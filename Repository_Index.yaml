@@ -431,37 +431,49 @@ documents:
     keywords: [ATAM, SAAM, DDD, BPM, plugins, Microsoft guidance, research gap]
 
   - path: References/ISO_42010.md
+    document_id: REF-ISO-42010-001
     title: ISO/IEC/IEEE 42010 Analysis
     category: standards
     authority: evidentiary
-    status: current
+    status: active
+    maturity: review
+    version: 0.3.0
     summary: Maps architecture-description concepts to Orden and narrows the proposed contribution toward an operational specialization.
     use_for: [concerns, viewpoints, views, decisions, architecture descriptions, terminology correction]
     key_finding: ISO 42010 provides a conceptual foundation but not the desired operational BC review method.
 
   - path: References/ISO_42020.md
+    document_id: REF-ISO-42020-001
     title: ISO/IEC/IEEE 42020 Analysis
     category: standards
     authority: evidentiary
-    status: current
+    status: active
+    maturity: review
+    version: 0.3.0
     summary: Examines architecture processes and positions Orden as a likely Business Central process specialization.
     use_for: [architecture governance, management, conceptualization, evaluation, process specialization]
     key_finding: A mechanism-independent review trigger remains operationally unresolved.
 
   - path: References/ISO_42030.md
+    document_id: REF-ISO-42030-001
     title: ISO/IEC/IEEE 42030 Analysis
     category: standards
     authority: evidentiary
-    status: current
+    status: active
+    maturity: review
+    version: 0.3.0
     summary: Relates architecture evaluation aims, proportionality, trigger detection, and evaluation records to the proposed framework.
     use_for: [evaluation levels, review trigger, proportionality, evaluation record, originality claim]
     key_finding: The generic evaluation framework largely exists; Orden's defensible contribution is a BC-specific operationalization.
 
   - path: References/SEI_Documenting_Behavior.md
+    document_id: REF-SEI-BEH-001
     title: SEI Documenting Behavior Analysis
     category: standards
     authority: evidentiary
-    status: current
+    status: active
+    maturity: review
+    version: 0.3.0
     summary: Evaluates SEI behavioral views and distinguishes behavior documentation from change evaluation.
     use_for: [behavior views, behavioral representation, execution-flow terminology, literature gap]
 
@@ -514,10 +526,13 @@ documents:
     use_for: [plugin evolution, extensibility mechanisms, extension contracts]
 
   - path: References/Microsoft_Extensibility_Overview.md
+    document_id: REF-MS-EXT-001
     title: Microsoft Extensibility Overview Analysis
     category: microsoft_study
     authority: evidentiary
-    status: current
+    status: active
+    maturity: review
+    version: 0.2.0
     summary: Separates Microsoft's explicit and implicit positions on layering, evolution, events, upgradeability, and separation of concerns.
     use_for: [Microsoft position, platform layering, upgradeability, mechanism coexistence]
 
@@ -538,10 +553,13 @@ documents:
     use_for: [AL interfaces, Strategy, explicit contracts, implementation selection]
 
   - path: References/Microsoft_IsHandled_v2.0.md
+    document_id: REF-MS-ISHANDLED-001
     title: Microsoft IsHandled Analysis
     category: microsoft_study
     authority: canonical
-    status: current
+    status: active
+    maturity: review
+    version: 2.1.0
     summary: Full layered analysis of Microsoft's IsHandled guidance, BC280 examples, counterarguments, threats to validity, and framework implications.
     use_for: [IsHandled, Microsoft criticism, BC280 evidence, extensibility degradation, candidate concepts]
     key_topics:
