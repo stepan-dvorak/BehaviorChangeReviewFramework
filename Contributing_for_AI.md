@@ -6,7 +6,7 @@ project:
 document:
   id: CG-001
   title: AI Contribution Guidelines
-  filename: CONTRIBUTING_FOR_AI.md
+  filename: Contributing_for_AI.md
   type: Contribution Guide
   version: 0.2.0
   status: Active
@@ -39,7 +39,6 @@ depends_on:
   - Governance_Principles.md
 
 related_documents:
-  - Repository_Architecture.md
   - Repository_Taxonomy.md
   - Editorial_Style_Guide.md
   - AGENTS.md
@@ -201,12 +200,11 @@ Priority:
 
 1. Governance_Principles.md
 2. Repository_Standards.md
-3. Repository_Architecture.md
-4. Repository_Taxonomy.md
-5. Editorial_Style_Guide.md
-6. Reasoning_Standard.md
-7. Document-specific guidance
-8. Current task instructions
+3. Repository_Taxonomy.md
+4. Editorial_Style_Guide.md
+5. Reasoning_Standard.md
+6. Document-specific guidance
+7. Current task instructions
 
 Higher-level governance documents SHALL always take precedence over lower-level
 documents.
@@ -1098,7 +1096,6 @@ repository improves intentionally rather than accidentally.
 
 - Governance_Principles.md
 - Repository_Standards.md
-- Repository_Architecture.md
 - Repository_Taxonomy.md
 - Editorial_Style_Guide.md
 - Reasoning_Standard.md

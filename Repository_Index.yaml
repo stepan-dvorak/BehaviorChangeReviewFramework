@@ -46,22 +46,21 @@ retrieval_policy:
   default_language: English
   available_languages:
     - English
-    - Czech
   path_case_sensitive: true
   precedence:
     - Governance_Principles.md
     - Repository_Standards.md
     - Repository_Taxonomy.md
-    - EDITORIAL_STYLE_GUIDE.md
+    - Editorial_Style_Guide.md
     - Reasoning_Standard.md
     - document-specific guidance
     - current task instructions
   startup_context:
     - AGENTS.md
-    - CONTRIBUTING_FOR_AI.md
+    - Contributing_for_AI.md
     - Governance_Principles.md
     - Repository_Standards.md
-    - EDITORIAL_STYLE_GUIDE.md
+    - Editorial_Style_Guide.md
     - Reasoning_Standard.md
     - 00_Project_Charter.md
     - 01_Terminology.md
@@ -107,10 +106,10 @@ query_routes:
   - intent: edit_or_create_repository_content
     retrieve:
       - AGENTS.md
-      - CONTRIBUTING_FOR_AI.md
+      - Contributing_for_AI.md
       - Governance_Principles.md
       - Repository_Standards.md
-      - EDITORIAL_STYLE_GUIDE.md
+      - Editorial_Style_Guide.md
       - Reasoning_Standard.md
       - Repository_Taxonomy.md
   - intent: resolve_or_introduce_terminology
@@ -174,7 +173,7 @@ query_routes:
     retrieve:
       - Templates/Research_Document_Template.md
       - Repository_Standards.md
-      - EDITORIAL_STYLE_GUIDE.md
+      - Editorial_Style_Guide.md
       - Evidence_Hierarchy.md
   - intent: create_architecture_decision
     retrieve:
@@ -250,8 +249,8 @@ documents:
     summary: Minimal entry-point instructions defining mandatory pre-reading and core AI rules.
     use_for: [AI startup, edit prerequisites, non-negotiable contribution rules]
     depends_on:
-      - CONTRIBUTING_FOR_AI.md
-      - EDITORIAL_STYLE_GUIDE.md
+      - Contributing_for_AI.md
+      - Editorial_Style_Guide.md
       - 00_Project_Charter.md
       - 01_Terminology.md
       - 02_Research_Methodology.md
@@ -275,11 +274,23 @@ documents:
     authority: normative
     status: active
     maturity: stable
-    summary: Constitutional repository standard for metadata, identity, classification, relationships, versioning, and lifecycle.
-    use_for: [front matter, document IDs, metadata, versioning, lifecycle, repository conventions]
-    keywords: [YAML front matter, metadata, SemVer, maturity, quality, document identity]
+    summary: Constitutional repository standard for architecture, artifact profiles, metadata, language, naming, relationships, versioning, lifecycle, and index maintenance.
+    use_for: [repository architecture, artifact profiles, front matter, document IDs, metadata, language, naming, versioning, lifecycle, repository conventions]
+    keywords: [YAML front matter, metadata, artifact profile, US English, filenames, SemVer, maturity, quality, document identity]
 
-  - path: CONTRIBUTING_FOR_AI.md
+  - path: Decisions/ADR-001_Repository_Artifact_Profiles_and_Metadata.md
+    document_id: ADR-001
+    title: Repository Artifact Profiles and Metadata Contract
+    category: decisions
+    authority: normative
+    status: active
+    maturity: stable
+    summary: Accepted decision establishing artifact profiles, metadata requirements, language, filename, architecture, map, and machine-index policies.
+    use_for: [governance rationale, metadata contract rationale, decision history, reopening criteria]
+    depends_on: [Governance_Principles.md]
+    keywords: [ADR, artifact profile, metadata, US English, repository architecture, filename convention]
+
+  - path: Contributing_for_AI.md
     document_id: CG-001
     title: AI Contribution Guidelines
     category: governance
@@ -301,7 +312,7 @@ documents:
     use_for: [hypotheses, conclusions, evidence classification, traceability, uncertainty]
     keywords: [fact, observation, interpretation, assumption, hypothesis, conclusion]
 
-  - path: EDITORIAL_STYLE_GUIDE.md
+  - path: Editorial_Style_Guide.md
     title: Editorial Style Guide
     category: governance
     authority: normative
@@ -320,13 +331,15 @@ documents:
     keywords: [evidence authority, ISO, Microsoft Learn, source code, community sources]
 
   - path: Repository_Taxonomy.md
+    document_id: GOV-TAX-001
     title: Repository Taxonomy
     category: governance
     authority: normative
-    status: current
-    summary: Canonical content categories and Draft-to-Archived lifecycle.
-    use_for: [document classification, placement, lifecycle]
-    keywords: [governance, core research, standards, Microsoft studies, empirical studies, framework, archive]
+    status: active
+    maturity: review
+    summary: Canonical artifact categories, placement rules, and movement rules.
+    use_for: [artifact classification, placement, directory responsibility, category movement]
+    keywords: [governance, entrypoints, decisions, core research, reference analysis, research stub, empirical study, archive]
 
   - path: Repository_Map.md
     title: Repository Map
@@ -524,7 +537,6 @@ documents:
     category: empirical_study
     authority: evidentiary
     status: current
-    language: Czech
     summary: Twelve-finding audit with classification and refactoring recommendations for IsHandled usage in an AL codebase.
     use_for: [case evidence, IsHandled classification, refactoring priorities]
 
@@ -533,7 +545,6 @@ documents:
     category: empirical_study
     authority: evidentiary
     status: current
-    language: Czech
     summary: Sixteen-finding analysis emphasizing critical risks, extensibility breaks, and discovery misuse.
     use_for: [case evidence, discovery misuse, critical-risk rules, migration approach]
 
@@ -542,7 +553,6 @@ documents:
     category: empirical_study
     authority: evidentiary
     status: current
-    language: Czech
     summary: Forty-four-finding report focused on competing subscribers, detailed risks, deterministic adapters, and refactoring order.
     use_for: [large case evidence, subscriber competition, adapter pattern, refactoring roadmap]
 
@@ -634,7 +644,7 @@ archive_families:
     contents: Iterative versions from v0.1 through v2.0 alpha drafts.
   - path_pattern: Archive/CONTRIBUTING_FOR_AI*.md
     authority: archived
-    current_replacement: CONTRIBUTING_FOR_AI.md
+    current_replacement: Contributing_for_AI.md
     contents: Earlier and alpha AI contribution guidelines.
   - path_pattern: Archive/Repository_Standards.md
     authority: archived
@@ -648,13 +658,6 @@ archive_families:
     contents: Historical packaged research notes; inspect only for provenance or recovery.
 
 planned_or_missing_documents:
-  - path: Repository_Architecture.md
-    referenced_by: [CONTRIBUTING_FOR_AI.md, Governance_Principles.md, Repository_Standards.md]
-    status: missing
-    instruction: Do not invent its contents or treat it as an available governance source.
-  - path: Editorial_Style_Guide.md
-    actual_path: EDITORIAL_STYLE_GUIDE.md
-    status: filename_case_mismatch
   - path: 04_Existing_BC_Guidance.md
     status: planned
     probable_current_sources:
@@ -680,14 +683,6 @@ planned_or_missing_documents:
     probable_current_source: Whitepaper/Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md
 
 known_consistency_issues:
-  - id: IDX-ISSUE-001
-    severity: high
-    issue: Repository_Architecture.md is referenced in governance but does not exist.
-    retrieval_effect: Skip it and report the missing dependency when its authority would matter.
-  - id: IDX-ISSUE-002
-    severity: medium
-    issue: Editorial_Style_Guide.md references differ in case from EDITORIAL_STYLE_GUIDE.md.
-    retrieval_effect: Resolve all such references to EDITORIAL_STYLE_GUIDE.md on case-sensitive systems.
   - id: IDX-ISSUE-003
     severity: medium
     issue: Repository_Map.md omits many present documents and uses unqualified reference filenames.
@@ -704,6 +699,10 @@ known_consistency_issues:
     severity: low
     issue: Several reference documents are research stubs rather than completed analyses.
     retrieval_effect: Treat their headings as research plans and verify any substantive claim externally.
+  - id: IDX-ISSUE-007
+    severity: medium
+    issue: Three legacy empirical reports contain repository-authored non-English content and require translation during empirical-document normalization.
+    retrieval_effect: Treat their current wording as legacy content; do not use it as a language precedent for new or revised artifacts.
 
 maintenance_rules:
   update_when:

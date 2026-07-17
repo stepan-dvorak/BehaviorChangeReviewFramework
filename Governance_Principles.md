@@ -6,8 +6,6 @@ classification:
   domain: Governance
   layer: Foundation
   maturity: Draft
-depends_on:
-- Repository_Standards.md
 document:
   filename: Governance_Principles.md
   id: GOV-PRN-001
@@ -23,9 +21,9 @@ purpose: |
   evolution, governance and long-term consistency of the Orden
   repository.
 related_documents:
-- CONTRIBUTING_FOR_AI.md
+- Contributing_for_AI.md
 - Reasoning_Standard.md
-- Repository_Architecture.md
+- Repository_Standards.md
 - Repository_Taxonomy.md
 - Editorial_Style_Guide.md
 tags:

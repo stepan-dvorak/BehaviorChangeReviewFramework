@@ -36,17 +36,17 @@ audience:
 
 depends_on:
   - Governance_Principles.md
+
+related_documents:
   - Repository_Standards.md
   - Repository_Taxonomy.md
   - Reasoning_Standard.md
-
-related_documents:
-  - CONTRIBUTING_FOR_AI.md
-  - EDITORIAL_STYLE_GUIDE.md
+  - Contributing_for_AI.md
+  - Editorial_Style_Guide.md
   - AGENTS.md
   - README.md
   - Repository_Index.yaml
-  - Repository_Conformance_Report.md
+  - Archive/Repository_Conformance_Report.md
 
 tags:
   - governance
@@ -60,16 +60,13 @@ tags:
 
 ## Status
 
-**Proposed**
+**Accepted**
 
-This decision becomes normative only after approval by the repository owner.
+Accepted by the repository owner, Štěpán Dvořák, on 2026-07-17.
 
-After approval:
-
-- `document.status` SHALL change from `Proposed` to `Active`;
-- `classification.maturity` SHALL change according to the completed review;
-- the decision SHALL be incorporated into `Repository_Standards.md`;
-- repository normalization SHALL follow the profiles defined herein.
+This decision is normative. `Repository_Standards.md` implements its artifact
+profiles, metadata contract, language, naming, architecture, and index
+maintenance requirements.
 
 ---
 

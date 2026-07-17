@@ -2,8 +2,8 @@
 
 ## Governance
 - README.md
-- CONTRIBUTING_FOR_AI.md
-- EDITORIAL_STYLE_GUIDE.md
+- Contributing_for_AI.md
+- Editorial_Style_Guide.md
 - AGENTS.md
 
 ## Core
