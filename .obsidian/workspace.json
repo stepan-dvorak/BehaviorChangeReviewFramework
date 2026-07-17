@@ -1,0 +1,239 @@
+{
+  "main": {
+    "id": "b0856f438a97790f",
+    "type": "split",
+    "children": [
+      {
+        "id": "7bfe6f1eff305f19",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4b38c09faf5d59e0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Behavior_Change_Review_Framework_for_Business_Central_Research_Draft"
+            }
+          }
+        ]
+      },
+      {
+        "id": "d4c9b534586f5b14",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "080ee8ed60445281",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graf"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "74a5a62e623f3963",
+    "type": "split",
+    "children": [
+      {
+        "id": "7f18423714a5cae7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a7a6bce9d8338d49",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Průzkumník souborů"
+            }
+          },
+          {
+            "id": "57c16b4391e695e4",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Hledat"
+            }
+          },
+          {
+            "id": "72c768b6a5fce25c",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Záložky"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "46cbed27be42f87f",
+    "type": "split",
+    "children": [
+      {
+        "id": "4953a01893558c39",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "24cf5af3782b8ce4",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Historical_References/Evolution_of_Extensibility.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Zpětné odkazy pro Evolution_of_Extensibility"
+            }
+          },
+          {
+            "id": "59668a32a9b36ee2",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Historical_References/Evolution_of_Extensibility.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Odchozí odkazy z Evolution_of_Extensibility"
+            }
+          },
+          {
+            "id": "8ed9fc485702fca0",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Štítky"
+            }
+          },
+          {
+            "id": "36614da46077f099",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Všechny vlastnosti"
+            }
+          },
+          {
+            "id": "82198da07bdd237a",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Historical_References/Evolution_of_Extensibility.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Přehled Evolution_of_Extensibility"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Otevřít rychlé přepínání": false,
+      "graph:Otevřít graf": false,
+      "canvas:Vytvořit nový canvas": false,
+      "daily-notes:Otevřít dnešní poznámku": false,
+      "templates:Vložit šablonu": false,
+      "command-palette:Otevřít paletu příkazů": false,
+      "bases:Vytvořit novou základnu": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "4b38c09faf5d59e0",
+  "lastOpenFiles": [
+    "References/CONTRIBUTING_FOR_AI_v2.0.md",
+    "Archive/CONTRIBUTING_FOR_AI.md",
+    "Archive/Microsoft_IsHandled.md",
+    "References/Microsoft_IsHandled_v2.0.md",
+    "03_Related_Work.md",
+    "02_Research_Methodology.md",
+    "01_Terminology.md",
+    "00_Research_Log.md",
+    "00_Project_Charter.md",
+    "Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md",
+    "Historical_References/Vjeko_Gentlemens_Agreement.md",
+    "Historical_References/Vjeko_Codeunit_Interfaces.md",
+    "Historical_References/Mark_Brummel_Handled_Pattern.md",
+    "Historical_References/Evolution_of_Extensibility.md",
+    "References/SEI_Documenting_Behavior.md",
+    "Archive/Microsoft_IsHandled_v2.0-alpha-03.md",
+    "Archive/Microsoft_IsHandled_v2.0-alpha-05.md",
+    "Archive/Microsoft_IsHandled_v2.0-alpha-04.md",
+    "Archive/Microsoft_IsHandled_v2.0-alpha-02.md",
+    "Archive/Microsoft_IsHandled_v2.0-alpha-01.md",
+    "Archive/Microsoft_IsHandled_v1.4.md",
+    "Archive/Microsoft_IsHandled_v1.3.md",
+    "Archive/Microsoft_IsHandled_v1.2.md",
+    "Archive/Microsoft_IsHandled_v1.1.md",
+    "Archive/Microsoft_IsHandled_v1.0.md",
+    "Archive/Microsoft_IsHandled_v0.9.md",
+    "Archive/Is logic in a Mediator Handler an Anti-Pattern- - r-dotnet.url",
+    "Archive/References_Research_Notes_v0.1.zip",
+    "Archive",
+    "Nová složka",
+    "Historical_References",
+    "References/Nový textový dokument.txt",
+    "References"
+  ]
+}
