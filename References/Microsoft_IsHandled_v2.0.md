@@ -1,22 +1,55 @@
 ---
-status: final-draft
-version: 2.0
-type: reference
-title: Microsoft_IsHandled
-project: Behavior Change Review Framework
-source-type:
-  - Microsoft Learn
+metadata_schema: "1.0"
+project:
+  id: Orden
+  name: Behavior Change Review Framework
+document:
+  id: REF-MS-ISHANDLED-001
+  title: Microsoft IsHandled Analysis
+  type: Reference Analysis
+  version: 2.1.0
+  status: Active
+classification:
+  domain: Business Central Extensibility
+  layer: Study
+  maturity: Review
+owner: Štěpán Dvořák
+purpose: >
+  Analyzes Microsoft's IsHandled guidance and representative BC280 evidence to
+  derive mechanism-independent architectural concerns and candidate questions.
+quality:
+  review: Not Reviewed
+  evidence: Partial
+  editorial: Draft
+audience:
+  - Researchers
+  - Contributors
+  - AI Assistants
+depends_on:
+  - 00_Project_Charter.md
+  - 01_Terminology.md
+  - 02_Research_Methodology.md
+  - 03_Related_Work.md
+  - References/ISO_42010.md
+  - References/ISO_42020.md
+  - References/ISO_42030.md
+  - References/SEI_Documenting_Behavior.md
+  - References/Microsoft_Extensibility_Overview.md
+related_documents:
+  - Empirical/MS-CZF-IsHandled-Refactoring-Analysis-cs.md
+evidence:
+  source_authority: Mixed Sources
+  source_access: Mixed
+  verification: Partial
+  limitations: >
+    Empirical evidence is limited to representative BC280 Czech localization
+    examples and does not establish universal Business Central behavior.
+tags:
+  - reference
+  - Microsoft
+  - Business-Central
+  - IsHandled
   - empirical-analysis
-depends-on:
-  - 00_Project_Charter
-  - 01_Terminology
-  - 02_Research_Methodology
-  - 03_Related_Work
-  - ISO_42010
-  - ISO_42020
-  - ISO_42030
-  - SEI_Documenting_Behavior
-  - Microsoft_Extensibility_Overview
 ---
 
 # Microsoft_IsHandled

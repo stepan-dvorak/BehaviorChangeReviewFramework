@@ -1,18 +1,53 @@
+---
+metadata_schema: "1.0"
+project:
+  id: Orden
+  name: Behavior Change Review Framework
+document:
+  id: REF-SEI-BEH-001
+  title: SEI Documenting Behavior Analysis
+  type: Reference Analysis
+  version: 0.3.0
+  status: Active
+classification:
+  domain: Software Architecture
+  layer: Study
+  maturity: Review
+owner: Štěpán Dvořák
+purpose: >
+  Evaluates SEI guidance on architectural behavior and distinguishes behavior
+  documentation from evaluation of behavior-changing customizations.
+quality:
+  review: Not Reviewed
+  evidence: Partial
+  editorial: Draft
+audience:
+  - Researchers
+  - Contributors
+  - AI Assistants
+depends_on:
+  - References/ISO_42010.md
+  - References/ISO_42020.md
+  - References/ISO_42030.md
+related_documents:
+  - 01_Terminology.md
+  - 03_Related_Work.md
+evidence:
+  source_authority: SEI Publication
+  source_access: Partial
+  verification: Partial
+  limitations: >
+    The note summarizes publicly accessible SEI material and does not replace
+    verification against the original publications.
+tags:
+  - reference
+  - software-architecture
+  - behavior-documentation
+  - behavioral-views
+  - SEI
+---
 
 # SEI_Documenting_Behavior.md
-
----
-status: detailed-draft
-version: 0.2
-project: Behavior Change Review Framework
-source-type: technical-literature
-organization: Software Engineering Institute (SEI)
-series: Views and Beyond
-depends-on:
-  - ISO_42010
-  - ISO_42020
-  - ISO_42030
----
 
 # Purpose
 

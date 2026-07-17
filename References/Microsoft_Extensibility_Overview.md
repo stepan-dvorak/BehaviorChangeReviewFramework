@@ -1,18 +1,53 @@
-# Microsoft_Extensibility_Overview.md
+---
+metadata_schema: "1.0"
+project:
+  id: Orden
+  name: Behavior Change Review Framework
+document:
+  id: REF-MS-EXT-001
+  title: Microsoft Extensibility Overview Analysis
+  type: Reference Analysis
+  version: 0.2.0
+  status: Active
+classification:
+  domain: Business Central Extensibility
+  layer: Study
+  maturity: Review
+owner: Štěpán Dvořák
+purpose: >
+  Analyzes Microsoft's documented Business Central extensibility philosophy and
+  separates explicit guidance from architectural implications and open gaps.
+quality:
+  review: Not Reviewed
+  evidence: Partial
+  editorial: Draft
+audience:
+  - Researchers
+  - Contributors
+  - AI Assistants
+depends_on:
+  - 00_Project_Charter.md
+  - 01_Terminology.md
+  - 02_Research_Methodology.md
+  - 03_Related_Work.md
+related_documents:
+  - References/Microsoft_IsHandled_v2.0.md
+evidence:
+  source_authority: Official Vendor Documentation
+  source_access: Full
+  verification: Partial
+  limitations: >
+    The analysis is limited to the cited Microsoft Learn material and its
+    architectural interpretation has not yet received independent review.
+tags:
+  - reference
+  - Microsoft
+  - Business-Central
+  - extensibility
+  - platform-architecture
+---
 
-```yaml
----
-status: draft
-version: 0.1
-project: Behavior Change Review Framework
-source-type: Microsoft Learn
-depends-on:
-  - 00_Project_Charter
-  - 01_Terminology
-  - 02_Research_Methodology
-  - 03_Related_Work
----
-```
+# Microsoft_Extensibility_Overview.md
 
 # Purpose
 
