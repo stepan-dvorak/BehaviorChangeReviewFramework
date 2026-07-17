@@ -1,4 +1,4 @@
-# EDITORIAL_STYLE_GUIDE
+# Editorial Style Guide
 
 ## Purpose
 Defines the editorial conventions for every repository document.

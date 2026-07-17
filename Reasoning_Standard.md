@@ -22,7 +22,7 @@ purpose: |
   Defines the normative reasoning principles that govern how conclusions
   are derived from evidence throughout the Orden repository.
 related_documents:
-- CONTRIBUTING_FOR_AI.md
+- Contributing_for_AI.md
 - Editorial_Style_Guide.md
 - Repository_Taxonomy.md
 tags:
@@ -42,7 +42,7 @@ evidence** regardless of whether the contributor is a human reviewer or
 an AI assistant.
 
 This standard is normative. Operational workflows are defined separately
-in `CONTRIBUTING_FOR_AI.md`.
+in `Contributing_for_AI.md`.
 
 ------------------------------------------------------------------------
 
