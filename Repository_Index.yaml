@@ -261,11 +261,11 @@ documents:
     title: Governance Principles
     category: governance
     authority: normative
-    status: draft
+    status: active
+    maturity: review
     summary: Foundational philosophy for governance, evidence, traceability, uncertainty, consistency, and human authority.
     use_for: [resolving governance intent, evaluating policy changes, conflict resolution]
     key_topics: [evidence before conclusions, reference over duplication, human authority, quality before completion]
-    depends_on: [Repository_Standards.md]
 
   - path: Repository_Standards.md
     document_id: RS-001
@@ -296,7 +296,7 @@ documents:
     category: governance
     authority: normative
     status: active
-    maturity: draft
+    maturity: review
     summary: End-to-end AI workflow from context resolution and knowledge modeling through reasoning, realization, validation, delivery, and governance evolution.
     use_for: [AI operating workflow, validation, complete-document delivery, governance-aware contribution]
     depends_on: [Repository_Standards.md, Reasoning_Standard.md, Governance_Principles.md]
@@ -307,25 +307,30 @@ documents:
     title: Reasoning Standard
     category: governance
     authority: normative
-    status: draft
+    status: active
+    maturity: review
     summary: Rules for evidence-based, transparent, reproducible reasoning and explicit uncertainty classification.
     use_for: [hypotheses, conclusions, evidence classification, traceability, uncertainty]
     keywords: [fact, observation, interpretation, assumption, hypothesis, conclusion]
 
   - path: Editorial_Style_Guide.md
+    document_id: GOV-EDT-001
     title: Editorial Style Guide
     category: governance
     authority: normative
-    status: current
+    status: active
+    maturity: review
     summary: Repository voice, terminology priority, evidence-layer separation, standard section structure, and review checklist.
     use_for: [writing, editing, document review, repository voice]
     keywords: [editorial style, technical writing, evidence separation, references]
 
   - path: Evidence_Hierarchy.md
+    document_id: GOV-EVH-001
     title: Evidence Hierarchy
     category: governance
     authority: normative
-    status: current
+    status: active
+    maturity: review
     summary: Ranks evidence from ISO standards through repository hypotheses and defines basic evidence-handling rules.
     use_for: [source weighting, confidence assessment, evidence disputes]
     keywords: [evidence authority, ISO, Microsoft Learn, source code, community sources]
@@ -351,10 +356,12 @@ documents:
     do_not_use_for: [complete file inventory, authority resolution]
 
   - path: Terminology_Index.md
+    document_id: TR-IDX-001
     title: Terminology Index
     category: terminology
     authority: canonical
-    status: current
+    status: active
+    maturity: draft
     summary: Compact registry of repository concepts, statuses, and definition locations.
     use_for: [term lookup, synonym prevention, terminology status]
     depends_on: [01_Terminology.md, References/Microsoft_IsHandled_v2.0.md]

@@ -1,35 +1,51 @@
 ---
-audience:
-- Human Contributors
-- AI Assistants
-classification:
-  domain: Governance
-  layer: Repository
-  maturity: Draft
-depends_on:
-- Repository_Standards.md
-document:
-  filename: Reasoning_Standard.md
-  id: GOV-RSN-001
-  status: Draft
-  title: Reasoning Standard
-  type: Governance Standard
-  version: 0.1.0
+metadata_schema: "1.0"
+
 project:
   id: Orden
   name: Behavior Change Review Framework
-purpose: |
-  Defines the normative reasoning principles that govern how conclusions
-  are derived from evidence throughout the Orden repository.
+
+document:
+  id: GOV-RSN-001
+  title: Reasoning Standard
+  type: Governance Standard
+  version: 0.2.0
+  status: Active
+
+classification:
+  domain: Governance
+  layer: Repository
+  maturity: Review
+
+owner: Štěpán Dvořák
+
+purpose: >
+  Defines the normative reasoning principles that govern how conclusions are
+  derived from evidence throughout the Orden repository.
+
+quality:
+  review: Self Reviewed
+  evidence: N/A
+  editorial: Reviewed
+
+audience:
+  - Human Contributors
+  - AI Assistants
+
+depends_on:
+  - Repository_Standards.md
+
 related_documents:
-- Contributing_for_AI.md
-- Editorial_Style_Guide.md
-- Repository_Taxonomy.md
+  - Contributing_for_AI.md
+  - Editorial_Style_Guide.md
+  - Repository_Taxonomy.md
+  - Evidence_Hierarchy.md
+
 tags:
-- reasoning
-- governance
-- evidence
-- research
+  - reasoning
+  - governance
+  - evidence
+  - research
 ---
 
 # Reasoning Standard

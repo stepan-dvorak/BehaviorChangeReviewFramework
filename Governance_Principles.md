@@ -1,36 +1,49 @@
 ---
-audience:
-- Human Contributors
-- AI Assistants
-classification:
-  domain: Governance
-  layer: Foundation
-  maturity: Draft
-document:
-  filename: Governance_Principles.md
-  id: GOV-PRN-001
-  status: Draft
-  title: Governance Principles
-  type: Foundational Governance Document
-  version: 0.1.0
+metadata_schema: "1.0"
+
 project:
   id: Orden
   name: Behavior Change Review Framework
-purpose: |
-  Defines the foundational architectural principles that guide the
-  evolution, governance and long-term consistency of the Orden
-  repository.
+
+document:
+  id: GOV-PRN-001
+  title: Governance Principles
+  type: Foundational Governance Document
+  version: 0.2.0
+  status: Active
+
+classification:
+  domain: Governance
+  layer: Repository
+  maturity: Review
+
+owner: Štěpán Dvořák
+
+purpose: >
+  Defines the foundational architectural principles that guide the evolution,
+  governance, and long-term consistency of the Orden repository.
+
+quality:
+  review: Self Reviewed
+  evidence: N/A
+  editorial: Reviewed
+
+audience:
+  - Human Contributors
+  - AI Assistants
+
 related_documents:
-- Contributing_for_AI.md
-- Reasoning_Standard.md
-- Repository_Standards.md
-- Repository_Taxonomy.md
-- Editorial_Style_Guide.md
+  - Contributing_for_AI.md
+  - Reasoning_Standard.md
+  - Repository_Standards.md
+  - Repository_Taxonomy.md
+  - Editorial_Style_Guide.md
+
 tags:
-- governance
-- principles
-- architecture
-- philosophy
+  - governance
+  - principles
+  - architecture
+  - philosophy
 ---
 
 # Governance Principles
