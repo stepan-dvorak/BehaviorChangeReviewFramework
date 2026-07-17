@@ -1,3 +1,50 @@
+---
+metadata_schema: "1.0"
+
+project:
+  id: Orden
+  name: Behavior Change Review Framework
+
+document:
+  id: GOV-EDT-001
+  title: Editorial Style Guide
+  type: Governance Guide
+  version: 0.1.0
+  status: Active
+
+classification:
+  domain: Governance
+  layer: Repository
+  maturity: Review
+
+owner: Štěpán Dvořák
+
+purpose: >
+  Defines the editorial conventions for repository-authored content.
+
+quality:
+  review: Self Reviewed
+  evidence: N/A
+  editorial: Reviewed
+
+audience:
+  - Contributors
+  - AI Assistants
+
+depends_on:
+  - Repository_Standards.md
+
+related_documents:
+  - Reasoning_Standard.md
+  - Evidence_Hierarchy.md
+
+tags:
+  - governance
+  - editorial
+  - writing
+  - style
+---
+
 # Editorial Style Guide
 
 ## Purpose

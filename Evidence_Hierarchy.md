@@ -1,3 +1,52 @@
+---
+metadata_schema: "1.0"
+
+project:
+  id: Orden
+  name: Behavior Change Review Framework
+
+document:
+  id: GOV-EVH-001
+  title: Evidence Hierarchy
+  type: Governance Standard
+  version: 0.1.0
+  status: Active
+
+classification:
+  domain: Governance
+  layer: Repository
+  maturity: Review
+
+owner: Štěpán Dvořák
+
+purpose: >
+  Defines the relative authority of evidence used throughout the repository.
+
+quality:
+  review: Self Reviewed
+  evidence: N/A
+  editorial: Reviewed
+
+audience:
+  - Contributors
+  - AI Assistants
+  - Researchers
+
+depends_on:
+  - Repository_Standards.md
+
+related_documents:
+  - Reasoning_Standard.md
+  - 02_Research_Methodology.md
+  - Editorial_Style_Guide.md
+
+tags:
+  - governance
+  - evidence
+  - authority
+  - research
+---
+
 # Evidence Hierarchy
 
 ## Purpose

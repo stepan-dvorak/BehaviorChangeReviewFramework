@@ -1,4 +1,6 @@
 ---
+metadata_schema: "1.0"
+
 project:
   id: Orden
   name: Behavior Change Review Framework
@@ -6,25 +8,21 @@ project:
 document:
   id: CG-001
   title: AI Contribution Guidelines
-  filename: Contributing_for_AI.md
   type: Contribution Guide
-  version: 0.2.0
+  version: 0.3.0
   status: Active
 
 classification:
   domain: Governance
   layer: Repository
-  maturity: Draft
+  maturity: Review
 
 owner: Štěpán Dvořák
 
-created: 2026-07-17
-last_updated: 2026-07-17
-
 quality:
-  review: Draft
+  review: Self Reviewed
   evidence: N/A
-  editorial: Draft
+  editorial: Reviewed
 
 purpose: >
   Defines the operational workflow that AI assistants SHALL follow when
@@ -42,7 +40,6 @@ related_documents:
   - Repository_Taxonomy.md
   - Editorial_Style_Guide.md
   - AGENTS.md
-
 
 tags:
   - governance
