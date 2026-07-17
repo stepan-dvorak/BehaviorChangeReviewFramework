@@ -1,40 +1,24 @@
 {
   "main": {
-    "id": "b0856f438a97790f",
+    "id": "ed6b6aa5d3cf7b8b",
     "type": "split",
     "children": [
       {
-        "id": "7bfe6f1eff305f19",
+        "id": "d3e400fcc1a9ac4f",
         "type": "tabs",
         "children": [
           {
-            "id": "4b38c09faf5d59e0",
+            "id": "e1a4892421058bbb",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md",
+                "file": "Ideas/IsHandled Pattern - Missing Extensibility Preservation Rule.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Behavior_Change_Review_Framework_for_Business_Central_Research_Draft"
-            }
-          }
-        ]
-      },
-      {
-        "id": "d4c9b534586f5b14",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "080ee8ed60445281",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graf"
+              "title": "IsHandled Pattern - Missing Extensibility Preservation Rule"
             }
           }
         ]
@@ -43,15 +27,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "74a5a62e623f3963",
+    "id": "334fb3218c775173",
     "type": "split",
     "children": [
       {
-        "id": "7f18423714a5cae7",
+        "id": "b5b0dde18304c2a3",
         "type": "tabs",
         "children": [
           {
-            "id": "a7a6bce9d8338d49",
+            "id": "53f7dabd770b0da3",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -64,7 +48,7 @@
             }
           },
           {
-            "id": "57c16b4391e695e4",
+            "id": "dfe102dd877788f1",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -81,7 +65,7 @@
             }
           },
           {
-            "id": "72c768b6a5fce25c",
+            "id": "0fcf8ac415c01c58",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -97,20 +81,20 @@
     "width": 300
   },
   "right": {
-    "id": "46cbed27be42f87f",
+    "id": "287eb7c4e9c936ca",
     "type": "split",
     "children": [
       {
-        "id": "4953a01893558c39",
+        "id": "199dec1938c51c43",
         "type": "tabs",
         "children": [
           {
-            "id": "24cf5af3782b8ce4",
+            "id": "8bd0fe22e93e2400",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Historical_References/Evolution_of_Extensibility.md",
+                "file": "Ideas/IsHandled Pattern - Missing Extensibility Preservation Rule.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,25 +104,25 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Zpětné odkazy pro Evolution_of_Extensibility"
+              "title": "Zpětné odkazy pro IsHandled Pattern - Missing Extensibility Preservation Rule"
             }
           },
           {
-            "id": "59668a32a9b36ee2",
+            "id": "9ec4ff42f59ac81c",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Historical_References/Evolution_of_Extensibility.md",
+                "file": "Ideas/IsHandled Pattern - Missing Extensibility Preservation Rule.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Odchozí odkazy z Evolution_of_Extensibility"
+              "title": "Odchozí odkazy z IsHandled Pattern - Missing Extensibility Preservation Rule"
             }
           },
           {
-            "id": "8ed9fc485702fca0",
+            "id": "57c537434ea02c65",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -153,7 +137,7 @@
             }
           },
           {
-            "id": "36614da46077f099",
+            "id": "a226ce9f101606f5",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -167,18 +151,18 @@
             }
           },
           {
-            "id": "82198da07bdd237a",
+            "id": "b61946e958999a5a",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "Historical_References/Evolution_of_Extensibility.md",
+                "file": "Ideas/IsHandled Pattern - Missing Extensibility Preservation Rule.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Přehled Evolution_of_Extensibility"
+              "title": "Přehled IsHandled Pattern - Missing Extensibility Preservation Rule"
             }
           }
         ]
@@ -196,44 +180,46 @@
       "daily-notes:Otevřít dnešní poznámku": false,
       "templates:Vložit šablonu": false,
       "command-palette:Otevřít paletu příkazů": false,
-      "bases:Vytvořit novou základnu": false,
-      "obsidian-git:Open Git source control": false
+      "bases:Vytvořit novou základnu": false
     }
   },
-  "active": "4b38c09faf5d59e0",
+  "active": "e1a4892421058bbb",
   "lastOpenFiles": [
-    "References/CONTRIBUTING_FOR_AI_v2.0.md",
-    "Archive/CONTRIBUTING_FOR_AI.md",
-    "Archive/Microsoft_IsHandled.md",
-    "References/Microsoft_IsHandled_v2.0.md",
-    "03_Related_Work.md",
+    "Empirical/MS-CZF-IsHandled-Refactoring-Analysis-cs.md",
+    "Empirical/KMITS-BA4_Finance-IsHandled-Audit.md",
+    "Empirical/MS-CZL-IsHandled-Refactoring-Analysis-Report.md",
+    "Ideas/IsHandled Pattern - Missing Extensibility Preservation Rule.md",
+    "Empirical/IsHandled_anti-pattern/MS-CZL-IsHandled-Refactoring-Analysis-Report.md",
+    "Empirical/IsHandled_anti-pattern/MS-CZF-IsHandled-Refactoring-Analysis-cs.md",
+    "Empirical/IsHandled_anti-pattern/KMITS-BA4_Finance-IsHandled-Audit.md",
+    "Empirical/IsHandled_anti-pattern/IsHandled Pattern - Missing Extensibility Preservation Rule.md",
+    "Empirical/IsHandled_anti-pattern",
+    "Ideas/Is logic in a Mediator Handler an Anti-Pattern- - r-dotnet.url",
+    "Ideas",
+    "Nová složka",
+    "Archive/CONTRIBUTING_FOR_AI-alpha-03-revised.md",
+    "Governance_Principles.md",
+    "CONTRIBUTING_FOR_AI.md",
+    "CONTRIBUTING_FOR_AI-alpha-03-revised.md",
+    "Repository_Standards.md",
+    "Archive/contributing_for_ai_v0_9.md",
+    "Archive/CONTRIBUTING_FOR_AI-alpha-01.md",
+    "Archive/CONTRIBUTING_FOR_AI-alpha-02.md",
+    "Archive/CONTRIBUTING_FOR_AI-alpha-03.md",
+    "Archive/CONTRIBUTING_FOR_AI_v2.0.md",
+    "Reasoning_Standard.md",
+    "CONTRIBUTING_FOR_AI_v2.0.md",
+    "00_Project_Charter.md",
+    "Archive/Repository_Standards.md",
+    "Whitepaper/Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md",
+    "Whitepaper",
+    "Empirical",
     "02_Research_Methodology.md",
     "01_Terminology.md",
     "00_Research_Log.md",
-    "00_Project_Charter.md",
-    "Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md",
-    "Historical_References/Vjeko_Gentlemens_Agreement.md",
-    "Historical_References/Vjeko_Codeunit_Interfaces.md",
-    "Historical_References/Mark_Brummel_Handled_Pattern.md",
-    "Historical_References/Evolution_of_Extensibility.md",
-    "References/SEI_Documenting_Behavior.md",
-    "Archive/Microsoft_IsHandled_v2.0-alpha-03.md",
-    "Archive/Microsoft_IsHandled_v2.0-alpha-05.md",
-    "Archive/Microsoft_IsHandled_v2.0-alpha-04.md",
-    "Archive/Microsoft_IsHandled_v2.0-alpha-02.md",
-    "Archive/Microsoft_IsHandled_v2.0-alpha-01.md",
-    "Archive/Microsoft_IsHandled_v1.4.md",
-    "Archive/Microsoft_IsHandled_v1.3.md",
-    "Archive/Microsoft_IsHandled_v1.2.md",
-    "Archive/Microsoft_IsHandled_v1.1.md",
-    "Archive/Microsoft_IsHandled_v1.0.md",
-    "Archive/Microsoft_IsHandled_v0.9.md",
-    "Archive/Is logic in a Mediator Handler an Anti-Pattern- - r-dotnet.url",
-    "Archive/References_Research_Notes_v0.1.zip",
-    "Archive",
-    "Nová složka",
+    "Templates",
+    "References",
     "Historical_References",
-    "References/Nový textový dokument.txt",
-    "References"
+    "Archive/References_Research_Notes_v0.1.zip"
   ]
 }
