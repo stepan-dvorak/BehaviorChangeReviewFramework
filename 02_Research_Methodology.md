@@ -1,10 +1,55 @@
 ---
-depends-on:
-- 00_Research_Log
-- 01_Terminology
-project: Behavior Change Review Framework
-status: draft
-version: 0.1
+metadata_schema: "1.0"
+
+project:
+  id: Orden
+  name: Behavior Change Review Framework
+
+document:
+  id: RD-MET-001
+  title: Research Methodology
+  type: Research Methodology
+  version: 0.2.0
+  status: Active
+
+classification:
+  domain: Research
+  layer: Project
+  maturity: Draft
+
+owner: Štěpán Dvořák
+
+purpose: >
+  Defines the research philosophy, evidence handling, hypothesis lifecycle,
+  decision criteria, literature strategy, and Business Central validation
+  approach used by the Orden project.
+
+quality:
+  review: Not Reviewed
+  evidence: Partial
+  editorial: Draft
+
+audience:
+  - Researchers
+  - Contributors
+  - AI Assistants
+
+depends_on:
+  - 00_Research_Log.md
+  - 01_Terminology.md
+
+related_documents:
+  - 00_Project_Charter.md
+  - 03_Related_Work.md
+  - Evidence_Hierarchy.md
+  - Reasoning_Standard.md
+
+tags:
+  - research
+  - methodology
+  - evidence
+  - hypotheses
+  - validation
 ---
 
 # 02_Research_Methodology.md

@@ -1,12 +1,57 @@
 ---
-depends-on:
-- 00_Project_Charter
-- 00_Research_Log
-- 01_Terminology
-- 02_Research_Methodology
-project: Behavior Change Review Framework
-status: draft
-version: 0.1
+metadata_schema: "1.0"
+
+project:
+  id: Orden
+  name: Behavior Change Review Framework
+
+document:
+  id: RW-001
+  title: Related Work
+  type: Related Work
+  version: 0.2.0
+  status: Active
+
+classification:
+  domain: Research
+  layer: Project
+  maturity: Draft
+
+owner: Štěpán Dvořák
+
+purpose: >
+  Surveys existing bodies of knowledge to identify reusable concepts,
+  established terminology, and research gaps relevant to the Orden project.
+
+quality:
+  review: Not Reviewed
+  evidence: Partial
+  editorial: Draft
+
+audience:
+  - Researchers
+  - Contributors
+  - AI Assistants
+
+depends_on:
+  - 00_Project_Charter.md
+  - 00_Research_Log.md
+  - 01_Terminology.md
+  - 02_Research_Methodology.md
+
+related_documents:
+  - References/ISO_42010.md
+  - References/ISO_42020.md
+  - References/ISO_42030.md
+  - References/SEI_Documenting_Behavior.md
+  - References/Microsoft_Extensibility_Overview.md
+
+tags:
+  - research
+  - related-work
+  - literature-review
+  - research-gap
+  - architecture
 ---
 
 # 03_Related_Work.md

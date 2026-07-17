@@ -1,7 +1,52 @@
 ---
-project: Behavior Change Review Framework
-status: draft
-version: 0.1
+metadata_schema: "1.0"
+
+project:
+  id: Orden
+  name: Behavior Change Review Framework
+
+document:
+  id: RD-LOG-001
+  title: Research Log
+  type: Research Log
+  version: 0.2.0
+  status: Active
+
+classification:
+  domain: Research
+  layer: Project
+  maturity: Draft
+
+owner: Štěpán Dvořák
+
+purpose: >
+  Records research evolution, hypotheses, rejected directions, terminology
+  questions, decisions, and unresolved questions for the Orden project.
+
+quality:
+  review: Not Reviewed
+  evidence: Partial
+  editorial: Draft
+
+audience:
+  - Researchers
+  - Contributors
+  - AI Assistants
+
+depends_on:
+  - 00_Project_Charter.md
+
+related_documents:
+  - 01_Terminology.md
+  - 02_Research_Methodology.md
+  - 03_Related_Work.md
+
+tags:
+  - research
+  - research-log
+  - hypotheses
+  - decisions
+  - open-questions
 ---
 
 # Research_Log.md
