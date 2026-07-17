@@ -367,53 +367,67 @@ documents:
     depends_on: [01_Terminology.md, References/Microsoft_IsHandled_v2.0.md]
 
   - path: 00_Project_Charter.md
+    document_id: RD-CHR-001
     title: Project Charter
     category: core_research
     authority: canonical
-    status: draft
-    version: "0.1"
+    status: active
+    maturity: draft
+    version: 0.2.0
     summary: Defines vision, research questions, scope boundaries, working hypothesis, deliverables, and success criteria.
     use_for: [scope decisions, research intent, expected contribution, out-of-scope checks]
     keywords: [mechanism-independent, behavior-changing customization, Business Central, working hypothesis]
 
   - path: 00_Research_Log.md
+    document_id: RD-LOG-001
     title: Research Log
     category: core_research
     authority: working
-    status: draft
-    version: "0.1"
+    status: active
+    maturity: draft
+    version: 0.2.0
     summary: Research backbone recording hypothesis evolution, rejected directions, open questions, and decisions.
     use_for: [research history, open questions, rejected ideas, current hypothesis state]
+    depends_on: [00_Project_Charter.md]
     keywords: [research log, hypothesis lifecycle, execution flow, review trigger, negative results]
 
   - path: 01_Terminology.md
+    document_id: TR-001
     title: Working Terminology
     category: core_research
     authority: canonical
-    status: draft
-    version: "0.1"
+    status: active
+    maturity: draft
+    version: 0.2.0
     summary: Working definitions, exclusions, relationships, and validation status for the framework's central terms.
     use_for: [definitions, term relationships, candidate status, forbidden terminology]
+    depends_on: [00_Research_Log.md]
     keywords: [behavior, execution flow, behavioral contract, architectural significance, effective extensibility]
 
   - path: 02_Research_Methodology.md
+    document_id: RD-MET-001
     title: Research Methodology
     category: core_research
     authority: normative
-    status: draft
-    version: "0.1"
+    status: active
+    maturity: draft
+    version: 0.2.0
     summary: Research philosophy, evidence hierarchy, hypothesis lifecycle, decision criteria, literature strategy, and BC validation method.
     use_for: [research design, accepting or rejecting concepts, evidence collection, validation]
+    depends_on: [00_Research_Log.md, 01_Terminology.md]
     keywords: [methodology, mechanism neutrality, literature review, empirical validation]
 
   - path: 03_Related_Work.md
+    document_id: RW-001
     title: Related Work
     category: core_research
     authority: working
-    status: draft
-    version: "0.1"
+    status: active
+    maturity: draft
+    version: 0.2.0
     summary: Comparative survey of software architecture, design, DDD, workflow/BPM, plugin architectures, and Microsoft BC guidance.
     use_for: [originality checks, terminology discovery, gap analysis, adjacent disciplines]
+    depends_on: [00_Project_Charter.md, 00_Research_Log.md, 01_Terminology.md, 02_Research_Methodology.md]
     keywords: [ATAM, SAAM, DDD, BPM, plugins, Microsoft guidance, research gap]
 
   - path: References/ISO_42010.md

@@ -1,9 +1,52 @@
 ---
-depends-on:
-- 00_Research_Log
-project: Behavior Change Review Framework
-status: draft
-version: 0.1
+metadata_schema: "1.0"
+
+project:
+  id: Orden
+  name: Behavior Change Review Framework
+
+document:
+  id: TR-001
+  title: Working Terminology
+  type: Terminology
+  version: 0.2.0
+  status: Active
+
+classification:
+  domain: Terminology
+  layer: Project
+  maturity: Draft
+
+owner: Štěpán Dvořák
+
+purpose: >
+  Defines the project's working terminology and records the validation status,
+  boundaries, relationships, and open questions associated with each term.
+
+quality:
+  review: Not Reviewed
+  evidence: Partial
+  editorial: Draft
+
+audience:
+  - Researchers
+  - Contributors
+  - AI Assistants
+
+depends_on:
+  - 00_Research_Log.md
+
+related_documents:
+  - Terminology_Index.md
+  - 02_Research_Methodology.md
+  - 03_Related_Work.md
+
+tags:
+  - terminology
+  - behavior
+  - execution-flow
+  - architectural-significance
+  - candidate-concepts
 ---
 
 # 01_Terminology.md
