@@ -1,0 +1,16 @@
+# Ignore Obsidian system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ignore cache and local workspace setup
+.obsidian/workspace
+.obsidian/workspace-mobile.json
+.obsidian/cache/
+
+# Ignore installed plugins
+.obsidian/plugins/
+.obsidian/themes/
+/.obsidian/workspace.json
+/.obsidian/community-plugins.json
+/.obsidian/workspace.json

@@ -4,21 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "d3e400fcc1a9ac4f",
+        "id": "d2a40acf6697bd22",
         "type": "tabs",
         "children": [
           {
-            "id": "e1a4892421058bbb",
+            "id": "997ba82b8542052f",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "split-diff-view",
               "state": {
-                "file": "Ideas/IsHandled Pattern - Missing Extensibility Preservation Rule.md",
-                "mode": "source",
-                "source": false
+                "aFile": ".obsidian/workspace.json",
+                "bFile": ".obsidian/workspace.json",
+                "aRef": "HEAD",
+                "bRef": ""
               },
-              "icon": "lucide-file",
-              "title": "IsHandled Pattern - Missing Extensibility Preservation Rule"
+              "icon": "diff",
+              "title": "Diff: workspace.json  (Index)"
             }
           }
         ]
@@ -94,7 +95,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Ideas/IsHandled Pattern - Missing Extensibility Preservation Rule.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Zpětné odkazy pro IsHandled Pattern - Missing Extensibility Preservation Rule"
+              "title": "Zpětné odkazy"
             }
           },
           {
@@ -113,12 +113,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Ideas/IsHandled Pattern - Missing Extensibility Preservation Rule.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Odchozí odkazy z IsHandled Pattern - Missing Extensibility Preservation Rule"
+              "title": "Odchozí odkazy"
             }
           },
           {
@@ -156,21 +155,30 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Ideas/IsHandled Pattern - Missing Extensibility Preservation Rule.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Přehled IsHandled Pattern - Missing Extensibility Preservation Rule"
+              "title": "Přehled"
+            }
+          },
+          {
+            "id": "a159771ec41d0cf8",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
             }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -180,15 +188,28 @@
       "daily-notes:Otevřít dnešní poznámku": false,
       "templates:Vložit šablonu": false,
       "command-palette:Otevřít paletu příkazů": false,
-      "bases:Vytvořit novou základnu": false
+      "bases:Vytvořit novou základnu": false,
+      "obsidian-git:Open Git source control": false,
+      "github-sync:Sync with Remote": false
     }
   },
-  "active": "e1a4892421058bbb",
+  "active": "997ba82b8542052f",
   "lastOpenFiles": [
+    "AGENTS.md",
+    "00_Research_Log.md",
+    "CONTRIBUTING_FOR_AI.md",
+    "Bez názvu.base",
+    "Decisions/ADR-001_Repository_Artifact_Profiles_and_Metadata.md",
+    "Repository_Standards.md",
+    "Archive/Repository_Conformance_Report.md",
+    "Decisions",
+    "Nová složka",
+    "Repository_Index.yaml",
+    "00_Project_Charter.md",
+    "Ideas/IsHandled Pattern - Missing Extensibility Preservation Rule.md",
     "Empirical/MS-CZF-IsHandled-Refactoring-Analysis-cs.md",
     "Empirical/KMITS-BA4_Finance-IsHandled-Audit.md",
     "Empirical/MS-CZL-IsHandled-Refactoring-Analysis-Report.md",
-    "Ideas/IsHandled Pattern - Missing Extensibility Preservation Rule.md",
     "Empirical/IsHandled_anti-pattern/MS-CZL-IsHandled-Refactoring-Analysis-Report.md",
     "Empirical/IsHandled_anti-pattern/MS-CZF-IsHandled-Refactoring-Analysis-cs.md",
     "Empirical/IsHandled_anti-pattern/KMITS-BA4_Finance-IsHandled-Audit.md",
@@ -196,12 +217,9 @@
     "Empirical/IsHandled_anti-pattern",
     "Ideas/Is logic in a Mediator Handler an Anti-Pattern- - r-dotnet.url",
     "Ideas",
-    "Nová složka",
     "Archive/CONTRIBUTING_FOR_AI-alpha-03-revised.md",
     "Governance_Principles.md",
-    "CONTRIBUTING_FOR_AI.md",
     "CONTRIBUTING_FOR_AI-alpha-03-revised.md",
-    "Repository_Standards.md",
     "Archive/contributing_for_ai_v0_9.md",
     "Archive/CONTRIBUTING_FOR_AI-alpha-01.md",
     "Archive/CONTRIBUTING_FOR_AI-alpha-02.md",
@@ -209,17 +227,9 @@
     "Archive/CONTRIBUTING_FOR_AI_v2.0.md",
     "Reasoning_Standard.md",
     "CONTRIBUTING_FOR_AI_v2.0.md",
-    "00_Project_Charter.md",
     "Archive/Repository_Standards.md",
-    "Whitepaper/Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md",
     "Whitepaper",
     "Empirical",
-    "02_Research_Methodology.md",
-    "01_Terminology.md",
-    "00_Research_Log.md",
-    "Templates",
-    "References",
-    "Historical_References",
-    "Archive/References_Research_Notes_v0.1.zip"
+    "Templates"
   ]
 }
