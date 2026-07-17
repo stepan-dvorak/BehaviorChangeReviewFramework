@@ -1,0 +1,722 @@
+schema_version: "1.0.0"
+
+index:
+  id: ORDEN-REPOSITORY-INDEX-001
+  title: Orden Repository Retrieval Index
+  purpose: >-
+    Machine-readable semantic index for locating, prioritizing, and combining
+    repository content during AI-assisted research, review, and contribution.
+  generated_on: 2026-07-17
+  source_repository: https://github.com/stepan-dvorak/BehaviorChangeReviewFramework
+  source_branch: main
+  source_commit: 807188fbd5aff5db1daad681e6da986a71afd0d3
+  maintenance: manual
+  intended_consumers:
+    - AI assistants
+    - repository search tools
+    - human contributors
+
+project:
+  id: Orden
+  name: Behavior Change Review Framework
+  domain: Microsoft Dynamics 365 Business Central software architecture
+  repository_kind: governed research knowledge base
+  primary_research_question: >-
+    Can a mechanism-independent review framework be defined for architecturally
+    significant behavior-changing customizations in Business Central?
+  working_hypothesis: >-
+    A significant change to an established effective execution flow may also
+    modify architectural properties carried by that flow; those impacts should
+    be reviewed independently of the implementation mechanism.
+  hypothesis_status: unverified
+  intended_contribution: >-
+    A practical Business Central specialization and integration of established
+    architecture concepts, not a new extensibility mechanism or architecture style.
+  seed_case: IsHandled pattern
+  mechanisms_in_scope:
+    - IsHandled
+    - event subscribers
+    - interfaces
+    - Strategy implementations
+    - delegation
+    - workflows
+    - plugin architectures
+
+retrieval_policy:
+  default_language: English
+  available_languages:
+    - English
+    - Czech
+  path_case_sensitive: true
+  precedence:
+    - Governance_Principles.md
+    - Repository_Standards.md
+    - Repository_Taxonomy.md
+    - EDITORIAL_STYLE_GUIDE.md
+    - Reasoning_Standard.md
+    - document-specific guidance
+    - current task instructions
+  startup_context:
+    - AGENTS.md
+    - CONTRIBUTING_FOR_AI.md
+    - Governance_Principles.md
+    - Repository_Standards.md
+    - EDITORIAL_STYLE_GUIDE.md
+    - Reasoning_Standard.md
+    - 00_Project_Charter.md
+    - 01_Terminology.md
+    - 02_Research_Methodology.md
+  rules:
+    - Prefer canonical root documents over files in Archive/.
+    - Treat Microsoft guidance as evidence rather than as repository conclusions.
+    - Separate facts, observations, interpretations, hypotheses, and conclusions.
+    - Preserve Candidate status until a repository concept is validated.
+    - Prefer ISO terminology, then Microsoft terminology, then repository terminology.
+    - Use empirical studies as case evidence, not as universally generalizable proof.
+    - Read a document's dependencies before changing its conclusions or terminology.
+    - Never infer existence from a planned filename; check document status below.
+  archive_policy:
+    default_retrieval: exclude
+    use_only_for:
+      - provenance
+      - document evolution
+      - superseded wording
+      - historical comparison
+    never_use_as:
+      - current governance
+      - canonical Microsoft IsHandled analysis
+      - current AI contribution instructions
+  authority_labels:
+    normative: Binding repository rule or required operating procedure.
+    canonical: Current authoritative repository synthesis for its subject.
+    evidentiary: Evidence or analysis used to support research conclusions.
+    working: Draft research state, hypothesis, or provisional synthesis.
+    navigational: Locator or inventory; does not override source documents.
+    template: Structure for a new artifact; contains no case conclusion.
+    historical: Contextual history or provenance; not current normative guidance.
+    archived: Superseded material excluded from ordinary retrieval.
+
+query_routes:
+  - intent: understand_project
+    retrieve:
+      - README.md
+      - 00_Project_Charter.md
+      - 00_Research_Log.md
+    then:
+      - Whitepaper/Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md
+  - intent: edit_or_create_repository_content
+    retrieve:
+      - AGENTS.md
+      - CONTRIBUTING_FOR_AI.md
+      - Governance_Principles.md
+      - Repository_Standards.md
+      - EDITORIAL_STYLE_GUIDE.md
+      - Reasoning_Standard.md
+      - Repository_Taxonomy.md
+  - intent: resolve_or_introduce_terminology
+    retrieve:
+      - Terminology_Index.md
+      - 01_Terminology.md
+      - 03_Related_Work.md
+      - References/ISO_42010.md
+    rule: Do not introduce a synonym without updating Terminology_Index.md.
+  - intent: evaluate_evidence_or_form_a_conclusion
+    retrieve:
+      - Evidence_Hierarchy.md
+      - Reasoning_Standard.md
+      - 02_Research_Methodology.md
+    rule: Retrieve the relevant primary reference and empirical study as applicable.
+  - intent: research_architecture_review_foundation
+    retrieve:
+      - References/ISO_42010.md
+      - References/ISO_42020.md
+      - References/ISO_42030.md
+      - References/ATAM.md
+      - References/SAAM.md
+      - References/SEI_Documenting_Behavior.md
+  - intent: research_microsoft_extensibility
+    retrieve:
+      - References/Microsoft_Extensibility_Overview.md
+      - References/Microsoft_Event_Types.md
+      - References/Microsoft_Interfaces.md
+      - References/Microsoft_IsHandled_v2.0.md
+  - intent: analyze_ishandled
+    retrieve:
+      - References/Microsoft_IsHandled_v2.0.md
+      - References/Microsoft_Extensibility_Overview.md
+      - Empirical/KMITS-BA4_Finance-IsHandled-Audit.md
+      - Empirical/MS-CZF-IsHandled-Refactoring-Analysis-cs.md
+      - Empirical/MS-CZL-IsHandled-Refactoring-Analysis-Report.md
+    optional_history:
+      - Historical_References/Mark_Brummel_Handled_Pattern.md
+      - Historical_References/Vjeko_Gentlemens_Agreement.md
+      - Historical_References/Vjeko_Codeunit_Interfaces.md
+  - intent: inspect_empirical_evidence
+    retrieve:
+      - Templates/Empirical_Study_Template.md
+      - Empirical/KMITS-BA4_Finance-IsHandled-Audit.md
+      - Empirical/MS-CZF-IsHandled-Refactoring-Analysis-cs.md
+      - Empirical/MS-CZL-IsHandled-Refactoring-Analysis-Report.md
+    caution: The three studies use differing formats and are not yet normalized.
+  - intent: synthesize_or_edit_whitepaper
+    retrieve:
+      - Whitepaper/Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md
+      - 00_Project_Charter.md
+      - 00_Research_Log.md
+      - 01_Terminology.md
+      - 02_Research_Methodology.md
+      - 03_Related_Work.md
+      - References/ISO_42010.md
+      - References/ISO_42020.md
+      - References/ISO_42030.md
+      - References/Microsoft_IsHandled_v2.0.md
+  - intent: create_new_research_artifact
+    retrieve:
+      - Templates/Research_Document_Template.md
+      - Repository_Standards.md
+      - EDITORIAL_STYLE_GUIDE.md
+      - Evidence_Hierarchy.md
+  - intent: create_architecture_decision
+    retrieve:
+      - Templates/ADR_Template.md
+      - Repository_Standards.md
+      - Governance_Principles.md
+
+canonical_concepts:
+  terminology_priority:
+    - ISO
+    - Microsoft
+    - Orden repository
+  terms:
+    behavior:
+      status: existing
+      definition_source: 01_Terminology.md
+      search_aliases: [observable behavior, system behavior]
+    behavior-changing_customization:
+      status: stable
+      definition_source: 01_Terminology.md
+      search_aliases: [behavioral change, behaviour-changing customization]
+    execution_flow:
+      status: candidate
+      definition_source: 01_Terminology.md
+      caution: May be replaceable by established architecture-view terminology.
+    effective_execution_flow:
+      status: candidate
+      definition_source: 01_Terminology.md
+    architectural_significance:
+      status: candidate
+      definition_source: 01_Terminology.md
+    behavioral_contract:
+      status: candidate
+      definition_source: 01_Terminology.md
+    behavioral_change_review:
+      status: candidate
+      definition_source: 01_Terminology.md
+    behavioral_change_review_trigger:
+      status: candidate
+      definition_source: 01_Terminology.md
+    responsibility_transfer:
+      status: candidate
+      definition_source: References/Microsoft_IsHandled_v2.0.md
+    evolution_ownership:
+      status: candidate
+      definition_source: References/Microsoft_IsHandled_v2.0.md
+    discoverability:
+      status: candidate
+      definition_source: References/Microsoft_IsHandled_v2.0.md
+    explicit_contract:
+      status: candidate
+      definition_source: References/Microsoft_IsHandled_v2.0.md
+    effective_extensibility:
+      status: candidate
+      definition_source: References/Microsoft_IsHandled_v2.0.md
+
+documents:
+  - path: README.md
+    title: BehaviorChangeReviewFramework
+    category: governance
+    authority: navigational
+    status: current
+    summary: One-paragraph public description of the repository and research goal.
+    use_for: [repository identification, quick orientation]
+    keywords: [Orden, Business Central, behavior change, architecture review]
+
+  - path: AGENTS.md
+    title: Agent Instructions
+    category: governance
+    authority: normative
+    status: current
+    audience: [AI assistants]
+    summary: Minimal entry-point instructions defining mandatory pre-reading and core AI rules.
+    use_for: [AI startup, edit prerequisites, non-negotiable contribution rules]
+    depends_on:
+      - CONTRIBUTING_FOR_AI.md
+      - EDITORIAL_STYLE_GUIDE.md
+      - 00_Project_Charter.md
+      - 01_Terminology.md
+      - 02_Research_Methodology.md
+    keywords: [agents, AI, instructions, contribution]
+
+  - path: Governance_Principles.md
+    document_id: GOV-PRN-001
+    title: Governance Principles
+    category: governance
+    authority: normative
+    status: draft
+    summary: Foundational philosophy for governance, evidence, traceability, uncertainty, consistency, and human authority.
+    use_for: [resolving governance intent, evaluating policy changes, conflict resolution]
+    key_topics: [evidence before conclusions, reference over duplication, human authority, quality before completion]
+    depends_on: [Repository_Standards.md]
+
+  - path: Repository_Standards.md
+    document_id: RS-001
+    title: Repository Standards
+    category: governance
+    authority: normative
+    status: active
+    maturity: stable
+    summary: Constitutional repository standard for metadata, identity, classification, relationships, versioning, and lifecycle.
+    use_for: [front matter, document IDs, metadata, versioning, lifecycle, repository conventions]
+    keywords: [YAML front matter, metadata, SemVer, maturity, quality, document identity]
+
+  - path: CONTRIBUTING_FOR_AI.md
+    document_id: CG-001
+    title: AI Contribution Guidelines
+    category: governance
+    authority: normative
+    status: active
+    maturity: draft
+    summary: End-to-end AI workflow from context resolution and knowledge modeling through reasoning, realization, validation, delivery, and governance evolution.
+    use_for: [AI operating workflow, validation, complete-document delivery, governance-aware contribution]
+    depends_on: [Repository_Standards.md, Reasoning_Standard.md, Governance_Principles.md]
+    keywords: [AI workflow, knowledge model, validation, artifact realization, delivery]
+
+  - path: Reasoning_Standard.md
+    document_id: GOV-RSN-001
+    title: Reasoning Standard
+    category: governance
+    authority: normative
+    status: draft
+    summary: Rules for evidence-based, transparent, reproducible reasoning and explicit uncertainty classification.
+    use_for: [hypotheses, conclusions, evidence classification, traceability, uncertainty]
+    keywords: [fact, observation, interpretation, assumption, hypothesis, conclusion]
+
+  - path: EDITORIAL_STYLE_GUIDE.md
+    title: Editorial Style Guide
+    category: governance
+    authority: normative
+    status: current
+    summary: Repository voice, terminology priority, evidence-layer separation, standard section structure, and review checklist.
+    use_for: [writing, editing, document review, repository voice]
+    keywords: [editorial style, technical writing, evidence separation, references]
+
+  - path: Evidence_Hierarchy.md
+    title: Evidence Hierarchy
+    category: governance
+    authority: normative
+    status: current
+    summary: Ranks evidence from ISO standards through repository hypotheses and defines basic evidence-handling rules.
+    use_for: [source weighting, confidence assessment, evidence disputes]
+    keywords: [evidence authority, ISO, Microsoft Learn, source code, community sources]
+
+  - path: Repository_Taxonomy.md
+    title: Repository Taxonomy
+    category: governance
+    authority: normative
+    status: current
+    summary: Canonical content categories and Draft-to-Archived lifecycle.
+    use_for: [document classification, placement, lifecycle]
+    keywords: [governance, core research, standards, Microsoft studies, empirical studies, framework, archive]
+
+  - path: Repository_Map.md
+    title: Repository Map
+    category: governance
+    authority: navigational
+    status: incomplete
+    summary: High-level directory map and conceptual reading order; it predates several current files.
+    use_for: [human orientation, conceptual reading order]
+    do_not_use_for: [complete file inventory, authority resolution]
+
+  - path: Terminology_Index.md
+    title: Terminology Index
+    category: terminology
+    authority: canonical
+    status: current
+    summary: Compact registry of repository concepts, statuses, and definition locations.
+    use_for: [term lookup, synonym prevention, terminology status]
+    depends_on: [01_Terminology.md, References/Microsoft_IsHandled_v2.0.md]
+
+  - path: 00_Project_Charter.md
+    title: Project Charter
+    category: core_research
+    authority: canonical
+    status: draft
+    version: "0.1"
+    summary: Defines vision, research questions, scope boundaries, working hypothesis, deliverables, and success criteria.
+    use_for: [scope decisions, research intent, expected contribution, out-of-scope checks]
+    keywords: [mechanism-independent, behavior-changing customization, Business Central, working hypothesis]
+
+  - path: 00_Research_Log.md
+    title: Research Log
+    category: core_research
+    authority: working
+    status: draft
+    version: "0.1"
+    summary: Research backbone recording hypothesis evolution, rejected directions, open questions, and decisions.
+    use_for: [research history, open questions, rejected ideas, current hypothesis state]
+    keywords: [research log, hypothesis lifecycle, execution flow, review trigger, negative results]
+
+  - path: 01_Terminology.md
+    title: Working Terminology
+    category: core_research
+    authority: canonical
+    status: draft
+    version: "0.1"
+    summary: Working definitions, exclusions, relationships, and validation status for the framework's central terms.
+    use_for: [definitions, term relationships, candidate status, forbidden terminology]
+    keywords: [behavior, execution flow, behavioral contract, architectural significance, effective extensibility]
+
+  - path: 02_Research_Methodology.md
+    title: Research Methodology
+    category: core_research
+    authority: normative
+    status: draft
+    version: "0.1"
+    summary: Research philosophy, evidence hierarchy, hypothesis lifecycle, decision criteria, literature strategy, and BC validation method.
+    use_for: [research design, accepting or rejecting concepts, evidence collection, validation]
+    keywords: [methodology, mechanism neutrality, literature review, empirical validation]
+
+  - path: 03_Related_Work.md
+    title: Related Work
+    category: core_research
+    authority: working
+    status: draft
+    version: "0.1"
+    summary: Comparative survey of software architecture, design, DDD, workflow/BPM, plugin architectures, and Microsoft BC guidance.
+    use_for: [originality checks, terminology discovery, gap analysis, adjacent disciplines]
+    keywords: [ATAM, SAAM, DDD, BPM, plugins, Microsoft guidance, research gap]
+
+  - path: References/ISO_42010.md
+    title: ISO/IEC/IEEE 42010 Analysis
+    category: standards
+    authority: evidentiary
+    status: current
+    summary: Maps architecture-description concepts to Orden and narrows the proposed contribution toward an operational specialization.
+    use_for: [concerns, viewpoints, views, decisions, architecture descriptions, terminology correction]
+    key_finding: ISO 42010 provides a conceptual foundation but not the desired operational BC review method.
+
+  - path: References/ISO_42020.md
+    title: ISO/IEC/IEEE 42020 Analysis
+    category: standards
+    authority: evidentiary
+    status: current
+    summary: Examines architecture processes and positions Orden as a likely Business Central process specialization.
+    use_for: [architecture governance, management, conceptualization, evaluation, process specialization]
+    key_finding: A mechanism-independent review trigger remains operationally unresolved.
+
+  - path: References/ISO_42030.md
+    title: ISO/IEC/IEEE 42030 Analysis
+    category: standards
+    authority: evidentiary
+    status: current
+    summary: Relates architecture evaluation aims, proportionality, trigger detection, and evaluation records to the proposed framework.
+    use_for: [evaluation levels, review trigger, proportionality, evaluation record, originality claim]
+    key_finding: The generic evaluation framework largely exists; Orden's defensible contribution is a BC-specific operationalization.
+
+  - path: References/SEI_Documenting_Behavior.md
+    title: SEI Documenting Behavior Analysis
+    category: standards
+    authority: evidentiary
+    status: current
+    summary: Evaluates SEI behavioral views and distinguishes behavior documentation from change evaluation.
+    use_for: [behavior views, behavioral representation, execution-flow terminology, literature gap]
+
+  - path: References/ATAM.md
+    title: Architecture Tradeoff Analysis Method
+    category: standards
+    authority: evidentiary
+    status: research_stub
+    summary: Structured research note for extracting ATAM concepts relevant to the framework.
+    use_for: [quality attributes, scenarios, tradeoffs, architecture evaluation]
+
+  - path: References/SAAM.md
+    title: Software Architecture Analysis Method
+    category: standards
+    authority: evidentiary
+    status: research_stub
+    summary: Structured research note for SAAM relevance, concepts, open questions, and actions.
+    use_for: [change scenarios, modifiability, architecture analysis]
+
+  - path: References/DDD.md
+    title: Domain-Driven Design
+    category: related_work
+    authority: evidentiary
+    status: research_stub
+    summary: Structured note for DDD concepts potentially relevant to behavioral correctness and invariants.
+    use_for: [domain behavior, invariants, aggregates, domain events]
+
+  - path: References/Fowler.md
+    title: Martin Fowler Reference Note
+    category: related_work
+    authority: evidentiary
+    status: research_stub
+    summary: Placeholder research structure for Fowler's relevant terminology and practices.
+    use_for: [refactoring, enterprise patterns, established terminology]
+
+  - path: References/Workflow_BPM.md
+    title: Workflow and BPM
+    category: related_work
+    authority: evidentiary
+    status: research_stub
+    summary: Structured note for workflow and business-process change concepts.
+    use_for: [process modification, orchestration, state transitions, compensation]
+
+  - path: References/Plugin_Architectures.md
+    title: Plugin Architectures
+    category: related_work
+    authority: evidentiary
+    status: research_stub
+    summary: Structured note for extension points, hooks, plugins, middleware, and inversion of control.
+    use_for: [plugin evolution, extensibility mechanisms, extension contracts]
+
+  - path: References/Microsoft_Extensibility_Overview.md
+    title: Microsoft Extensibility Overview Analysis
+    category: microsoft_study
+    authority: evidentiary
+    status: current
+    summary: Separates Microsoft's explicit and implicit positions on layering, evolution, events, upgradeability, and separation of concerns.
+    use_for: [Microsoft position, platform layering, upgradeability, mechanism coexistence]
+
+  - path: References/Microsoft_Event_Types.md
+    title: Microsoft Learn Event Types
+    category: microsoft_study
+    authority: evidentiary
+    status: research_stub
+    summary: Structured note for Microsoft event taxonomy and its relevance to behavior change.
+    use_for: [business events, integration events, internal events, event taxonomy]
+
+  - path: References/Microsoft_Interfaces.md
+    title: Microsoft Learn Interfaces
+    category: microsoft_study
+    authority: evidentiary
+    status: research_stub
+    summary: Structured note for interface guidance and mechanism-independent comparison.
+    use_for: [AL interfaces, Strategy, explicit contracts, implementation selection]
+
+  - path: References/Microsoft_IsHandled_v2.0.md
+    title: Microsoft IsHandled Analysis
+    category: microsoft_study
+    authority: canonical
+    status: current
+    summary: Full layered analysis of Microsoft's IsHandled guidance, BC280 examples, counterarguments, threats to validity, and framework implications.
+    use_for: [IsHandled, Microsoft criticism, BC280 evidence, extensibility degradation, candidate concepts]
+    key_topics:
+      - turning off standard code
+      - fragile evolution
+      - readability and discoverability
+      - single-subscriber assumption
+      - coding by convention
+      - extensibility degradation
+    supersedes: Archive/Microsoft_IsHandled*.md
+
+  - path: Empirical/KMITS-BA4_Finance-IsHandled-Audit.md
+    title: KMITS BA4 Finance IsHandled Audit
+    category: empirical_study
+    authority: evidentiary
+    status: current
+    language: Czech
+    summary: Twelve-finding audit with classification and refactoring recommendations for IsHandled usage in an AL codebase.
+    use_for: [case evidence, IsHandled classification, refactoring priorities]
+
+  - path: Empirical/MS-CZF-IsHandled-Refactoring-Analysis-cs.md
+    title: MS-CZF IsHandled Refactoring Analysis
+    category: empirical_study
+    authority: evidentiary
+    status: current
+    language: Czech
+    summary: Sixteen-finding analysis emphasizing critical risks, extensibility breaks, and discovery misuse.
+    use_for: [case evidence, discovery misuse, critical-risk rules, migration approach]
+
+  - path: Empirical/MS-CZL-IsHandled-Refactoring-Analysis-Report.md
+    title: MS-CZL IsHandled Refactoring Analysis Report
+    category: empirical_study
+    authority: evidentiary
+    status: current
+    language: Czech
+    summary: Forty-four-finding report focused on competing subscribers, detailed risks, deterministic adapters, and refactoring order.
+    use_for: [large case evidence, subscriber competition, adapter pattern, refactoring roadmap]
+
+  - path: Historical_References/Evolution_of_Extensibility.md
+    title: Evolution of Extensibility
+    category: historical_reference
+    authority: historical
+    status: current
+    summary: Historical context artifact; currently contains no Markdown headings.
+    use_for: [historical provenance]
+
+  - path: Historical_References/Mark_Brummel_Handled_Pattern.md
+    title: Mark Brummel Handled Pattern
+    category: historical_reference
+    authority: historical
+    status: current
+    summary: Historical reference to the early Handled pattern discussion.
+    use_for: [IsHandled origin, historical attribution]
+
+  - path: Historical_References/Vjeko_Gentlemens_Agreement.md
+    title: Vjeko Gentlemen's Agreement
+    category: historical_reference
+    authority: historical
+    status: current
+    summary: Community historical source on the convention-based nature of the handled pattern.
+    use_for: [IsHandled history, coding by convention]
+
+  - path: Historical_References/Vjeko_Codeunit_Interfaces.md
+    title: Vjeko Codeunit Interfaces
+    category: historical_reference
+    authority: historical
+    status: current
+    summary: Community historical source connecting codeunit interfaces and extensibility evolution.
+    use_for: [interface history, alternative mechanisms]
+
+  - path: Ideas/IsHandled Pattern - Missing Extensibility Preservation Rule.md
+    title: Missing Extensibility Preservation Rule
+    category: ideas
+    authority: working
+    status: idea
+    summary: Candidate future-work note about preserving downstream extensibility when replacing behavior.
+    use_for: [hypothesis generation, future research]
+    do_not_use_for: [validated conclusion, normative rule]
+
+  - path: Whitepaper/Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md
+    title: Toward a Mechanism-Independent Review Framework for Behavior-Changing Customizations in Microsoft Dynamics 365 Business Central
+    category: framework
+    authority: working
+    status: research_draft
+    summary: Current synthesis proposing a four-step behavioral change review and practical checklist.
+    use_for: [framework overview, synthesis, review steps, whitepaper drafting]
+    caution: Draft synthesis; reconcile with newer ISO and Microsoft analyses before treating conclusions as current.
+
+  - path: Templates/Research_Document_Template.md
+    title: Research Document Template
+    category: templates
+    authority: template
+    status: current
+    summary: Standard structure for research questions, methodology, layered analysis, findings, limitations, and references.
+    use_for: [new research document]
+
+  - path: Templates/Empirical_Study_Template.md
+    title: Empirical Study Template
+    category: templates
+    authority: template
+    status: current
+    summary: Structure for objective, setup, observations, evidence, validity threats, findings, and framework implications.
+    use_for: [new empirical study, normalization of existing studies]
+
+  - path: Templates/ADR_Template.md
+    title: Architecture Decision Record Template
+    category: templates
+    authority: template
+    status: current
+    summary: Standard ADR structure for context, drivers, options, decision, rationale, and consequences.
+    use_for: [architecture decisions, governance decisions]
+
+non_markdown_artifacts:
+  - path: Ideas/Is logic in a Mediator Handler an Anti-Pattern- - r-dotnet.url
+    category: ideas
+    authority: historical
+    status: external_link
+    retrieval: Follow only when the external discussion is directly relevant and available.
+
+archive_families:
+  - path_pattern: Archive/Microsoft_IsHandled*.md
+    authority: archived
+    current_replacement: References/Microsoft_IsHandled_v2.0.md
+    contents: Iterative versions from v0.1 through v2.0 alpha drafts.
+  - path_pattern: Archive/CONTRIBUTING_FOR_AI*.md
+    authority: archived
+    current_replacement: CONTRIBUTING_FOR_AI.md
+    contents: Earlier and alpha AI contribution guidelines.
+  - path_pattern: Archive/Repository_Standards.md
+    authority: archived
+    current_replacement: Repository_Standards.md
+  - path_pattern: Archive/Document_Template.md
+    authority: archived
+    current_replacement: Templates/Research_Document_Template.md
+  - path_pattern: Archive/References_Research_Notes_v0.1.zip
+    authority: archived
+    current_replacement: null
+    contents: Historical packaged research notes; inspect only for provenance or recovery.
+
+planned_or_missing_documents:
+  - path: Repository_Architecture.md
+    referenced_by: [CONTRIBUTING_FOR_AI.md, Governance_Principles.md, Repository_Standards.md]
+    status: missing
+    instruction: Do not invent its contents or treat it as an available governance source.
+  - path: Editorial_Style_Guide.md
+    actual_path: EDITORIAL_STYLE_GUIDE.md
+    status: filename_case_mismatch
+  - path: 04_Existing_BC_Guidance.md
+    status: planned
+    probable_current_sources:
+      - References/Microsoft_Extensibility_Overview.md
+      - References/Microsoft_Event_Types.md
+      - References/Microsoft_Interfaces.md
+      - References/Microsoft_IsHandled_v2.0.md
+  - path: 05_Framework.md
+    status: planned
+    probable_current_source: Whitepaper/Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md
+  - path: 06_BC_Pattern_Catalog.md
+    status: planned
+  - path: 07_Example_Catalog.md
+    status: planned
+    probable_current_sources:
+      - Empirical/KMITS-BA4_Finance-IsHandled-Audit.md
+      - Empirical/MS-CZF-IsHandled-Refactoring-Analysis-cs.md
+      - Empirical/MS-CZL-IsHandled-Refactoring-Analysis-Report.md
+  - path: 08_Decision_Tree.md
+    status: planned
+  - path: Whitepaper.md
+    status: planned
+    probable_current_source: Whitepaper/Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md
+
+known_consistency_issues:
+  - id: IDX-ISSUE-001
+    severity: high
+    issue: Repository_Architecture.md is referenced in governance but does not exist.
+    retrieval_effect: Skip it and report the missing dependency when its authority would matter.
+  - id: IDX-ISSUE-002
+    severity: medium
+    issue: Editorial_Style_Guide.md references differ in case from EDITORIAL_STYLE_GUIDE.md.
+    retrieval_effect: Resolve all such references to EDITORIAL_STYLE_GUIDE.md on case-sensitive systems.
+  - id: IDX-ISSUE-003
+    severity: medium
+    issue: Repository_Map.md omits many present documents and uses unqualified reference filenames.
+    retrieval_effect: Use this index as the file inventory; retain Repository_Map.md only for its conceptual reading order.
+  - id: IDX-ISSUE-004
+    severity: medium
+    issue: Metadata coverage and schema style are inconsistent across current documents.
+    retrieval_effect: Do not assume absent front matter means low importance; use authority fields in this index.
+  - id: IDX-ISSUE-005
+    severity: medium
+    issue: Terminology_Index.md points candidate IsHandled concepts to Microsoft_IsHandled.md rather than the actual current path.
+    retrieval_effect: Resolve those definitions to References/Microsoft_IsHandled_v2.0.md.
+  - id: IDX-ISSUE-006
+    severity: low
+    issue: Several reference documents are research stubs rather than completed analyses.
+    retrieval_effect: Treat their headings as research plans and verify any substantive claim externally.
+
+maintenance_rules:
+  update_when:
+    - a canonical document is added, renamed, moved, archived, or superseded
+    - a concept changes status or definition source
+    - a query route gains a better primary source
+    - a planned document is created
+    - a known consistency issue is resolved
+  validation_checks:
+    - YAML parses successfully.
+    - Every documents.path exists with exact case.
+    - No archived document is marked canonical or normative.
+    - Every superseded family identifies its current replacement when one exists.
+    - Every missing document remains absent or is reclassified after creation.
+    - Query routes use current paths and respect governance precedence.
+  recommended_location: /Repository_Index.yaml
