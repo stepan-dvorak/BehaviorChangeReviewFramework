@@ -9,7 +9,7 @@ document:
   id: RD-LOG-001
   title: Research Log
   type: Research Log
-  version: 0.6.0
+  version: 0.7.0
   status: Active
 
 classification:
@@ -312,3 +312,35 @@ behavior. The contextual boundary has not been established.
 See `References/Microsoft_Event_Types.md`,
 `Empirical/BCApps_Event_Pattern_Analysis.md`, and
 `Ideas/Microsoft_Event_Types_Research_Agenda.md`.
+
+## 2026-07-18 — Behavioral Change Impact Review Pilot Pre-registration
+
+**Candidate working definition:** Behavioral Change Impact Review is a review
+initiated when a customization materially augments, redirects, suppresses,
+replaces, reorders, or delegates established behavior or execution
+responsibility.
+
+**Operational assumption:** For the pilot, a change is material when available
+evidence indicates that it can alter an observable outcome, side effect,
+invariant, responsibility, interaction, failure mode, or quality-relevant
+execution property. This is a coding rule, not canonical terminology.
+
+**Candidate checklist:** Review affected flow, change type, outcomes,
+invariants, ordering and transaction semantics, integration and extensibility,
+observability, failure behavior, ownership, and evolution. Extensibility is one
+possible impact rather than the name or complete scope of the review.
+
+**Empirical decision:** Begin with a bounded 16-case pilot in Microsoft's Core
+Localization Pack for Czech application at BCApps commit
+`397d01199c321e774edaf23a7290fee40f75c6a6`. Freeze selection rules before case
+classification, disclose prior case knowledge, and include negative controls
+and uncertain cases.
+
+**Uncertainty:** The trigger, materiality rule, checklist, event-evidence
+dimensions, and their mapping remain candidates. The pilot may refine or reject
+them and cannot establish defect prevalence.
+
+**Status:** Under Investigation; pilot execution pending
+
+See `Empirical/BCApps_Event_Pattern_Analysis.md` and
+`Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md`.

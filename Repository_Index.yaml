@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.5
+  version: 1.0.6
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -412,7 +412,7 @@ documents:
     authority: working
     status: active
     maturity: draft
-    version: 0.6.0
+    version: 0.7.0
     summary: Research backbone recording hypothesis evolution, rejected directions, open questions, and decisions.
     use_for: [research history, open questions, rejected ideas, current hypothesis state]
     depends_on: [00_Project_Charter.md]
@@ -652,11 +652,25 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.1.0
-    summary: Defines a reproducible stratified repository-code audit for testing candidate event dimensions against representative BCApps publisher-subscriber participation cases.
-    use_for: [BCApps study planning, event case sampling, publisher-subscriber analysis, runtime participation, empirical validation]
+    version: 0.2.0
+    summary: Defines a reproducible BCApps code-audit protocol and a candidate mechanism-independent Behavioral Change Impact Review trigger and checklist for empirical testing.
+    use_for: [BCApps study planning, behavioral change trigger testing, impact checklist testing, event case sampling, publisher-subscriber analysis, runtime participation, empirical validation]
     caution: Study protocol only; execution, classified cases, and findings are pending.
     depends_on: [02_Research_Methodology.md, References/Microsoft_Event_Types.md]
+
+  - path: Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md
+    document_id: ES-BCAPPS-CZ-CLP-EVENT-PILOT-001
+    title: BCApps Czech Core Localization Event Pilot
+    profile: empirical_study
+    category: empirical_study
+    authority: planned
+    status: active
+    maturity: draft
+    version: 0.1.0
+    summary: Pre-registers a bounded 16-case event pilot in Microsoft's Core Localization Pack for Czech application with a fixed BCApps commit, bias controls, selection rules, and empty case records.
+    use_for: [Czech localization pilot, pre-registration, event subscriber case selection, behavioral change trigger testing, impact checklist testing]
+    caution: Pre-registration only; the selection register is empty and no case findings or prevalence claims are available.
+    depends_on: [02_Research_Methodology.md, Empirical/BCApps_Event_Pattern_Analysis.md, References/Microsoft_Event_Types.md]
 
   - path: Empirical/MS_CZF_IsHandled_Refactoring_Analysis.md
     document_id: ES-MS-CZF-001
