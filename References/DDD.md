@@ -1,9 +1,46 @@
-# Domain-Driven Design
+---
+metadata_schema: "1.0"
+project:
+  id: Orden
+  name: Behavior Change Review Framework
+document:
+  id: REF-DDD-001
+  title: Domain-Driven Design
+  type: Research Stub
+  version: 0.2.0
+  status: Active
+classification:
+  domain: Domain-Driven Design
+  layer: Study
+  maturity: Stub
+owner: Štěpán Dvořák
+purpose: >
+  Scopes future research into Domain-Driven Design concepts relevant to domain
+  behavior, invariants, consistency, aggregates, and domain events.
+quality:
+  review: Not Reviewed
+  evidence: Pending
+  editorial: Draft
+audience:
+  - Researchers
+  - Contributors
+  - AI Assistants
+depends_on:
+  - 02_Research_Methodology.md
+  - 03_Related_Work.md
+related_documents:
+  - 01_Terminology.md
+research_status:
+  state: Planned
+  conclusions_available: false
+tags:
+  - research-stub
+  - domain-driven-design
+  - domain-behavior
+  - invariants
+---
 
----
-status: stub
-version: 0.1
----
+# Domain-Driven Design
 
 # Purpose
 

@@ -1,9 +1,46 @@
-# Martin Fowler
+---
+metadata_schema: "1.0"
+project:
+  id: Orden
+  name: Behavior Change Review Framework
+document:
+  id: REF-FOWLER-001
+  title: Martin Fowler Reference Note
+  type: Research Stub
+  version: 0.2.0
+  status: Active
+classification:
+  domain: Software Design
+  layer: Study
+  maturity: Stub
+owner: Štěpán Dvořák
+purpose: >
+  Scopes future research into Martin Fowler's terminology and practices relevant
+  to refactoring, enterprise patterns, and evolutionary design.
+quality:
+  review: Not Reviewed
+  evidence: Pending
+  editorial: Draft
+audience:
+  - Researchers
+  - Contributors
+  - AI Assistants
+depends_on:
+  - 02_Research_Methodology.md
+  - 03_Related_Work.md
+related_documents:
+  - 01_Terminology.md
+research_status:
+  state: Planned
+  conclusions_available: false
+tags:
+  - research-stub
+  - refactoring
+  - enterprise-patterns
+  - evolutionary-design
+---
 
----
-status: stub
-version: 0.1
----
+# Martin Fowler
 
 # Purpose
 

@@ -1,9 +1,47 @@
-# Plugin Architectures
+---
+metadata_schema: "1.0"
+project:
+  id: Orden
+  name: Behavior Change Review Framework
+document:
+  id: REF-PLUGIN-ARCH-001
+  title: Plugin Architectures
+  type: Research Stub
+  version: 0.2.0
+  status: Active
+classification:
+  domain: Extensibility Architecture
+  layer: Study
+  maturity: Stub
+owner: Štěpán Dvořák
+purpose: >
+  Scopes future research into plugin architectures, extension points, hooks,
+  middleware, and inversion of control.
+quality:
+  review: Not Reviewed
+  evidence: Pending
+  editorial: Draft
+audience:
+  - Researchers
+  - Contributors
+  - AI Assistants
+depends_on:
+  - 02_Research_Methodology.md
+  - 03_Related_Work.md
+related_documents:
+  - 01_Terminology.md
+  - References/Microsoft_Extensibility_Overview.md
+research_status:
+  state: Planned
+  conclusions_available: false
+tags:
+  - research-stub
+  - plugin-architecture
+  - extension-points
+  - inversion-of-control
+---
 
----
-status: stub
-version: 0.1
----
+# Plugin Architectures
 
 # Purpose
 
