@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-EVENT-POP-001
   title: BCApps Czech Core Localization Event Population Manifest
   type: Empirical Study
-  version: 0.1.0
+  version: 0.2.0
   status: Active
 
 classification:
@@ -21,7 +21,8 @@ owner: Štěpán Dvořák
 
 purpose: >
   Records the reproducible syntactic extraction of the fixed event-subscriber
-  population used by the BCApps Czech Core Localization event pilot.
+  population, publisher declarations, and discovery markers used by the
+  BCApps Czech Core Localization event pilot.
 
 quality:
   review: Self Reviewed
@@ -47,7 +48,7 @@ study:
   method: Deterministic Static Source Inventory Extraction
   subject: Microsoft Core Localization Pack for Czech application
   data_access: Public GitHub Repository at Fixed Commit
-  reproducibility: Full for the Recorded Syntactic Population
+  reproducibility: Full for the Recorded Syntactic Discovery Outputs
 
 tags:
   - empirical-study
@@ -79,6 +80,10 @@ The fixed source is Microsoft's public `microsoft/BCApps` repository at commit
 | `Scripts/Discover_BCApps_CZ_Event_Population.py` | Validates the checkout commit, scans the fixed boundary, and deterministically generates the CSV |
 | `Empirical/Data/BCApps_CZ_Core_Localization_Event_Population.csv` | One ordered row per detected, uncommented `[EventSubscriber(...)]` attribute |
 | `Empirical/Data/BCApps_CZ_Core_Localization_Source_Files.csv` | Complete ordered list of AL files in the fixed production boundary |
+| `Scripts/Discover_BCApps_CZ_Event_Markers.py` | Generates publisher, marker, and multi-subscriber-target inventories |
+| `Empirical/Data/BCApps_CZ_Core_Localization_Event_Publishers.csv` | One row per detected event publisher declaration |
+| `Empirical/Data/BCApps_CZ_Core_Localization_Discovery_Markers.csv` | One row per detected binding, transaction, obsolescence, or mutable-control marker |
+| `Empirical/Data/BCApps_CZ_Core_Localization_Multi_Subscriber_Targets.csv` | Subscriber targets with syntactic multiplicity in the bounded application |
 
 The script uses only the Python standard library. It fails if the BCApps
 checkout is not at the fixed commit or if the source boundary is absent.
@@ -93,6 +98,7 @@ git -C C:\Research\BCApps sparse-checkout init --cone
 git -C C:\Research\BCApps sparse-checkout set src/Apps/CZ/CoreLocalizationPack/app
 git -C C:\Research\BCApps checkout 397d01199c321e774edaf23a7290fee40f75c6a6
 python Scripts\Discover_BCApps_CZ_Event_Population.py --bcapps-root C:\Research\BCApps --output Empirical\Data\BCApps_CZ_Core_Localization_Event_Population.csv --files-output Empirical\Data\BCApps_CZ_Core_Localization_Source_Files.csv
+python Scripts\Discover_BCApps_CZ_Event_Markers.py --bcapps-root C:\Research\BCApps --population Empirical\Data\BCApps_CZ_Core_Localization_Event_Population.csv --publishers-output Empirical\Data\BCApps_CZ_Core_Localization_Event_Publishers.csv --markers-output Empirical\Data\BCApps_CZ_Core_Localization_Discovery_Markers.csv --targets-output Empirical\Data\BCApps_CZ_Core_Localization_Multi_Subscriber_Targets.csv
 ```
 
 Recorded execution environment:
@@ -116,6 +122,16 @@ The extractor reported:
 | Detected event-subscriber attributes | 448 |
 | Source files containing a detected subscriber | 116 |
 | CSV data rows | 448 |
+| Integration event publisher declarations | 289 |
+| Business event publisher declarations | 0 |
+| Internal event publisher declarations | 0 |
+| Publisher declarations with a recorded isolated argument | 0 |
+| Manual subscriber-instance declarations | 8 |
+| Bind and unbind calls | 9 and 7 |
+| Mutable `IsHandled`, `Handled`, and `Skip` parameters | 146, 2, and 0 |
+| `Commit` calls and `TryFunction` attributes | 19 and 16 |
+| `CommitBehavior` and `Obsolete` attributes | 0 and 20 |
+| Targets with two or more bounded subscribers | 21 |
 
 These counts reproduce the pilot's preliminary subscriber inventory. They are
 repository observations produced from the fixed source, not claims made by
@@ -128,7 +144,15 @@ SHA-256 checksums at generation time:
 - generated CSV:
   `c18156d853fcfb5808e55e5756efea398c9c0beef911b743865248dbbd8a32da`;
 - ordered source-file CSV:
-  `393f8306c753f229dd67c3059777a1bbfee1fa776001b29c68e11061d042465c`.
+  `393f8306c753f229dd67c3059777a1bbfee1fa776001b29c68e11061d042465c`;
+- marker discovery script:
+  `80a6e4de85a8fa2d93f5b23fb7de81b41d9ef1c38c321d0b6ea3a46f15e698ae`;
+- publisher CSV:
+  `4713bc2b834559fbc473334219485dbc5898d16d6d9e9c759ac2b600c4bb78b4`;
+- discovery-marker CSV:
+  `aafcd40d20823971771021ec4c1a9fb66ace9ac73945d12386f5743f16b1bac3`;
+- multi-subscriber-target CSV:
+  `3805183dd5be6fa6296c13d6fe40d48aee73f6efddba6ad83c4934d7280c5a1e`.
 
 ## 5. Dataset Fields and Status Values
 
@@ -148,6 +172,11 @@ The `has_ishandled_parameter`, `has_handled_parameter`, and
 `has_skip_parameter` fields report exact case-insensitive parameter-name
 matches. They do not determine subscriber effect or trigger classification.
 
+Publisher and marker rows preserve lexical source context. Every marker has
+`interpretation_status` set to `Not Evaluated`. Multi-subscriber targets record
+only bounded syntactic multiplicity and have `composition_status` set to
+`Syntactic Multiplicity Only`.
+
 ## 6. Verification Checks
 
 The retained result was checked for:
@@ -159,7 +188,8 @@ The retained result was checked for:
 - a following procedure declaration for every detected attribute;
 - sequential unique inventory IDs from `CZPOP-0001` through `CZPOP-0448`;
 - 448 data rows and 116 distinct subscriber source paths; and
-- 782 sequential unique source-file rows; and
+- 782 sequential unique source-file rows;
+- 289 publisher rows, 227 marker rows, and 21 multi-subscriber-target rows; and
 - byte-identical CSV outputs on a second execution in the recorded workspace.
 
 ## 7. Limitations and Threats to Validity
@@ -173,12 +203,14 @@ The retained result was checked for:
   behavior, reachable runtime participant, or behavioral change case.
 - Publisher objects and events are copied from attribute arguments; they are
   not resolved to declarations or raise sites in this step.
-- Default and manual binding, publisher composition, mutable effects,
-  transactions, error behavior, and preserved responsibilities require later
-  source analysis.
-- The CSV does not yet retain separate inventories for publisher declarations,
-  binding calls, or other discovery markers required by the broader pilot
-  protocol. Those are legitimate deferred discovery work.
+- The presence of manual binding, a mutable control parameter, `Commit`,
+  `TryFunction`, obsolescence, or multiple bounded subscribers does not prove
+  reachability, interaction, control effect, risk, or defect.
+- Publisher raise sites are not resolved in this discovery step. Publisher
+  contracts, binding lifetime, mutable effects, transactions, error behavior,
+  and preserved responsibilities require later source analysis.
+- Multi-subscriber counts include only subscriber attributes in the bounded
+  application and do not represent complete runtime composition.
 - One application at one commit cannot represent BCApps or Business Central
   extension practice generally.
 
@@ -188,10 +220,10 @@ The reproduced inventory establishes a stable candidate frame from which the
 pre-registered coarse screen can proceed. It provides no evidence that any row
 satisfies the Behavioral Change Impact Review trigger.
 
-The next step is to complete the remaining discovery-marker inventories and
-then perform the coarse evidence-availability and stratum screen. Reviewer
-prior-knowledge labels must be supplied before bucket assignment. Case IDs and
-the full checklist remain untouched until the selection register is frozen.
+The next step is the pre-registered coarse evidence-availability and stratum
+screen. Reviewer prior-knowledge labels must be supplied before bucket
+assignment. Case IDs and the full checklist remain untouched until the
+selection register is frozen.
 
 ## 9. References
 
@@ -200,6 +232,15 @@ the full checklist remain untouched until the selection register is frozen.
   <https://github.com/microsoft/BCApps/tree/397d01199c321e774edaf23a7290fee40f75c6a6/src/Apps/CZ/CoreLocalizationPack/app/Src>.
 
 ## 10. Revision History
+
+### 0.2.0 — 2026-07-18
+
+- Retained publisher, binding, transaction, obsolescence, mutable-control, and
+  multi-subscriber-target marker inventories.
+- Recorded raw counts, checksums, repeatability checks, and nonsemantic status
+  labels for the completed mechanical discovery layer.
+- Deferred raise-site resolution, runtime interpretation, coarse screening,
+  case selection, trigger classification, and impact analysis.
 
 ### 0.1.0 — 2026-07-18
 

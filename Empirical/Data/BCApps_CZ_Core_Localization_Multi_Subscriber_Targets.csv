@@ -1,0 +1,22 @@
+target_id,source_commit,publisher_object_type,publisher_object,published_event_name,published_element_name,subscriber_count,subscriber_inventory_ids,composition_status
+CZTGT-0001,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Codeunit,"Codeunit::""Copy Gen. Journal Mgt.""",OnAfterInsertGenJournalLine,,2,CZPOP-0060 | CZPOP-0061,Syntactic Multiplicity Only
+CZTGT-0002,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Codeunit,"Codeunit::""Gen. Jnl.-Post Line""",OnBeforeInsertGLEntryBuffer,,2,CZPOP-0063 | CZPOP-0157,Syntactic Multiplicity Only
+CZTGT-0003,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Codeunit,"Codeunit::""Gen. Jnl.-Post Line""",OnCalcPmtDiscIfAdjVATOnBeforeVATEntryFind,,2,CZPOP-0145 | CZPOP-0400,Syntactic Multiplicity Only
+CZTGT-0004,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Codeunit,"Codeunit::""Get Inventory Report""",OnCalcInvtPostingSetupOnBeforeAssignTempInvtPostingSetup,,3,CZPOP-0188 | CZPOP-0189 | CZPOP-0190,Syntactic Multiplicity Only
+CZTGT-0005,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Codeunit,"Codeunit::""Inventory Posting To G/L""",OnBeforeBufferOutputPosting,,2,CZPOP-0072 | CZPOP-0210,Syntactic Multiplicity Only
+CZTGT-0006,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Codeunit,"Codeunit::""Inventory Posting To G/L""",OnBeforeBufferPurchPosting,,2,CZPOP-0070 | CZPOP-0213,Syntactic Multiplicity Only
+CZTGT-0007,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Codeunit,"Codeunit::""Inventory Posting To G/L""",OnBeforeBufferSalesPosting,,2,CZPOP-0071 | CZPOP-0211,Syntactic Multiplicity Only
+CZTGT-0008,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Codeunit,"Codeunit::""Inventory Posting To G/L""",OnPostInvtPostBufOnBeforeSetAmt,,2,CZPOP-0075 | CZPOP-0405,Syntactic Multiplicity Only
+CZTGT-0009,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Codeunit,"Codeunit::""Inventory Posting To G/L""",OnSetAccNoOnBeforeCheckAccNo,,2,CZPOP-0074 | CZPOP-0207,Syntactic Multiplicity Only
+CZTGT-0010,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Codeunit,"Codeunit::""Item Jnl.-Check Line""",OnAfterCheckItemJnlLine,,2,CZPOP-0233 | CZPOP-0234,Syntactic Multiplicity Only
+CZTGT-0011,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Codeunit,"Codeunit::""Service Post Invoice Events""",OnAfterPrepareInvoicePostingBuffer,,2,CZPOP-0085 | CZPOP-0404,Syntactic Multiplicity Only
+CZTGT-0012,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Codeunit,Codeunit::AccSchedManagement,OnAfterCalcCellValue,,2,CZPOP-0001 | CZPOP-0004,Syntactic Multiplicity Only
+CZTGT-0013,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Codeunit,"Codeunit::Microsoft.Purchases.Posting.""Purch. Post Invoice Events""",OnAfterPrepareInvoicePostingBuffer,,2,CZPOP-0084 | CZPOP-0403,Syntactic Multiplicity Only
+CZTGT-0014,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Codeunit,"Codeunit::Microsoft.Sales.Posting.""Sales Post Invoice Events""",OnAfterPrepareInvoicePostingBuffer,,2,CZPOP-0083 | CZPOP-0402,Syntactic Multiplicity Only
+CZTGT-0015,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Page,"Page::""My Notifications""",OnInitializingNotificationWithDefaultState,,2,CZPOP-0367 | CZPOP-0422,Syntactic Multiplicity Only
+CZTGT-0016,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Table,"Database::""Invt. Posting Buffer""",OnUseInvtPostSetup,,2,CZPOP-0073 | CZPOP-0222,Syntactic Multiplicity Only
+CZTGT-0017,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Table,"Database::""Purchase Header""",OnAfterValidateEvent,Currency Code,2,CZPOP-0027 | CZPOP-0283,Syntactic Multiplicity Only
+CZTGT-0018,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Table,"Database::""Sales Header""",OnAfterValidateEvent,Currency Code,2,CZPOP-0025 | CZPOP-0328,Syntactic Multiplicity Only
+CZTGT-0019,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Table,"Database::""Service Connection""",OnRegisterServiceConnection,,2,CZPOP-0309 | CZPOP-0381,Syntactic Multiplicity Only
+CZTGT-0020,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Table,"Database::""Service Header""",OnAfterValidateEvent,Currency Code,2,CZPOP-0030 | CZPOP-0352,Syntactic Multiplicity Only
+CZTGT-0021,397d01199c321e774edaf23a7290fee40f75c6a6,ObjectType::Table,"Database::""VAT Entry""",OnAfterCopyFromGenJnlLine,,2,CZPOP-0399 | CZPOP-0410,Syntactic Multiplicity Only
