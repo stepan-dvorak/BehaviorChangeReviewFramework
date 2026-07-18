@@ -9,7 +9,7 @@ document:
   id: RD-LOG-001
   title: Research Log
   type: Research Log
-  version: 0.7.0
+  version: 0.8.0
   status: Active
 
 classification:
@@ -344,3 +344,25 @@ them and cannot establish defect prevalence.
 
 See `Empirical/BCApps_Event_Pattern_Analysis.md` and
 `Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md`.
+
+## 2026-07-18 — BCApps Czech Subscriber Population Reproduction
+
+**Repository observation:** A deterministic lexical extraction at the fixed
+BCApps commit reproduced 448 event-subscriber attributes in 116 of 782 AL files
+within the Core Localization Pack for Czech production-source boundary.
+
+**Interpretation:** The retained rows provide a stable syntactic candidate
+frame for later coarse screening. They are not independent behavioral cases and
+do not demonstrate trigger satisfaction, runtime participation, or defects.
+
+**Method decision:** Preserve each detected attribute with a stable inventory
+ID, source identity, subscriber and publisher arguments, signature markers,
+and explicit `Unknown`, `Not Screened`, and `Unselected` workflow states.
+
+**Deferred work:** Publisher declarations, binding calls, other discovery
+markers, prior-knowledge labeling, coarse screening, and case selection remain
+open. No `CZP` case was selected or classified during population extraction.
+
+**Status:** Subscriber population reproduced; discovery incomplete
+
+See `Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md`.

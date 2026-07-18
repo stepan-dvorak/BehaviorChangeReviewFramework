@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-EVENT-PILOT-001
   title: BCApps Czech Core Localization Event Pilot
   type: Empirical Study
-  version: 0.1.0
+  version: 0.2.0
   status: Active
 
 classification:
@@ -27,7 +27,7 @@ purpose: >
 
 quality:
   review: Self Reviewed
-  evidence: Pending
+  evidence: Partial
   editorial: Reviewed
 
 audience:
@@ -53,7 +53,7 @@ study:
   method: Bounded Stratified Repository Code Audit Pilot
   subject: Microsoft Core Localization Pack for Czech application
   data_access: Public GitHub Repository at Fixed Commit
-  reproducibility: Baseline and Selection Protocol Fixed; Execution Pending
+  reproducibility: Baseline, Subscriber Population, and Selection Protocol Fixed
 
 tags:
   - empirical-study
@@ -133,9 +133,10 @@ The baseline `app.json` declares [C1]:
 This identifies the empirical subject. It does not establish the quality,
 intent, or representativeness of any event implementation.
 
-### 4.3 Preliminary syntactic inventory
+### 4.3 Reproduced syntactic inventory
 
-A reproducible `rg`-based scan of the fixed production source boundary found:
+A retained deterministic extraction of the fixed production source boundary
+found [C4]:
 
 | Search result | Count |
 |---|---:|
@@ -148,10 +149,13 @@ A reproducible `rg`-based scan of the fixed production source boundary found:
 | Files declaring `EventSubscriberInstance = Manual` | 8 |
 | `BindSubscription(` call occurrences | 9 |
 
-These are syntactic inventory observations, not semantic case counts. They may
-miss formatting variants, conditional-compilation effects, generated behavior,
-or relationships that require an AL parser. They must be regenerated and
-retained with the pilot work rather than copied forward as assumed facts.
+The 448 subscriber rows and their source identities are retained in the
+population CSV. These are syntactic inventory observations, not semantic case
+counts. The extractor is not an AL compiler, does not evaluate conditional
+compilation, and does not establish runtime participation or subscriber effect.
+The manifest records the commands, versions, checksums, validation, and
+limitations. Separate retained inventories for publisher declarations,
+binding calls, and the remaining discovery markers are still pending.
 
 ## 5. Scope
 
@@ -477,8 +481,9 @@ None. The pilot is designed to test candidate concepts, not to accept them.
 
 ## 16. Execution Checklist
 
-- [ ] Reproduce and retain the complete syntactic inventory.
-- [ ] Record discovery commands, tool versions, and limitations.
+- [x] Reproduce and retain the event-subscriber population inventory.
+- [x] Record its discovery command, tool versions, checksum, and limitations.
+- [ ] Retain publisher, binding, and other required discovery-marker inventories.
 - [ ] Complete coarse evidence-availability screening.
 - [ ] Mark prior-known status before bucket assignment.
 - [ ] Fill and freeze the 16-case selection register.
@@ -502,8 +507,19 @@ None. The pilot is designed to test candidate concepts, not to accept them.
   <https://github.com/microsoft/BCApps/tree/397d01199c321e774edaf23a7290fee40f75c6a6/src/Apps/CZ/CoreLocalizationPack/app/Src>.
 - **[C3]** Microsoft. "Subscribing to events." Microsoft Learn.
   <https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-subscribing-to-events>.
+- **[C4]** Orden. "BCApps Czech Core Localization Event Population Manifest."
+  `Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md`.
 
 ## 18. Revision History
+
+### 0.2.0 — 2026-07-18
+
+- Replaced preliminary subscriber counts with a retained, reproducible
+  448-row population inventory.
+- Linked the extraction manifest and separated completed subscriber discovery
+  from deferred publisher, binding, and other marker inventories.
+- Left coarse screening, prior-knowledge labeling, case selection, trigger
+  classification, and checklist analysis unperformed.
 
 ### 0.1.0 — 2026-07-18
 
