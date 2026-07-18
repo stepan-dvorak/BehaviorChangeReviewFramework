@@ -55,3 +55,16 @@ architecturally significant.
 
 Repository navigation does not override governance, evidence, canonical
 terminology, or human review.
+
+## Local Metadata Validation
+
+Install the validation dependencies and run the baseline check:
+
+```text
+python -m pip install -r requirements-validation.txt
+python Scripts/Validate_Repository_Metadata.py
+```
+
+The baseline check reports approved migration gaps as warnings. Use
+`python Scripts/Validate_Repository_Metadata.py --strict` to require every active
+Markdown artifact to conform immediately.
