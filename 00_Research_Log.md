@@ -9,7 +9,7 @@ document:
   id: RD-LOG-001
   title: Research Log
   type: Research Log
-  version: 0.5.0
+  version: 0.6.0
   status: Active
 
 classification:
@@ -279,3 +279,36 @@ evolution risk according to demonstrated consequences.
 
 See `References/Microsoft_Event_Types.md` for evidence, limitations, and
 unresolved questions.
+
+## 2026-07-18 — Event Guidance Expansion and BCApps Study Protocol
+
+**Source claim:** The Microsoft-layer BCQuality event corpus adds atomic review
+guidance for subscriber binding, event contract evolution, error boundaries,
+handled control flow, and preservation of critical operations. Selected
+ALGuidelines.dev sources add community pattern guidance, while BCApps provides
+official source code suitable for empirical observation.
+
+**Repository observation:** These sources have different purposes and authority.
+Microsoft Learn documents platform semantics and design guidance, BCQuality
+encodes agent-review knowledge, BCApps records implemented product choices, and
+ALGuidelines.dev includes community and historical material.
+
+**Interpretation:** Event review may require four separately observed
+dimensions: publisher contract, subscriber effect, runtime participation, and
+responsibilities that remain effective after participation. The fourth
+dimension is especially relevant when handling or skipping default behavior
+also suppresses later events, validation, integrity checks, or other work.
+
+**Candidate implication:** Test the dimensions through a predefined,
+stratified BCApps repository audit rather than selecting convenient examples or
+inferring preferred design from occurrence in shipped code.
+
+**Unresolved tension:** Microsoft Learn's low-value assessment of handled events
+coexists with narrowly scoped BCQuality guidance for exposing substitutable
+behavior. The contextual boundary has not been established.
+
+**Status:** Under Investigation
+
+See `References/Microsoft_Event_Types.md`,
+`Empirical/BCApps_Event_Pattern_Analysis.md`, and
+`Ideas/Microsoft_Event_Types_Research_Agenda.md`.
