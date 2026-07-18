@@ -412,7 +412,7 @@ documents:
     authority: working
     status: active
     maturity: draft
-    version: 0.3.0
+    version: 0.4.0
     summary: Research backbone recording hypothesis evolution, rejected directions, open questions, and decisions.
     use_for: [research history, open questions, rejected ideas, current hypothesis state]
     depends_on: [00_Project_Charter.md]
@@ -522,12 +522,13 @@ documents:
     title: Software Architecture Analysis Method
     category: standards
     authority: evidentiary
-    profile: research_stub
+    profile: reference_analysis
     status: active
-    maturity: stub
-    version: 0.2.0
-    summary: Structured research note for SAAM relevance, concepts, open questions, and actions.
-    use_for: [change scenarios, modifiability, architecture analysis]
+    maturity: draft
+    version: 0.3.0
+    summary: Analyzes primary SAAM publications to identify how scenarios expose architectural support, change impact, and interactions without defining a behavioral-change review trigger.
+    use_for: [direct scenarios, indirect scenarios, change impact, scenario interaction, modifiability, architecture analysis]
+    caution: Direct and indirect scenarios are relative to a particular architecture; scenario interaction requires interpretation by scenario class and architectural granularity.
 
   - path: References/DDD.md
     document_id: REF-DDD-001

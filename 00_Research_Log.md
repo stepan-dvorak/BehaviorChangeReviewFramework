@@ -9,7 +9,7 @@ document:
   id: RD-LOG-001
   title: Research Log
   type: Research Log
-  version: 0.3.0
+  version: 0.4.0
   status: Active
 
 classification:
@@ -225,3 +225,29 @@ evaluation.
 **Status:** Under Investigation
 
 See `References/ATAM.md` for evidence, limitations, and unresolved questions.
+
+## 2026-07-18 — SAAM Reference Analysis
+
+**Source claim:** SAAM uses stakeholder scenarios to evaluate how an
+architecture supports current activities and anticipated changes. Indirect
+scenarios require architectural changes; interactions among indirect scenarios
+help examine separation of concerns relative to the selected scenario classes.
+
+**Repository observation:** The examined SAAM sources do not define behavioral
+change itself as a review trigger. Direct and indirect scenarios describe the
+relationship between a scenario and a particular architecture, not universal
+categories of customizations.
+
+**Interpretation:** SAAM provides established precedent for contextual
+change-impact analysis and reduces the plausible novelty of Orden. It does not
+cover all quality-attribute consequences or determine when extension work
+warrants architecture-level review.
+
+**Candidate implication:** A future framework may reuse scenario development,
+support classification, affected-element mapping, and scenario-interaction
+analysis, provided that interactions are interpreted by scenario class and
+architectural granularity rather than treated as automatic defects.
+
+**Status:** Under Investigation
+
+See `References/SAAM.md` for evidence, limitations, and unresolved questions.
