@@ -9,7 +9,7 @@ document:
   id: RD-LOG-001
   title: Research Log
   type: Research Log
-  version: 0.4.0
+  version: 0.5.0
   status: Active
 
 classification:
@@ -251,3 +251,31 @@ architectural granularity rather than treated as automatic defects.
 **Status:** Under Investigation
 
 See `References/SAAM.md` for evidence, limitations, and unresolved questions.
+
+## 2026-07-18 — Microsoft Event Types Reference Analysis
+
+**Source claim:** Microsoft distinguishes language and runtime event types from
+an extensibility-oriented taxonomy of placements and patterns. Its guidance
+addresses contract stability, implementation coupling, multiple subscribers,
+unspecified execution order, transactions, error handling, and extension
+composition.
+
+**Repository observation:** An event attribute or pattern does not fully state
+what a subscriber does to effective behavior. Integration events in particular
+can implement operation boundaries, line-level hooks, verification, switching,
+skipping, handling, or discovery.
+
+**Interpretation:** Microsoft provides substantial mechanism-specific evidence
+for event review, but the examined sources do not combine publisher contract,
+runtime semantics, and subscriber behavioral effect into a
+mechanism-independent review method.
+
+**Candidate implication:** A future framework may classify event type,
+placement pattern, and subscriber effect separately, then review composition,
+mutable parameters, responsibility transfer, transaction semantics, and
+evolution risk according to demonstrated consequences.
+
+**Status:** Under Investigation
+
+See `References/Microsoft_Event_Types.md` for evidence, limitations, and
+unresolved questions.

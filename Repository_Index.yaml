@@ -412,7 +412,7 @@ documents:
     authority: working
     status: active
     maturity: draft
-    version: 0.4.0
+    version: 0.5.0
     summary: Research backbone recording hypothesis evolution, rejected directions, open questions, and decisions.
     use_for: [research history, open questions, rejected ideas, current hypothesis state]
     depends_on: [00_Project_Charter.md]
@@ -591,15 +591,16 @@ documents:
 
   - path: References/Microsoft_Event_Types.md
     document_id: REF-MS-EVENTS-001
-    title: Microsoft Learn Event Types
+    title: Microsoft Business Central Event Types Analysis
     category: microsoft_study
     authority: evidentiary
-    profile: research_stub
+    profile: reference_analysis
     status: active
-    maturity: stub
-    version: 0.2.0
-    summary: Structured note for Microsoft event taxonomy and its relevance to behavior change.
-    use_for: [business events, integration events, internal events, event taxonomy]
+    maturity: draft
+    version: 0.3.0
+    summary: Distinguishes Microsoft's runtime event types from extensibility patterns and analyzes contract, ordering, composition, transaction, and evolution implications without equating event type with behavioral effect.
+    use_for: [business events, integration events, internal events, trigger events, event patterns, subscriber composition, transaction semantics]
+    caution: An event attribute or value ranking describes only part of the extension point; subscriber behavior and architectural consequences require separate analysis.
 
   - path: References/Microsoft_Interfaces.md
     document_id: REF-MS-INTERFACES-001
