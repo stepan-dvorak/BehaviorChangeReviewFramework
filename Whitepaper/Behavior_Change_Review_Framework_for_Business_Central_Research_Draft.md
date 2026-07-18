@@ -1,3 +1,58 @@
+---
+metadata_schema: "1.0"
+project:
+  id: Orden
+  name: Behavior Change Review Framework
+document:
+  id: RD-WP-001
+  title: Toward a Mechanism-Independent Review Framework for Behavior-Changing Customizations in Microsoft Dynamics 365 Business Central
+  type: Whitepaper Draft
+  version: 0.1.0
+  status: Active
+classification:
+  domain: Business Central Software Architecture
+  layer: Synthesis
+  maturity: Draft
+owner: Štěpán Dvořák
+purpose: >
+  Synthesizes the current research direction for a mechanism-independent review
+  of architecturally significant behavior-changing customizations in Business
+  Central.
+quality:
+  review: Not Reviewed
+  evidence: Partial
+  editorial: Draft
+audience:
+  - Researchers
+  - Business Central Architects
+  - Business Central Developers
+  - Contributors
+  - AI Assistants
+depends_on:
+  - 00_Project_Charter.md
+  - 00_Research_Log.md
+  - 01_Terminology.md
+  - 02_Research_Methodology.md
+  - 03_Related_Work.md
+  - References/ISO_42010.md
+  - References/ISO_42020.md
+  - References/ISO_42030.md
+  - References/SEI_Documenting_Behavior.md
+  - References/Microsoft_Extensibility_Overview.md
+  - References/Microsoft_IsHandled_v2.0.md
+related_documents:
+  - Ideas/IsHandled_Pattern_Missing_Extensibility_Preservation_Rule.md
+  - Empirical/KMITS-BA4_Finance-IsHandled-Audit.md
+  - Empirical/MS-CZF-IsHandled-Refactoring-Analysis-cs.md
+  - Empirical/MS-CZL-IsHandled-Refactoring-Analysis-Report.md
+tags:
+  - whitepaper
+  - research-synthesis
+  - behavior-change-review
+  - Business-Central
+  - software-architecture
+---
+
 # Toward a Mechanism-Independent Review Framework for Behavior-Changing Customizations in Microsoft Dynamics 365 Business Central
 
 **Status:** Research Draft (Working Paper)\

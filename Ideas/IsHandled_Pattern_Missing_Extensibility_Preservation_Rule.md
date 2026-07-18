@@ -1,3 +1,55 @@
+---
+metadata_schema: "1.0"
+project:
+  id: Orden
+  name: Behavior Change Review Framework
+document:
+  id: RD-IDEA-001
+  title: IsHandled Pattern Missing Extensibility Preservation Rule
+  type: Research Idea
+  version: 0.1.0
+  status: Active
+classification:
+  domain: Business Central Extensibility
+  layer: Exploration
+  maturity: Draft
+owner: Štěpán Dvořák
+purpose: >
+  Preserves the publicly published precursor to the Orden project: a candidate
+  proposal for preserving downstream extensibility when an IsHandled subscriber
+  replaces established behavior.
+quality:
+  review: Not Reviewed
+  evidence: Pending
+  editorial: Draft
+audience:
+  - Researchers
+  - Contributors
+  - AI Assistants
+depends_on:
+  - References/Microsoft_IsHandled_v2.0.md
+  - 02_Research_Methodology.md
+related_documents:
+  - 00_Project_Charter.md
+  - 00_Research_Log.md
+  - 01_Terminology.md
+  - Whitepaper/Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md
+publication:
+  platform: GitHub Discussions
+  repository: microsoft/alguidelines
+  discussion_number: 289
+  url: https://github.com/microsoft/alguidelines/discussions/289
+  published_on: "2026-06-14"
+  author_username: stedvo-kmits
+  role: Project Precursor
+  provenance_status: Verified
+tags:
+  - research-idea
+  - IsHandled
+  - extensibility-preservation
+  - candidate-rule
+  - project-origin
+---
 
 🧩 Title
 IsHandled Pattern: Missing Extensibility Preservation Rule
@@ -312,4 +364,4 @@ This is not a new pattern.
 It is a **minimal extraction of principles already present in the Method pattern**, applied to the most widely used extensibility mechanism in Business Central.
 The goal is not to redesign the ecosystem, but to:
 
-> Prevent creation of non-extensible code in an extensible platform.	
+> Prevent creation of non-extensible code in an extensible platform.
