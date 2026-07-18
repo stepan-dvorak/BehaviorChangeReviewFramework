@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-EVENT-PILOT-001
   title: BCApps Czech Core Localization Event Pilot
   type: Empirical Study
-  version: 0.2.0
+  version: 0.3.0
   status: Active
 
 classification:
@@ -53,7 +53,7 @@ study:
   method: Bounded Stratified Repository Code Audit Pilot
   subject: Microsoft Core Localization Pack for Czech application
   data_access: Public GitHub Repository at Fixed Commit
-  reproducibility: Baseline, Subscriber Population, and Selection Protocol Fixed
+  reproducibility: Baseline, Syntactic Discovery, and Selection Protocol Fixed
 
 tags:
   - empirical-study
@@ -154,8 +154,10 @@ population CSV. These are syntactic inventory observations, not semantic case
 counts. The extractor is not an AL compiler, does not evaluate conditional
 compilation, and does not establish runtime participation or subscriber effect.
 The manifest records the commands, versions, checksums, validation, and
-limitations. Separate retained inventories for publisher declarations,
-binding calls, and the remaining discovery markers are still pending.
+limitations. Separate retained inventories now cover publisher declarations,
+binding calls, mutable-control parameters, transaction and obsolescence
+markers, and bounded subscriber-target multiplicity. These markers remain
+unclassified.
 
 ## 5. Scope
 
@@ -483,7 +485,7 @@ None. The pilot is designed to test candidate concepts, not to accept them.
 
 - [x] Reproduce and retain the event-subscriber population inventory.
 - [x] Record its discovery command, tool versions, checksum, and limitations.
-- [ ] Retain publisher, binding, and other required discovery-marker inventories.
+- [x] Retain publisher, binding, and other required discovery-marker inventories.
 - [ ] Complete coarse evidence-availability screening.
 - [ ] Mark prior-known status before bucket assignment.
 - [ ] Fill and freeze the 16-case selection register.
@@ -511,6 +513,13 @@ None. The pilot is designed to test candidate concepts, not to accept them.
   `Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md`.
 
 ## 18. Revision History
+
+### 0.3.0 — 2026-07-18
+
+- Completed and retained the mechanical publisher and discovery-marker
+  inventories required before coarse screening.
+- Preserved marker interpretations, prior-knowledge fields, case selection,
+  trigger classifications, and checklist rows as unperformed.
 
 ### 0.2.0 — 2026-07-18
 

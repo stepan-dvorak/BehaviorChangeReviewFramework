@@ -9,7 +9,7 @@ document:
   id: RD-LOG-001
   title: Research Log
   type: Research Log
-  version: 0.8.0
+  version: 0.9.0
   status: Active
 
 classification:
@@ -364,5 +364,30 @@ markers, prior-knowledge labeling, coarse screening, and case selection remain
 open. No `CZP` case was selected or classified during population extraction.
 
 **Status:** Subscriber population reproduced; discovery incomplete
+
+See `Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md`.
+
+## 2026-07-18 — BCApps Czech Discovery-Marker Reproduction
+
+**Repository observation:** The fixed production boundary contains 289
+integration-event publisher declarations and no detected business-event or
+internal-event declarations. Mechanical discovery also retained 8 manual
+subscriber-instance declarations, 9 bind calls, 7 unbind calls, 148 mutable
+control-name parameters, 19 commit calls, 16 try-function attributes, 20
+obsolete attributes, and 21 subscriber targets with bounded syntactic
+multiplicity.
+
+**Interpretation:** These occurrences identify source context for coarse
+screening. Their presence does not demonstrate runtime participation,
+interaction, behavioral change, architectural impact, or defect.
+
+**Method decision:** Preserve raw occurrences and explicit nonsemantic statuses
+before screening. Do not use a marker as an automatic selection rule.
+
+**Deferred work:** Resolve evidence availability during coarse screening and
+obtain reviewer prior-knowledge labels before assigning selection buckets. No
+case, trigger result, impact, or framework implication was recorded.
+
+**Status:** Mechanical discovery reproduced; coarse screening pending
 
 See `Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md`.
