@@ -412,7 +412,7 @@ documents:
     authority: working
     status: active
     maturity: draft
-    version: 0.2.0
+    version: 0.3.0
     summary: Research backbone recording hypothesis evolution, rejected directions, open questions, and decisions.
     use_for: [research history, open questions, rejected ideas, current hypothesis state]
     depends_on: [00_Project_Charter.md]
@@ -509,12 +509,13 @@ documents:
     title: Architecture Tradeoff Analysis Method
     category: standards
     authority: evidentiary
-    profile: research_stub
+    profile: reference_analysis
     status: active
-    maturity: stub
-    version: 0.2.0
-    summary: Structured research note for extracting ATAM concepts relevant to the framework.
-    use_for: [quality attributes, scenarios, tradeoffs, architecture evaluation]
+    maturity: draft
+    version: 0.3.0
+    summary: Analyzes verified SEI sources to identify what ATAM contributes to consequence-focused review and what remains outside its demonstrated scope.
+    use_for: [quality attributes, scenarios, architectural risk, sensitivity points, tradeoffs, architecture evaluation]
+    caution: ATAM supports evaluation of consequences but does not establish behavioral change as a review trigger or provide a Business Central-specific review scale.
 
   - path: References/SAAM.md
     document_id: REF-SAAM-001

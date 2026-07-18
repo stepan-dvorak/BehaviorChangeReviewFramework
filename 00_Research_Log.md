@@ -9,7 +9,7 @@ document:
   id: RD-LOG-001
   title: Research Log
   type: Research Log
-  version: 0.2.0
+  version: 0.3.0
   status: Active
 
 classification:
@@ -200,3 +200,28 @@ For each example capture:
 
 Project scope expanded beyond IsHandled because the observed problem is
 mechanism-independent.
+
+## 2026-07-18 — ATAM Reference Analysis
+
+**Source claim:** ATAM evaluates the consequences of architectural decisions
+against quality-attribute requirements and identifies risks, sensitivity
+points, and tradeoff points through prioritized scenarios and stakeholder
+analysis.
+
+**Repository observation:** The examined ATAM sources do not define behavioral
+change itself as an architecture-evaluation trigger and do not provide a
+Business Central-specific review scale.
+
+**Interpretation:** ATAM is evidence for a mechanism-independent method of
+evaluating quality-attribute consequences. It reduces the plausible novelty of
+Orden to integration and specialization rather than invention of architecture
+evaluation.
+
+**Candidate implication:** A future framework may reuse scenario
+characterization, architectural-decision analysis, and risk and tradeoff
+identification, provided that the adaptation is not represented as a full ATAM
+evaluation.
+
+**Status:** Under Investigation
+
+See `References/ATAM.md` for evidence, limitations, and unresolved questions.
