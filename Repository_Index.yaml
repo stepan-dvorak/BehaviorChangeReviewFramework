@@ -478,50 +478,74 @@ documents:
     use_for: [behavior views, behavioral representation, execution-flow terminology, literature gap]
 
   - path: References/ATAM.md
+    document_id: REF-ATAM-001
     title: Architecture Tradeoff Analysis Method
     category: standards
     authority: evidentiary
-    status: research_stub
+    profile: research_stub
+    status: active
+    maturity: stub
+    version: 0.2.0
     summary: Structured research note for extracting ATAM concepts relevant to the framework.
     use_for: [quality attributes, scenarios, tradeoffs, architecture evaluation]
 
   - path: References/SAAM.md
+    document_id: REF-SAAM-001
     title: Software Architecture Analysis Method
     category: standards
     authority: evidentiary
-    status: research_stub
+    profile: research_stub
+    status: active
+    maturity: stub
+    version: 0.2.0
     summary: Structured research note for SAAM relevance, concepts, open questions, and actions.
     use_for: [change scenarios, modifiability, architecture analysis]
 
   - path: References/DDD.md
+    document_id: REF-DDD-001
     title: Domain-Driven Design
     category: related_work
     authority: evidentiary
-    status: research_stub
+    profile: research_stub
+    status: active
+    maturity: stub
+    version: 0.2.0
     summary: Structured note for DDD concepts potentially relevant to behavioral correctness and invariants.
     use_for: [domain behavior, invariants, aggregates, domain events]
 
   - path: References/Fowler.md
+    document_id: REF-FOWLER-001
     title: Martin Fowler Reference Note
     category: related_work
     authority: evidentiary
-    status: research_stub
+    profile: research_stub
+    status: active
+    maturity: stub
+    version: 0.2.0
     summary: Placeholder research structure for Fowler's relevant terminology and practices.
     use_for: [refactoring, enterprise patterns, established terminology]
 
   - path: References/Workflow_BPM.md
+    document_id: REF-WORKFLOW-BPM-001
     title: Workflow and BPM
     category: related_work
     authority: evidentiary
-    status: research_stub
+    profile: research_stub
+    status: active
+    maturity: stub
+    version: 0.2.0
     summary: Structured note for workflow and business-process change concepts.
     use_for: [process modification, orchestration, state transitions, compensation]
 
   - path: References/Plugin_Architectures.md
+    document_id: REF-PLUGIN-ARCH-001
     title: Plugin Architectures
     category: related_work
     authority: evidentiary
-    status: research_stub
+    profile: research_stub
+    status: active
+    maturity: stub
+    version: 0.2.0
     summary: Structured note for extension points, hooks, plugins, middleware, and inversion of control.
     use_for: [plugin evolution, extensibility mechanisms, extension contracts]
 
@@ -537,18 +561,26 @@ documents:
     use_for: [Microsoft position, platform layering, upgradeability, mechanism coexistence]
 
   - path: References/Microsoft_Event_Types.md
+    document_id: REF-MS-EVENTS-001
     title: Microsoft Learn Event Types
     category: microsoft_study
     authority: evidentiary
-    status: research_stub
+    profile: research_stub
+    status: active
+    maturity: stub
+    version: 0.2.0
     summary: Structured note for Microsoft event taxonomy and its relevance to behavior change.
     use_for: [business events, integration events, internal events, event taxonomy]
 
   - path: References/Microsoft_Interfaces.md
+    document_id: REF-MS-INTERFACES-001
     title: Microsoft Learn Interfaces
     category: microsoft_study
     authority: evidentiary
-    status: research_stub
+    profile: research_stub
+    status: active
+    maturity: stub
+    version: 0.2.0
     summary: Structured note for interface guidance and mechanism-independent comparison.
     use_for: [AL interfaces, Strategy, explicit contracts, implementation selection]
 
