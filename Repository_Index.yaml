@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.3
+  version: 1.0.4
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -53,10 +53,7 @@ metadata_validation:
   validator: Scripts/Validate_Repository_Metadata.py
   requirements: requirements-validation.txt
   default_mode: baseline
-  migration_backlog:
-    - Empirical/KMITS-BA4_Finance-IsHandled-Audit.md
-    - Empirical/MS-CZF-IsHandled-Refactoring-Analysis-cs.md
-    - Empirical/MS-CZL-IsHandled-Refactoring-Analysis-Report.md
+  migration_backlog: []
 
 retrieval_policy:
   default_language: English
@@ -161,9 +158,9 @@ query_routes:
     retrieve:
       - References/Microsoft_IsHandled_v2.0.md
       - References/Microsoft_Extensibility_Overview.md
-      - Empirical/KMITS-BA4_Finance-IsHandled-Audit.md
-      - Empirical/MS-CZF-IsHandled-Refactoring-Analysis-cs.md
-      - Empirical/MS-CZL-IsHandled-Refactoring-Analysis-Report.md
+      - Empirical/KMITS_BA4_Finance_IsHandled_Audit.md
+      - Empirical/MS_CZF_IsHandled_Refactoring_Analysis.md
+      - Empirical/MS_CZL_IsHandled_Refactoring_Analysis_Report.md
     optional_history:
       - Historical_References/Mark_Brummel_Handled_Pattern.md
       - Historical_References/Vjeko_Gentlemens_Agreement.md
@@ -171,10 +168,10 @@ query_routes:
   - intent: inspect_empirical_evidence
     retrieve:
       - Templates/Empirical_Study_Template.md
-      - Empirical/KMITS-BA4_Finance-IsHandled-Audit.md
-      - Empirical/MS-CZF-IsHandled-Refactoring-Analysis-cs.md
-      - Empirical/MS-CZL-IsHandled-Refactoring-Analysis-Report.md
-    caution: The three studies use differing formats and are not yet normalized.
+      - Empirical/KMITS_BA4_Finance_IsHandled_Audit.md
+      - Empirical/MS_CZF_IsHandled_Refactoring_Analysis.md
+      - Empirical/MS_CZL_IsHandled_Refactoring_Analysis_Report.md
+    caution: These preliminary studies are limited to IsHandled markers and do not represent complete framework-based assessments.
   - intent: synthesize_or_edit_whitepaper
     retrieve:
       - Whitepaper/Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md
@@ -633,27 +630,36 @@ documents:
       - extensibility degradation
     supersedes: Archive/Microsoft_IsHandled*.md
 
-  - path: Empirical/KMITS-BA4_Finance-IsHandled-Audit.md
+  - path: Empirical/KMITS_BA4_Finance_IsHandled_Audit.md
+    document_id: ES-KMITS-BA4-001
     title: KMITS BA4 Finance IsHandled Audit
     category: empirical_study
     authority: evidentiary
-    status: current
+    status: active
+    maturity: review
+    version: 0.1.0
     summary: Twelve-finding audit with classification and refactoring recommendations for IsHandled usage in an AL codebase.
     use_for: [case evidence, IsHandled classification, refactoring priorities]
 
-  - path: Empirical/MS-CZF-IsHandled-Refactoring-Analysis-cs.md
+  - path: Empirical/MS_CZF_IsHandled_Refactoring_Analysis.md
+    document_id: ES-MS-CZF-001
     title: MS-CZF IsHandled Refactoring Analysis
     category: empirical_study
     authority: evidentiary
-    status: current
+    status: active
+    maturity: review
+    version: 0.1.0
     summary: Sixteen-finding analysis emphasizing critical risks, extensibility breaks, and discovery misuse.
     use_for: [case evidence, discovery misuse, critical-risk rules, migration approach]
 
-  - path: Empirical/MS-CZL-IsHandled-Refactoring-Analysis-Report.md
+  - path: Empirical/MS_CZL_IsHandled_Refactoring_Analysis_Report.md
+    document_id: ES-MS-CZL-001
     title: MS-CZL IsHandled Refactoring Analysis Report
     category: empirical_study
     authority: evidentiary
-    status: current
+    status: active
+    maturity: review
+    version: 0.1.0
     summary: Forty-four-finding report focused on competing subscribers, detailed risks, deterministic adapters, and refactoring order.
     use_for: [large case evidence, subscriber competition, adapter pattern, refactoring roadmap]
 
@@ -838,9 +844,9 @@ planned_or_missing_documents:
   - path: 07_Example_Catalog.md
     status: planned
     probable_current_sources:
-      - Empirical/KMITS-BA4_Finance-IsHandled-Audit.md
-      - Empirical/MS-CZF-IsHandled-Refactoring-Analysis-cs.md
-      - Empirical/MS-CZL-IsHandled-Refactoring-Analysis-Report.md
+      - Empirical/KMITS_BA4_Finance_IsHandled_Audit.md
+      - Empirical/MS_CZF_IsHandled_Refactoring_Analysis.md
+      - Empirical/MS_CZL_IsHandled_Refactoring_Analysis_Report.md
   - path: 08_Decision_Tree.md
     status: planned
   - path: Whitepaper.md
@@ -848,14 +854,10 @@ planned_or_missing_documents:
     probable_current_source: Whitepaper/Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md
 
 known_consistency_issues:
-  - id: IDX-ISSUE-004
-    severity: medium
-    issue: Metadata coverage and schema style are inconsistent across current documents.
-    retrieval_effect: Do not assume absent front matter means low importance; use authority fields and metadata_validation.migration_backlog in this index.
   - id: IDX-ISSUE-007
     severity: medium
-    issue: Three legacy empirical reports contain repository-authored non-English content and require translation during empirical-document normalization.
-    retrieval_effect: Treat their current wording as legacy content; do not use it as a language precedent for new or revised artifacts.
+    issue: Three empirical studies retain legacy repository-authored non-English finding narratives pending complete editorial translation.
+    retrieval_effect: Treat their non-English wording as legacy evidence text and do not use it as a language precedent.
 
 maintenance_rules:
   update_when:

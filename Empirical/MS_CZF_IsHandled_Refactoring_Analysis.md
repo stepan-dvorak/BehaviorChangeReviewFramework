@@ -1,4 +1,52 @@
-# Analýza IsHandled Pattern v AL codebase (CZF)
+---
+metadata_schema: "1.0"
+project:
+  id: Orden
+  name: Behavior Change Review Framework
+document:
+  id: ES-MS-CZF-001
+  title: MS-CZF IsHandled Refactoring Analysis
+  type: Empirical Study
+  version: 0.1.0
+  status: Active
+classification:
+  domain: Business Central Extensibility
+  layer: Study
+  maturity: Review
+owner: Štěpán Dvořák
+purpose: >
+  Preserves a preliminary marker-limited analysis of IsHandled subscribers in
+  Microsoft Fixed Asset Localization for Czech as case evidence.
+quality:
+  review: Not Reviewed
+  evidence: Partial
+  editorial: Draft
+audience: [Researchers, Business Central Architects, Business Central Developers, Contributors, AI Assistants]
+depends_on: [02_Research_Methodology.md, References/Microsoft_IsHandled_v2.0.md]
+related_documents: [Empirical/KMITS_BA4_Finance_IsHandled_Audit.md, Empirical/MS_CZL_IsHandled_Refactoring_Analysis_Report.md]
+study:
+  method: Repository Code Audit
+  subject: BC280 Fixed Asset Localization for Czech
+  data_access: Microsoft Localization Source Snapshot
+  reproducibility: Restricted
+tags: [empirical-study, ishandled, preliminary, marker-limited, microsoft-localization]
+---
+
+# MS-CZF IsHandled Refactoring Analysis
+
+## Study Status and Boundaries
+
+This is a preliminary, marker-limited study of subscribers that accept
+`var IsHandled: Boolean` and set `IsHandled := true`. The 16 findings comprise
+15 subscriber observations plus a separate analytical finding concerning the
+discovery-event semantics of one observed subscriber.
+
+The study predates the repository's broader review framework. It does not claim
+to identify every behavior-changing or architectural structural change in the
+examined application. Its classifications and refactoring proposals are
+provisional interpretations that should be reassessed with the completed
+methodology, additional implementation markers, and a broader set of quality
+attributes.
 
 Datum: 2026-06-03
 Repozitář: BC280 Fixed Asset Localization for Czech

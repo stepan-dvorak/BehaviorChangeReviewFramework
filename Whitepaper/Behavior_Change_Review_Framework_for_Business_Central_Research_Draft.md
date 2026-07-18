@@ -42,9 +42,9 @@ depends_on:
   - References/Microsoft_IsHandled_v2.0.md
 related_documents:
   - Ideas/IsHandled_Pattern_Missing_Extensibility_Preservation_Rule.md
-  - Empirical/KMITS-BA4_Finance-IsHandled-Audit.md
-  - Empirical/MS-CZF-IsHandled-Refactoring-Analysis-cs.md
-  - Empirical/MS-CZL-IsHandled-Refactoring-Analysis-Report.md
+  - Empirical/KMITS_BA4_Finance_IsHandled_Audit.md
+  - Empirical/MS_CZF_IsHandled_Refactoring_Analysis.md
+  - Empirical/MS_CZL_IsHandled_Refactoring_Analysis_Report.md
 tags:
   - whitepaper
   - research-synthesis
