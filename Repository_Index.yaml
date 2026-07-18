@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.2
+  version: 1.0.3
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -57,8 +57,6 @@ metadata_validation:
     - Empirical/KMITS-BA4_Finance-IsHandled-Audit.md
     - Empirical/MS-CZF-IsHandled-Refactoring-Analysis-cs.md
     - Empirical/MS-CZL-IsHandled-Refactoring-Analysis-Report.md
-    - Ideas/IsHandled Pattern - Missing Extensibility Preservation Rule.md
-    - Whitepaper/Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md
 
 retrieval_policy:
   default_language: English
@@ -121,6 +119,8 @@ query_routes:
       - 00_Research_Log.md
     then:
       - Whitepaper/Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md
+    optional_history:
+      - Ideas/IsHandled_Pattern_Missing_Extensibility_Preservation_Rule.md
   - intent: edit_or_create_repository_content
     retrieve:
       - AGENTS.md
@@ -705,20 +705,29 @@ documents:
     summary: Planned analysis of a community source concerning codeunit interfaces and AL extensibility evolution.
     use_for: [interface history planning, alternative mechanisms, community-source review]
 
-  - path: Ideas/IsHandled Pattern - Missing Extensibility Preservation Rule.md
-    title: Missing Extensibility Preservation Rule
+  - path: Ideas/IsHandled_Pattern_Missing_Extensibility_Preservation_Rule.md
+    document_id: RD-IDEA-001
+    title: IsHandled Pattern Missing Extensibility Preservation Rule
+    profile: governed_document
     category: ideas
     authority: working
-    status: idea
-    summary: Candidate future-work note about preserving downstream extensibility when replacing behavior.
-    use_for: [hypothesis generation, future research]
+    status: active
+    maturity: draft
+    version: 0.1.0
+    summary: Publicly published precursor to Orden proposing an extensibility-preservation rule for IsHandled overrides; later research expanded the problem beyond this mechanism-specific proposal.
+    use_for: [project origin, hypothesis provenance, IsHandled proposal history, future research]
+    external_publication: https://github.com/microsoft/alguidelines/discussions/289
     do_not_use_for: [validated conclusion, normative rule]
 
   - path: Whitepaper/Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md
+    document_id: RD-WP-001
     title: Toward a Mechanism-Independent Review Framework for Behavior-Changing Customizations in Microsoft Dynamics 365 Business Central
+    profile: governed_document
     category: framework
     authority: working
-    status: research_draft
+    status: active
+    maturity: draft
+    version: 0.1.0
     summary: Current synthesis proposing a four-step behavioral change review and practical checklist.
     use_for: [framework overview, synthesis, review steps, whitepaper drafting]
     caution: Draft synthesis; reconcile with newer ISO and Microsoft analyses before treating conclusions as current.
