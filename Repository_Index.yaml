@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.0
+  version: 1.0.1
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -47,6 +47,25 @@ generation:
   method: Manual Review
   source_repository: https://github.com/stepan-dvorak/BehaviorChangeReviewFramework
   source_branch: main
+
+metadata_validation:
+  schema: Schemas/Repository_Document_Metadata.schema.json
+  validator: Scripts/Validate_Repository_Metadata.py
+  requirements: requirements-validation.txt
+  default_mode: baseline
+  migration_backlog:
+    - Empirical/KMITS-BA4_Finance-IsHandled-Audit.md
+    - Empirical/MS-CZF-IsHandled-Refactoring-Analysis-cs.md
+    - Empirical/MS-CZL-IsHandled-Refactoring-Analysis-Report.md
+    - Historical_References/Evolution_of_Extensibility.md
+    - Historical_References/Mark_Brummel_Handled_Pattern.md
+    - Historical_References/Vjeko_Codeunit_Interfaces.md
+    - Historical_References/Vjeko_Gentlemens_Agreement.md
+    - Ideas/IsHandled Pattern - Missing Extensibility Preservation Rule.md
+    - Templates/ADR_Template.md
+    - Templates/Empirical_Study_Template.md
+    - Templates/Research_Document_Template.md
+    - Whitepaper/Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md
 
 retrieval_policy:
   default_language: English
@@ -186,6 +205,13 @@ query_routes:
       - Templates/ADR_Template.md
       - Repository_Standards.md
       - Governance_Principles.md
+  - intent: validate_repository_metadata
+    retrieve:
+      - Repository_Standards.md
+      - Schemas/Repository_Document_Metadata.schema.json
+      - Scripts/Validate_Repository_Metadata.py
+      - requirements-validation.txt
+    rule: Baseline mode permits only the explicit migration backlog; strict mode permits no active legacy Markdown artifacts.
 
 canonical_concepts:
   terminology_priority:
@@ -274,6 +300,7 @@ documents:
     authority: normative
     status: active
     maturity: review
+    version: 0.2.0
     summary: Foundational philosophy for governance, evidence, traceability, uncertainty, consistency, and human authority.
     use_for: [resolving governance intent, evaluating policy changes, conflict resolution]
     key_topics: [evidence before conclusions, reference over duplication, human authority, quality before completion]
@@ -285,6 +312,7 @@ documents:
     authority: normative
     status: active
     maturity: stable
+    version: 3.0.0
     summary: Constitutional repository standard for architecture, artifact profiles, metadata, language, naming, relationships, versioning, lifecycle, and index maintenance.
     use_for: [repository architecture, artifact profiles, front matter, document IDs, metadata, language, naming, versioning, lifecycle, repository conventions]
     keywords: [YAML front matter, metadata, artifact profile, US English, filenames, SemVer, maturity, quality, document identity]
@@ -296,6 +324,7 @@ documents:
     authority: normative
     status: active
     maturity: stable
+    version: 1.0.0
     summary: Accepted decision establishing artifact profiles, metadata requirements, language, filename, architecture, map, and machine-index policies.
     use_for: [governance rationale, metadata contract rationale, decision history, reopening criteria]
     depends_on: [Governance_Principles.md]
@@ -308,6 +337,7 @@ documents:
     authority: normative
     status: active
     maturity: review
+    version: 0.3.0
     summary: End-to-end AI workflow from context resolution and knowledge modeling through reasoning, realization, validation, delivery, and governance evolution.
     use_for: [AI operating workflow, validation, complete-document delivery, governance-aware contribution]
     depends_on: [Repository_Standards.md, Reasoning_Standard.md, Governance_Principles.md]
@@ -320,6 +350,7 @@ documents:
     authority: normative
     status: active
     maturity: review
+    version: 0.2.0
     summary: Rules for evidence-based, transparent, reproducible reasoning and explicit uncertainty classification.
     use_for: [hypotheses, conclusions, evidence classification, traceability, uncertainty]
     keywords: [fact, observation, interpretation, assumption, hypothesis, conclusion]
@@ -331,6 +362,7 @@ documents:
     authority: normative
     status: active
     maturity: review
+    version: 0.1.0
     summary: Repository voice, terminology priority, evidence-layer separation, standard section structure, and review checklist.
     use_for: [writing, editing, document review, repository voice]
     keywords: [editorial style, technical writing, evidence separation, references]
@@ -342,6 +374,7 @@ documents:
     authority: normative
     status: active
     maturity: review
+    version: 0.1.0
     summary: Ranks evidence from ISO standards through repository hypotheses and defines basic evidence-handling rules.
     use_for: [source weighting, confidence assessment, evidence disputes]
     keywords: [evidence authority, ISO, Microsoft Learn, source code, community sources]
@@ -353,6 +386,7 @@ documents:
     authority: normative
     status: active
     maturity: review
+    version: 1.0.0
     summary: Canonical artifact categories, placement rules, and movement rules.
     use_for: [artifact classification, placement, directory responsibility, category movement]
     keywords: [governance, entrypoints, decisions, core research, reference analysis, research stub, empirical study, archive]
@@ -364,6 +398,7 @@ documents:
     authority: canonical
     status: active
     maturity: draft
+    version: 0.1.0
     summary: Compact registry of repository concepts, statuses, and definition locations.
     use_for: [term lookup, synonym prevention, terminology status]
     depends_on: [01_Terminology.md, References/Microsoft_IsHandled_v2.0.md]
@@ -704,6 +739,27 @@ documents:
     use_for: [architecture decisions, governance decisions]
 
 non_markdown_artifacts:
+  - path: Schemas/Repository_Document_Metadata.schema.json
+    category: governance
+    authority: working
+    status: active
+    summary: Executable JSON Schema representation of repository document metadata schema 1.0.
+    use_for: [metadata validation, editor integration, controlled-value validation]
+
+  - path: Scripts/Validate_Repository_Metadata.py
+    category: tooling
+    authority: working
+    status: active
+    summary: Local validator for document metadata, relationships, IDs, paths, dependency cycles, migration gaps, and the machine index.
+    use_for: [local validation, normalization review, conformance checks]
+
+  - path: requirements-validation.txt
+    category: tooling
+    authority: working
+    status: active
+    summary: Minimal Python dependencies required by the local metadata validator.
+    use_for: [validation environment setup]
+
   - path: Ideas/Is logic in a Mediator Handler an Anti-Pattern- - r-dotnet.url
     category: ideas
     authority: historical
@@ -765,7 +821,7 @@ known_consistency_issues:
   - id: IDX-ISSUE-004
     severity: medium
     issue: Metadata coverage and schema style are inconsistent across current documents.
-    retrieval_effect: Do not assume absent front matter means low importance; use authority fields in this index.
+    retrieval_effect: Do not assume absent front matter means low importance; use authority fields and metadata_validation.migration_backlog in this index.
   - id: IDX-ISSUE-005
     severity: medium
     issue: Terminology_Index.md points candidate IsHandled concepts to Microsoft_IsHandled.md rather than the actual current path.
@@ -782,6 +838,7 @@ maintenance_rules:
     - a query route gains a better primary source
     - a planned document is created
     - a known consistency issue is resolved
+    - a metadata migration backlog item is normalized or a validation artifact changes
   validation_checks:
     - YAML parses successfully.
     - Every documents.path exists with exact case.

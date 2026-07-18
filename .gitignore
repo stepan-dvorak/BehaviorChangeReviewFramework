@@ -12,5 +12,9 @@ desktop.ini
 .obsidian/plugins/
 .obsidian/themes/
 /.obsidian/workspace.json
+
+# Ignore local Python validation environments and caches
+__pycache__/
+*.py[cod]
+.venv/
 /.obsidian/community-plugins.json
-/.obsidian/workspace.json

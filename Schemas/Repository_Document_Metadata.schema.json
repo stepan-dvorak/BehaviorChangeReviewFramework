@@ -1,0 +1,223 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/stepan-dvorak/BehaviorChangeReviewFramework/Schemas/Repository_Document_Metadata.schema.json",
+  "title": "Orden Repository Document Metadata",
+  "description": "Metadata schema 1.0 for governed Markdown artifacts in the Behavior Change Review Framework repository.",
+  "type": "object",
+  "required": [
+    "metadata_schema",
+    "project",
+    "document",
+    "classification",
+    "owner",
+    "purpose"
+  ],
+  "properties": {
+    "metadata_schema": {
+      "const": "1.0"
+    },
+    "project": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": {"const": "Orden"},
+        "name": {"const": "Behavior Change Review Framework"}
+      },
+      "additionalProperties": false
+    },
+    "document": {
+      "type": "object",
+      "required": ["id", "title", "type", "version", "status"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3,
+          "pattern": "^[A-Z0-9]+(?:-[A-Z0-9]+)+$"
+        },
+        "title": {"type": "string", "minLength": 1},
+        "type": {"type": "string", "minLength": 1},
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+        },
+        "status": {
+          "enum": ["Proposed", "Active", "Deprecated", "Archived"]
+        }
+      },
+      "additionalProperties": true
+    },
+    "classification": {
+      "type": "object",
+      "required": ["domain", "layer", "maturity"],
+      "properties": {
+        "domain": {"type": "string", "minLength": 1},
+        "layer": {"type": "string", "minLength": 1},
+        "maturity": {
+          "enum": ["Stub", "Draft", "Review", "Stable"]
+        }
+      },
+      "additionalProperties": true
+    },
+    "owner": {"type": "string", "minLength": 1},
+    "purpose": {"type": "string", "minLength": 1},
+    "quality": {
+      "type": "object",
+      "required": ["review", "evidence", "editorial"],
+      "properties": {
+        "review": {
+          "enum": ["Not Reviewed", "Self Reviewed", "Reviewed", "Approved", "N/A"]
+        },
+        "evidence": {
+          "enum": ["Pending", "Partial", "Verified", "N/A"]
+        },
+        "editorial": {
+          "enum": ["Draft", "Reviewed", "Approved", "N/A"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "audience": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "depends_on": {"$ref": "#/$defs/pathArray"},
+    "related_documents": {"$ref": "#/$defs/pathArray"},
+    "supersedes": {"$ref": "#/$defs/pathArray"},
+    "superseded_by": {"$ref": "#/$defs/pathArray"},
+    "evidence": {
+      "type": "object",
+      "required": ["source_authority", "source_access", "verification"],
+      "properties": {
+        "source_authority": {
+          "enum": [
+            "Primary Standard",
+            "Peer-Reviewed Publication",
+            "SEI Publication",
+            "Official Vendor Documentation",
+            "Official Source Code",
+            "Official Product Behavior",
+            "Community Publication",
+            "Mixed Sources"
+          ]
+        },
+        "source_access": {
+          "enum": ["Full", "Partial", "Public Summary", "Secondary Only", "Mixed"]
+        },
+        "verification": {
+          "enum": ["Verified", "Partial", "Pending"]
+        },
+        "limitations": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": true
+    },
+    "study": {
+      "type": "object",
+      "required": ["method", "subject", "data_access", "reproducibility"],
+      "properties": {
+        "method": {"type": "string", "minLength": 1},
+        "subject": {"type": "string", "minLength": 1},
+        "data_access": {"type": "string", "minLength": 1},
+        "reproducibility": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": true
+    },
+    "research_status": {
+      "type": "object",
+      "required": ["state", "conclusions_available"],
+      "properties": {
+        "state": {"const": "Planned"},
+        "conclusions_available": {"const": false}
+      },
+      "additionalProperties": false
+    },
+    "tags": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "aliases": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "not": {
+    "anyOf": [
+      {"required": ["depends-on"]},
+      {"required": ["source-type"]}
+    ]
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "document": {
+            "properties": {"type": {"const": "Reference Analysis"}},
+            "required": ["type"]
+          }
+        }
+      },
+      "then": {"required": ["quality", "evidence"]}
+    },
+    {
+      "if": {
+        "properties": {
+          "document": {
+            "properties": {"type": {"const": "Empirical Study"}},
+            "required": ["type"]
+          }
+        }
+      },
+      "then": {"required": ["quality", "study"]}
+    },
+    {
+      "if": {
+        "properties": {
+          "document": {
+            "properties": {"type": {"const": "Research Stub"}},
+            "required": ["type"]
+          }
+        }
+      },
+      "then": {
+        "required": ["quality", "research_status"],
+        "properties": {
+          "document": {
+            "properties": {
+              "status": {"const": "Active"}
+            }
+          },
+          "classification": {
+            "properties": {
+              "maturity": {"const": "Stub"}
+            }
+          },
+          "quality": {
+            "properties": {
+              "review": {"const": "Not Reviewed"},
+              "evidence": {"const": "Pending"},
+              "editorial": {"const": "Draft"}
+            }
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": true,
+  "$defs": {
+    "pathArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^(?!/)(?!.*\\\\)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+      }
+    }
+  }
+}
