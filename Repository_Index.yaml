@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.4
+  version: 1.0.5
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -412,7 +412,7 @@ documents:
     authority: working
     status: active
     maturity: draft
-    version: 0.5.0
+    version: 0.6.0
     summary: Research backbone recording hypothesis evolution, rejected directions, open questions, and decisions.
     use_for: [research history, open questions, rejected ideas, current hypothesis state]
     depends_on: [00_Project_Charter.md]
@@ -597,10 +597,10 @@ documents:
     profile: reference_analysis
     status: active
     maturity: draft
-    version: 0.3.0
-    summary: Distinguishes Microsoft's runtime event types from extensibility patterns and analyzes contract, ordering, composition, transaction, and evolution implications without equating event type with behavioral effect.
-    use_for: [business events, integration events, internal events, trigger events, event patterns, subscriber composition, transaction semantics]
-    caution: An event attribute or value ranking describes only part of the extension point; subscriber behavior and architectural consequences require separate analysis.
+    version: 0.4.0
+    summary: Distinguishes Microsoft's runtime event types from extensibility patterns and integrates Learn, BCQuality, BCApps scope, and community guidance to analyze contract, participation, control flow, composition, transactions, and responsibility preservation.
+    use_for: [business events, integration events, internal events, trigger events, event patterns, subscriber composition, runtime participation, event contracts, transaction semantics, responsibility preservation]
+    caution: The source classes have different authority; candidate dimensions and source tensions remain unvalidated pending empirical study.
 
   - path: References/Microsoft_Interfaces.md
     document_id: REF-MS-INTERFACES-001
@@ -643,6 +643,20 @@ documents:
     version: 0.1.0
     summary: Twelve-finding audit with classification and refactoring recommendations for IsHandled usage in an AL codebase.
     use_for: [case evidence, IsHandled classification, refactoring priorities]
+
+  - path: Empirical/BCApps_Event_Pattern_Analysis.md
+    document_id: ES-BCAPPS-EVENTS-001
+    title: BCApps Event Pattern Analysis
+    profile: empirical_study
+    category: empirical_study
+    authority: planned
+    status: active
+    maturity: draft
+    version: 0.1.0
+    summary: Defines a reproducible stratified repository-code audit for testing candidate event dimensions against representative BCApps publisher-subscriber participation cases.
+    use_for: [BCApps study planning, event case sampling, publisher-subscriber analysis, runtime participation, empirical validation]
+    caution: Study protocol only; execution, classified cases, and findings are pending.
+    depends_on: [02_Research_Methodology.md, References/Microsoft_Event_Types.md]
 
   - path: Empirical/MS_CZF_IsHandled_Refactoring_Analysis.md
     document_id: ES-MS-CZF-001
@@ -727,6 +741,20 @@ documents:
     use_for: [project origin, hypothesis provenance, IsHandled proposal history, future research]
     external_publication: https://github.com/microsoft/alguidelines/discussions/289
     do_not_use_for: [validated conclusion, normative rule]
+
+  - path: Ideas/Microsoft_Event_Types_Research_Agenda.md
+    document_id: RD-IDEA-EVENTS-001
+    title: Microsoft Event Types Research Agenda
+    profile: governed_document
+    category: ideas
+    authority: working
+    status: active
+    maturity: draft
+    version: 0.1.0
+    summary: Preserves event-source tensions, a candidate multidimensional analysis, broader pattern routing, BCApps sampling ideas, and unresolved research branches.
+    use_for: [event research planning, source tension, runtime participation hypothesis, responsibility preservation hypothesis, future work routing]
+    do_not_use_for: [validated conclusion, Microsoft position, normative rule, empirical finding]
+    depends_on: [References/Microsoft_Event_Types.md]
 
   - path: Whitepaper/Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md
     document_id: RD-WP-001

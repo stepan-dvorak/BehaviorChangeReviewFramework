@@ -9,7 +9,7 @@ document:
   id: REF-MS-EVENTS-001
   title: Microsoft Business Central Event Types Analysis
   type: Reference Analysis
-  version: 0.3.0
+  version: 0.4.0
   status: Active
 
 classification:
@@ -47,16 +47,20 @@ related_documents:
   - References/Microsoft_IsHandled_v2.0.md
   - References/ATAM.md
   - References/SAAM.md
+  - Empirical/BCApps_Event_Pattern_Analysis.md
+  - Ideas/Microsoft_Event_Types_Research_Agenda.md
 
 evidence:
-  source_authority: Official Vendor Documentation
+  source_authority: Mixed Sources
   source_access: Full
   verification: Verified
   limitations: >
-    The analysis is limited to the cited public Microsoft Learn documentation
-    as available on 2026-07-18. It does not establish the prevalence or runtime
-    effect of event patterns across the complete Business Central application
-    or third-party extension ecosystem.
+    The analysis combines Microsoft Learn, Microsoft-endorsed BCQuality
+    knowledge files, official Microsoft source-repository context, and selected
+    community guidance hosted by Microsoft. These sources have different
+    authority and purposes. The analysis does not establish pattern prevalence
+    or runtime effects across the complete Business Central application or
+    third-party extension ecosystem.
 
 tags:
   - Microsoft
@@ -64,6 +68,8 @@ tags:
   - events
   - event-contracts
   - event-subscribers
+  - runtime-participation
+  - BCQuality
   - extensibility
   - behavior-change
 ---
@@ -115,10 +121,34 @@ placements or patterns. Several entries in it are implemented as integration
 events. Therefore, an event's AL attribute and its extensibility pattern are
 not interchangeable classifications.
 
-## 3. Verified Microsoft Claims
+### 2.3 Additional source classes
 
-This section reports Microsoft's documented position. Repository
-interpretation begins in Section 4.
+This revision adds three source classes that require separate treatment:
+
+- **BCQuality Microsoft knowledge files** are maintained in a Microsoft
+  repository and placed in its Microsoft-endorsed layer. They encode atomic
+  review guidance for agents and include good and bad AL fixtures [M10]. They
+  are stronger evidence of current Microsoft review guidance than community
+  commentary, but they are not Microsoft Learn product specifications.
+- **BCApps** is official Microsoft application source code. It can provide
+  primary implementation observations, but a repository-wide prevalence or
+  quality claim requires a defined sampling and classification method. This
+  document uses BCApps only to establish the available empirical subject; the
+  planned audit is scoped separately in
+  `Empirical/BCApps_Event_Pattern_Analysis.md` [M20].
+- **ALGuidelines.dev** describes itself as a home for community knowledge about
+  Business Central patterns and practices [M18]. Its content is useful for
+  pattern provenance and competing recommendations, but Microsoft repository
+  hosting does not make each article an official product position.
+
+Four AI-generated pattern inventories supplied during this research were used
+only as discovery aids. Their claims are not treated as evidence, and they are
+not cited as source authority.
+
+## 3. Verified Source Claims
+
+This section reports claims from the cited sources with their authority kept
+explicit. Repository interpretation begins in Section 4.
 
 ### 3.1 Event model
 
@@ -309,6 +339,71 @@ These are explicit publisher and extension-point design concerns. Microsoft
 does not present them as a complete architecture-review method for subscriber
 implementations.
 
+### 3.14 BCQuality event-review guidance
+
+The BCQuality repository states that its knowledge files exist to prevent
+Business Central-specific mistakes by development and review agents. It
+distinguishes a Microsoft-endorsed layer from community and custom layers and
+describes the corpus as additive to agent judgment rather than a replacement
+for it [M10].
+
+The examined Microsoft-layer event files add several review concerns not
+developed in the Learn taxonomy:
+
+- Static subscribers are always bound, while manual subscribers participate
+  only after `BindSubscription`. BCQuality recommends choosing between them
+  according to whether behavior is always active or deliberately scoped and
+  warns that a retained manual binding can leak beyond its intended scope
+  [M11].
+- Raising an integration event inside a `TryFunction` can place subscriber
+  errors inside the function's error boundary. BCQuality treats this as a
+  silent failure risk and recommends raising the event outside that boundary
+  [M12].
+- A shipped business or integration event remains a subscriber contract even
+  when its publisher procedure is `local` or `internal`. Existing parameter
+  names, types, subtypes, and value-versus-`var` modes remain contract-relevant;
+  this differs from the module-only `[InternalEvent]` attribute [M13].
+- Changing shipped `IncludeSender`, `GlobalVarAccess`, or `Isolated` attribute
+  flags can alter compatibility or observable execution. BCQuality recommends
+  preserving the shipped flags and introducing a new event when a different
+  contract is required [M14].
+- If an `IsHandled` guard exits the entire procedure, a paired `OnAfter` event
+  can be suppressed. BCQuality recommends skipping only the default body when
+  the after-event is intended to remain part of the contract [M15].
+- BCQuality warns against placing an `IsHandled` bypass around posting, ledger
+  writes, number-series consumption, referential-integrity checks, or
+  permission validation [M16].
+
+BCQuality also contains a positive rule describing `IsHandled` as the
+established AL seam for making default behavior overridable when a partner
+genuinely needs substitution [M17]. That rule is narrower than a general
+recommendation: it prefers a positive `OnAfter` event for reaction-only needs,
+and the surrounding Microsoft-layer files constrain critical-operation,
+contract-evolution, initialization, and downstream-event behavior.
+
+### 3.15 Community pattern guidance and source tension
+
+ALGuidelines.dev documents an Event Bridge pattern in which events shared by
+multiple interface implementations are published from a dedicated codeunit.
+The stated purpose is to preserve a discoverable event surface when current and
+future implementations would otherwise publish different events [M19]. This is
+community pattern guidance rather than verified runtime behavior.
+
+Other ALGuidelines.dev material recommends small subscriber codeunits, manual
+binding when participation should be conditional, and avoidance of generic
+record-trigger subscribers because they can impair bulk operations [M21]. Its
+agentic event rules also promote broad use of integration events and handled
+patterns [M22]. These recommendations vary in age, scope, and authority and
+must not be combined into a single Microsoft position.
+
+The positive BCQuality treatment of a narrowly scoped `IsHandled` override and
+the Microsoft Learn low-value assessment of handled events are evidence of a
+contextual boundary, not grounds to discard either source. Learn emphasizes
+scalability, discoverability, and multi-subscriber limitations; BCQuality also
+addresses the practical need for an explicit substitution seam. The conditions
+under which the latter need outweighs the former risks remain an unresolved
+research question.
+
 ## 4. Repository Observations
 
 The following are observations about how the verified documentation relates to
@@ -333,6 +428,16 @@ Orden. They are not Microsoft claims.
    direct composition constraints for behavior-changing subscribers.
 7. Isolated execution changes failure propagation and transaction boundaries
    but does not isolate every side effect.
+8. Subscriber participation is a separate dimension from publisher type and
+   subscriber effect. A subscriber can be always bound, manually scoped, or
+   absent because no binding was established.
+9. Responsibility preservation is not captured by the event attribute. A
+   control-flow subscriber can suppress default work, later events, validation,
+   integrity checks, or other responsibilities unless the publisher boundary
+   preserves them explicitly.
+10. Event compatibility includes more than procedure-call compatibility.
+    Parameter names, types, subtypes, `var` modes, attribute flags, and
+    subscriber visibility can affect dependent extensions differently.
 
 ## 5. Research Interpretation
 
@@ -383,6 +488,44 @@ observable outcomes or system guarantees.
 The isolated-event qualifications also show why labels such as "isolated" must
 not be interpreted more broadly than the documented runtime semantics.
 
+### 5.5 Runtime participation is an independent review dimension
+
+The distinction between static and manual subscribers changes when behavior
+can participate, for how long, and under whose control. It therefore cannot be
+represented only as a property of the subscriber's business effect. A useful
+analysis needs at least the binding mode, activation site, instance lifetime,
+session boundary, and unbinding behavior.
+
+This is a repository interpretation derived from the documented binding model
+and BCQuality review guidance. It is a candidate refinement, not an accepted
+framework construct.
+
+### 5.6 Event handling can transfer or suppress responsibility
+
+The BCQuality rules concerning paired `OnAfter` events and critical operations
+make a distinction that the event-type taxonomy alone does not express. A
+subscriber may replace the default calculation while the publisher retains
+responsibility for notification, posting, integrity, or permission enforcement;
+alternatively, an early exit may transfer or suppress those responsibilities
+as well.
+
+Review therefore needs to ask not only what the subscriber executes, but which
+publisher responsibilities remain effective after the subscriber participates.
+The proposed term *responsibility preservation* is used descriptively in this
+document and is not added to canonical terminology.
+
+### 5.7 Current guidance is purpose-specific rather than fully consistent
+
+Microsoft Learn, BCQuality, official application code, and community pattern
+guidance serve different purposes. Learn describes platform semantics and
+preferred extension-point designs. BCQuality provides atomic code-review rules.
+BCApps records implemented product choices. ALGuidelines.dev preserves
+community patterns and recommendations.
+
+Differences among them should be recorded as source tension until context,
+version, and implementation evidence explain them. Repository ownership alone
+is insufficient to collapse these sources into one authority class.
+
 ## 6. What Microsoft Guidance Does Not Establish
 
 The examined documentation does not establish that:
@@ -395,6 +538,10 @@ The examined documentation does not establish that:
 - isolated events roll back all subscriber side effects;
 - `OnSkip` automatically composes correctly across extensions;
 - an event value ranking measures subscriber consequence or risk; or
+- every Microsoft-hosted guideline is an official product specification;
+- implemented BCApps patterns are necessarily preferred for new code;
+- a static or manual binding choice is behaviorally neutral;
+- handling default work preserves later events or critical responsibilities;
 - event use alone determines whether architectural review is required.
 
 The documentation provides strong mechanism-specific design evidence but not a
@@ -433,7 +580,13 @@ The following are non-normative candidates for later synthesis:
 8. Treat manual binding as an explicit runtime participation decision.
 9. Record sensitive-data exposure and permission or licensing skip behavior
    where relevant.
-10. Scale review depth to actual consequences rather than to the event name or
+10. Record runtime participation: binding mode, activation, lifetime, session
+    scope, and unbinding.
+11. Identify which publisher responsibilities remain effective, are
+    transferred, or are suppressed after subscriber participation.
+12. Treat event-contract evolution as a combination of accessibility,
+    parameter-binding, passing-mode, and attribute-flag constraints.
+13. Scale review depth to actual consequences rather than to the event name or
     attribute alone.
 
 These candidates organize evidence from Microsoft guidance. They do not yet
@@ -473,6 +626,18 @@ of SAAM or ATAM.
   each pattern appears or fails in Microsoft or third-party applications.
 - **No empirical pilot:** The candidate classification has not yet been tested
   across representative Business Central subscribers.
+- **BCQuality maturity:** BCQuality is an evolving review corpus whose atomic
+  files are designed for agent consumption. This analysis did not independently
+  validate every rule against compiler, runtime, or compatibility behavior.
+- **Authority separation:** Microsoft organization hosting, Microsoft-endorsed
+  BCQuality placement, Microsoft Learn documentation, and shipped BCApps code
+  are related but non-equivalent evidence classes.
+- **Community-source age:** ALGuidelines.dev combines current AL guidance with
+  historical NAV and C/AL material. Only the cited pages were examined, and
+  their continued applicability was not assumed.
+- **AI discovery input:** The supplied AI-generated inventories may contain
+  hallucinated, conflated, or overgeneralized patterns. They informed search
+  terms only and were not used as evidence.
 - **Mechanism boundary:** Interfaces, workflow, direct procedure calls, and
   other mechanisms require separate analysis before conclusions can be called
   mechanism-independent.
@@ -495,6 +660,19 @@ of SAAM or ATAM.
    a more explicit contract?
 8. Which representative event cases should be selected for the first
    cross-mechanism empirical study?
+9. Can static and manual subscriber participation be represented without
+   introducing repository terminology that duplicates established runtime or
+   architecture concepts?
+10. Under what conditions is a narrowly scoped `IsHandled` substitution seam
+    justified despite Microsoft's documented composition and maintenance
+    concerns?
+11. Which responsibilities must remain effective after default behavior is
+    handled, skipped, or replaced?
+12. Does the Event Bridge pattern preserve a useful cross-implementation
+    contract in current BCApps code, or does it introduce a separate coupling
+    surface?
+13. Which BCQuality rules are platform semantics, compatibility constraints,
+    Microsoft engineering preferences, or agent-review heuristics?
 
 ## 12. References
 
@@ -517,8 +695,68 @@ of SAAM or ATAM.
   <https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/analyzers/appsourcecop-as0020>.
 - **[M9]** Microsoft. "EventSubscriberInstance property." Microsoft Learn.
   <https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/properties/devenv-eventsubscriberinstance-property>.
+- **[M10]** Microsoft. "BCQuality." GitHub repository README, commit
+  `712dee9ec1f0b098f859753e083e8c6efa903d01`.
+  <https://github.com/microsoft/BCQuality/blob/712dee9ec1f0b098f859753e083e8c6efa903d01/README.md>.
+- **[M11]** Microsoft. "Choose static vs manual subscribers deliberately and
+  bind manual ones with BindSubscription." BCQuality, commit
+  `712dee9ec1f0b098f859753e083e8c6efa903d01`.
+  <https://github.com/microsoft/BCQuality/blob/712dee9ec1f0b098f859753e083e8c6efa903d01/microsoft/knowledge/events/choose-static-vs-manual-subscribers-deliberately.md>.
+- **[M12]** Microsoft. "Do not raise integration events inside a TryFunction."
+  BCQuality, commit `712dee9ec1f0b098f859753e083e8c6efa903d01`.
+  <https://github.com/microsoft/BCQuality/blob/712dee9ec1f0b098f859753e083e8c6efa903d01/microsoft/knowledge/events/avoid-raising-events-inside-try-functions.md>.
+- **[M13]** Microsoft. "Treat local and internal events as subscriber
+  contracts." BCQuality, commit
+  `712dee9ec1f0b098f859753e083e8c6efa903d01`.
+  <https://github.com/microsoft/BCQuality/blob/712dee9ec1f0b098f859753e083e8c6efa903d01/microsoft/knowledge/events/treat-local-and-internal-events-as-subscriber-contracts.md>.
+- **[M14]** Microsoft. "Do not change shipped event attribute flags."
+  BCQuality, commit `712dee9ec1f0b098f859753e083e8c6efa903d01`.
+  <https://github.com/microsoft/BCQuality/blob/712dee9ec1f0b098f859753e083e8c6efa903d01/microsoft/knowledge/events/do-not-change-shipped-event-attribute-flags.md>.
+- **[M15]** Microsoft. "Preserve OnAfter execution when IsHandled skips the
+  body." BCQuality, commit `712dee9ec1f0b098f859753e083e8c6efa903d01`.
+  <https://github.com/microsoft/BCQuality/blob/712dee9ec1f0b098f859753e083e8c6efa903d01/microsoft/knowledge/events/preserve-onafter-execution-when-ishandled-skips-the-body.md>.
+- **[M16]** Microsoft. "Do not bypass critical operations with IsHandled."
+  BCQuality, commit `712dee9ec1f0b098f859753e083e8c6efa903d01`.
+  <https://github.com/microsoft/BCQuality/blob/712dee9ec1f0b098f859753e083e8c6efa903d01/microsoft/knowledge/events/do-not-bypass-critical-operations-with-ishandled.md>.
+- **[M17]** Microsoft. "Use the IsHandled pattern to make base behaviour
+  overridable." BCQuality, commit
+  `712dee9ec1f0b098f859753e083e8c6efa903d01`.
+  <https://github.com/microsoft/BCQuality/blob/712dee9ec1f0b098f859753e083e8c6efa903d01/microsoft/knowledge/events/use-ishandled-to-make-base-behaviour-overridable.md>.
+- **[M18]** Microsoft ALGuidelines contributors. "Business Central Design
+  Patterns & Best Practices." GitHub repository README, commit
+  `dbbc3d3cdc10014be80510808ce83c93b8af2b7c`.
+  <https://github.com/microsoft/alguidelines/blob/dbbc3d3cdc10014be80510808ce83c93b8af2b7c/README.md>.
+- **[M19]** Microsoft ALGuidelines contributors. "Event Bridge."
+  ALGuidelines.dev source, commit
+  `dbbc3d3cdc10014be80510808ce83c93b8af2b7c`.
+  <https://github.com/microsoft/alguidelines/blob/dbbc3d3cdc10014be80510808ce83c93b8af2b7c/content/docs/patterns/event-bridge-pattern/index.md>.
+- **[M20]** Microsoft. "BCApps — the home of Business Central application
+  development." GitHub repository README, commit
+  `397d01199c321e774edaf23a7290fee40f75c6a6`.
+  <https://github.com/microsoft/BCApps/blob/397d01199c321e774edaf23a7290fee40f75c6a6/README.md>.
+- **[M21]** Microsoft ALGuidelines contributors. "Subscriber Codeunits."
+  ALGuidelines.dev source, commit
+  `dbbc3d3cdc10014be80510808ce83c93b8af2b7c`.
+  <https://github.com/microsoft/alguidelines/blob/dbbc3d3cdc10014be80510808ce83c93b8af2b7c/content/docs/BestPractices/SubscriberCodeunits/index.md>.
+- **[M22]** Microsoft ALGuidelines contributors. "Event-Driven Development
+  Rules." ALGuidelines.dev source, commit
+  `dbbc3d3cdc10014be80510808ce83c93b8af2b7c`.
+  <https://github.com/microsoft/alguidelines/blob/dbbc3d3cdc10014be80510808ce83c93b8af2b7c/content/docs/agentic-coding/vibe-coding-rules/al-events.md>.
 
 ## 13. Revision History
+
+### 0.4.0 — 2026-07-18
+
+- Added Microsoft-endorsed BCQuality guidance while preserving its distinction
+  from Microsoft Learn product documentation.
+- Added contract-evolution, runtime-participation, error-boundary, and
+  responsibility-preservation evidence.
+- Recorded the contextual tension between the low-value handled-event
+  assessment and narrowly justified substitution guidance.
+- Added selected ALGuidelines.dev pattern evidence with explicit community
+  authority and historical limitations.
+- Scoped BCApps as a planned empirical study rather than inferring prevalence
+  from unstructured source-code examples.
 
 ### 0.3.0 — 2026-07-18
 
