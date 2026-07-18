@@ -1,4 +1,7 @@
-# Repository Map
+# Repository Map (Archived)
+
+> Historical navigation artifact. Use `README.md` for human orientation and
+> `Repository_Index.yaml` for the current machine-readable inventory.
 
 ## Governance
 - README.md
