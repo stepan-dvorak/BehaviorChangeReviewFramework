@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.1
+  version: 1.0.2
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -57,14 +57,7 @@ metadata_validation:
     - Empirical/KMITS-BA4_Finance-IsHandled-Audit.md
     - Empirical/MS-CZF-IsHandled-Refactoring-Analysis-cs.md
     - Empirical/MS-CZL-IsHandled-Refactoring-Analysis-Report.md
-    - Historical_References/Evolution_of_Extensibility.md
-    - Historical_References/Mark_Brummel_Handled_Pattern.md
-    - Historical_References/Vjeko_Codeunit_Interfaces.md
-    - Historical_References/Vjeko_Gentlemens_Agreement.md
     - Ideas/IsHandled Pattern - Missing Extensibility Preservation Rule.md
-    - Templates/ADR_Template.md
-    - Templates/Empirical_Study_Template.md
-    - Templates/Research_Document_Template.md
     - Whitepaper/Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md
 
 retrieval_policy:
@@ -665,36 +658,52 @@ documents:
     use_for: [large case evidence, subscriber competition, adapter pattern, refactoring roadmap]
 
   - path: Historical_References/Evolution_of_Extensibility.md
-    title: Evolution of Extensibility
+    document_id: REF-HIST-EVOLUTION-001
+    title: Evolution of Business Central Extensibility
+    profile: research_stub
     category: historical_reference
     authority: historical
-    status: current
-    summary: Historical context artifact; currently contains no Markdown headings.
-    use_for: [historical provenance]
+    status: active
+    maturity: stub
+    version: 0.1.0
+    summary: Planned historical research into Business Central extensibility mechanisms, guidance, constraints, and architectural intent.
+    use_for: [historical research planning, extensibility evolution, source discovery]
 
   - path: Historical_References/Mark_Brummel_Handled_Pattern.md
+    document_id: REF-HIST-BRUMMEL-001
     title: Mark Brummel Handled Pattern
+    profile: research_stub
     category: historical_reference
     authority: historical
-    status: current
-    summary: Historical reference to the early Handled pattern discussion.
-    use_for: [IsHandled origin, historical attribution]
+    status: active
+    maturity: stub
+    version: 0.1.0
+    summary: Planned research into the early Handled pattern discussion attributed to Mark Brummel, now Marije Brummel.
+    use_for: [IsHandled history planning, source recovery, historical attribution]
 
   - path: Historical_References/Vjeko_Gentlemens_Agreement.md
+    document_id: REF-HIST-VJEKO-HANDLED-001
     title: Vjeko Gentlemen's Agreement
+    profile: research_stub
     category: historical_reference
     authority: historical
-    status: current
-    summary: Community historical source on the convention-based nature of the handled pattern.
-    use_for: [IsHandled history, coding by convention]
+    status: active
+    maturity: stub
+    version: 0.1.0
+    summary: Planned analysis of a community source on the convention-based nature and early history of the Handled pattern.
+    use_for: [IsHandled history planning, coding-by-convention research, community-source review]
 
   - path: Historical_References/Vjeko_Codeunit_Interfaces.md
+    document_id: REF-HIST-VJEKO-INTERFACES-001
     title: Vjeko Codeunit Interfaces
+    profile: research_stub
     category: historical_reference
     authority: historical
-    status: current
-    summary: Community historical source connecting codeunit interfaces and extensibility evolution.
-    use_for: [interface history, alternative mechanisms]
+    status: active
+    maturity: stub
+    version: 0.1.0
+    summary: Planned analysis of a community source concerning codeunit interfaces and AL extensibility evolution.
+    use_for: [interface history planning, alternative mechanisms, community-source review]
 
   - path: Ideas/IsHandled Pattern - Missing Extensibility Preservation Rule.md
     title: Missing Extensibility Preservation Rule
@@ -715,26 +724,38 @@ documents:
     caution: Draft synthesis; reconcile with newer ISO and Microsoft analyses before treating conclusions as current.
 
   - path: Templates/Research_Document_Template.md
+    document_id: GOV-TPL-RES-001
     title: Research Document Template
+    profile: governed_document
     category: templates
     authority: template
-    status: current
+    status: active
+    maturity: review
+    version: 0.2.0
     summary: Standard structure for research questions, methodology, layered analysis, findings, limitations, and references.
     use_for: [new research document]
 
   - path: Templates/Empirical_Study_Template.md
+    document_id: GOV-TPL-EMP-001
     title: Empirical Study Template
+    profile: governed_document
     category: templates
     authority: template
-    status: current
+    status: active
+    maturity: review
+    version: 0.2.0
     summary: Structure for objective, setup, observations, evidence, validity threats, findings, and framework implications.
     use_for: [new empirical study, normalization of existing studies]
 
   - path: Templates/ADR_Template.md
+    document_id: GOV-TPL-ADR-001
     title: Architecture Decision Record Template
+    profile: governed_document
     category: templates
     authority: template
-    status: current
+    status: active
+    maturity: review
+    version: 0.1.0
     summary: Standard ADR structure for context, drivers, options, decision, rationale, and consequences.
     use_for: [architecture decisions, governance decisions]
 
@@ -822,10 +843,6 @@ known_consistency_issues:
     severity: medium
     issue: Metadata coverage and schema style are inconsistent across current documents.
     retrieval_effect: Do not assume absent front matter means low importance; use authority fields and metadata_validation.migration_backlog in this index.
-  - id: IDX-ISSUE-005
-    severity: medium
-    issue: Terminology_Index.md points candidate IsHandled concepts to Microsoft_IsHandled.md rather than the actual current path.
-    retrieval_effect: Resolve those definitions to References/Microsoft_IsHandled_v2.0.md.
   - id: IDX-ISSUE-007
     severity: medium
     issue: Three legacy empirical reports contain repository-authored non-English content and require translation during empirical-document normalization.
