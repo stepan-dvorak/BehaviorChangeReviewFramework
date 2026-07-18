@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.6
+  version: 1.0.7
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -412,7 +412,7 @@ documents:
     authority: working
     status: active
     maturity: draft
-    version: 0.7.0
+    version: 0.8.0
     summary: Research backbone recording hypothesis evolution, rejected directions, open questions, and decisions.
     use_for: [research history, open questions, rejected ideas, current hypothesis state]
     depends_on: [00_Project_Charter.md]
@@ -666,11 +666,25 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.1.0
-    summary: Pre-registers a bounded 16-case event pilot in Microsoft's Core Localization Pack for Czech application with a fixed BCApps commit, bias controls, selection rules, and empty case records.
+    version: 0.2.0
+    summary: Pre-registers a bounded 16-case event pilot and links its reproduced 448-row subscriber population while preserving empty selection and case records.
     use_for: [Czech localization pilot, pre-registration, event subscriber case selection, behavioral change trigger testing, impact checklist testing]
     caution: Pre-registration only; the selection register is empty and no case findings or prevalence claims are available.
     depends_on: [02_Research_Methodology.md, Empirical/BCApps_Event_Pattern_Analysis.md, References/Microsoft_Event_Types.md]
+
+  - path: Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md
+    document_id: ES-BCAPPS-CZ-CLP-EVENT-POP-001
+    title: BCApps Czech Core Localization Event Population Manifest
+    profile: empirical_study
+    category: empirical_study
+    authority: evidentiary
+    status: active
+    maturity: draft
+    version: 0.1.0
+    summary: Records the deterministic extraction, provenance, validation, limitations, and checksums for 448 syntactic event-subscriber candidates at the fixed BCApps Czech pilot commit.
+    use_for: [Czech localization population discovery, event subscriber inventory, pilot reproducibility, coarse-screen input]
+    caution: Syntactic candidate inventory only; it contains no case selection, trigger result, defect finding, or prevalence evidence.
+    depends_on: [02_Research_Methodology.md, Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md]
 
   - path: Empirical/MS_CZF_IsHandled_Refactoring_Analysis.md
     document_id: ES-MS-CZF-001
@@ -833,6 +847,27 @@ non_markdown_artifacts:
     status: active
     summary: Local validator for document metadata, relationships, IDs, paths, dependency cycles, migration gaps, and the machine index.
     use_for: [local validation, normalization review, conformance checks]
+
+  - path: Scripts/Discover_BCApps_CZ_Event_Population.py
+    category: tooling
+    authority: evidentiary
+    status: active
+    summary: Deterministically extracts the fixed BCApps Czech pilot event-subscriber population into the retained CSV.
+    use_for: [population reproduction, event subscriber discovery, empirical provenance]
+
+  - path: Empirical/Data/BCApps_CZ_Core_Localization_Event_Population.csv
+    category: empirical_study
+    authority: evidentiary
+    status: active
+    summary: Generated 448-row syntactic event-subscriber population for the fixed BCApps Czech Core Localization pilot baseline.
+    use_for: [coarse-screen input, pilot candidate frame, reproduction checks]
+
+  - path: Empirical/Data/BCApps_CZ_Core_Localization_Source_Files.csv
+    category: empirical_study
+    authority: evidentiary
+    status: active
+    summary: Complete deterministic 782-row AL source-file inventory for the fixed BCApps Czech pilot production boundary.
+    use_for: [population-boundary verification, discovery completeness, reproduction checks]
 
   - path: requirements-validation.txt
     category: tooling
