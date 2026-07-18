@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-EVENTS-001
   title: BCApps Event Pattern Analysis
   type: Empirical Study Protocol
-  version: 0.1.0
+  version: 0.2.0
   status: Active
 
 classification:
@@ -41,6 +41,7 @@ depends_on:
   - References/Microsoft_Event_Types.md
 
 related_documents:
+  - Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md
   - References/Microsoft_IsHandled_v2.0.md
   - References/Microsoft_Interfaces.md
   - References/SAAM.md
@@ -82,6 +83,11 @@ Test whether the event dimensions proposed in
 Business Central application cases consistently and whether additional runtime
 participation or responsibility-preservation evidence is required.
 
+The study also tests a candidate **Behavioral Change Impact Review** entry
+condition and checklist. The candidate is mechanism-independent: event-specific
+facts are evidence supplied to the review, not the definition of the reviewed
+phenomenon.
+
 The study is not intended to rank all BCApps code, measure Microsoft-wide
 quality, or infer that a pattern is recommended merely because it is present.
 
@@ -99,6 +105,11 @@ quality, or infer that a pattern is recommended merely because it is present.
    separate runtime model?
 5. Which cases provide counterexamples to the candidate classifications or
    implications in the reference analysis?
+6. Can the candidate Behavioral Change Impact Review entry condition
+   distinguish materially behavior-changing cases from local or nonmaterial
+   event participation?
+7. Does the candidate checklist identify relevant architectural consequences
+   without depending on event-specific terminology?
 
 ## 4. Data Source and Baseline
 
@@ -115,7 +126,96 @@ Branch names alone are insufficient for reproducibility. Source paths, commit
 identifiers, and relevant line or symbol locations must be recorded for every
 selected case.
 
-## 5. Unit of Analysis
+## 5. Candidate Behavioral Change Impact Review
+
+### 5.1 Candidate status
+
+Behavioral Change Impact Review is a working label used for empirical testing.
+It is not canonical repository terminology, an accepted framework component,
+or a Microsoft-defined method.
+
+The working definition is:
+
+> A review initiated when a customization materially augments, redirects,
+> suppresses, replaces, reorders, or delegates established behavior or
+> execution responsibility.
+
+The wording deliberately includes augmentation. An added action can change
+outcomes, side effects, transactions, failure behavior, or other architectural
+properties even when default behavior remains reachable.
+
+For this study, a change is **material** when available evidence indicates that
+it can alter an observable outcome, side effect, invariant, responsibility,
+interaction, failure mode, or quality-relevant execution property. This is an
+operational coding rule, not a canonical definition of materiality.
+
+### 5.2 Trigger screening
+
+Before applying the impact checklist, classify the case as:
+
+- **Triggered:** direct source evidence supports both an established behavior
+  or responsibility and a material augmentation, redirection, suppression,
+  replacement, reordering, or delegation.
+- **Not Triggered:** the subscriber participates, but available evidence does
+  not show a material behavioral change under the operational rule.
+- **Uncertain:** essential publisher, caller, runtime, configuration, or
+  behavioral evidence is unavailable or ambiguous.
+
+The trigger result is a study classification, not a quality judgment. A
+triggered case is not automatically defective, and a not-triggered case is not
+automatically well designed.
+
+Record separately:
+
+1. the established behavior or responsibility;
+2. the source evidence for the customization effect;
+3. the candidate change type;
+4. the material consequence that supports or fails to support entry; and
+5. missing evidence or competing interpretations.
+
+Do not infer materiality from `IsHandled`, an event name, a `var` parameter, or
+manual binding alone.
+
+### 5.3 Behavioral Change Impact Checklist
+
+Apply the checklist to `Triggered` cases. Apply it provisionally to `Uncertain`
+cases when doing so clarifies the missing evidence. Do not force every row to
+produce an impact.
+
+| Area | Mechanism-independent review question |
+|---|---|
+| Affected flow | What established behavior or execution flow is changed? |
+| Change type | Is the flow augmented, redirected, suppressed, replaced, reordered, or delegated? |
+| Outcomes | Which outcomes and side effects change, and which must remain preserved? |
+| Invariants | Which domain, data, security, and process invariants did the original flow enforce? |
+| Ordering and transaction semantics | Does the change affect operation order, atomicity, rollback, locking, retry, or idempotence? |
+| Integration and extensibility | Does it change the reachability, ordering, contract, or behavioral significance of integration and extension points? |
+| Observability | Are audit evidence, telemetry, diagnostics, and business events preserved? |
+| Failure behavior | Does error, partial-completion, compensation, or retry behavior change? |
+| Ownership | Who now owns the changed behavior and the responsibilities previously carried by the original flow? |
+| Evolution | How will the customization respond when the original implementation evolves? |
+
+The checklist separates extensibility from the general research subject.
+Changed extensibility semantics are one possible consequence of behavioral
+change, not the name or complete scope of the review.
+
+### 5.4 Relationship to event evidence
+
+For an event-based case, collect the mechanism-specific evidence before or
+alongside the general checklist:
+
+| Event evidence dimension | Primary checklist use |
+|---|---|
+| Publisher contract | Affected flow; integration and extensibility; evolution |
+| Subscriber effect | Change type; outcomes |
+| Runtime participation | Ordering and transaction semantics; failure behavior; ownership |
+| Preserved responsibility | Outcomes; invariants; observability; ownership |
+
+This mapping is a candidate analytical aid. The study must retain facts that do
+not fit it and must not treat the mapping as proof that the four event
+dimensions are sufficient.
+
+## 6. Unit of Analysis
 
 The primary unit is an **event participation case**, consisting of:
 
@@ -130,9 +230,9 @@ A publisher or subscriber in isolation is insufficient when its effect depends
 on surrounding control flow. Multiple subscribers to the same event may be
 grouped as a composition case while retaining separate subscriber records.
 
-## 6. Sampling Strategy
+## 7. Sampling Strategy
 
-### 6.1 Population discovery
+### 7.1 Population discovery
 
 Create a machine-generated inventory of relevant AL declarations and calls,
 including at minimum:
@@ -149,7 +249,7 @@ including at minimum:
 The inventory script, command, tool version, and raw counts must be retained or
 recorded so another reviewer can reproduce the candidate population.
 
-### 6.2 Strata
+### 7.2 Strata
 
 The sample should cover, when available:
 
@@ -166,7 +266,7 @@ The sample should cover, when available:
 - ordinary, isolated, and `TryFunction`-bounded execution; and
 - single-subscriber and multi-subscriber cases.
 
-### 6.3 Selection
+### 7.3 Selection
 
 Use a two-stage selection:
 
@@ -178,7 +278,15 @@ Use a two-stage selection:
 Purely convenient or visually interesting examples may be used for pilot
 calibration but must not be represented as prevalence evidence.
 
-## 7. Inclusion and Exclusion Criteria
+Include negative controls, uncertain cases, and cases expected not to trigger
+the review. A pilot that contains only suspected defects cannot evaluate the
+entry condition or its false-positive tendency.
+
+Record whether a case was known to the reviewer before selection. Domain
+familiarity may improve interpretation but must not silently determine the
+sample.
+
+## 8. Inclusion and Exclusion Criteria
 
 Include a case when the required publisher, raise site, subscriber, and
 relevant control-flow context are available at the fixed commit.
@@ -194,7 +302,7 @@ Record but analyze separately:
 Exclude a case from consequence analysis when essential dependencies are
 unavailable. The exclusion and its reason remain part of the study record.
 
-## 8. Classification Record
+## 9. Classification Record
 
 Each case should record:
 
@@ -211,12 +319,15 @@ Each case should record:
 | Transaction context | Commit boundary, isolation, `TryFunction`, rollback, and external side effects where observable |
 | Composition | Other known subscribers, ordering assumptions, and shared-control interaction |
 | Scenario | Intended current activity or anticipated change represented by the case |
+| Trigger evidence | Established behavior, candidate change type, material consequence, and missing evidence |
+| Trigger result | Triggered, Not Triggered, or Uncertain |
+| Checklist applicability | Applicable rows, not-applicable rows, and unresolved rows |
 | Evidence status | Direct observation, interpretation, missing context, or unresolved question |
 
 Unclassifiable cases are evidence against the candidate model and must not be
 forced into the nearest category.
 
-## 9. Pilot and Reliability
+## 10. Pilot and Reliability
 
 Pilot the record on at least one case from each available major effect category
 before fixing the main sample. Revise ambiguous definitions explicitly and
@@ -228,7 +339,11 @@ repeat classification after an interval and record changed judgments. No
 reliability statistic is required until the sample size and coding scheme make
 one meaningful.
 
-## 10. Planned Analysis
+The pilot must allow revision or rejection of the trigger, checklist, event
+dimensions, or their mapping. Classification disagreement and unclassifiable
+cases are study results, not editorial defects to be removed.
+
+## 11. Planned Analysis
 
 The study should produce:
 
@@ -238,22 +353,25 @@ The study should produce:
 - within-stratum comparisons without unsupported population estimates;
 - an assessment of whether the candidate dimensions are independent and
   sufficient; and
+- trigger outcomes, including negative controls and uncertain cases;
+- checklist omissions, duplication, and mechanism-dependent wording; and
 - narrowly scoped implications for later framework synthesis.
 
 Counts may describe the selected sample. They must not be presented as BCApps
 prevalence unless the population and sampling design support that inference.
 
-## 11. Threats to Validity
+## 12. Threats to Validity
 
-### 11.1 Internal validity
+### 12.1 Internal validity
 
 - Subscriber behavior may depend on setup, license, permissions, runtime
   version, or code outside the inspected path.
 - Static source analysis may not reveal actual binding, event reachability, or
   transaction behavior.
 - Mutable state and external effects may be hidden behind called procedures.
+- Prior knowledge of a case may bias trigger and impact classification.
 
-### 11.2 External validity
+### 12.2 External validity
 
 - Microsoft application code does not represent every partner or customer
   extension.
@@ -261,7 +379,7 @@ prevalence unless the population and sampling design support that inference.
   independently distributed extensions.
 - One repository commit cannot establish historical or future practice.
 
-### 11.3 Construct validity
+### 12.3 Construct validity
 
 - Candidate effect and responsibility categories may overlap or omit relevant
   phenomena.
@@ -269,25 +387,31 @@ prevalence unless the population and sampling design support that inference.
   implement.
 - Presence in shipped code does not measure architectural quality or Microsoft
   recommendation.
+- The terms *material*, *established behavior*, and *execution responsibility*
+  may be applied inconsistently or may duplicate established concepts not yet
+  identified by the repository research.
+- Checklist coverage may appear complete because the same researchers proposed
+  and applied it.
 
-### 11.4 Reproducibility
+### 12.4 Reproducibility
 
 - The repository is large and evolves continuously.
 - Tooling that parses AL may produce incomplete or version-sensitive results.
 - A fixed commit and retained discovery method are required to reproduce the
   population.
 
-## 12. Findings
+## 13. Findings
 
 No findings are available. Study execution is pending.
 
-## 13. Candidate Implications for the Framework
+## 14. Candidate Implications for the Framework
 
 No framework implication is accepted by this protocol. The study is designed
-to test, refine, or reject candidate dimensions recorded in
+to test, refine, or reject the candidate review trigger, checklist, and event
+dimensions recorded in this protocol and
 `References/Microsoft_Event_Types.md`.
 
-## 14. Future Work
+## 15. Future Work
 
 1. Implement and retain the population-discovery procedure.
 2. Fix the execution baseline and generate raw population counts.
@@ -297,14 +421,23 @@ to test, refine, or reject candidate dimensions recorded in
 6. Compare event cases with interface-based substitution after
    `References/Microsoft_Interfaces.md` is developed.
 
-## 15. References
+## 16. References
 
 - **[B1]** Microsoft. "BCApps — the home of Business Central application
   development." GitHub repository, planning baseline commit
   `397d01199c321e774edaf23a7290fee40f75c6a6`.
   <https://github.com/microsoft/BCApps/tree/397d01199c321e774edaf23a7290fee40f75c6a6>.
 
-## 16. Revision History
+## 17. Revision History
+
+### 0.2.0 — 2026-07-18
+
+- Added the candidate Behavioral Change Impact Review working definition.
+- Added operational materiality and three-state trigger-screening rules.
+- Added the mechanism-independent impact checklist and mapped event evidence to
+  it without accepting the mapping as sufficient.
+- Required negative controls, uncertain cases, prior-knowledge disclosure, and
+  explicit construct-validity testing.
 
 ### 0.1.0 — 2026-07-18
 
