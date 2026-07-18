@@ -1,4 +1,52 @@
-# Audit použití IsHandled patternu v AL kódu
+---
+metadata_schema: "1.0"
+project:
+  id: Orden
+  name: Behavior Change Review Framework
+document:
+  id: ES-KMITS-BA4-001
+  title: KMITS BA4 Finance IsHandled Audit
+  type: Empirical Study
+  version: 0.1.0
+  status: Active
+classification:
+  domain: Business Central Extensibility
+  layer: Study
+  maturity: Review
+owner: Štěpán Dvořák
+purpose: >
+  Preserves a preliminary marker-limited audit of IsHandled subscribers in the
+  KMITS BA4 Finance application as case evidence for later framework research.
+quality:
+  review: Not Reviewed
+  evidence: Partial
+  editorial: Draft
+audience: [Researchers, Business Central Architects, Business Central Developers, Contributors, AI Assistants]
+depends_on: [02_Research_Methodology.md, References/Microsoft_IsHandled_v2.0.md]
+related_documents: [Empirical/MS_CZF_IsHandled_Refactoring_Analysis.md, Empirical/MS_CZL_IsHandled_Refactoring_Analysis_Report.md]
+study:
+  method: Repository Code Audit
+  subject: KMITS BA4 Finance application
+  data_access: Private Source Snapshot
+  reproducibility: Restricted
+tags: [empirical-study, ishandled, preliminary, marker-limited, private-source]
+---
+
+# KMITS BA4 Finance IsHandled Audit
+
+## Study Status and Boundaries
+
+This is a preliminary, marker-limited audit of subscribers that accept
+`var IsHandled: Boolean` and set `IsHandled := true`. It preserves early case
+evidence about one behavior-changing mechanism and the extensibility risks
+identified during the original review.
+
+The audit predates the repository's broader review framework. It is not a
+complete assessment of behavior-changing or architectural structural changes in
+the application. Its classifications and refactoring proposals are provisional
+analytical interpretations and should be reassessed with the completed
+methodology, additional implementation markers, and quality attributes beyond
+termination of an extensibility chain.
 
 Tento dokument shrnuje nálezy z analýzy aktuálního AL codebase v projektu `App`. Zaměření je na `EventSubscriber` metody, které používají `var IsHandled: Boolean` a nastavují `IsHandled := true`.
 

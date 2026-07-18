@@ -1,4 +1,52 @@
-# IsHandled Pattern Analysis Report
+---
+metadata_schema: "1.0"
+project:
+  id: Orden
+  name: Behavior Change Review Framework
+document:
+  id: ES-MS-CZL-001
+  title: MS-CZL IsHandled Refactoring Analysis Report
+  type: Empirical Study
+  version: 0.1.0
+  status: Active
+classification:
+  domain: Business Central Extensibility
+  layer: Study
+  maturity: Review
+owner: Štěpán Dvořák
+purpose: >
+  Preserves a preliminary marker-limited analysis of IsHandled subscribers in
+  Microsoft Core Localization Pack for Czech as case evidence.
+quality:
+  review: Not Reviewed
+  evidence: Partial
+  editorial: Draft
+audience: [Researchers, Business Central Architects, Business Central Developers, Contributors, AI Assistants]
+depends_on: [02_Research_Methodology.md, References/Microsoft_IsHandled_v2.0.md]
+related_documents: [Empirical/KMITS_BA4_Finance_IsHandled_Audit.md, Empirical/MS_CZF_IsHandled_Refactoring_Analysis.md]
+study:
+  method: Repository Code Audit
+  subject: BC280 Core Localization Pack for Czech
+  data_access: Microsoft Localization Source Snapshot
+  reproducibility: Restricted
+tags: [empirical-study, ishandled, preliminary, marker-limited, microsoft-localization]
+---
+
+# MS-CZL IsHandled Refactoring Analysis Report
+
+## Study Status and Boundaries
+
+This is a preliminary, marker-limited study of subscribers that accept
+`var IsHandled: Boolean` and set `IsHandled := true`. It records evidence about
+one behavior-changing mechanism and the extensibility risks identified during
+the original review; it is not a complete assessment of behavior-changing or
+architectural structural changes in the examined application.
+
+The study predates the repository's broader review framework. Its classifications
+and refactoring proposals are provisional analytical interpretations. A future
+reassessment should apply the completed methodology, consider additional
+implementation markers, and evaluate quality attributes and architectural
+effects beyond termination of an extensibility chain.
 
 Datum: 2026-06-03
 Repozitář: BC280 Core Localization Pack for Czech
@@ -16,14 +64,16 @@ Výsledek:
 - 44 unikátních EventSubscriber metod splňuje obě podmínky.
 - 3 skutečné CRITICAL kolize (stejný publisher objekt + stejný event) v posting logice Inventory Posting To G/L.
 
-## Souhrn klasifikace
+## Classification Summary
 
-- A) FULL OVERRIDE: 10
-- B) PARTIAL LOGIC MODIFICATION: 23
+- A) FULL OVERRIDE: 7
+- B) PARTIAL LOGIC MODIFICATION: 21
 - C) VALIDATION / SIDE EFFECT: 8
-- D) DEAD-END EVENT (EXTENSIBILITY BREAK): 3 přímé, plus řada případů s vysokým rizikem dead-end chování
+- D) DEAD-END EVENT (EXTENSIBILITY BREAK): 8
 
-Poznámka: Kategorie D je explicitně označena tam, kde je standardní flow "uneseno" bez re-expozice dalších hooků.
+These totals are derived from the classifications assigned to the 44 individual
+findings. Category D identifies cases in which a subscriber takes control of the
+standard flow without re-exposing downstream extension hooks.
 
 ---
 

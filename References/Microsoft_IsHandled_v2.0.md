@@ -36,7 +36,7 @@ depends_on:
   - References/SEI_Documenting_Behavior.md
   - References/Microsoft_Extensibility_Overview.md
 related_documents:
-  - Empirical/MS-CZF-IsHandled-Refactoring-Analysis-cs.md
+  - Empirical/MS_CZF_IsHandled_Refactoring_Analysis.md
 evidence:
   source_authority: Mixed Sources
   source_access: Mixed
