@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-EVENT-PILOT-001
   title: BCApps Czech Core Localization Event Pilot
   type: Empirical Study
-  version: 0.5.0
+  version: 0.6.0
   status: Active
 
 classification:
@@ -49,6 +49,7 @@ related_documents:
   - References/ATAM.md
   - Ideas/Microsoft_Event_Types_Research_Agenda.md
   - Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md
+  - Empirical/BCApps_CZ_Subscriber_Context_Technical_Validation.md
 
 study:
   method: Bounded Stratified Repository Code Audit Pilot
@@ -509,7 +510,8 @@ None. The pilot is designed to test candidate concepts, not to accept them.
 - [x] Reproduce and retain the event-subscriber population inventory.
 - [x] Record its discovery command, tool versions, checksum, and limitations.
 - [x] Freeze the dependency-aware source boundary and context record protocol.
-- [ ] Implement and technically validate the subscriber-context resolver.
+- [x] Implement and automatically validate the subscriber-context resolver.
+- [ ] Complete owner source review of the retained validation records.
 - [ ] Resolve publisher and runtime context for every retained CZL subscriber.
 - [ ] Complete coarse evidence-availability screening.
 - [ ] Mark prior-known status before bucket assignment.
@@ -542,6 +544,13 @@ None. The pilot is designed to test candidate concepts, not to accept them.
   `Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md`.
 
 ## 18. Revision History
+
+### 0.6.0 — 2026-07-19
+
+- Recorded the implemented resolver and passing automated technical checks.
+- Retained owner review as the remaining gate before population-wide context
+  generation.
+- Kept coarse screening and case selection unperformed.
 
 ### 0.5.0 — 2026-07-19
 
