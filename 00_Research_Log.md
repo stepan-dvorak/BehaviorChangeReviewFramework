@@ -9,7 +9,7 @@ document:
   id: RD-LOG-001
   title: Research Log
   type: Research Log
-  version: 0.9.0
+  version: 0.10.0
   status: Active
 
 classification:
@@ -388,6 +388,41 @@ before screening. Do not use a marker as an automatic selection rule.
 obtain reviewer prior-knowledge labels before assigning selection buckets. No
 case, trigger result, impact, or framework implication was recorded.
 
-**Status:** Mechanical discovery reproduced; coarse screening pending
+**Status:** Withdrawn on 2026-07-19; not valid for screening or selection
 
 See `Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md`.
+
+## 2026-07-19 — BCApps Czech Discovery-Scope Correction
+
+**Contradicting observation:** The application-wide marker inventory included
+mutable control parameters declared by CZL integration-event publishers. Such
+rows described publisher contracts or ordinary CZL implementation details, not
+CZL subscribers extending or deviating from behavior supplied by a dependency.
+
+**Interpretation:** The discovery procedure changed the unit of analysis from a
+CZL event subscriber to any selected lexical occurrence in CZL. Its publisher,
+marker, and multi-target datasets therefore cannot support the intended coarse
+screen or case selection, even though their raw occurrence counts were
+reproducible.
+
+**Corrective decision:** Retain the 448 CZL event-subscriber rows as the sole
+candidate population and retain the 782-file boundary inventory. Remove the
+invalid second extractor and its three outputs. Resolve publisher, raise-site,
+established-flow, binding, composition, and test context only in relation to a
+specific retained subscriber.
+
+**Dependency boundary:** Use the fixed CZL source, its explicit `EU 3-Party
+Trade Purchase` dependency, and the dependency closure represented by
+`application` version `29.0.0.0` at the same BCApps commit. Record the exact
+source application or platform-event classification for each resolution rather
+than assuming current packaging.
+
+**Deferred work:** Define and validate the dependency-aware subscriber-context
+resolver before coarse screening. Prior-knowledge labeling, `CZP` selection,
+trigger classification, checklist analysis, and framework implications remain
+unperformed.
+
+**Status:** Method corrected; subscriber-context resolution pending
+
+See `Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md` and
+`Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md`.

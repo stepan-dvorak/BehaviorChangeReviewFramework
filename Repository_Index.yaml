@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.8
+  version: 1.0.9
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -412,7 +412,7 @@ documents:
     authority: working
     status: active
     maturity: draft
-    version: 0.9.0
+    version: 0.10.0
     summary: Research backbone recording hypothesis evolution, rejected directions, open questions, and decisions.
     use_for: [research history, open questions, rejected ideas, current hypothesis state]
     depends_on: [00_Project_Charter.md]
@@ -666,8 +666,8 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.3.0
-    summary: Pre-registers a bounded 16-case event pilot and links completed syntactic subscriber, publisher, and marker discovery while preserving empty selection and case records.
+    version: 0.4.0
+    summary: Pre-registers a bounded 16-case subscriber-centered event pilot with a fixed population and dependency-aware context resolution pending.
     use_for: [Czech localization pilot, pre-registration, event subscriber case selection, behavioral change trigger testing, impact checklist testing]
     caution: Pre-registration only; the selection register is empty and no case findings or prevalence claims are available.
     depends_on: [02_Research_Methodology.md, Empirical/BCApps_Event_Pattern_Analysis.md, References/Microsoft_Event_Types.md]
@@ -680,9 +680,9 @@ documents:
     authority: evidentiary
     status: active
     maturity: draft
-    version: 0.2.0
-    summary: Records deterministic extraction, provenance, validation, limitations, and checksums for the fixed BCApps Czech subscriber, publisher, and discovery-marker inventories.
-    use_for: [Czech localization population discovery, event subscriber inventory, publisher inventory, marker inventory, pilot reproducibility, coarse-screen input]
+    version: 0.3.0
+    summary: Records the fixed BCApps Czech subscriber population and the withdrawal of an invalid application-wide publisher and marker inventory.
+    use_for: [Czech localization population discovery, event subscriber inventory, pilot reproducibility, subscriber-context planning]
     caution: Syntactic candidate inventory only; it contains no case selection, trigger result, defect finding, or prevalence evidence.
     depends_on: [02_Research_Methodology.md, Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md]
 
@@ -855,13 +855,6 @@ non_markdown_artifacts:
     summary: Deterministically extracts the fixed BCApps Czech pilot event-subscriber population into the retained CSV.
     use_for: [population reproduction, event subscriber discovery, empirical provenance]
 
-  - path: Scripts/Discover_BCApps_CZ_Event_Markers.py
-    category: tooling
-    authority: evidentiary
-    status: active
-    summary: Deterministically extracts event publishers, discovery markers, and bounded multi-subscriber targets for the fixed BCApps Czech pilot.
-    use_for: [publisher reproduction, marker discovery, composition-candidate discovery, empirical provenance]
-
   - path: Empirical/Data/BCApps_CZ_Core_Localization_Event_Population.csv
     category: empirical_study
     authority: evidentiary
@@ -875,27 +868,6 @@ non_markdown_artifacts:
     status: active
     summary: Complete deterministic 782-row AL source-file inventory for the fixed BCApps Czech pilot production boundary.
     use_for: [population-boundary verification, discovery completeness, reproduction checks]
-
-  - path: Empirical/Data/BCApps_CZ_Core_Localization_Event_Publishers.csv
-    category: empirical_study
-    authority: evidentiary
-    status: active
-    summary: Generated 289-row event publisher declaration inventory for the fixed BCApps Czech pilot boundary.
-    use_for: [publisher context, coarse-screen input, reproduction checks]
-
-  - path: Empirical/Data/BCApps_CZ_Core_Localization_Discovery_Markers.csv
-    category: empirical_study
-    authority: evidentiary
-    status: active
-    summary: Generated lexical inventory of binding, mutable-control, transaction, try-function, and obsolescence markers for the fixed BCApps Czech pilot.
-    use_for: [coarse-screen input, evidence-location support, reproduction checks]
-
-  - path: Empirical/Data/BCApps_CZ_Core_Localization_Multi_Subscriber_Targets.csv
-    category: empirical_study
-    authority: evidentiary
-    status: active
-    summary: Generated inventory of 21 publisher targets with two or more syntactic subscribers in the bounded Czech application.
-    use_for: [composition-candidate discovery, coarse-screen input, reproduction checks]
 
   - path: requirements-validation.txt
     category: tooling
