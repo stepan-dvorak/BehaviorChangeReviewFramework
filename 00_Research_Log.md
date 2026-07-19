@@ -9,7 +9,7 @@ document:
   id: RD-LOG-001
   title: Research Log
   type: Research Log
-  version: 0.13.0
+  version: 0.14.0
   status: Active
 
 classification:
@@ -525,3 +525,36 @@ analysis, and synthesis remain unperformed.
 **Status:** Population-wide static context generation complete
 
 See `Empirical/BCApps_CZ_Subscriber_Context_Manifest.md`.
+
+## 2026-07-19 — BCApps Czech Coarse Screening Pre-registration
+
+**Repository observation:** The complete context dataset supplies one
+schema-valid static record for every retained subscriber, but successful
+publisher or platform resolution does not establish that surrounding flow,
+manual participation, caller, or test evidence is sufficient for later case
+interpretation.
+
+**Interpretation:** Coarse screening must be an explicit evidence-availability
+operation rather than a filter based on interesting syntax. Combining readiness,
+prior knowledge, bucket assignment, or trigger prediction would conceal
+selection decisions and increase confirmation risk.
+
+**Method decision:** Preserve the context dataset as immutable input and create
+one separate screening record per `CZPOP` unit. Record eight bounded evidence
+dimensions, descriptive stratum indicators, targeted-search questions, and one
+of four statuses: `Not Screened`, `Ready for Prior-Knowledge Labeling`,
+`Targeted Context Required`, or `Unavailable for Selection`.
+
+**Workflow protection:** Keep `prior_known` as `Unknown`, `selection_status` as
+`Unselected`, and trigger and checklist status as `Not Evaluated`. Mechanical
+markers, event class, manual participation, composition, and missing tests are
+not automatic readiness, bucket, trigger, or quality decisions.
+
+**Deferred work:** Implement and technically validate the screen before
+population-wide execution. Prior-knowledge labeling, bucket assignment, `CZP`
+selection, trigger classification, checklist analysis, and synthesis remain
+unperformed.
+
+**Status:** Coarse-screen protocol fixed; execution pending
+
+See `Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md`.

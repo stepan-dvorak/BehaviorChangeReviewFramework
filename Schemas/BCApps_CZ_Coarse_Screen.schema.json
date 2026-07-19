@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/stepan-dvorak/BehaviorChangeReviewFramework/blob/main/Schemas/BCApps_CZ_Coarse_Screen.schema.json",
+  "title": "BCApps Czech Coarse Evidence-Availability Screen Record",
+  "description": "Contract for screening one retained CZL subscriber for evidence availability and descriptive strata without evaluating trigger, impact, quality, or selection.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "inventory_id",
+    "context_dataset_sha256",
+    "screening_protocol_version",
+    "screening_status",
+    "evidence_availability",
+    "stratum_indicators",
+    "targeted_search_questions",
+    "screening_observations",
+    "unavailability_reason",
+    "screened_by",
+    "screened_on",
+    "prior_known",
+    "selection_status",
+    "trigger_status",
+    "checklist_status"
+  ],
+  "properties": {
+    "inventory_id": {"type": "string", "pattern": "^CZPOP-[0-9]{4}$"},
+    "context_dataset_sha256": {"const": "2cbeb7a45b46f937f5749e73caad6167c5604ffa100ca4f084ca77ac5a2df4eb"},
+    "screening_protocol_version": {"const": "0.1.0"},
+    "screening_status": {
+      "enum": ["Not Screened", "Ready for Prior-Knowledge Labeling", "Targeted Context Required", "Unavailable for Selection"]
+    },
+    "evidence_availability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subscriber_identity", "subscriber_body", "publisher_or_platform", "raise_or_trigger", "established_flow", "runtime_participation", "composition_scope", "test_context"],
+      "properties": {
+        "subscriber_identity": {"enum": ["Available", "Missing", "Ambiguous"]},
+        "subscriber_body": {"enum": ["Available", "Missing", "Ambiguous"]},
+        "publisher_or_platform": {"enum": ["Available", "Missing", "Ambiguous", "Outside Boundary"]},
+        "raise_or_trigger": {"enum": ["Available", "Missing", "Ambiguous", "Outside Boundary"]},
+        "established_flow": {"enum": ["Available", "Targeted Search Required", "Ambiguous", "Outside Boundary"]},
+        "runtime_participation": {"enum": ["Static Automatic", "Binding Evidence Available", "Targeted Search Required", "Ambiguous", "Outside Boundary"]},
+        "composition_scope": {"enum": ["CZL Peers Recorded", "No CZL Peer Recorded"]},
+        "test_context": {"enum": ["Linked Evidence Available", "No Linked Evidence"]}
+      }
+    },
+    "stratum_indicators": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": ["Integration Event", "Database Trigger Event", "Page Trigger Event", "Subject Publisher", "Dependency Publisher", "Platform Trigger", "Static Subscriber", "Manual Subscriber", "Mutable Parameter Read", "Mutable Parameter Write", "Transaction Marker", "Error or Exit Marker", "Same-Target CZL Peers", "No Same-Target CZL Peer", "Linked Test Context", "No Linked Test Context"]
+      }
+    },
+    "targeted_search_questions": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "screening_observations": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "unavailability_reason": {"type": ["string", "null"]},
+    "screened_by": {"type": ["string", "null"]},
+    "screened_on": {"type": ["string", "null"], "format": "date"},
+    "prior_known": {"const": "Unknown"},
+    "selection_status": {"const": "Unselected"},
+    "trigger_status": {"const": "Not Evaluated"},
+    "checklist_status": {"const": "Not Evaluated"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"screening_status": {"const": "Ready for Prior-Knowledge Labeling"}}},
+      "then": {
+        "properties": {
+          "evidence_availability": {
+            "properties": {
+              "subscriber_identity": {"const": "Available"},
+              "subscriber_body": {"const": "Available"},
+              "publisher_or_platform": {"const": "Available"},
+              "raise_or_trigger": {"const": "Available"},
+              "established_flow": {"const": "Available"},
+              "runtime_participation": {"enum": ["Static Automatic", "Binding Evidence Available"]}
+            }
+          },
+          "unavailability_reason": {"type": "null"},
+          "screened_by": {"type": "string", "minLength": 1},
+          "screened_on": {"type": "string", "format": "date"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"screening_status": {"const": "Targeted Context Required"}}},
+      "then": {
+        "properties": {
+          "targeted_search_questions": {"minItems": 1},
+          "screened_by": {"type": "string", "minLength": 1},
+          "screened_on": {"type": "string", "format": "date"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"screening_status": {"const": "Unavailable for Selection"}}},
+      "then": {
+        "properties": {
+          "unavailability_reason": {"type": "string", "minLength": 1},
+          "screened_by": {"type": "string", "minLength": 1},
+          "screened_on": {"type": "string", "format": "date"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"screening_status": {"const": "Not Screened"}}},
+      "then": {
+        "properties": {
+          "screened_by": {"type": "null"},
+          "screened_on": {"type": "null"}
+        }
+      }
+    }
+  ]
+}
