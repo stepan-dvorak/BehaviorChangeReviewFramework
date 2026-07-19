@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-CONTEXT-MANIFEST-001
   title: BCApps Czech Subscriber Context Dataset Manifest
   type: Empirical Study Manifest
-  version: 0.1.0
+  version: 0.2.0
   status: Active
 
 classification:
@@ -43,6 +43,7 @@ depends_on:
 
 related_documents:
   - Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md
+  - Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md
   - 00_Research_Log.md
 
 study:
@@ -193,15 +194,22 @@ must treat empty fields as unavailable static evidence, not as proof of absence.
 
 ## 8. Next Research Step
 
-Population-wide context generation is complete. The next operation must be a
-separately specified coarse evidence-availability screen. It must consume these
-records without treating resolution status, event class, mechanical markers,
-or composition count as automatic trigger or case-selection decisions.
+Population-wide context generation is complete. The separate coarse
+evidence-availability protocol and record contract are now fixed, but screening
+has not begun. The future screen must consume these records without treating
+resolution status, event class, mechanical markers, or composition count as
+automatic trigger or case-selection decisions.
 
 Prior-knowledge labeling, case selection, trigger classification, checklist
 analysis, and synthesis remain unperformed.
 
 ## 9. Revision History
+
+### 0.2.0 — 2026-07-19
+
+- Linked the pre-registered coarse evidence-availability protocol and schema.
+- Preserved this dataset as immutable screening input.
+- Kept screening, prior-knowledge labeling, and case selection unperformed.
 
 ### 0.1.0 — 2026-07-19
 

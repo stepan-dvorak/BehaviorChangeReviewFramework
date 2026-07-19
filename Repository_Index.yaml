@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.12
+  version: 1.0.13
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -412,7 +412,7 @@ documents:
     authority: working
     status: active
     maturity: draft
-    version: 0.13.0
+    version: 0.14.0
     summary: Research backbone recording hypothesis evolution, rejected directions, open questions, and decisions.
     use_for: [research history, open questions, rejected ideas, current hypothesis state]
     depends_on: [00_Project_Charter.md]
@@ -666,8 +666,8 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.7.0
-    summary: Pre-registers a bounded 16-case subscriber-centered pilot; owner-reviewed static context resolution is complete and screening remains pending.
+    version: 0.8.0
+    summary: Pre-registers a bounded 16-case subscriber-centered pilot; static context and coarse-screen protocol are fixed while screening remains pending.
     use_for: [Czech localization pilot, pre-registration, event subscriber case selection, behavioral change trigger testing, impact checklist testing]
     caution: Pre-registration only; the selection register is empty and no case findings or prevalence claims are available.
     depends_on: [02_Research_Methodology.md, Empirical/BCApps_Event_Pattern_Analysis.md, References/Microsoft_Event_Types.md]
@@ -722,11 +722,25 @@ documents:
     authority: evidentiary
     status: active
     maturity: draft
-    version: 0.1.0
-    summary: Records reproducible generation, integrity checks, mechanical summaries, and limitations for all 448 retained static context records.
+    version: 0.2.0
+    summary: Records reproducible generation and limitations for all 448 static context records and links their pre-registered screening protocol.
     use_for: [context dataset provenance, integrity verification, mechanical context summary, coarse-screen input planning]
     caution: Resolution success and mechanical counts do not establish behavior change, impact, quality, defect status, or screening eligibility.
     depends_on: [Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md, Empirical/BCApps_CZ_Subscriber_Context_Technical_Validation.md, Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md]
+
+  - path: Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md
+    document_id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-PROTOCOL-001
+    title: BCApps Czech Coarse Evidence-Availability Screening Protocol
+    profile: empirical_study
+    category: empirical_study
+    authority: planned
+    status: active
+    maturity: draft
+    version: 0.1.0
+    summary: Pre-registers one-to-one evidence-readiness screening, descriptive strata, bounded targeted searches, validation, and workflow protections.
+    use_for: [coarse-screen design, evidence readiness, targeted context search, screening implementation, selection-bias control]
+    caution: Protocol only; no screening, prior-knowledge labeling, bucket assignment, case selection, trigger classification, or impact analysis has occurred.
+    depends_on: [02_Research_Methodology.md, Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md, Empirical/BCApps_CZ_Subscriber_Context_Manifest.md, Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md]
 
   - path: Empirical/MS_CZF_IsHandled_Refactoring_Analysis.md
     document_id: ES-MS-CZF-001
@@ -924,6 +938,13 @@ non_markdown_artifacts:
     status: active
     summary: JSON Schema contract for future one-record-per-subscriber context-resolution records.
     use_for: [context-record validation, resolver implementation, workflow-state protection]
+
+  - path: Schemas/BCApps_CZ_Coarse_Screen.schema.json
+    category: tooling
+    authority: working
+    status: active
+    summary: JSON Schema contract for future one-record-per-subscriber coarse evidence-availability screening records.
+    use_for: [coarse-screen validation, readiness-status enforcement, workflow-state protection]
 
   - path: Empirical/Data/BCApps_CZ_Core_Localization_Event_Population.csv
     category: empirical_study
