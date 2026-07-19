@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.10
+  version: 1.0.11
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -412,7 +412,7 @@ documents:
     authority: working
     status: active
     maturity: draft
-    version: 0.11.0
+    version: 0.12.0
     summary: Research backbone recording hypothesis evolution, rejected directions, open questions, and decisions.
     use_for: [research history, open questions, rejected ideas, current hypothesis state]
     depends_on: [00_Project_Charter.md]
@@ -666,8 +666,8 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.5.0
-    summary: Pre-registers a bounded 16-case subscriber-centered event pilot with fixed population, dependency boundary, and context protocol; resolution remains pending.
+    version: 0.6.0
+    summary: Pre-registers a bounded 16-case subscriber-centered pilot; automated context-resolver validation has passed and owner review remains pending.
     use_for: [Czech localization pilot, pre-registration, event subscriber case selection, behavioral change trigger testing, impact checklist testing]
     caution: Pre-registration only; the selection register is empty and no case findings or prevalence claims are available.
     depends_on: [02_Research_Methodology.md, Empirical/BCApps_Event_Pattern_Analysis.md, References/Microsoft_Event_Types.md]
@@ -680,8 +680,8 @@ documents:
     authority: evidentiary
     status: active
     maturity: draft
-    version: 0.4.0
-    summary: Records the fixed BCApps Czech subscriber population, the corrected unit of analysis, and its link to the context-resolution protocol.
+    version: 0.5.0
+    summary: Records the fixed BCApps Czech subscriber population and its link to the implemented, automatically validated context resolver.
     use_for: [Czech localization population discovery, event subscriber inventory, pilot reproducibility, subscriber-context planning]
     caution: Syntactic candidate inventory only; it contains no case selection, trigger result, defect finding, or prevalence evidence.
     depends_on: [02_Research_Methodology.md, Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md]
@@ -694,11 +694,25 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.1.0
-    summary: Freezes the five-application source search boundary, one-record-per-subscriber contract, resolution statuses, and technical validation rules.
+    version: 0.2.0
+    summary: Freezes the context contract and links the implemented resolver and passing automated validation while owner review remains pending.
     use_for: [dependency boundary, subscriber-context resolution, publisher lookup, runtime-context evidence, resolver implementation]
-    caution: Protocol only; resolver implementation, context records, coarse screening, and case selection are pending, and the boundary is not a complete packaged Application closure.
+    caution: Owner review and full context generation remain pending; no screening or selection has occurred, and the boundary is not a complete packaged Application closure.
     depends_on: [02_Research_Methodology.md, Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md, Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md, References/Microsoft_Event_Types.md]
+
+  - path: Empirical/BCApps_CZ_Subscriber_Context_Technical_Validation.md
+    document_id: ES-BCAPPS-CZ-CLP-CONTEXT-VALIDATION-001
+    title: BCApps Czech Subscriber Context Resolver Technical Validation
+    profile: empirical_study
+    category: empirical_study
+    authority: evidentiary
+    status: active
+    maturity: draft
+    version: 0.1.0
+    summary: Records passing automated resolver checks, dry-run diagnostics, and the retained three-record deterministic validation set.
+    use_for: [resolver validation, parser limitations, validation provenance, owner source review]
+    caution: Owner review remains pending; dry-run counts are parser diagnostics and not screening, impact, quality, or defect evidence.
+    depends_on: [Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md, Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md]
 
   - path: Empirical/MS_CZF_IsHandled_Refactoring_Analysis.md
     document_id: ES-MS-CZF-001
@@ -876,6 +890,20 @@ non_markdown_artifacts:
     summary: Validates fixed BCApps manifests and source roots and generates the five-application CZL context-resolution boundary.
     use_for: [dependency-boundary reproduction, manifest validation, empirical provenance]
 
+  - path: Scripts/Resolve_BCApps_CZ_Subscriber_Context.py
+    category: tooling
+    authority: evidentiary
+    status: active
+    summary: Resolves bounded static publisher, platform, subscriber-body, composition, and binding context for retained CZL subscribers.
+    use_for: [subscriber-context resolution, technical validation, context dataset generation]
+
+  - path: Scripts/Test_BCApps_CZ_Subscriber_Context_Resolver.py
+    category: tooling
+    authority: evidentiary
+    status: active
+    summary: Focused regression tests for explicit resolver failure statuses and deterministic validation selection.
+    use_for: [resolver regression testing, failure-path validation]
+
   - path: Schemas/BCApps_CZ_Subscriber_Context.schema.json
     category: tooling
     authority: working
@@ -896,6 +924,13 @@ non_markdown_artifacts:
     status: active
     summary: Generated five-row source search boundary for fixed-commit CZL subscriber-context resolution.
     use_for: [publisher-source search, dependency-boundary verification, reproduction checks]
+
+  - path: Empirical/Data/BCApps_CZ_Subscriber_Context_Technical_Validation.jsonl
+    category: empirical_study
+    authority: evidentiary
+    status: active
+    summary: Three schema-valid context records selected deterministically for automated resolver validation and pending owner review.
+    use_for: [technical validation, source comparison, resolver provenance]
 
   - path: Empirical/Data/BCApps_CZ_Core_Localization_Source_Files.csv
     category: empirical_study

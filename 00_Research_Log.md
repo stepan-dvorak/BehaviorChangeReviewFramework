@@ -9,7 +9,7 @@ document:
   id: RD-LOG-001
   title: Research Log
   type: Research Log
-  version: 0.11.0
+  version: 0.12.0
   status: Active
 
 classification:
@@ -456,3 +456,34 @@ selection, trigger classification, and checklist analysis remain unperformed.
 **Status:** Dependency boundary and resolution protocol fixed; execution pending
 
 See `Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md`.
+
+## 2026-07-19 — BCApps Czech Context Resolver Technical Validation
+
+**Repository observation:** The bounded resolver processed all 448 retained
+subscriber identities in a non-retained dry run. It returned 339 dependency
+source publishers, 4 subject-application publishers, and 105 recognized
+database or page trigger events. The deterministic validation rule retained
+the first Integration Event, Database Trigger Event, and Page Trigger Event
+records. No non-success status occurred in the fixed population dry run.
+
+**Interpretation:** These counts describe static resolver output, not evidence
+availability, runtime participation, behavioral change, impact, quality, or
+defects. Successful static resolution does not establish semantic completeness.
+
+**Method decision:** Retain only the three technical-validation records, with
+no `CZP` IDs. Use synthetic regression fixtures to exercise ambiguous and
+missing-source failure paths without adding them to the empirical population.
+Keep workflow values fixed as `Unknown`, `Not Screened`, and `Unselected`.
+
+**Validation:** Two executions produced byte-identical JSON Lines output; all
+three records passed the context schema; focused failure-path tests passed; and
+an AI-assisted source comparison found no mismatch in the retained records.
+
+**Deferred work:** Owner review of all three records remains required by the
+protocol. Full 448-record context generation, coarse screening,
+prior-knowledge labeling, `CZP` selection, and impact analysis remain
+unperformed.
+
+**Status:** Automated technical validation passed; owner review pending
+
+See `Empirical/BCApps_CZ_Subscriber_Context_Technical_Validation.md`.

@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-EVENT-POP-001
   title: BCApps Czech Core Localization Event Population Manifest
   type: Empirical Study
-  version: 0.4.0
+  version: 0.5.0
   status: Active
 
 classification:
@@ -44,6 +44,7 @@ related_documents:
   - Empirical/BCApps_Event_Pattern_Analysis.md
   - References/Microsoft_Event_Types.md
   - Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md
+  - Empirical/BCApps_CZ_Subscriber_Context_Technical_Validation.md
 
 study:
   method: Deterministic Static Source Inventory Extraction
@@ -188,12 +189,12 @@ The reproduced inventory establishes a stable candidate frame, but it is not
 sufficient by itself to begin the pre-registered coarse screen. It provides no
 evidence that any row satisfies the Behavioral Change Impact Review trigger.
 
-The dependency-aware source search boundary and one-record-per-subscriber
-context protocol are now fixed [P4]. The next step is to implement and
-technically validate the resolver, then create one context record for each of
-the 448 retained population rows. Coarse screening, prior-knowledge labeling,
-case IDs, and the full checklist remain untouched until context resolution is
-complete and its limitations are recorded.
+The dependency-aware source search boundary, one-record-per-subscriber context
+protocol, resolver, and automated technical validation are now retained [P4]
+[P5]. Owner source review of the three validation records remains the next
+gate. Only after that review may one context record be created for each of the
+448 retained population rows. Coarse screening, prior-knowledge labeling, case
+IDs, and the full checklist remain untouched.
 
 ## 9. Method Correction
 
@@ -223,8 +224,17 @@ subscriber population and its source boundary.
   <https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-application-app-file>.
 - **[P4]** Orden. "BCApps Czech Subscriber Context Resolution Protocol."
   `Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md`.
+- **[P5]** Orden. "BCApps Czech Subscriber Context Resolver Technical
+  Validation."
+  `Empirical/BCApps_CZ_Subscriber_Context_Technical_Validation.md`.
 
 ## 11. Revision History
+
+### 0.5.0 — 2026-07-19
+
+- Linked the implemented resolver and automated technical-validation record.
+- Retained owner review as the remaining gate before full context generation.
+- Kept coarse screening and case selection unperformed.
 
 ### 0.4.0 — 2026-07-19
 

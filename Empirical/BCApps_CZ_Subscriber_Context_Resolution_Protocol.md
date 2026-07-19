@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-CONTEXT-PROTOCOL-001
   title: BCApps Czech Subscriber Context Resolution Protocol
   type: Empirical Study Protocol
-  version: 0.1.0
+  version: 0.2.0
   status: Active
 
 classification:
@@ -44,13 +44,14 @@ depends_on:
 
 related_documents:
   - Empirical/BCApps_Event_Pattern_Analysis.md
+  - Empirical/BCApps_CZ_Subscriber_Context_Technical_Validation.md
   - 00_Research_Log.md
 
 study:
   method: Dependency-Aware Static Source Context Resolution Protocol
   subject: Retained CZL event-subscriber population at fixed BCApps commit
   data_access: Public GitHub Repository with Packaged Application Limitation
-  reproducibility: Boundary and Record Contract Fixed; Resolver Execution Pending
+  reproducibility: Automated Resolver Validation Passed; Owner Review Pending
 
 tags:
   - empirical-study
@@ -67,8 +68,9 @@ tags:
 ## 1. Status and Purpose
 
 This protocol freezes the inputs and outputs for the next stage of the Czech
-localization pilot. It does not execute resolution across the 448 retained
-subscribers and contains no coarse-screen result, prior-knowledge label, case
+localization pilot. The resolver and automated technical validation are now
+implemented, but owner review and full 448-record context generation remain
+pending. This document contains no coarse-screen result, prior-knowledge label, case
 selection, trigger classification, impact assessment, defect claim, or
 framework conclusion.
 
@@ -163,6 +165,9 @@ source is searched.
 | `Scripts/Discover_BCApps_CZ_Dependency_Boundary.py` | Validates the commit, manifests, versions, and fixed relationships and generates the boundary CSV |
 | `Empirical/Data/BCApps_CZ_Core_Localization_Dependency_Boundary.csv` | Five-row ordered physical source boundary |
 | `Schemas/BCApps_CZ_Subscriber_Context.schema.json` | Machine-readable contract for one future subscriber-context record |
+| `Scripts/Resolve_BCApps_CZ_Subscriber_Context.py` | Implements bounded dry-run and technical-validation resolution |
+| `Scripts/Test_BCApps_CZ_Subscriber_Context_Resolver.py` | Exercises explicit failure statuses and deterministic validation selection |
+| `Empirical/Data/BCApps_CZ_Subscriber_Context_Technical_Validation.jsonl` | Three retained records selected by the protocol rule |
 
 Reproduction command:
 
@@ -373,6 +378,15 @@ analysis, and synthesis remain explicitly deferred.
   <https://github.com/microsoft/BCApps/blob/397d01199c321e774edaf23a7290fee40f75c6a6/src/System%20Application/App/app.json>.
 
 ## 13. Revision History
+
+### 0.2.0 — 2026-07-19
+
+- Linked the bounded resolver, focused regression tests, and deterministic
+  three-record technical-validation output.
+- Recorded successful automated validation while retaining owner source review
+  as a mandatory gate before full execution.
+- Preserved full context generation, coarse screening, and case selection as
+  unperformed operations.
 
 ### 0.1.0 — 2026-07-19
 
