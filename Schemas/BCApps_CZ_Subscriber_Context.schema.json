@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/stepan-dvorak/BehaviorChangeReviewFramework/blob/main/Schemas/BCApps_CZ_Subscriber_Context.schema.json",
+  "title": "BCApps Czech Subscriber Context Record",
+  "description": "Field contract for dependency-aware context joined to one retained CZL event subscriber. It does not encode coarse-screen or case-analysis results.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "inventory_id",
+    "source_commit",
+    "subscriber_path",
+    "subscriber_procedure",
+    "target_event_class",
+    "publisher_resolution_status",
+    "context_resolution_status",
+    "prior_known",
+    "coarse_screen_status",
+    "selection_status"
+  ],
+  "properties": {
+    "inventory_id": {"type": "string", "pattern": "^CZPOP-[0-9]{4}$"},
+    "source_commit": {"const": "397d01199c321e774edaf23a7290fee40f75c6a6"},
+    "subscriber_path": {"type": "string", "minLength": 1},
+    "subscriber_codeunit": {"type": "string"},
+    "subscriber_procedure": {"type": "string", "minLength": 1},
+    "subscriber_body_start_line": {"type": ["integer", "null"], "minimum": 1},
+    "subscriber_body_end_line": {"type": ["integer", "null"], "minimum": 1},
+    "target_object_type": {"type": "string"},
+    "target_object": {"type": "string"},
+    "target_event": {"type": "string"},
+    "target_element": {"type": "string"},
+    "target_event_class": {
+      "enum": ["Integration Event", "Business Event", "Internal Event", "Database Trigger Event", "Page Trigger Event", "Platform Event", "Unknown"]
+    },
+    "publisher_resolution_status": {
+      "enum": ["Resolved Source Publisher", "Resolved Platform or Trigger Event", "Publisher in Subject Application", "Ambiguous Target", "Source Not in Boundary", "Raise Site Unresolved", "Parse Failure", "Not Attempted"]
+    },
+    "publisher_boundary_id": {"type": ["string", "null"], "pattern": "^CZDEP-[0-9]{4}$"},
+    "publisher_app_id": {"type": ["string", "null"]},
+    "publisher_app_name": {"type": ["string", "null"]},
+    "publisher_path": {"type": ["string", "null"]},
+    "publisher_procedure": {"type": ["string", "null"]},
+    "raise_site_paths": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "platform_semantics_reference": {"type": ["string", "null"]},
+    "subscriber_instance": {"type": "string"},
+    "binding_context_paths": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "direct_call_symbols": {"type": "array", "items": {"type": "string"}},
+    "control_parameter_reads": {"type": "array", "items": {"type": "string"}},
+    "control_parameter_writes": {"type": "array", "items": {"type": "string"}},
+    "transaction_markers": {"type": "array", "items": {"type": "string"}},
+    "error_markers": {"type": "array", "items": {"type": "string"}},
+    "composition_subscriber_ids": {"type": "array", "items": {"type": "string", "pattern": "^CZPOP-[0-9]{4}$"}, "uniqueItems": true},
+    "caller_context_paths": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "test_context_paths": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "unresolved_reason": {"type": ["string", "null"]},
+    "manual_correction": {"type": ["string", "null"]},
+    "context_resolution_status": {"enum": ["Resolved", "Partially Resolved", "Unresolved", "Not Attempted"]},
+    "prior_known": {"const": "Unknown"},
+    "coarse_screen_status": {"const": "Not Screened"},
+    "selection_status": {"const": "Unselected"}
+  }
+}

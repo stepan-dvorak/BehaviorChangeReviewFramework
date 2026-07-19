@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-EVENT-POP-001
   title: BCApps Czech Core Localization Event Population Manifest
   type: Empirical Study
-  version: 0.3.0
+  version: 0.4.0
   status: Active
 
 classification:
@@ -43,6 +43,7 @@ depends_on:
 related_documents:
   - Empirical/BCApps_Event_Pattern_Analysis.md
   - References/Microsoft_Event_Types.md
+  - Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md
 
 study:
   method: Deterministic Static Source Inventory Extraction
@@ -187,13 +188,12 @@ The reproduced inventory establishes a stable candidate frame, but it is not
 sufficient by itself to begin the pre-registered coarse screen. It provides no
 evidence that any row satisfies the Behavioral Change Impact Review trigger.
 
-The next step is dependency-aware resolution of each retained CZL subscriber
-to its publisher contract, raise site or platform-trigger semantics, and
-relevant runtime context. The resolution scope must include the fixed CZL
-source, its explicit `EU 3-Party Trade Purchase` dependency, and the application
-dependency closure available at the same BCApps commit [P2] [P3]. Coarse
-screening, prior-knowledge labeling, case IDs, and the full checklist remain
-untouched until this context is retained and its limitations are recorded.
+The dependency-aware source search boundary and one-record-per-subscriber
+context protocol are now fixed [P4]. The next step is to implement and
+technically validate the resolver, then create one context record for each of
+the 448 retained population rows. Coarse screening, prior-knowledge labeling,
+case IDs, and the full checklist remain untouched until context resolution is
+complete and its limitations are recorded.
 
 ## 9. Method Correction
 
@@ -221,8 +221,16 @@ subscriber population and its source boundary.
   <https://github.com/microsoft/BCApps/blob/397d01199c321e774edaf23a7290fee40f75c6a6/src/Apps/CZ/CoreLocalizationPack/app/app.json>.
 - **[P3]** Microsoft. "The Microsoft_Application.app file." Microsoft Learn.
   <https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-application-app-file>.
+- **[P4]** Orden. "BCApps Czech Subscriber Context Resolution Protocol."
+  `Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md`.
 
 ## 11. Revision History
+
+### 0.4.0 — 2026-07-19
+
+- Linked the fixed dependency boundary and subscriber-context record protocol.
+- Deferred resolver implementation, technical validation, population-wide
+  context resolution, coarse screening, and case selection.
 
 ### 0.3.0 — 2026-07-19
 

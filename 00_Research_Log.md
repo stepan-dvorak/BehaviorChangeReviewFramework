@@ -9,7 +9,7 @@ document:
   id: RD-LOG-001
   title: Research Log
   type: Research Log
-  version: 0.10.0
+  version: 0.11.0
   status: Active
 
 classification:
@@ -426,3 +426,33 @@ unperformed.
 
 See `Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md` and
 `Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md`.
+
+## 2026-07-19 — BCApps Czech Dependency Boundary and Context Protocol
+
+**Source claim:** Microsoft documents `application` as a dependency on the
+Application app and distinguishes application, business, integration, internal,
+trigger, and platform events. The fixed BCApps manifests expose the CZL subject,
+its EU 3-Party Trade Purchase dependency, Base Application, Business Foundation,
+and System Application source at the selected commit.
+
+**Repository observation:** The retained population has 448 subscriber rows,
+but it does not identify publisher declarations, raise sites, binding mode,
+subscriber-local effects, or runtime participation for those rows.
+
+**Interpretation:** The five applications form a reproducible source search
+boundary for this pilot. They must not be represented as a verified copy of the
+complete distributed Application package or as a complete runtime closure.
+
+**Method decision:** Require exactly one context record per retained `CZPOP`
+row. Resolve target event class, publisher source, raise-site evidence,
+subscriber-local mechanics, and bounded runtime/composition evidence while
+preserving explicit unresolved states and source locations. Freeze workflow
+fields as `Unknown`, `Not Screened`, and `Unselected`.
+
+**Deferred work:** Implement and technically validate the resolver, then create
+448 context records. Coarse screening, prior-knowledge labeling, `CZP` case
+selection, trigger classification, and checklist analysis remain unperformed.
+
+**Status:** Dependency boundary and resolution protocol fixed; execution pending
+
+See `Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md`.
