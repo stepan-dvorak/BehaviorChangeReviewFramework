@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-EVENT-PILOT-001
   title: BCApps Czech Core Localization Event Pilot
   type: Empirical Study
-  version: 0.3.0
+  version: 0.4.0
   status: Active
 
 classification:
@@ -53,7 +53,7 @@ study:
   method: Bounded Stratified Repository Code Audit Pilot
   subject: Microsoft Core Localization Pack for Czech application
   data_access: Public GitHub Repository at Fixed Commit
-  reproducibility: Baseline, Syntactic Discovery, and Selection Protocol Fixed
+  reproducibility: Baseline, Subscriber Population, and Selection Protocol Fixed
 
 tags:
   - empirical-study
@@ -130,6 +130,14 @@ The baseline `app.json` declares [C1]:
 - target `Cloud`; and
 - application and platform version `29.0.0.0`.
 
+The manifest also declares one explicit application dependency, `EU 3-Party
+Trade Purchase` version `29.0.0.0`, and `application` version `29.0.0.0` [C1].
+Microsoft documents that the `application` property references the Application
+app, which logically encapsulates the apps that make up the solution and
+resolves their dependencies implicitly [C5]. The exact dependency closure used
+for publisher resolution must be recorded from the fixed BCApps commit rather
+than inferred from current product packaging.
+
 This identifies the empirical subject. It does not establish the quality,
 intent, or representativeness of any event implementation.
 
@@ -143,21 +151,16 @@ found [C4]:
 | AL source files | 782 |
 | `[EventSubscriber(` attribute occurrences | 448 |
 | Source files containing at least one subscriber | 116 |
-| `[IntegrationEvent(` attribute occurrences | 289 |
-| `[BusinessEvent(` attribute occurrences | 0 |
-| `[InternalEvent(` attribute occurrences | 0 |
-| Files declaring `EventSubscriberInstance = Manual` | 8 |
-| `BindSubscription(` call occurrences | 9 |
 
 The 448 subscriber rows and their source identities are retained in the
 population CSV. These are syntactic inventory observations, not semantic case
 counts. The extractor is not an AL compiler, does not evaluate conditional
 compilation, and does not establish runtime participation or subscriber effect.
 The manifest records the commands, versions, checksums, validation, and
-limitations. Separate retained inventories now cover publisher declarations,
-binding calls, mutable-control parameters, transaction and obsolescence
-markers, and bounded subscriber-target multiplicity. These markers remain
-unclassified.
+limitations. A later application-wide marker inventory was withdrawn because
+it mixed CZL publishers and ordinary implementation markers with the CZL
+subscriber population. Dependency-aware, per-subscriber context resolution is
+therefore still pending [C4].
 
 ## 5. Scope
 
@@ -241,25 +244,38 @@ Before selection, retain or record:
 - the fixed commit identifier;
 - the complete ordered list of AL files;
 - every detected subscriber attribute with source path and symbol;
-- manual subscriber declarations and binding calls;
-- event publisher occurrences in the application;
 - the commands and tool versions used; and
 - parse failures, conditional-compilation limitations, and manual corrections.
 
-### 8.2 Minimum discovery searches
+Publisher and runtime-context discovery must be joined to a retained CZL
+subscriber. Application-wide publisher declarations or control markers are not
+candidate cases and must not be used as independent screening inputs.
 
-The discovery procedure must cover at least:
+For each subscriber taken forward to screening, resolve or explicitly mark as
+unresolved:
 
-- `[EventSubscriber]`;
-- `[IntegrationEvent]`, `[BusinessEvent]`, and `[InternalEvent]`;
-- database and page trigger subscribers;
-- `EventSubscriberInstance`;
-- `BindSubscription` and `UnbindSubscription`;
-- `IsHandled`, `Handled`, `Skip`, mutable record parameters, and other mutable
-  control values;
-- `Commit`, `TryFunction`, and isolated-event context where present;
-- obsolete-state directives; and
-- subscriber targets with more than one subscriber in the inspected scope.
+- the target publisher application or platform event class;
+- the publisher declaration and raise site where source exists;
+- the surrounding established flow;
+- the subscriber body boundary, direct calls, and mechanical control writes;
+- manual binding or activation context for that subscriber; and
+- relevant dependency, caller, composition, and test context.
+
+### 8.2 Minimum subscriber-context searches
+
+When resolving a retained subscriber, the procedure must cover at least:
+
+- the subscriber declaration, body, parameters, and direct calls;
+- its target integration, business, internal, database, or page event;
+- the publisher declaration, raise site, and surrounding default flow where
+  source exists;
+- `EventSubscriberInstance`, `BindSubscription`, and `UnbindSubscription`
+  context applicable to that subscriber;
+- writes or reads involving `IsHandled`, `Handled`, `Skip`, mutable records,
+  or other control values in that subscriber;
+- `Commit`, `TryFunction`, isolated-event, and obsolete-state context relevant
+  to that subscriber and publisher; and
+- other subscribers to the same target in the available dependency scope.
 
 Discovery markers generate candidates. They do not establish trigger results,
 change types, impacts, or defects.
@@ -485,7 +501,7 @@ None. The pilot is designed to test candidate concepts, not to accept them.
 
 - [x] Reproduce and retain the event-subscriber population inventory.
 - [x] Record its discovery command, tool versions, checksum, and limitations.
-- [x] Retain publisher, binding, and other required discovery-marker inventories.
+- [ ] Resolve dependency-aware publisher and runtime context per CZL subscriber.
 - [ ] Complete coarse evidence-availability screening.
 - [ ] Mark prior-known status before bucket assignment.
 - [ ] Fill and freeze the 16-case selection register.
@@ -511,8 +527,18 @@ None. The pilot is designed to test candidate concepts, not to accept them.
   <https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-subscribing-to-events>.
 - **[C4]** Orden. "BCApps Czech Core Localization Event Population Manifest."
   `Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md`.
+- **[C5]** Microsoft. "The Microsoft_Application.app file." Microsoft Learn.
+  <https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-application-app-file>.
 
 ## 18. Revision History
+
+### 0.4.0 — 2026-07-19
+
+- Restored the CZL event subscriber as the sole candidate-population unit.
+- Withdrew application-wide publisher and marker discovery as a screening
+  input because it mixed publisher design with subscriber behavior.
+- Required dependency-aware publisher, raise-site, established-flow, and
+  runtime-context resolution per subscriber before coarse screening.
 
 ### 0.3.0 — 2026-07-18
 
@@ -520,6 +546,8 @@ None. The pilot is designed to test candidate concepts, not to accept them.
   inventories required before coarse screening.
 - Preserved marker interpretations, prior-knowledge fields, case selection,
   trigger classifications, and checklist rows as unperformed.
+- **Withdrawn on 2026-07-19:** the retained marker inventories were not valid
+  inputs for this subscriber-centered pilot.
 
 ### 0.2.0 — 2026-07-18
 
