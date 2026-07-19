@@ -9,7 +9,7 @@ document:
   id: RD-LOG-001
   title: Research Log
   type: Research Log
-  version: 0.14.0
+  version: 0.15.0
   status: Active
 
 classification:
@@ -558,3 +558,34 @@ unperformed.
 **Status:** Coarse-screen protocol fixed; execution pending
 
 See `Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md`.
+
+## 2026-07-19 — BCApps Czech Coarse-Screen Worksheet Preparation
+
+**Repository observation:** A deterministic generator prepares one schema-valid
+coarse-screen worksheet for each of the 448 fixed subscriber-context records.
+It verifies the context checksum and identities, derives only mechanical
+strata, and preserves every record as `Not Screened` with null reviewer and
+date fields.
+
+**Technical validation:** Two executions produced byte-identical output. All
+448 full-template records and the six retained validation records passed the
+screen schema, exact identity and order checks, context referential-integrity
+checks, and protected-workflow assertions. Focused regression tests passed.
+
+**Method decision:** Retain six validation records selected by the fixed
+mechanical coverage rules. Do not retain the generated 448-record template as
+a screening result because no human evidence-availability decision has been
+made.
+
+**Limitation:** Automated preparation cannot decide whether established-flow
+evidence is sufficient. The prepared records therefore contain bounded review
+questions and remain `Not Screened` pending owner source review.
+
+**Deferred work:** Owner review of the six validation records is required
+before population-wide coarse screening. Prior-knowledge labeling, bucket
+assignment, `CZP` selection, trigger classification, checklist analysis, and
+synthesis remain unperformed.
+
+**Status:** Automated worksheet validation passed; owner review pending
+
+See `Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md`.

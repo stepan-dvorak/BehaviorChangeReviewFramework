@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-PROTOCOL-001
   title: BCApps Czech Coarse Evidence-Availability Screening Protocol
   type: Empirical Study Protocol
-  version: 0.1.0
+  version: 0.2.0
   status: Active
 
 classification:
@@ -44,13 +44,14 @@ depends_on:
 
 related_documents:
   - Empirical/BCApps_Event_Pattern_Analysis.md
+  - Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md
   - 00_Research_Log.md
 
 study:
   method: Pre-registered Coarse Evidence-Availability Screening
   subject: Complete 448-record CZL subscriber-context dataset
   data_access: Public GitHub Repository at Fixed Commit
-  reproducibility: Record Contract and Decision Rules Fixed; Execution Pending
+  reproducibility: Automated Worksheet Validation Passed; Owner Review Pending
 
 tags:
   - empirical-study
@@ -358,9 +359,11 @@ unavailable counts without treating them as behavior or defect prevalence.
 
 ## 14. Deferred Work
 
-The screening implementation, technical validation, and population-wide
-execution remain pending. After screening is complete, prior-knowledge labels
-must be supplied in a separate owner-controlled step before bucket assignment.
+The worksheet-preparation implementation and automated technical validation
+are complete. Owner review of the six retained `Not Screened` validation
+records remains pending and is the final gate before population-wide coarse
+screening may begin. After screening is complete, prior-knowledge labels must
+be supplied in a separate owner-controlled step before bucket assignment.
 
 Case selection, trigger classification, checklist analysis, and framework
 synthesis remain explicitly deferred.
@@ -375,8 +378,19 @@ synthesis remain explicitly deferred.
 - **[S4]** Orden. "BCApps Czech Subscriber Context Resolution Protocol."
   `Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md`.
 - **[S5]** Orden. "Reasoning Standard." `Reasoning_Standard.md`.
+- **[S6]** Orden. "BCApps Czech Coarse Screen Preparation Technical
+  Validation." `Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md`.
 
 ## 16. Revision History
+
+### 0.2.0 — 2026-07-19
+
+- Implemented deterministic preparation of protected `Not Screened`
+  worksheets for all 448 context records.
+- Retained six validation records covering the pre-registered mechanical
+  strata and passed automated schema, determinism, integrity, and workflow
+  protection checks.
+- Kept owner review, coarse-screen decisions, and all later operations pending.
 
 ### 0.1.0 — 2026-07-19
 

@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-EVENT-PILOT-001
   title: BCApps Czech Core Localization Event Pilot
   type: Empirical Study
-  version: 0.8.0
+  version: 0.9.0
   status: Active
 
 classification:
@@ -52,6 +52,7 @@ related_documents:
   - Empirical/BCApps_CZ_Subscriber_Context_Technical_Validation.md
   - Empirical/BCApps_CZ_Subscriber_Context_Manifest.md
   - Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md
+  - Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md
 
 study:
   method: Bounded Stratified Repository Code Audit Pilot
@@ -517,6 +518,8 @@ None. The pilot is designed to test candidate concepts, not to accept them.
 - [x] Resolve publisher and static runtime context for every retained CZL
       subscriber.
 - [x] Freeze the coarse evidence-availability screening protocol and schema.
+- [x] Implement and automatically validate coarse-screen worksheet preparation.
+- [ ] Complete owner review of the coarse-screen validation records.
 - [ ] Complete coarse evidence-availability screening.
 - [ ] Mark prior-known status before bucket assignment.
 - [ ] Fill and freeze the 16-case selection register.
@@ -548,6 +551,13 @@ None. The pilot is designed to test candidate concepts, not to accept them.
   `Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md`.
 
 ## 18. Revision History
+
+### 0.9.0 — 2026-07-19
+
+- Implemented and automatically validated deterministic coarse-screen
+  worksheet preparation.
+- Retained six protected `Not Screened` validation records for owner review.
+- Kept coarse screening, prior-knowledge labeling, and case selection pending.
 
 ### 0.8.0 — 2026-07-19
 
