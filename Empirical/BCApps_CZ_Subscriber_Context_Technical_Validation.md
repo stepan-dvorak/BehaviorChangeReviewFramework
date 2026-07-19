@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-CONTEXT-VALIDATION-001
   title: BCApps Czech Subscriber Context Resolver Technical Validation
   type: Empirical Study Validation Record
-  version: 0.1.0
+  version: 0.2.0
   status: Active
 
 classification:
@@ -25,7 +25,7 @@ purpose: >
   coarse screening, and case selection as separate pending steps.
 
 quality:
-  review: Self Reviewed
+  review: Reviewed
   evidence: Partial
   editorial: Reviewed
 
@@ -42,13 +42,14 @@ depends_on:
 
 related_documents:
   - Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md
+  - Empirical/BCApps_CZ_Subscriber_Context_Manifest.md
   - 00_Research_Log.md
 
 study:
   method: Deterministic Static Resolver Technical Validation
   subject: Fixed CZL subscriber population and five-application source boundary
   data_access: Public GitHub Repository at Fixed Commit
-  reproducibility: Automated Checks Passed; Owner Source Review Pending
+  reproducibility: Automated Checks Passed; Owner Source Review Accepted
 
 tags:
   - empirical-study
@@ -63,9 +64,10 @@ tags:
 ## 1. Status and Scope
 
 The bounded static resolver is implemented and its automated technical checks
-pass. The protocol-required owner review of each retained validation record is
-pending. Full 448-record context generation is therefore not yet authorized by
-the protocol's acceptance criteria.
+pass. The repository owner reviewed and accepted each retained validation
+record without correction and authorized full 448-record context generation.
+The authorized generation is recorded separately in
+`Empirical/BCApps_CZ_Subscriber_Context_Manifest.md`.
 
 This validation performs no coarse screening, prior-knowledge labeling, case
 selection, trigger classification, impact analysis, defect assessment, or
@@ -131,10 +133,11 @@ The dry run returned three classes and no non-success status:
 The retained JSON Lines file contains only these three technical-validation
 records. They have no `CZP` IDs and are not selected pilot cases.
 
-An AI-assisted comparison confirmed that their subscriber identities, body
-boundaries, publisher or platform classification, mechanical body markers, and
-unchanged workflow fields correspond to the fixed source. This comparison does
-not satisfy the protocol's separate owner-review requirement.
+The repository owner confirmed that subscriber identity, body boundary,
+publisher or platform classification, publisher declaration or applicable
+absence, raise sites or applicable absence, mechanical markers, composition
+subscribers, and protected workflow fields were correct for all three records.
+No correction or additional note was recorded.
 
 ## 5. Failure-Path Tests
 
@@ -162,7 +165,7 @@ python Scripts\Resolve_BCApps_CZ_Subscriber_Context.py --bcapps-root C:\Research
 Checksums:
 
 - resolver:
-  `d76ac1bf620b068ea5c40efddc9e0267c275889877b8230a251c8f3f9ecfdeee`;
+  `234a0cf28aa7559f9515afe79f85893b9f787451935e9cc5d91f51b659633e23`;
 - regression tests:
   `897c5adb949d3fe706b0b002e40d6b0e5fce7092ff12e4b18f135db68777db1d`;
 - retained validation JSON Lines:
@@ -193,15 +196,19 @@ output. All three records validate against
 
 ## 8. Acceptance Status and Next Step
 
-Automated implementation validation is complete. The protocol's full-execution
-gate remains closed until the repository owner compares all three retained
-records with the fixed source and records acceptance or corrections.
-
-After that review, the next operation is generation and retention of exactly
-one context record for each of the 448 `CZPOP` rows. Coarse screening and case
-selection remain later, separate operations.
+Automated implementation validation and owner source review are complete. The
+owner authorized generation and retention of exactly one context record for
+each of the 448 `CZPOP` rows. That operation completed without changing any
+screening or selection field. Coarse screening and case selection remain later,
+separate operations.
 
 ## 9. Revision History
+
+### 0.2.0 — 2026-07-19
+
+- Recorded owner acceptance of all three validation records without correction.
+- Recorded explicit authorization for population-wide context generation.
+- Linked the completed 448-record context dataset manifest.
 
 ### 0.1.0 — 2026-07-19
 

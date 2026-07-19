@@ -9,7 +9,7 @@ document:
   id: RD-LOG-001
   title: Research Log
   type: Research Log
-  version: 0.12.0
+  version: 0.13.0
   status: Active
 
 classification:
@@ -487,3 +487,41 @@ unperformed.
 **Status:** Automated technical validation passed; owner review pending
 
 See `Empirical/BCApps_CZ_Subscriber_Context_Technical_Validation.md`.
+
+## 2026-07-19 — BCApps Czech Population-Wide Context Generation
+
+**Owner review:** The repository owner reviewed `CZPOP-0001`, `CZPOP-0009`,
+and `CZPOP-0386`; accepted identity, body boundary, publisher or platform
+classification, declaration and raise-site applicability, mechanical markers,
+composition subscribers, and protected workflow fields for all three; recorded
+no correction; and authorized full 448-record generation.
+
+**Repository observation:** Two full executions produced the same 448-record
+JSON Lines output byte for byte. All records validate against the context
+schema, match the population IDs and order exactly, reference only retained
+composition IDs, and retain `Unknown`, `Not Screened`, and `Unselected`.
+
+**Mechanical description:** The resolver classified 343 Integration Event
+records, 100 Database Trigger Event records, and 5 Page Trigger Event records.
+Publisher resolution returned 339 dependency source publishers, 4 subject
+publishers, and 105 platform or trigger events. Forty-three records have at
+least one same-target CZL composition subscriber.
+
+**Limitation:** Of 23 records in manual subscriber codeunits, 17 contain a
+bounded lexical binding path and 6 do not. An empty path array is unresolved
+static context, not evidence that runtime binding is absent. Caller, test,
+reachability, ordering, configuration, license, and permission context also
+remain subject to the protocol's static-analysis limitations.
+
+**Interpretation:** The context dataset is a reproducible mechanical input for
+a separately defined coarse evidence-availability screen. Resolution success
+does not establish behavioral change, architectural significance, quality, or
+defect status.
+
+**Deferred work:** Define the coarse-screen operation before executing it.
+Prior-knowledge labeling, `CZP` selection, trigger classification, checklist
+analysis, and synthesis remain unperformed.
+
+**Status:** Population-wide static context generation complete
+
+See `Empirical/BCApps_CZ_Subscriber_Context_Manifest.md`.

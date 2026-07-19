@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-CONTEXT-PROTOCOL-001
   title: BCApps Czech Subscriber Context Resolution Protocol
   type: Empirical Study Protocol
-  version: 0.2.0
+  version: 0.3.0
   status: Active
 
 classification:
@@ -45,13 +45,14 @@ depends_on:
 related_documents:
   - Empirical/BCApps_Event_Pattern_Analysis.md
   - Empirical/BCApps_CZ_Subscriber_Context_Technical_Validation.md
+  - Empirical/BCApps_CZ_Subscriber_Context_Manifest.md
   - 00_Research_Log.md
 
 study:
   method: Dependency-Aware Static Source Context Resolution Protocol
   subject: Retained CZL event-subscriber population at fixed BCApps commit
   data_access: Public GitHub Repository with Packaged Application Limitation
-  reproducibility: Automated Resolver Validation Passed; Owner Review Pending
+  reproducibility: Full Static Context Dataset Reproduced and Retained
 
 tags:
   - empirical-study
@@ -69,8 +70,8 @@ tags:
 
 This protocol freezes the inputs and outputs for the next stage of the Czech
 localization pilot. The resolver and automated technical validation are now
-implemented, but owner review and full 448-record context generation remain
-pending. This document contains no coarse-screen result, prior-knowledge label, case
+implemented, owner review is accepted, and full 448-record context generation
+is complete. This document contains no coarse-screen result, prior-knowledge label, case
 selection, trigger classification, impact assessment, defect claim, or
 framework conclusion.
 
@@ -168,6 +169,8 @@ source is searched.
 | `Scripts/Resolve_BCApps_CZ_Subscriber_Context.py` | Implements bounded dry-run and technical-validation resolution |
 | `Scripts/Test_BCApps_CZ_Subscriber_Context_Resolver.py` | Exercises explicit failure statuses and deterministic validation selection |
 | `Empirical/Data/BCApps_CZ_Subscriber_Context_Technical_Validation.jsonl` | Three retained records selected by the protocol rule |
+| `Empirical/Data/BCApps_CZ_Subscriber_Context.jsonl` | Complete one-record-per-subscriber static context dataset |
+| `Empirical/BCApps_CZ_Subscriber_Context_Manifest.md` | Generation, integrity, summary, and limitation record |
 
 Reproduction command:
 
@@ -311,6 +314,9 @@ At least one human review must compare each technical validation record with
 the fixed source before full execution. Validation success establishes parser
 fitness for this bounded task, not semantic correctness of later analysis.
 
+The repository owner completed this review for all three retained records,
+accepted them without correction, and authorized population-wide generation.
+
 ## 9. Acceptance Criteria for Resolver Execution
 
 Full execution may begin only when:
@@ -326,6 +332,10 @@ Full execution may begin only when:
 
 Coarse screening remains a separate later operation. Resolution status is not
 a screening result and must not be used as an automatic selection bucket.
+
+All full-execution criteria were satisfied for the retained dataset. It contains
+448 schema-valid records in exact population order and preserves every protected
+workflow value.
 
 ## 10. Threats to Validity
 
@@ -349,12 +359,10 @@ No candidate framework implication is introduced. This protocol is study
 infrastructure created to prevent publisher or marker evidence from replacing
 the subscriber-centered unit of analysis.
 
-Deferred work is limited to:
-
-1. implement the resolver against this frozen contract;
-2. execute and human-review the technical validation set;
-3. generate one context record for each of the 448 retained subscribers; and
-4. only then design the separate coarse-screen operation.
+Resolver implementation, technical validation, owner review, and generation of
+one context record for each retained subscriber are complete. Deferred work is
+now limited to defining the separate coarse-screen operation before executing
+it.
 
 Prior-knowledge labeling, case selection, trigger classification, checklist
 analysis, and synthesis remain explicitly deferred.
@@ -378,6 +386,14 @@ analysis, and synthesis remain explicitly deferred.
   <https://github.com/microsoft/BCApps/blob/397d01199c321e774edaf23a7290fee40f75c6a6/src/System%20Application/App/app.json>.
 
 ## 13. Revision History
+
+### 0.3.0 — 2026-07-19
+
+- Recorded owner acceptance of all technical-validation records and explicit
+  authorization for full generation.
+- Linked the reproducible, schema-valid 448-record context dataset and manifest.
+- Preserved coarse screening, prior-knowledge labeling, case selection, and
+  impact analysis as unperformed operations.
 
 ### 0.2.0 — 2026-07-19
 
