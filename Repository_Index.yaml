@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.9
+  version: 1.0.10
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -412,7 +412,7 @@ documents:
     authority: working
     status: active
     maturity: draft
-    version: 0.10.0
+    version: 0.11.0
     summary: Research backbone recording hypothesis evolution, rejected directions, open questions, and decisions.
     use_for: [research history, open questions, rejected ideas, current hypothesis state]
     depends_on: [00_Project_Charter.md]
@@ -666,8 +666,8 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.4.0
-    summary: Pre-registers a bounded 16-case subscriber-centered event pilot with a fixed population and dependency-aware context resolution pending.
+    version: 0.5.0
+    summary: Pre-registers a bounded 16-case subscriber-centered event pilot with fixed population, dependency boundary, and context protocol; resolution remains pending.
     use_for: [Czech localization pilot, pre-registration, event subscriber case selection, behavioral change trigger testing, impact checklist testing]
     caution: Pre-registration only; the selection register is empty and no case findings or prevalence claims are available.
     depends_on: [02_Research_Methodology.md, Empirical/BCApps_Event_Pattern_Analysis.md, References/Microsoft_Event_Types.md]
@@ -680,11 +680,25 @@ documents:
     authority: evidentiary
     status: active
     maturity: draft
-    version: 0.3.0
-    summary: Records the fixed BCApps Czech subscriber population and the withdrawal of an invalid application-wide publisher and marker inventory.
+    version: 0.4.0
+    summary: Records the fixed BCApps Czech subscriber population, the corrected unit of analysis, and its link to the context-resolution protocol.
     use_for: [Czech localization population discovery, event subscriber inventory, pilot reproducibility, subscriber-context planning]
     caution: Syntactic candidate inventory only; it contains no case selection, trigger result, defect finding, or prevalence evidence.
     depends_on: [02_Research_Methodology.md, Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md]
+
+  - path: Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md
+    document_id: ES-BCAPPS-CZ-CLP-CONTEXT-PROTOCOL-001
+    title: BCApps Czech Subscriber Context Resolution Protocol
+    profile: empirical_study
+    category: empirical_study
+    authority: planned
+    status: active
+    maturity: draft
+    version: 0.1.0
+    summary: Freezes the five-application source search boundary, one-record-per-subscriber contract, resolution statuses, and technical validation rules.
+    use_for: [dependency boundary, subscriber-context resolution, publisher lookup, runtime-context evidence, resolver implementation]
+    caution: Protocol only; resolver implementation, context records, coarse screening, and case selection are pending, and the boundary is not a complete packaged Application closure.
+    depends_on: [02_Research_Methodology.md, Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md, Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md, References/Microsoft_Event_Types.md]
 
   - path: Empirical/MS_CZF_IsHandled_Refactoring_Analysis.md
     document_id: ES-MS-CZF-001
@@ -855,12 +869,33 @@ non_markdown_artifacts:
     summary: Deterministically extracts the fixed BCApps Czech pilot event-subscriber population into the retained CSV.
     use_for: [population reproduction, event subscriber discovery, empirical provenance]
 
+  - path: Scripts/Discover_BCApps_CZ_Dependency_Boundary.py
+    category: tooling
+    authority: evidentiary
+    status: active
+    summary: Validates fixed BCApps manifests and source roots and generates the five-application CZL context-resolution boundary.
+    use_for: [dependency-boundary reproduction, manifest validation, empirical provenance]
+
+  - path: Schemas/BCApps_CZ_Subscriber_Context.schema.json
+    category: tooling
+    authority: working
+    status: active
+    summary: JSON Schema contract for future one-record-per-subscriber context-resolution records.
+    use_for: [context-record validation, resolver implementation, workflow-state protection]
+
   - path: Empirical/Data/BCApps_CZ_Core_Localization_Event_Population.csv
     category: empirical_study
     authority: evidentiary
     status: active
     summary: Generated 448-row syntactic event-subscriber population for the fixed BCApps Czech Core Localization pilot baseline.
     use_for: [coarse-screen input, pilot candidate frame, reproduction checks]
+
+  - path: Empirical/Data/BCApps_CZ_Core_Localization_Dependency_Boundary.csv
+    category: empirical_study
+    authority: evidentiary
+    status: active
+    summary: Generated five-row source search boundary for fixed-commit CZL subscriber-context resolution.
+    use_for: [publisher-source search, dependency-boundary verification, reproduction checks]
 
   - path: Empirical/Data/BCApps_CZ_Core_Localization_Source_Files.csv
     category: empirical_study

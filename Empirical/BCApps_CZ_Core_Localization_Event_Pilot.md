@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-EVENT-PILOT-001
   title: BCApps Czech Core Localization Event Pilot
   type: Empirical Study
-  version: 0.4.0
+  version: 0.5.0
   status: Active
 
 classification:
@@ -48,12 +48,13 @@ related_documents:
   - References/SAAM.md
   - References/ATAM.md
   - Ideas/Microsoft_Event_Types_Research_Agenda.md
+  - Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md
 
 study:
   method: Bounded Stratified Repository Code Audit Pilot
   subject: Microsoft Core Localization Pack for Czech application
   data_access: Public GitHub Repository at Fixed Commit
-  reproducibility: Baseline, Subscriber Population, and Selection Protocol Fixed
+  reproducibility: Baseline, Population, Context Protocol, and Selection Protocol Fixed
 
 tags:
   - empirical-study
@@ -137,6 +138,12 @@ app, which logically encapsulates the apps that make up the solution and
 resolves their dependencies implicitly [C5]. The exact dependency closure used
 for publisher resolution must be recorded from the fixed BCApps commit rather
 than inferred from current product packaging.
+
+The context protocol records five physically available source applications at
+the fixed commit: the subject, its explicit dependency, Base Application,
+Business Foundation, and System Application [C6]. This is an operational source
+search boundary, not a claim that those five repositories reproduce the full
+contents or runtime closure of the distributed `Microsoft_Application.app`.
 
 This identifies the empirical subject. It does not establish the quality,
 intent, or representativeness of any event implementation.
@@ -501,7 +508,9 @@ None. The pilot is designed to test candidate concepts, not to accept them.
 
 - [x] Reproduce and retain the event-subscriber population inventory.
 - [x] Record its discovery command, tool versions, checksum, and limitations.
-- [ ] Resolve dependency-aware publisher and runtime context per CZL subscriber.
+- [x] Freeze the dependency-aware source boundary and context record protocol.
+- [ ] Implement and technically validate the subscriber-context resolver.
+- [ ] Resolve publisher and runtime context for every retained CZL subscriber.
 - [ ] Complete coarse evidence-availability screening.
 - [ ] Mark prior-known status before bucket assignment.
 - [ ] Fill and freeze the 16-case selection register.
@@ -529,8 +538,19 @@ None. The pilot is designed to test candidate concepts, not to accept them.
   `Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md`.
 - **[C5]** Microsoft. "The Microsoft_Application.app file." Microsoft Learn.
   <https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/developer/devenv-application-app-file>.
+- **[C6]** Orden. "BCApps Czech Subscriber Context Resolution Protocol."
+  `Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md`.
 
 ## 18. Revision History
+
+### 0.5.0 — 2026-07-19
+
+- Fixed a five-application source search boundary for dependency-aware
+  subscriber-context resolution.
+- Added the context record and resolution protocol without executing coarse
+  screening or case selection.
+- Deferred resolver implementation, technical validation, and population-wide
+  context resolution.
 
 ### 0.4.0 — 2026-07-19
 
