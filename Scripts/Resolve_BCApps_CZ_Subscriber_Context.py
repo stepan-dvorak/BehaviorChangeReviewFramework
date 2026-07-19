@@ -374,7 +374,9 @@ def main() -> int:
     parser.add_argument("--population", required=True, type=Path)
     parser.add_argument("--boundary", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
-    parser.add_argument("--mode", choices=("dry-run", "validation"), default="validation")
+    parser.add_argument(
+        "--mode", choices=("dry-run", "validation", "full"), default="validation"
+    )
     args = parser.parse_args()
     root = args.bcapps_root.resolve()
     if git_head(root) != EXPECTED_COMMIT:
@@ -410,7 +412,7 @@ def main() -> int:
             root, row, events, peers[target], qualified_calls, binding_index,
             boundary_apps,
         ))
-    output = records if args.mode == "dry-run" else validation_selection(records)
+    output = records if args.mode in {"dry-run", "full"} else validation_selection(records)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("w", encoding="utf-8", newline="\n") as handle:
         for record in output:

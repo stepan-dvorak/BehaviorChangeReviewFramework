@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-EVENT-PILOT-001
   title: BCApps Czech Core Localization Event Pilot
   type: Empirical Study
-  version: 0.6.0
+  version: 0.7.0
   status: Active
 
 classification:
@@ -50,6 +50,7 @@ related_documents:
   - Ideas/Microsoft_Event_Types_Research_Agenda.md
   - Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md
   - Empirical/BCApps_CZ_Subscriber_Context_Technical_Validation.md
+  - Empirical/BCApps_CZ_Subscriber_Context_Manifest.md
 
 study:
   method: Bounded Stratified Repository Code Audit Pilot
@@ -511,8 +512,9 @@ None. The pilot is designed to test candidate concepts, not to accept them.
 - [x] Record its discovery command, tool versions, checksum, and limitations.
 - [x] Freeze the dependency-aware source boundary and context record protocol.
 - [x] Implement and automatically validate the subscriber-context resolver.
-- [ ] Complete owner source review of the retained validation records.
-- [ ] Resolve publisher and runtime context for every retained CZL subscriber.
+- [x] Complete owner source review of the retained validation records.
+- [x] Resolve publisher and static runtime context for every retained CZL
+      subscriber.
 - [ ] Complete coarse evidence-availability screening.
 - [ ] Mark prior-known status before bucket assignment.
 - [ ] Fill and freeze the 16-case selection register.
@@ -544,6 +546,13 @@ None. The pilot is designed to test candidate concepts, not to accept them.
   `Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md`.
 
 ## 18. Revision History
+
+### 0.7.0 — 2026-07-19
+
+- Recorded owner acceptance of the technical-validation records.
+- Completed reproducible generation of one schema-valid static context record
+  for each retained subscriber.
+- Kept coarse screening, prior-knowledge labeling, and case selection pending.
 
 ### 0.6.0 — 2026-07-19
 
