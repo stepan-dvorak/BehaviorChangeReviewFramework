@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.14
+  version: 1.0.15
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -666,8 +666,8 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.10.0
-    summary: Pre-registers a bounded 16-case subscriber-centered pilot; corrected static context and worksheet preparation await focused CZPOP-0270 re-review before screening.
+    version: 0.11.0
+    summary: Pre-registers a bounded 16-case subscriber-centered pilot; corrected static context and worksheet preparation are validated and population-wide coarse screening is authorized.
     use_for: [Czech localization pilot, pre-registration, event subscriber case selection, behavioral change trigger testing, impact checklist testing]
     caution: Pre-registration only; the selection register is empty and no case findings or prevalence claims are available.
     depends_on: [02_Research_Methodology.md, Empirical/BCApps_Event_Pattern_Analysis.md, References/Microsoft_Event_Types.md]
@@ -736,8 +736,8 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.3.0
-    summary: Pre-registers one-to-one evidence-readiness screening against the corrected context dataset; focused CZPOP-0270 re-review remains pending.
+    version: 0.4.0
+    summary: Pre-registers one-to-one evidence-readiness screening against the corrected context dataset and records the open execution gate.
     use_for: [coarse-screen design, evidence readiness, targeted context search, screening implementation, selection-bias control]
     caution: Protocol only; no screening, prior-knowledge labeling, bucket assignment, case selection, trigger classification, or impact analysis has occurred.
     depends_on: [02_Research_Methodology.md, Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md, Empirical/BCApps_CZ_Subscriber_Context_Manifest.md, Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md]
@@ -750,8 +750,8 @@ documents:
     authority: evidentiary
     status: active
     maturity: draft
-    version: 0.2.0
-    summary: Records conditional owner review, corrected worksheet regeneration, and the focused CZPOP-0270 re-review required before screening.
+    version: 0.3.0
+    summary: Records completed automated and owner validation, including focused acceptance of corrected CZPOP-0270 and authorization of population-wide screening.
     use_for: [coarse-screen implementation validation, worksheet provenance, workflow-state protection, owner source review]
     caution: Automated preparation is not coarse screening; readiness decisions and all downstream operations remain pending.
     depends_on: [Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md, Empirical/BCApps_CZ_Subscriber_Context_Manifest.md]
@@ -1008,6 +1008,14 @@ non_markdown_artifacts:
     status: active
     summary: Six deterministic schema-valid worksheet records retained as Not Screened for owner source review.
     use_for: [coarse-screen technical validation, owner source review, worksheet provenance]
+
+  - path: Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl
+    category: empirical_study
+    authority: working
+    status: active
+    summary: Complete ordered 448-record coarse-screen worksheet retained in the initial Not Screened state after owner authorization.
+    use_for: [population-wide coarse screening, screening checkpoints, evidence-readiness review]
+    caution: Initial worksheet only; it contains no completed screening decision, prior-knowledge label, selection, trigger result, or checklist result.
 
   - path: Empirical/Data/BCApps_CZ_Core_Localization_Source_Files.csv
     category: empirical_study

@@ -619,3 +619,28 @@ and checklist analysis remain unperformed.
 **Status:** Corrective regeneration complete; focused owner re-review pending
 
 See `Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md`.
+
+## 2026-07-21 — BCApps Czech Coarse-Screen Execution Gate Opened
+
+**Owner decision:** Focused re-review accepted corrected `CZPOP-0270`. The
+subscriber body range is `22-33`, the regenerated worksheet observation is
+correct, and protected workflow fields remain unchanged. The repository owner
+authorized population-wide coarse screening.
+
+**Retained input:** Generated and retained one ordered worksheet for each of
+the 448 fixed context records. The file SHA-256 is
+`0a60f6a24466195fd2cd94d98fd3d4f1518ac24f2bc84f00c7435059d0219729`.
+Every record remains `Not Screened`, with null reviewer and date and unchanged
+prior-knowledge, selection, trigger, and checklist fields.
+
+**Method decision:** Treat the retained file as the initial screening state,
+not as screening results. Execute human evidence-availability review in lexical
+`CZPOP` order and retain all intermediate statuses under the fixed protocol.
+
+**Deferred work:** Screening decisions, targeted searches, prior-knowledge
+labeling, bucket assignment, `CZP` selection, trigger classification,
+checklist analysis, and synthesis remain unperformed.
+
+**Status:** Technical gate complete; population-wide coarse screening ready to begin
+
+See `Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md`.

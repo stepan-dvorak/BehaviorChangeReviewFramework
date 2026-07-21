@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-VALIDATION-001
   title: BCApps Czech Coarse Screen Preparation Technical Validation
   type: Empirical Study Validation Record
-  version: 0.2.0
+  version: 0.3.0
   status: Active
 
 classification:
@@ -48,7 +48,7 @@ study:
   method: Deterministic Worksheet Preparation Technical Validation
   subject: Fixed 448-record CZL subscriber-context dataset
   data_access: Retained Repository Dataset
-  reproducibility: Automated Checks Passed; Conditional Owner Review Corrected
+  reproducibility: Automated Checks and Owner Review Passed
 
 tags:
   - empirical-study
@@ -66,9 +66,9 @@ tags:
 The worksheet-preparation generator is implemented and its automated checks
 pass. Owner review accepted five records and conditionally accepted the set
 after finding an upstream body-boundary error in `CZPOP-0270`. The context
-resolver and derived records have been corrected. Focused owner confirmation
-of the regenerated record remains pending, so population-wide screening is not
-authorized.
+resolver and derived records were corrected. Focused owner re-review then
+confirmed body range `22-33`, the regenerated worksheet observation, and
+workflow protection. Population-wide screening is authorized.
 
 Every retained record remains `Not Screened`. The output contains no readiness
 decision, reviewer identity, review date, prior-knowledge label, selection
@@ -92,8 +92,10 @@ status change, `CZP` ID, trigger result, checklist result, or impact finding.
 - fixes every workflow and analysis field to its pre-screen value; and
 - supports deterministic validation and full-template modes.
 
-`full-template` creates 448 `Not Screened` worksheet records. It does not execute
-screening and no full template is retained in this change.
+`full-template` creates 448 `Not Screened` worksheet records. The complete
+initial worksheet is retained as
+`Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl`. It does not constitute executed
+screening.
 
 ## 3. Mechanical Prefill Mapping
 
@@ -132,7 +134,8 @@ All six records remain `Not Screened`, have null reviewer and date, and retain
 
 ## 5. Automated Validation
 
-- four focused regression tests pass;
+- five focused regression tests pass, including retained full-template
+  reproduction and protected-state assertions;
 - two validation generations are byte-identical;
 - all six records validate against
   `Schemas/BCApps_CZ_Coarse_Screen.schema.json`;
@@ -147,9 +150,11 @@ Checksums:
 - worksheet generator:
   `3633ec834ecc589b232c59198e7bbd4755ef0f6fa3ad82d68bdb08e865e4029a`;
 - regression tests:
-  `a2418b44fe901ce1faad7f129ea11d26de7bbe374136e75c52fe7086188ff926`;
+  `030519d5f590656c8ad48c136a132d47c21c6154f080aa44d745053041fc355b`;
 - retained technical-validation JSON Lines:
   `87bb7580adcf144f8daa13a77baf00c65bac9ff4603476a307afba684e5627c3`.
+- retained 448-record initial worksheet:
+  `0a60f6a24466195fd2cd94d98fd3d4f1518ac24f2bc84f00c7435059d0219729`.
 
 ## 6. Required Owner Review
 
@@ -183,16 +188,23 @@ questions or assign readiness during validation.
 
 ## 8. Acceptance Status and Next Step
 
-Automated technical validation is complete. Five records require no further
-review. The full-screening gate remains closed until the repository owner
-confirms that regenerated `CZPOP-0270` now cites body range `22-33` and records
-final acceptance.
+Automated technical validation and owner review are complete. The repository
+owner confirmed that regenerated `CZPOP-0270` cites body range `22-33`, that its
+worksheet observation is correct, and that protected workflow fields remain
+unchanged. The full-screening gate is open.
 
-After acceptance, a full 448-record `Not Screened` worksheet may be retained and
-screening may proceed in lexical order under the pre-registered protocol.
+The retained 448-record worksheet is the authorized initial screening dataset.
+Screening may proceed in lexical order under the pre-registered protocol.
 Prior-knowledge labeling and case selection remain later operations.
 
 ## 9. Revision History
+
+### 0.3.0 — 2026-07-21
+
+- Recorded focused owner acceptance of corrected `CZPOP-0270`.
+- Authorized population-wide coarse screening.
+- Retained the deterministic 448-record initial worksheet and its checksum.
+- Preserved all 448 records as `Not Screened` with protected downstream fields.
 
 ### 0.2.0 — 2026-07-21
 
