@@ -53,6 +53,7 @@ related_documents:
   - Empirical/BCApps_CZ_Subscriber_Context_Manifest.md
   - Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md
   - Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md
+  - Empirical/BCApps_CZ_Coarse_Screen_Execution_Protocol.md
   - Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl
 
 study:

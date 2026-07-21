@@ -644,3 +644,28 @@ checklist analysis, and synthesis remain unperformed.
 **Status:** Technical gate complete; population-wide coarse screening ready to begin
 
 See `Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md`.
+
+## 2026-07-21 — BCApps Czech Coarse-Screen Execution Plan Fixed
+
+**Execution decision:** Divide the authorized 448-record screen into 28
+contiguous batches of 16 records in lexical `CZPOP` order. Batch membership is
+mechanical and does not depend on expected readiness, prior knowledge, or case
+interest.
+
+**Initial checkpoint:** Treat `CZCS-B01` (`CZPOP-0001` through `CZPOP-0016`) as
+a process-calibration batch. Stop after all 16 records are reviewed and require
+owner acceptance of evidence citations, status consistency, targeted-search
+boundaries, schema validity, and protected fields before continuing.
+
+**Reproducibility:** Retain a generated batch manifest and regression tests
+that prove complete, unique, ordered coverage of all 448 pristine worksheet
+records. The manifest records every batch as `Planned` and contains no
+screening decision.
+
+**Deferred work:** Screening has not begun. Prior-knowledge labeling, bucket
+assignment, `CZP` selection, trigger classification, checklist analysis, and
+synthesis remain unperformed.
+
+**Status:** Execution plan fixed; first 16-record batch ready for screening
+
+See `Empirical/BCApps_CZ_Coarse_Screen_Execution_Protocol.md`.
