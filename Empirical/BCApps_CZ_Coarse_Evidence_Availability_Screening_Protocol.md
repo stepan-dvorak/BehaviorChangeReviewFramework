@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-PROTOCOL-001
   title: BCApps Czech Coarse Evidence-Availability Screening Protocol
   type: Empirical Study Protocol
-  version: 0.4.0
+  version: 0.4.1
   status: Active
 
 classification:
@@ -45,6 +45,7 @@ depends_on:
 related_documents:
   - Empirical/BCApps_Event_Pattern_Analysis.md
   - Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md
+  - Empirical/BCApps_CZ_Coarse_Screen_Execution_Protocol.md
   - 00_Research_Log.md
 
 study:
@@ -369,6 +370,9 @@ Human evidence-availability screening is now the active next operation. After
 screening is complete, prior-knowledge labels must be supplied in a separate
 owner-controlled step before bucket assignment.
 
+Execution sessions, fixed batch membership, and the initial owner checkpoint
+are governed by `Empirical/BCApps_CZ_Coarse_Screen_Execution_Protocol.md`.
+
 Case selection, trigger classification, checklist analysis, and framework
 synthesis remain explicitly deferred.
 
@@ -386,6 +390,11 @@ synthesis remain explicitly deferred.
   Validation." `Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md`.
 
 ## 16. Revision History
+
+### 0.4.1 — 2026-07-21
+
+- Linked the fixed execution protocol and batch controls without changing the
+  screening decision rules or deferred-work boundary.
 
 ### 0.4.0 — 2026-07-21
 

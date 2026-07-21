@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.15
+  version: 1.0.16
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -736,7 +736,7 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.4.0
+    version: 0.4.1
     summary: Pre-registers one-to-one evidence-readiness screening against the corrected context dataset and records the open execution gate.
     use_for: [coarse-screen design, evidence readiness, targeted context search, screening implementation, selection-bias control]
     caution: Protocol only; no screening, prior-knowledge labeling, bucket assignment, case selection, trigger classification, or impact analysis has occurred.
@@ -755,6 +755,20 @@ documents:
     use_for: [coarse-screen implementation validation, worksheet provenance, workflow-state protection, owner source review]
     caution: Automated preparation is not coarse screening; readiness decisions and all downstream operations remain pending.
     depends_on: [Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md, Empirical/BCApps_CZ_Subscriber_Context_Manifest.md]
+
+  - path: Empirical/BCApps_CZ_Coarse_Screen_Execution_Protocol.md
+    document_id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-EXECUTION-001
+    title: BCApps Czech Coarse Screen Execution Protocol
+    profile: empirical_study
+    category: empirical_study
+    authority: planned
+    status: active
+    maturity: draft
+    version: 0.1.0
+    summary: Fixes lexical 16-record execution batches, per-record evidence review, and an owner checkpoint after the first batch.
+    use_for: [coarse-screen execution, batch boundaries, reviewer procedure, calibration checkpoint, completion gate]
+    caution: Execution controls only; no screening decision or downstream classification is recorded.
+    depends_on: [Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md, Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md]
 
   - path: Empirical/MS_CZF_IsHandled_Refactoring_Analysis.md
     document_id: ES-MS-CZF-001
@@ -1016,6 +1030,14 @@ non_markdown_artifacts:
     summary: Complete ordered 448-record coarse-screen worksheet retained in the initial Not Screened state after owner authorization.
     use_for: [population-wide coarse screening, screening checkpoints, evidence-readiness review]
     caution: Initial worksheet only; it contains no completed screening decision, prior-knowledge label, selection, trigger result, or checklist result.
+
+  - path: Empirical/Data/BCApps_CZ_Coarse_Screen_Batches.json
+    category: empirical_study
+    authority: planned
+    status: active
+    summary: Deterministic 28-batch execution manifest covering CZPOP-0001 through CZPOP-0448 once in lexical order.
+    use_for: [batch membership, execution order, first-batch checkpoint, completeness validation]
+    caution: Planning artifact only; every batch remains Planned and contains no screening result.
 
   - path: Empirical/Data/BCApps_CZ_Core_Localization_Source_Files.csv
     category: empirical_study
