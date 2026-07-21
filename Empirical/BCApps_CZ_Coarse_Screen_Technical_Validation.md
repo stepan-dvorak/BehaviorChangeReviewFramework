@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-VALIDATION-001
   title: BCApps Czech Coarse Screen Preparation Technical Validation
   type: Empirical Study Validation Record
-  version: 0.1.0
+  version: 0.2.0
   status: Active
 
 classification:
@@ -48,7 +48,7 @@ study:
   method: Deterministic Worksheet Preparation Technical Validation
   subject: Fixed 448-record CZL subscriber-context dataset
   data_access: Retained Repository Dataset
-  reproducibility: Automated Checks Passed; Owner Review Pending
+  reproducibility: Automated Checks Passed; Conditional Owner Review Corrected
 
 tags:
   - empirical-study
@@ -64,8 +64,11 @@ tags:
 ## 1. Status and Scope
 
 The worksheet-preparation generator is implemented and its automated checks
-pass. Owner review of the six retained validation records remains pending, so
-population-wide screening is not authorized.
+pass. Owner review accepted five records and conditionally accepted the set
+after finding an upstream body-boundary error in `CZPOP-0270`. The context
+resolver and derived records have been corrected. Focused owner confirmation
+of the regenerated record remains pending, so population-wide screening is not
+authorized.
 
 Every retained record remains `Not Screened`. The output contains no readiness
 decision, reviewer identity, review date, prior-knowledge label, selection
@@ -142,11 +145,11 @@ All six records remain `Not Screened`, have null reviewer and date, and retain
 Checksums:
 
 - worksheet generator:
-  `37f88b0f120bd750fb10cc8edc3af25f9b296a06de744021fe46e5b33ed5db36`;
+  `3633ec834ecc589b232c59198e7bbd4755ef0f6fa3ad82d68bdb08e865e4029a`;
 - regression tests:
   `a2418b44fe901ce1faad7f129ea11d26de7bbe374136e75c52fe7086188ff926`;
 - retained technical-validation JSON Lines:
-  `d343515f7bfae939db890ecb3f3c8254efcc190bac53c6d75386d4a2923f864b`.
+  `87bb7580adcf144f8daa13a77baf00c65bac9ff4603476a307afba684e5627c3`.
 
 ## 6. Required Owner Review
 
@@ -180,15 +183,23 @@ questions or assign readiness during validation.
 
 ## 8. Acceptance Status and Next Step
 
-Automated technical validation is complete. The full-screening gate remains
-closed until the repository owner reviews all six records and records acceptance
-or corrections.
+Automated technical validation is complete. Five records require no further
+review. The full-screening gate remains closed until the repository owner
+confirms that regenerated `CZPOP-0270` now cites body range `22-33` and records
+final acceptance.
 
 After acceptance, a full 448-record `Not Screened` worksheet may be retained and
 screening may proceed in lexical order under the pre-registered protocol.
 Prior-knowledge labeling and case selection remain later operations.
 
 ## 9. Revision History
+
+### 0.2.0 — 2026-07-21
+
+- Recorded conditional owner acceptance and the upstream `CZPOP-0270` defect.
+- Regenerated the retained validation set from the corrected context dataset.
+- Limited follow-up owner review to the corrected `CZPOP-0270` record.
+- Kept population-wide coarse screening unauthorized.
 
 ### 0.1.0 — 2026-07-19
 

@@ -666,8 +666,8 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.9.0
-    summary: Pre-registers a bounded 16-case subscriber-centered pilot; static context and coarse-screen worksheet preparation are validated while owner review and screening remain pending.
+    version: 0.10.0
+    summary: Pre-registers a bounded 16-case subscriber-centered pilot; corrected static context and worksheet preparation await focused CZPOP-0270 re-review before screening.
     use_for: [Czech localization pilot, pre-registration, event subscriber case selection, behavioral change trigger testing, impact checklist testing]
     caution: Pre-registration only; the selection register is empty and no case findings or prevalence claims are available.
     depends_on: [02_Research_Methodology.md, Empirical/BCApps_Event_Pattern_Analysis.md, References/Microsoft_Event_Types.md]
@@ -708,8 +708,8 @@ documents:
     authority: evidentiary
     status: active
     maturity: draft
-    version: 0.2.0
-    summary: Records passing automated resolver checks, owner acceptance, and authorization for full population generation.
+    version: 0.3.0
+    summary: Records resolver validation, the later body-boundary defect, its general correction, and the complete 10-record regeneration impact.
     use_for: [resolver validation, parser limitations, validation provenance, owner source review]
     caution: Validation establishes bounded parser fitness only; it is not screening, impact, quality, or defect evidence.
     depends_on: [Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md, Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md]
@@ -722,8 +722,8 @@ documents:
     authority: evidentiary
     status: active
     maturity: draft
-    version: 0.2.0
-    summary: Records reproducible generation and limitations for all 448 static context records and links their pre-registered screening protocol.
+    version: 0.3.0
+    summary: Records corrected reproducible generation and limitations for all 448 static context records after balanced procedure-boundary regeneration.
     use_for: [context dataset provenance, integrity verification, mechanical context summary, coarse-screen input planning]
     caution: Resolution success and mechanical counts do not establish behavior change, impact, quality, defect status, or screening eligibility.
     depends_on: [Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md, Empirical/BCApps_CZ_Subscriber_Context_Technical_Validation.md, Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md]
@@ -736,8 +736,8 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.2.0
-    summary: Pre-registers one-to-one evidence-readiness screening and records passing automated worksheet preparation with owner review pending.
+    version: 0.3.0
+    summary: Pre-registers one-to-one evidence-readiness screening against the corrected context dataset; focused CZPOP-0270 re-review remains pending.
     use_for: [coarse-screen design, evidence readiness, targeted context search, screening implementation, selection-bias control]
     caution: Protocol only; no screening, prior-knowledge labeling, bucket assignment, case selection, trigger classification, or impact analysis has occurred.
     depends_on: [02_Research_Methodology.md, Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md, Empirical/BCApps_CZ_Subscriber_Context_Manifest.md, Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md]
@@ -750,8 +750,8 @@ documents:
     authority: evidentiary
     status: active
     maturity: draft
-    version: 0.1.0
-    summary: Records passing automated preparation checks and six protected Not Screened validation records awaiting owner review.
+    version: 0.2.0
+    summary: Records conditional owner review, corrected worksheet regeneration, and the focused CZPOP-0270 re-review required before screening.
     use_for: [coarse-screen implementation validation, worksheet provenance, workflow-state protection, owner source review]
     caution: Automated preparation is not coarse screening; readiness decisions and all downstream operations remain pending.
     depends_on: [Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md, Empirical/BCApps_CZ_Subscriber_Context_Manifest.md]

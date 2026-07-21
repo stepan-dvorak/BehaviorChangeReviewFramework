@@ -90,20 +90,26 @@ def matching_brace(lines: list[str], start: int) -> tuple[int | None, int | None
 
 
 def al_procedure_boundary(lines: list[str], procedure_at: int) -> tuple[int | None, int | None]:
-    """Return one-based body bounds using the next top-level object member."""
+    """Return one-based body bounds by balancing AL begin/case/end blocks."""
     begin_at = next(
         (index for index in range(procedure_at + 1, len(lines)) if lines[index].strip().casefold() == "begin"),
         None,
     )
     if begin_at is None:
         return None, None
-    member = re.compile(r"^    (?:(?:local|internal|protected)\s+)?procedure\b|^    \[")
-    for index in range(begin_at + 1, len(lines)):
-        if member.match(lines[index]) or lines[index] == "}":
-            end = index
-            while end > begin_at and not lines[end - 1].strip():
-                end -= 1
-            return begin_at + 1, end
+    depth = 0
+    block_token = re.compile(r"\b(begin|case|end)\b", re.IGNORECASE)
+    for index in range(begin_at, len(lines)):
+        code = lines[index].split("//", 1)[0]
+        code = re.sub(r"'(?:''|[^'])*'", "''", code)
+        code = re.sub(r'"(?:""|[^"])*"', '""', code)
+        for token in block_token.findall(code):
+            if token.casefold() in {"begin", "case"}:
+                depth += 1
+            else:
+                depth -= 1
+                if depth == 0:
+                    return begin_at + 1, index + 1
     return None, None
 
 
