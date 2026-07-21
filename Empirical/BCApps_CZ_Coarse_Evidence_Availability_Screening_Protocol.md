@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-PROTOCOL-001
   title: BCApps Czech Coarse Evidence-Availability Screening Protocol
   type: Empirical Study Protocol
-  version: 0.3.0
+  version: 0.4.0
   status: Active
 
 classification:
@@ -51,7 +51,7 @@ study:
   method: Pre-registered Coarse Evidence-Availability Screening
   subject: Complete 448-record CZL subscriber-context dataset
   data_access: Public GitHub Repository at Fixed Commit
-  reproducibility: Automated Worksheet Validation Passed; Owner Review Pending
+  reproducibility: Automated Worksheet Validation and Owner Review Passed
 
 tags:
   - empirical-study
@@ -135,7 +135,7 @@ The JSON Schema is the field authority. Screening creates exactly one separate
 record for every context record and leaves the context dataset unchanged.
 
 Schema SHA-256:
-`01f108f29416d2ccc7d85a5d72974a002799dc75d4be68be403238fe0e584c7c`.
+`9698581c03ae663e5288a03719f6df759ebe35f378d4e3ee5e95f88c9fc31047`.
 
 Every record contains:
 
@@ -357,15 +357,17 @@ unavailable counts without treating them as behavior or defect prevalence.
 - Readiness counts cannot support behavioral, quality, defect, or ecosystem
   prevalence claims.
 
-## 14. Deferred Work
+## 14. Authorized Execution State and Deferred Work
 
-The worksheet-preparation implementation and automated technical validation
-are complete. Owner review accepted five records and identified an upstream
-body-boundary defect in `CZPOP-0270`. The defect and derived record are
-corrected; focused owner confirmation of that record is the final gate before
-population-wide coarse screening may begin. After screening is complete,
-prior-knowledge labels must be supplied in a separate owner-controlled step
-before bucket assignment.
+The worksheet-preparation implementation, automated technical validation, and
+owner review are complete. Owner review accepted corrected `CZPOP-0270` with
+body range `22-33` and authorized population-wide coarse screening. The
+complete retained worksheet contains 448 records in lexical order, all in the
+initial `Not Screened` state.
+
+Human evidence-availability screening is now the active next operation. After
+screening is complete, prior-knowledge labels must be supplied in a separate
+owner-controlled step before bucket assignment.
 
 Case selection, trigger classification, checklist analysis, and framework
 synthesis remain explicitly deferred.
@@ -384,6 +386,14 @@ synthesis remain explicitly deferred.
   Validation." `Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md`.
 
 ## 16. Revision History
+
+### 0.4.0 — 2026-07-21
+
+- Recorded focused owner acceptance of corrected `CZPOP-0270`.
+- Opened the population-wide coarse-screening gate.
+- Retained the complete 448-record worksheet in its initial `Not Screened`
+  state without making any screening decision.
+- Updated the schema checksum after the corrective change.
 
 ### 0.3.0 — 2026-07-21
 

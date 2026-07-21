@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
+import json
 import unittest
 from pathlib import Path
 
@@ -64,6 +66,35 @@ class PreparationTests(unittest.TestCase):
         records = [SCREEN.prepare_record(item) for item in contexts]
         selected = SCREEN.validation_selection(contexts, records)
         self.assertEqual(["CZPOP-0001", "CZPOP-0002"], [item["inventory_id"] for item in selected])
+
+    def test_retained_full_template_is_pristine_and_reproducible(self) -> None:
+        root = SCRIPT.parent.parent
+        retained = root / "Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl"
+        context_path = root / "Empirical/Data/BCApps_CZ_Subscriber_Context.jsonl"
+        records = [json.loads(line) for line in retained.read_text(encoding="utf-8").splitlines()]
+        contexts = SCREEN.read_jsonl(context_path)
+        expected = [SCREEN.prepare_record(item) for item in contexts]
+
+        self.assertEqual(448, len(records))
+        self.assertEqual(expected, records)
+        self.assertEqual(
+            [item["inventory_id"] for item in contexts],
+            [item["inventory_id"] for item in records],
+        )
+        self.assertTrue(all(item["screening_status"] == "Not Screened" for item in records))
+        self.assertTrue(all(item["screened_by"] is None for item in records))
+        self.assertTrue(all(item["screened_on"] is None for item in records))
+        self.assertTrue(all(item["prior_known"] == "Unknown" for item in records))
+        self.assertTrue(all(item["selection_status"] == "Unselected" for item in records))
+        self.assertTrue(all(item["trigger_status"] == "Not Evaluated" for item in records))
+        self.assertTrue(all(item["checklist_status"] == "Not Evaluated" for item in records))
+        canonical_retained_bytes = (
+            "\n".join(retained.read_text(encoding="utf-8").splitlines()) + "\n"
+        ).encode("utf-8")
+        self.assertEqual(
+            "0a60f6a24466195fd2cd94d98fd3d4f1518ac24f2bc84f00c7435059d0219729",
+            hashlib.sha256(canonical_retained_bytes).hexdigest(),
+        )
 
 
 if __name__ == "__main__":
