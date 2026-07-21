@@ -90,6 +90,28 @@ class ResolverFailureStatusTests(unittest.TestCase):
         selected = RESOLVER.validation_selection(sorted(records, key=lambda x: x["inventory_id"]))
         self.assertEqual(["CZPOP-0001"], [item["inventory_id"] for item in selected])
 
+    def test_body_boundary_excludes_comment_before_next_subscriber(self) -> None:
+        lines = (
+            "codeunit 1 FixtureSubscriber\n"
+            "    local procedure HandleFixture(var Value: Boolean)\n"
+            "    begin\n"
+            "        if Value then begin\n"
+            "            case Value of\n"
+            "                true:\n"
+            "                    Value := false;\n"
+            "            end;\n"
+            "        end;\n"
+            "    end;\n"
+            "\n"
+            "    // Comment for the next subscriber, not part of HandleFixture.\n"
+            "    [EventSubscriber(ObjectType::Codeunit, Codeunit::FixturePublisher, 'OnFixture', '', false, false)]\n"
+            "    local procedure NextFixture()\n"
+            "    begin\n"
+            "    end;\n"
+            "}\n"
+        ).splitlines()
+        self.assertEqual((3, 10), RESOLVER.al_procedure_boundary(lines, 1))
+
 
 if __name__ == "__main__":
     unittest.main()

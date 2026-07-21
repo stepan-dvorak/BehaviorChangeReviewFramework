@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-CONTEXT-VALIDATION-001
   title: BCApps Czech Subscriber Context Resolver Technical Validation
   type: Empirical Study Validation Record
-  version: 0.2.0
+  version: 0.3.0
   status: Active
 
 classification:
@@ -150,7 +150,9 @@ status. Focused synthetic regression fixtures therefore verify that:
 - failure records retain an explanation;
 - mutable-parameter writes retain their source line; and
 - validation selection remains deterministic and does not alter screening
-  state.
+  state; and
+- balanced `begin`, `case`, and `end` blocks stop a procedure body before
+  comments or declarations belonging to the next object member.
 
 Synthetic fixtures validate control behavior only. They are not empirical
 BCApps cases and are not included in the population or validation dataset.
@@ -165,9 +167,9 @@ python Scripts\Resolve_BCApps_CZ_Subscriber_Context.py --bcapps-root C:\Research
 Checksums:
 
 - resolver:
-  `234a0cf28aa7559f9515afe79f85893b9f787451935e9cc5d91f51b659633e23`;
+  `9e148c3c3a5716350bbea13375f7a411de988364474df91d9dd1461dd05e2103`;
 - regression tests:
-  `897c5adb949d3fe706b0b002e40d6b0e5fce7092ff12e4b18f135db68777db1d`;
+  `9eb17f936e3d36ea2603fac5be507dfc990e4b5120f1fe38751e551a2271410c`;
 - retained validation JSON Lines:
   `4ee46fd6010f808f89b256bc6af49a423353f92d0c3cb4c2e24b42bb65bb7dbc`.
 
@@ -202,7 +204,25 @@ each of the 448 `CZPOP` rows. That operation completed without changing any
 screening or selection field. Coarse screening and case selection remain later,
 separate operations.
 
+The later owner review of coarse-screen worksheet preparation found that
+`CZPOP-0270` ended at line 35 rather than the procedure's line 33. The review
+was conditionally accepted and population-wide coarse screening was not
+authorized. General correction and regeneration changed 10 context records:
+`CZPOP-0033`, `CZPOP-0036`, `CZPOP-0114`, `CZPOP-0198`, `CZPOP-0246`,
+`CZPOP-0247`, `CZPOP-0270`, `CZPOP-0308`, `CZPOP-0321`, `CZPOP-0406`,
+and no others. Every change affects only the retained body end line; all
+mechanical marker arrays remain byte-equivalent. A focused owner re-review of
+the regenerated `CZPOP-0270` worksheet remains required.
+
 ## 9. Revision History
+
+### 0.3.0 — 2026-07-21
+
+- Recorded the conditionally accepted coarse-screen preparation review and its
+  upstream boundary defect.
+- Added a balanced-block regression fixture.
+- Recorded the complete 10-record regeneration impact.
+- Kept population-wide coarse screening unauthorized pending focused re-review.
 
 ### 0.2.0 — 2026-07-19
 

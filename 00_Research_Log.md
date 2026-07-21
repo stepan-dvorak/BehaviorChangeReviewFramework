@@ -589,3 +589,33 @@ synthesis remain unperformed.
 **Status:** Automated worksheet validation passed; owner review pending
 
 See `Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md`.
+
+## 2026-07-21 — BCApps Czech Subscriber Body-Boundary Correction
+
+**Owner observation:** Review of the six coarse-screen preparation records
+accepted five records and found that `CZPOP-0270` cited body end line 35 rather
+than the subscriber procedure's closing line 33. The overall review was
+conditionally accepted and did not authorize population-wide screening.
+
+**Defect classification:** The worksheet generator reproduced its context
+input correctly. The defect originated in the upstream resolver rule that
+extended a procedure body to the next object member and could therefore retain
+intervening comments or declarations.
+
+**Corrective action:** Replaced next-member inference with balanced AL
+`begin`, `case`, and `end` block detection, added a regression fixture, and
+regenerated all 448 context records and the six derived validation worksheets.
+
+**Impact:** Ten context records received corrected end lines. No other context
+field changed. All 448 identities, event and publisher classifications,
+resolution statuses, mechanical marker arrays, composition references, binding
+paths, and protected workflow fields remain unchanged.
+
+**Gate decision:** The five accepted validation records require no repeat
+review. Focused owner confirmation of corrected `CZPOP-0270` remains required.
+Coarse screening, prior-knowledge labeling, selection, trigger classification,
+and checklist analysis remain unperformed.
+
+**Status:** Corrective regeneration complete; focused owner re-review pending
+
+See `Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md`.

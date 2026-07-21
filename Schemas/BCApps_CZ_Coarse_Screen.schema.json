@@ -24,7 +24,7 @@
   ],
   "properties": {
     "inventory_id": {"type": "string", "pattern": "^CZPOP-[0-9]{4}$"},
-    "context_dataset_sha256": {"const": "2cbeb7a45b46f937f5749e73caad6167c5604ffa100ca4f084ca77ac5a2df4eb"},
+    "context_dataset_sha256": {"const": "381d476096615b757fecd92e52e3325b65b20384adfa8e9ae1bac792a99c8dfb"},
     "screening_protocol_version": {"const": "0.1.0"},
     "screening_status": {
       "enum": ["Not Screened", "Ready for Prior-Knowledge Labeling", "Targeted Context Required", "Unavailable for Selection"]

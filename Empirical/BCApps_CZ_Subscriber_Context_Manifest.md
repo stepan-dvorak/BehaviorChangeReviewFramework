@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-CONTEXT-MANIFEST-001
   title: BCApps Czech Subscriber Context Dataset Manifest
   type: Empirical Study Manifest
-  version: 0.2.0
+  version: 0.3.0
   status: Active
 
 classification:
@@ -96,9 +96,9 @@ python Scripts\Resolve_BCApps_CZ_Subscriber_Context.py --bcapps-root C:\Research
 Retained checksums:
 
 - resolver:
-  `234a0cf28aa7559f9515afe79f85893b9f787451935e9cc5d91f51b659633e23`;
+  `9e148c3c3a5716350bbea13375f7a411de988364474df91d9dd1461dd05e2103`;
 - full context dataset:
-  `2cbeb7a45b46f937f5749e73caad6167c5604ffa100ca4f084ca77ac5a2df4eb`.
+  `381d476096615b757fecd92e52e3325b65b20384adfa8e9ae1bac792a99c8dfb`.
 
 Two independent executions produced byte-identical output.
 
@@ -194,16 +194,23 @@ must treat empty fields as unavailable static evidence, not as proof of absence.
 
 ## 8. Next Research Step
 
-Population-wide context generation is complete. The separate coarse
-evidence-availability protocol and record contract are now fixed, but screening
-has not begun. The future screen must consume these records without treating
-resolution status, event class, mechanical markers, or composition count as
-automatic trigger or case-selection decisions.
+Population-wide context regeneration is complete after correction of the
+procedure-body boundary rule. The separate coarse evidence-availability
+protocol and record contract are fixed, but screening has not begun. The
+corrected validation record requires focused owner confirmation before the
+screening gate can close.
 
 Prior-knowledge labeling, case selection, trigger classification, checklist
 analysis, and synthesis remain unperformed.
 
 ## 9. Revision History
+
+### 0.3.0 — 2026-07-21
+
+- Replaced next-member boundary inference with balanced AL block detection.
+- Regenerated all 448 records and recorded 10 corrected body end lines.
+- Preserved all resolution classifications and protected workflow fields.
+- Kept population-wide coarse screening unauthorized pending focused review.
 
 ### 0.2.0 — 2026-07-19
 

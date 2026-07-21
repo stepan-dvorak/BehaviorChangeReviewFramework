@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-PROTOCOL-001
   title: BCApps Czech Coarse Evidence-Availability Screening Protocol
   type: Empirical Study Protocol
-  version: 0.2.0
+  version: 0.3.0
   status: Active
 
 classification:
@@ -97,7 +97,7 @@ Fixed inputs are:
 - BCApps commit `397d01199c321e774edaf23a7290fee40f75c6a6`;
 - `Empirical/Data/BCApps_CZ_Core_Localization_Event_Population.csv`;
 - `Empirical/Data/BCApps_CZ_Subscriber_Context.jsonl` with SHA-256
-  `2cbeb7a45b46f937f5749e73caad6167c5604ffa100ca4f084ca77ac5a2df4eb`;
+  `381d476096615b757fecd92e52e3325b65b20384adfa8e9ae1bac792a99c8dfb`;
 - the five-application source boundary; and
 - `Schemas/BCApps_CZ_Coarse_Screen.schema.json`.
 
@@ -360,10 +360,12 @@ unavailable counts without treating them as behavior or defect prevalence.
 ## 14. Deferred Work
 
 The worksheet-preparation implementation and automated technical validation
-are complete. Owner review of the six retained `Not Screened` validation
-records remains pending and is the final gate before population-wide coarse
-screening may begin. After screening is complete, prior-knowledge labels must
-be supplied in a separate owner-controlled step before bucket assignment.
+are complete. Owner review accepted five records and identified an upstream
+body-boundary defect in `CZPOP-0270`. The defect and derived record are
+corrected; focused owner confirmation of that record is the final gate before
+population-wide coarse screening may begin. After screening is complete,
+prior-knowledge labels must be supplied in a separate owner-controlled step
+before bucket assignment.
 
 Case selection, trigger classification, checklist analysis, and framework
 synthesis remain explicitly deferred.
@@ -382,6 +384,12 @@ synthesis remain explicitly deferred.
   Validation." `Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md`.
 
 ## 16. Revision History
+
+### 0.3.0 — 2026-07-21
+
+- Updated the immutable context checksum after corrective regeneration.
+- Recorded conditional owner review and focused `CZPOP-0270` re-review.
+- Kept population-wide screening and all downstream operations pending.
 
 ### 0.2.0 — 2026-07-19
 
