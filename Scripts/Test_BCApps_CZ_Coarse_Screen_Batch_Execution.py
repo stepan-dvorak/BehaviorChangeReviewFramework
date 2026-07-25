@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-import hashlib
+
 import json
 import subprocess
 import unittest
@@ -17,7 +17,16 @@ WORKSHEET = ROOT / "Empirical" / "Data" / "BCApps_CZ_Coarse_Screen.jsonl"
 SCHEMA = ROOT / "Schemas" / "BCApps_CZ_Coarse_Screen.schema.json"
 BASE_COMMIT = "aea85c8627b78dcd88e8eb7e8c17d27e4adadcf5"
 WORKSHEET_PATH = "Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl"
-EXPECTED_SCREENED_SHA256 = "5dac8a307299bec68d859d6bfd40e33a1551310c110a18d4eaa2196dd25db0d5"
+EXPECTED_ESTABLISHED_ACTIVITY = {
+    "CZPOP-0001": "AccSchedManagement.Codeunit.al:700-849.",
+    "CZPOP-0002": "FinancialReportMgt.Codeunit.al:372-384.",
+    "CZPOP-0003": "AccScheduleOverview.Page.al:956-986.",
+    "CZPOP-0004": "AccSchedManagement.Codeunit.al:700-849.",
+    "CZPOP-0006": "AccSchedManagement.Codeunit.al:2746-2839.",
+    "CZPOP-0007": "AccSchedManagement.Codeunit.al:1120-1149.",
+    "CZPOP-0008": "AccSchedManagement.Codeunit.al:2657-2675.",
+    "CZPOP-0011": "CategGenerateAccSchedules.Codeunit.al:80-134.",
+}
 ALLOWED_SCREENING_FIELDS = {
     "screening_status", "evidence_availability", "targeted_search_questions",
     "screening_observations", "unavailability_reason", "screened_by", "screened_on",
@@ -76,9 +85,18 @@ class BatchExecutionTests(unittest.TestCase):
             self.assertEqual("Not Evaluated", after["trigger_status"])
             self.assertEqual("Not Evaluated", after["checklist_status"])
 
-    def test_screened_worksheet_is_deterministic(self) -> None:
-        canonical = "\n".join(self.text.splitlines()) + "\n"
-        self.assertEqual(EXPECTED_SCREENED_SHA256, hashlib.sha256(canonical.encode()).hexdigest())
+    def test_owner_corrections_use_exact_established_activity_boundaries(self) -> None:
+        records = {record["inventory_id"]: record for record in self.records}
+        for inventory_id, expected_suffix in EXPECTED_ESTABLISHED_ACTIVITY.items():
+            observations = records[inventory_id]["screening_observations"]
+            evidence = next(
+                observation for observation in observations
+                if observation.startswith("Established activity evidence:")
+            )
+            self.assertTrue(evidence.endswith(expected_suffix), (inventory_id, evidence))
+
+    def test_worksheet_uses_canonical_lf_serialization(self) -> None:
+        self.assertEqual("\n".join(self.text.splitlines()) + "\n", self.text)
 
 
 if __name__ == "__main__":

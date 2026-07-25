@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-EXECUTION-001
   title: BCApps Czech Coarse Screen Execution Protocol
   type: Empirical Study Protocol
-  version: 0.1.1
+  version: 0.1.2
   status: Active
 
 classification:
@@ -186,13 +186,28 @@ synthesis remain deferred.
 
 ## 9. Current State and Next Action
 
-`CZCS-B01` (`CZPOP-0001` through `CZPOP-0016`) has been screened and retained.
-All 16 records are `Ready for Prior-Knowledge Labeling`; this count reports only
-evidence readiness. The next action is the initial owner checkpoint defined in
-Section 6. Screening must stop before `CZPOP-0017` until the checkpoint is
-accepted.
+`CZCS-B01` (`CZPOP-0001` through `CZPOP-0016`) has been screened, owner-reviewed,
+and corrected. All 16 records remain `Ready for Prior-Knowledge Labeling`; this
+count reports only evidence readiness. The owner corrections changed exact
+enclosing-activity citations for eight source-published records and did not
+change any evidence-availability value, screening status, stratum indicator, or
+protected downstream field.
+
+The initial owner checkpoint is accepted after correction. No protocol revision,
+recalibration, or calibration-range extension is required. The next permitted
+screening action is `CZCS-B02` (`CZPOP-0017` through `CZPOP-0032`) under the
+unchanged rules in Sections 4–7.
 
 ## 10. Revision History
+
+### 0.1.2 — 2026-07-25
+
+- Recorded owner-required citation corrections for eight source-published
+  records in `CZCS-B01`.
+- Accepted the initial owner checkpoint after correction.
+- Determined that no recalibration or calibration-range extension is required.
+- Authorized continuation with `CZCS-B02` under the unchanged screening rules.
+
 
 ### 0.1.1 — 2026-07-21
 
