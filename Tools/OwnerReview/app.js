@@ -1,5 +1,5 @@
 import { CONFIG } from "./config.js";
-import { AREA_DEFINITIONS, AREA_RESULTS, RECORD_RESULTS, acceptanceWarnings, buildSourceUrl, createEmptyRecordReview, extractSourceCitations, generateMarkdownReport, normalizeSession, parseJsonl, sha256Hex } from "./core.js";
+import { AREA_DEFINITIONS, AREA_RESULTS, RECORD_RESULTS, acceptanceWarnings, buildSourceUrl, canonicalLf, createEmptyRecordReview, extractSourceCitations, generateMarkdownReport, normalizeSession, parseJsonl, sha256Hex, validateBatchManifest } from "./core.js";
 
 const $ = (id) => document.getElementById(id);
 const state = { records: [], byId: new Map(), fingerprint: "", lfFingerprint: "", fileName: "", session: null, manifest: null, scopeIds: [], currentId: null, filter: "All" };
@@ -15,7 +15,7 @@ async function loadDataset(file) {
   try {
     const text = await file.text();
     const records = parseJsonl(text);
-    const fingerprint = await sha256Hex(text), lfFingerprint = await sha256Hex(text.replace(/\r\n/g, "\n"));
+    const fingerprint = await sha256Hex(text), lfFingerprint = await sha256Hex(canonicalLf(text));
     state.records = records; state.byId = new Map(records.map((record) => [record.inventory_id, record])); state.fingerprint = fingerprint; state.lfFingerprint = lfFingerprint; state.fileName = file.name;
     const stored = localStorage.getItem(`${CONFIG.storagePrefix}${fingerprint}`);
     state.session = stored ? normalizeSession(JSON.parse(stored), fingerprint) : { format: "Orden OwnerReview Session", version: 1, dataset: { fileName: file.name, fingerprint, recordCount: records.length }, bcAppsRef: CONFIG.defaultRef, scopeLabel: "Entire dataset", reviews: {}, createdAt: new Date().toISOString(), updatedAt: null };
@@ -67,7 +67,7 @@ function download(name,content,type){const blob=new Blob([content],{type});const
 
 $("fixedRefOption").value=CONFIG.defaultRef;$("fixedRefOption").textContent=`fixed commit (${CONFIG.defaultRef.slice(0,12)}…)`;for(const result of RECORD_RESULTS){const o=document.createElement("option");o.value=o.textContent=result;$("overallResult").append(o);}
 $("jsonlFile").addEventListener("change",e=>e.target.files[0]&&loadDataset(e.target.files[0]));
-$("manifestFile").addEventListener("change",async e=>{try{if(!state.records.length)throw new Error("Load the JSONL dataset first.");const manifest=JSON.parse(await e.target.files[0].text());if(!Array.isArray(manifest.batches))throw new Error("Batch manifest must contain a batches array.");if(manifest.worksheet_sha256_lf&&manifest.worksheet_sha256_lf!==state.lfFingerprint)throw new Error("The manifest worksheet fingerprint does not match the loaded dataset.");state.manifest=manifest;const options=[new Option("Entire dataset","")];for(const b of manifest.batches)options.push(new Option(`${b.batch_id} (${b.record_count})`,b.batch_id));$("batchSelect").replaceChildren(...options);showMessage(`${manifest.batches.length} batches loaded.`,"info");}catch(error){showMessage(`Invalid batch manifest: ${error.message}`);}});
+$("manifestFile").addEventListener("change",async e=>{try{if(!state.records.length)throw new Error("Load the JSONL dataset first.");const manifest=JSON.parse(await e.target.files[0].text());const validation=validateBatchManifest(manifest,state.records,state.lfFingerprint);state.manifest=manifest;const options=[new Option("Entire dataset","")];for(const b of manifest.batches)options.push(new Option(`${b.batch_id} (${b.record_count})`,b.batch_id));$("batchSelect").replaceChildren(...options);showMessage(validation.warning||`${manifest.batches.length} batches loaded.`,"info");}catch(error){showMessage(`Invalid batch manifest: ${error.message}`);}});
 $("batchSelect").addEventListener("change",()=>{const id=$("batchSelect").value;if(!id)return applyScope(state.records.map(r=>r.inventory_id),"Entire dataset");const batch=state.manifest.batches.find(b=>b.batch_id===id);applyScope(batch.inventory_ids,`Batch ${id}`);});
 $("applyRange").addEventListener("click",()=>{const [first,last]=$("rangeInput").value.trim().split(/\s*[:–-]\s*(?=CZPOP)/);const a=state.records.findIndex(r=>r.inventory_id===first),b=state.records.findIndex(r=>r.inventory_id===last);if(a<0||b<a)return showMessage("Enter a valid inclusive range, for example CZPOP-0001:CZPOP-0016.");applyScope(state.records.slice(a,b+1).map(r=>r.inventory_id),`Range ${first} through ${last}`);});
 $("statusFilter").addEventListener("change",()=>{state.filter=$("statusFilter").value;renderList();});$("idSearch").addEventListener("change",()=>{const id=$("idSearch").value.trim();if(state.scopeIds.includes(id)){state.currentId=id;render();}else showMessage(`${id} is not in the active scope.`);});

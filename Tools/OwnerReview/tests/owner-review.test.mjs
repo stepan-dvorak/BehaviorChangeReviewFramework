@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { acceptanceWarnings, buildSourceUrl, createEmptyRecordReview, extractSourceCitations, generateMarkdownReport, normalizeSession, parseJsonl, sha256Hex } from "../core.js";
+import { acceptanceWarnings, buildSourceUrl, canonicalLf, createEmptyRecordReview, extractSourceCitations, generateMarkdownReport, normalizeSession, parseJsonl, sha256Hex, validateBatchManifest } from "../core.js";
 import { CONFIG } from "../config.js";
 
 const line = (id) => JSON.stringify({ inventory_id: id, screening_observations: [] });
@@ -39,6 +39,45 @@ test("session exports and imports without losing review data", () => {
   const imported=normalizeSession(JSON.parse(JSON.stringify(original)),"fp");assert.equal(imported.reviews.X.ownerNotes,"retained");
 });
 test("SHA-256 fingerprint is stable", async () => assert.equal(await sha256Hex("abc"),"ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"));
+test("canonical LF normalizes CRLF and lone CR", () => assert.equal(canonicalLf("A\r\nB\rC\n"),"A\nB\nC\n"));
+test("accepts the original worksheet and matching manifest", () => {
+  const records=makeRecords(),manifest=makeManifest(records);assert.equal(validateBatchManifest(manifest,records,"original").fingerprintMatches,true);
+});
+test("accepts mutable screening changes without changing population identity", () => {
+  const records=makeRecords();records[0].screening_status="Ready for Prior-Knowledge Labeling";records[0].screening_observations=["Updated"];
+  const validation=validateBatchManifest(makeManifest(makeRecords()),records,"changed");
+  assert.equal(validation.fingerprintMatches,false);assert.match(validation.warning,/original batch-planning input/);
+});
+test("CZCS-B01 remains selectable after screening-field changes", () => {
+  const records=makeRecords();records[0].screening_status="Ready for Prior-Knowledge Labeling";
+  const manifest=makeManifest(makeRecords());validateBatchManifest(manifest,records,"changed");
+  assert.deepEqual(manifest.batches[0].inventory_ids,["CZPOP-0001","CZPOP-0002"]);
+});
+test("missing and duplicate dataset inventory IDs are rejected", () => {
+  const missing=makeRecords();delete missing[0].inventory_id;
+  assert.throws(()=>validateBatchManifest(makeManifest(makeRecords()),missing,"original"),/inventory_id/);
+  const duplicate=makeRecords();duplicate[1].inventory_id=duplicate[0].inventory_id;
+  assert.throws(()=>validateBatchManifest(makeManifest(makeRecords()),duplicate,"original"),/unique/);
+});
+test("unknown, replaced, or reordered population IDs are rejected", () => {
+  const original=makeRecords(),manifest=makeManifest(original);
+  const replaced=makeRecords();replaced[1].inventory_id="CZPOP-9999";
+  assert.throws(()=>validateBatchManifest(manifest,replaced,"changed"),/differs/);
+  const reordered=makeRecords();[reordered[0],reordered[1]]=[reordered[1],reordered[0]];
+  assert.throws(()=>validateBatchManifest(manifest,reordered,"changed"),/differs/);
+});
+test("incomplete and duplicate batch membership are rejected", () => {
+  const records=makeRecords(),incomplete=makeManifest(records);incomplete.batches.pop();incomplete.batch_count=1;
+  assert.throws(()=>validateBatchManifest(incomplete,records,"original"),/contain 2 records|complete loaded population/);
+  const duplicate=makeManifest(records);duplicate.batches[1].inventory_ids[0]="CZPOP-0002";duplicate.batches[1].first_inventory_id="CZPOP-0002";
+  assert.throws(()=>validateBatchManifest(duplicate,records,"original"),/duplicate/);
+});
+test("record count, range, and inventory IDs must agree", () => {
+  const records=makeRecords();
+  const count=makeManifest(records);count.record_count=3;assert.throws(()=>validateBatchManifest(count,records,"original"),/record_count/);
+  const range=makeManifest(records);range.batches[0].last_inventory_id="CZPOP-9999";assert.throws(()=>validateBatchManifest(range,records,"original"),/last_inventory_id/);
+  const members=makeManifest(records);members.batches[0].record_count=1;assert.throws(()=>validateBatchManifest(members,records,"original"),/record_count/);
+});
 test("Markdown report never claims that Not Reviewed records were reviewed", () => {
   const report=generateMarkdownReport(makeSession("fp"),["A"]);assert.match(report,/Reviewed inventory IDs: None/);assert.match(report,/Owner review: Incomplete/);assert.doesNotMatch(report,/Owner review: Accepted/);
 });
@@ -53,5 +92,16 @@ test("complete accepted report has required checkpoint wording", () => {
   const session=makeSession("fp"),review=createEmptyRecordReview();review.result="Accepted";for(const area of Object.values(review.areas))area.result="Correct";session.reviews.A=review;
   const report=generateMarkdownReport(session,["A"]);assert.match(report,/Owner review: Accepted/);assert.match(report,/Workflow fields unchanged: Yes/);assert.match(report,/Additional notes: None/);
 });
+test("Markdown report contains only the active batch scope", () => {
+  const session=makeSession("fp");session.scopeLabel="Batch CZCS-B01";
+  for(const id of ["CZPOP-0001","CZPOP-0002","CZPOP-0003"])session.reviews[id]=createEmptyRecordReview();
+  const report=generateMarkdownReport(session,["CZPOP-0001","CZPOP-0002"]);
+  assert.match(report,/Active scope: Batch CZCS-B01/);assert.match(report,/Records in scope: 2/);assert.doesNotMatch(report,/CZPOP-0003/);
+});
 
 function makeSession(fingerprint){return {dataset:{fileName:"input.jsonl",fingerprint,recordCount:1},bcAppsRef:CONFIG.defaultRef,scopeLabel:"Test data",reviews:{}};}
+function makeRecords(){return ["CZPOP-0001","CZPOP-0002","CZPOP-0003","CZPOP-0004"].map(inventory_id=>({inventory_id,screening_status:"Not Screened",screening_observations:[]}));}
+function makeManifest(records){
+  const batches=[records.slice(0,2),records.slice(2,4)].map((members,index)=>({batch_id:`CZCS-B0${index+1}`,first_inventory_id:members[0].inventory_id,last_inventory_id:members.at(-1).inventory_id,record_count:members.length,inventory_ids:members.map(record=>record.inventory_id)}));
+  return {manifest_version:"1.0.0",worksheet_sha256_lf:"original",batch_size:2,record_count:records.length,batch_count:batches.length,batches};
+}

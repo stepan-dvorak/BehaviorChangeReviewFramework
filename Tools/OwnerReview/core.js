@@ -44,6 +44,89 @@ export async function sha256Hex(text) {
   return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
 }
 
+export function canonicalLf(text) {
+  return String(text).replace(/\r\n?/g, "\n");
+}
+
+export function validateBatchManifest(manifest, records, worksheetLfFingerprint) {
+  if (!manifest || Array.isArray(manifest) || typeof manifest !== "object") {
+    throw new Error("Batch manifest must be a JSON object.");
+  }
+  if (!Array.isArray(manifest.batches) || !manifest.batches.length) {
+    throw new Error("Batch manifest must contain a non-empty batches array.");
+  }
+  if (!Number.isInteger(manifest.record_count) || manifest.record_count !== records.length) {
+    throw new Error(`Manifest record_count must equal the loaded dataset count (${records.length}).`);
+  }
+  if (!Number.isInteger(manifest.batch_count) || manifest.batch_count !== manifest.batches.length) {
+    throw new Error(`Manifest batch_count must equal the number of batches (${manifest.batches.length}).`);
+  }
+  if (!Number.isInteger(manifest.batch_size) || manifest.batch_size < 1) {
+    throw new Error("Manifest batch_size must be a positive integer.");
+  }
+
+  const datasetIds = records.map((record) => record.inventory_id);
+  if (datasetIds.some((id) => typeof id !== "string" || !id.trim())) {
+    throw new Error("Every loaded record must have an inventory_id.");
+  }
+  if (new Set(datasetIds).size !== datasetIds.length) {
+    throw new Error("Loaded dataset inventory_id values must be unique.");
+  }
+
+  const batchIds = new Set();
+  const manifestIds = [];
+  let remaining = records.length;
+  for (const [index, batch] of manifest.batches.entries()) {
+    if (!batch || Array.isArray(batch) || typeof batch !== "object") {
+      throw new Error(`Batch ${index + 1} must be a JSON object.`);
+    }
+    if (typeof batch.batch_id !== "string" || !batch.batch_id.trim()) {
+      throw new Error(`Batch ${index + 1} must have a batch_id.`);
+    }
+    if (batchIds.has(batch.batch_id)) throw new Error(`Duplicate batch_id: ${batch.batch_id}.`);
+    batchIds.add(batch.batch_id);
+    if (!Array.isArray(batch.inventory_ids) || !batch.inventory_ids.length) {
+      throw new Error(`${batch.batch_id} must contain a non-empty inventory_ids array.`);
+    }
+
+    const expectedSize = Math.min(manifest.batch_size, remaining);
+    if (batch.inventory_ids.length !== expectedSize) {
+      throw new Error(`${batch.batch_id} inventory_ids must contain ${expectedSize} records.`);
+    }
+    if (batch.record_count !== batch.inventory_ids.length) {
+      throw new Error(`${batch.batch_id} record_count does not match inventory_ids.`);
+    }
+    if (batch.first_inventory_id !== batch.inventory_ids[0]) {
+      throw new Error(`${batch.batch_id} first_inventory_id does not match inventory_ids.`);
+    }
+    if (batch.last_inventory_id !== batch.inventory_ids.at(-1)) {
+      throw new Error(`${batch.batch_id} last_inventory_id does not match inventory_ids.`);
+    }
+    manifestIds.push(...batch.inventory_ids);
+    remaining -= batch.inventory_ids.length;
+  }
+
+  if (remaining !== 0 || manifestIds.length !== datasetIds.length) {
+    throw new Error("Batch membership does not cover the complete loaded population.");
+  }
+  if (new Set(manifestIds).size !== manifestIds.length) {
+    throw new Error("Batch membership contains duplicate inventory_id values.");
+  }
+  const mismatch = datasetIds.findIndex((id, index) => manifestIds[index] !== id);
+  if (mismatch !== -1) {
+    throw new Error(`Batch population differs from the loaded dataset at position ${mismatch + 1}.`);
+  }
+
+  const fingerprintMatches = !manifest.worksheet_sha256_lf
+    || manifest.worksheet_sha256_lf === worksheetLfFingerprint;
+  return {
+    fingerprintMatches,
+    warning: fingerprintMatches
+      ? ""
+      : "The current worksheet fingerprint differs from the original batch-planning input; population identity and batch structure are valid.",
+  };
+}
+
 const citationPattern = /\bsrc\/[A-Za-z0-9_./+() -]+?\.[A-Za-z0-9]+:\d+(?:-\d+)?(?=$|[\s,;.!?)}\]])/g;
 
 export function extractSourceCitations(text) {

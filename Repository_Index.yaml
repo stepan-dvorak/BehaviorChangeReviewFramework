@@ -925,8 +925,8 @@ documents:
     authority: working
     status: active
     maturity: review
-    version: 1.0.0
-    summary: Instructions for running and safely using the local OwnerReview application.
+    version: 1.0.1
+    summary: Instructions for running and safely using the local OwnerReview application, including batch-manifest population validation.
     use_for: [owner-review operation, local-tool setup, review-session handling]
 
   - path: Tools/OwnerReview/examples/OwnerReview_Report_Test_Data.md
