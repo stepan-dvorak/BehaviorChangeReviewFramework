@@ -669,3 +669,33 @@ synthesis remain unperformed.
 **Status:** Execution plan fixed; first 16-record batch ready for screening
 
 See `Empirical/BCApps_CZ_Coarse_Screen_Execution_Protocol.md`.
+
+## 2026-07-21 — BCApps Czech Coarse-Screen Calibration Batch Completed
+
+**Executed scope:** Reviewed `CZCS-B01` (`CZPOP-0001` through `CZPOP-0016`)
+record by record under the fixed evidence-availability and execution protocols.
+No record outside the calibration batch was screened.
+
+**Evidence disposition:** All 16 records are `Ready for Prior-Knowledge
+Labeling`. For each record, the retained worksheet cites the bounded established
+activity using the resolved source procedure and raise site or the applicable
+platform-trigger semantics. The result is evidence readiness only and does not
+indicate behavioral change, architectural significance, quality, or selection.
+
+**Calibration observation:** The fixed rules were sufficient for the batch.
+Source-published events required a bounded procedure-and-raise-site statement;
+database trigger events required the retained target field, trigger phase, and
+platform semantics. No extraction defect, unresolved ambiguity, outside-
+boundary dependency, or protocol-change requirement was found.
+
+**Checkpoint:** Stop before `CZPOP-0017`. Owner review of all 16 records is
+required under Section 6 of the execution protocol. The checkpoint remains
+pending and its only allowed disposition is `Accepted` or `Correction Required`.
+
+**Deferred work:** Every later batch, prior-knowledge labeling, bucket
+assignment, `CZP` selection, trigger classification, checklist analysis, and
+synthesis remain unperformed.
+
+**Status:** CZCS-B01 completed; initial owner checkpoint pending
+
+See `Empirical/BCApps_CZ_Coarse_Screen_Execution_Protocol.md`.

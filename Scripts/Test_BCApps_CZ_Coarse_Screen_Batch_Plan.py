@@ -25,8 +25,8 @@ class BatchPlanTests(unittest.TestCase):
         cls.records = MODULE.read_jsonl(cls.worksheet)
         cls.manifest = json.loads(cls.manifest_path.read_text(encoding="utf-8"))
 
-    def test_manifest_is_exact_generator_output(self) -> None:
-        self.assertEqual(MODULE.plan(self.records), self.manifest)
+    def test_manifest_retains_fixed_initial_worksheet_identity(self) -> None:
+        self.assertEqual(MODULE.EXPECTED_WORKSHEET_SHA256, self.manifest["worksheet_sha256_lf"])
 
     def test_every_record_appears_once_in_lexical_order(self) -> None:
         actual = [item for batch in self.manifest["batches"] for item in batch["inventory_ids"]]
@@ -43,12 +43,18 @@ class BatchPlanTests(unittest.TestCase):
         checkpoints = [batch["batch_id"] for batch in self.manifest["batches"] if batch["checkpoint_after_batch"]]
         self.assertEqual(["CZCS-B01"], checkpoints)
 
-    def test_source_worksheet_is_pristine(self) -> None:
-        self.assertEqual(MODULE.EXPECTED_WORKSHEET_SHA256, MODULE.canonical_sha256(self.worksheet))
-        for record in self.records:
-            self.assertEqual("Not Screened", record["screening_status"])
-            self.assertIsNone(record["screened_by"])
-            self.assertIsNone(record["screened_on"])
+    def test_only_calibration_batch_is_screened(self) -> None:
+        for index, record in enumerate(self.records):
+            if index < 16:
+                self.assertEqual("Ready for Prior-Knowledge Labeling", record["screening_status"])
+                self.assertEqual("Available", record["evidence_availability"]["established_flow"])
+                self.assertEqual([], record["targeted_search_questions"])
+                self.assertEqual("OpenAI Codex", record["screened_by"])
+                self.assertEqual("2026-07-21", record["screened_on"])
+            else:
+                self.assertEqual("Not Screened", record["screening_status"])
+                self.assertIsNone(record["screened_by"])
+                self.assertIsNone(record["screened_on"])
             self.assertEqual("Unknown", record["prior_known"])
             self.assertEqual("Unselected", record["selection_status"])
             self.assertEqual("Not Evaluated", record["trigger_status"])
