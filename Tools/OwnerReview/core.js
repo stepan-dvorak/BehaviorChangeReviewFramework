@@ -178,6 +178,10 @@ export function normalizeSession(candidate, fingerprint) {
 
 function md(value) { return String(value ?? "").replace(/\|/g, "\\|").replace(/\r?\n/g, " "); }
 function reviewedIds(session, scopeIds) { return scopeIds.filter((id) => (session.reviews[id]?.result || "Not Reviewed") !== "Not Reviewed"); }
+function scopeToken(session,scopeIds){const m=String(session.scopeLabel||"").match(/\bCZCS-B(\d+)\b/i);if(m)return `CZCS-B${m[1].padStart(2,"0")}`;return scopeIds.length?`${scopeIds[0]}-${scopeIds.at(-1)}`:"EMPTY-SCOPE";}
+function reportMetadata(session,scopeIds){const token=scopeToken(session,scopeIds),m=token.match(/^CZCS-B(\d+)$/),id=m?`ES-BCAPPS-CZ-CLP-COARSE-SCREEN-OWNER-REVIEW-B${m[1]}-001`:`ES-BCAPPS-CZ-CLP-COARSE-SCREEN-OWNER-REVIEW-${token.replace(/[^A-Z0-9]+/gi,"-").toUpperCase()}-001`;const first=scopeIds[0]||"None",last=scopeIds.at(-1)||"None";return ["---",'metadata_schema: "1.0"',"","project:","  id: Orden","  name: Behavior Change Review Framework","","document:",`  id: ${id}`,`  title: BCApps Czech Coarse Screen Owner Review — ${token}`,"  type: Empirical Study","  version: 0.1.0","  status: Active","","classification:","  domain: Empirical Research","  layer: Evidence","  maturity: Review","","owner: Štěpán Dvořák","","purpose: >","  Records the repository owner's review of prepared BCApps Czech coarse-screen evidence","  without changing source records, screening classifications, or research conclusions.","","quality:","  review: Approved","  evidence: Verified","  editorial: Reviewed","","audience:","  - Researchers","  - Reviewers","  - AI Assistants","","depends_on:","  - Empirical/BCApps_CZ_Coarse_Screen_Execution_Protocol.md","  - Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl","","study:","  method: Structured Owner Review of Prepared Coarse-Screen Evidence",`  subject: Coarse-screen scope ${token} (${first} through ${last})`,"  data_access: Retained Repository Dataset and Fixed BCApps Source Revision","  reproducibility: Generated Owner Review Report and Automated Regression Checks","","tags:","  - empirical","  - coarse-screen","  - owner-review","  - BCApps","---",""]; }
+export function reportFilename(session,scopeIds){return `BCApps_CZ_Coarse_Screen_Owner_Review_${scopeToken(session,scopeIds).replace("-","_")}.md`;}
+export function validateGeneratedReport(report){const required=[/^---\nmetadata_schema: "1\.0"/,/\ndocument:\n[\s\S]*?\n  type: Empirical Study\n/,/\nquality:\n  review: Approved\n  evidence: Verified\n  editorial: Reviewed\n/,/\nstudy:\n  method: .+\n  subject: .+\n  data_access: .+\n  reproducibility: .+\n/,/\n# Owner Review Report\n/,/\n## Checkpoint\n/];const failed=required.find(p=>!p.test(report));if(failed)throw new Error(`Generated report failed structural validation: ${failed}`);return true;}
 
 export function generateMarkdownReport(session, scopeIds) {
   const reviews = scopeIds.map((id) => [id, session.reviews[id] || createEmptyRecordReview()]);
@@ -188,13 +192,15 @@ export function generateMarkdownReport(session, scopeIds) {
   const hasCorrection = counts["Correction Required"] > 0;
   const checkpoint = hasCorrection ? "Correction Required" : allAccepted ? "Accepted" : "Incomplete";
   const reviewedList = done.length ? done.join(", ") : "None";
+  const exportedAt = new Date().toISOString();
   const lines = [
+    ...reportMetadata(session, scopeIds),
     "# Owner Review Report", "",
     "> This report records owner-review results only. It does not modify or replace the source coarse-screen records.", "",
     "## Session", "",
     `- Input file: \`${md(session.dataset.fileName)}\``,
     `- Input SHA-256: \`${session.dataset.fingerprint}\``,
-    `- Exported at: ${new Date().toISOString()}`,
+    `- Exported at: ${exportedAt}`,
     `- BCApps ref: \`${md(session.bcAppsRef)}\``,
     `- Active scope: ${md(session.scopeLabel || "Entire dataset")}`,
     `- Records in scope: ${scopeIds.length}`,

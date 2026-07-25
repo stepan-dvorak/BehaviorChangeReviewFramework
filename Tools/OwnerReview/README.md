@@ -85,6 +85,10 @@ GitHub links.
 **Clear session** permanently removes the current dataset's saved browser
 session after confirmation. Export the JSON session first if it may be needed.
 
+## Governed Report Export
+
+Markdown export creates a Metadata Schema 1.0 empirical-study artifact with a required `study` block and valid quality values. Move the downloaded report into `Empirical/`, then run `Tools\OwnerReview\Register_OwnerReview_Report.bat Empirical\<report-name>.md`. The registration step updates `Repository_Index.yaml` and runs strict metadata validation without changing coarse-screen records or owner-review decisions.
+
 ## Automated Tests
 
 Node.js is used only for repository development tests:
