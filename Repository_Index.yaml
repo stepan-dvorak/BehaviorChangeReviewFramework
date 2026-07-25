@@ -764,11 +764,25 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.1.1
-    summary: Fixes lexical 16-record execution batches and records completion of CZCS-B01 pending its required owner checkpoint.
+    version: 0.1.2
+    summary: Fixes lexical 16-record execution batches and records corrected owner acceptance of the CZCS-B01 calibration checkpoint.
     use_for: [coarse-screen execution, batch boundaries, reviewer procedure, calibration checkpoint, completion gate]
-    caution: CZCS-B01 records evidence-readiness decisions only; owner acceptance and every downstream classification remain pending.
+    caution: CZCS-B01 records evidence-readiness decisions only; prior-knowledge labeling and every downstream classification remain pending.
     depends_on: [Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md, Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md]
+
+  - path: Empirical/BCApps_CZ_Coarse_Screen_Owner_Review_CZCS_B01.md
+    document_id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-OWNER-REVIEW-B01-001
+    title: BCApps Czech Coarse Screen Owner Review — CZCS-B01
+    profile: empirical_study
+    category: empirical_study
+    authority: evidentiary
+    status: active
+    maturity: review
+    version: 0.1.0
+    summary: Records the owner checkpoint for calibration batch CZCS-B01, including eight accepted records and eight evidence-citation corrections.
+    use_for: [calibration acceptance, owner review, evidence-citation correction, coarse-screen quality control]
+    caution: Owner-review evidence only; it does not perform prior-knowledge labeling, case selection, trigger classification, or BCIR assessment.
+    depends_on: [Empirical/BCApps_CZ_Coarse_Screen_Execution_Protocol.md, Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl]
 
   - path: Empirical/MS_CZF_IsHandled_Refactoring_Analysis.md
     document_id: ES-MS-CZF-001

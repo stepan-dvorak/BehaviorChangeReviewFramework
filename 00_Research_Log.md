@@ -699,3 +699,33 @@ synthesis remain unperformed.
 **Status:** CZCS-B01 completed; initial owner checkpoint pending
 
 See `Empirical/BCApps_CZ_Coarse_Screen_Execution_Protocol.md`.
+
+## 2026-07-25 — BCApps Czech Coarse-Screen Calibration Checkpoint Accepted
+
+**Owner disposition:** The initial `CZCS-B01` checkpoint identified citation
+corrections in `CZPOP-0001`, `CZPOP-0002`, `CZPOP-0003`, `CZPOP-0004`,
+`CZPOP-0006`, `CZPOP-0007`, `CZPOP-0008`, and `CZPOP-0011`. The affected
+observations did not bound the complete enclosing source procedure or page-action
+trigger.
+
+**Correction:** Updated only the established-activity source ranges for the
+eight affected records. The corrected ranges include the declaration and final
+end of each enclosing procedure or trigger. Evidence-availability values,
+screening statuses, reviewer metadata, stratum indicators, targeted questions,
+and protected downstream fields remain unchanged.
+
+**Calibration finding:** The owner review exposed a consistent recording error,
+not a methodological ambiguity or upstream context-extraction defect. The fixed
+protocol already requires a bounded established activity. No protocol rule,
+screening criterion, batch boundary, or decision code changed.
+
+**Decision:** Accept `CZCS-B01` after correction. Recalibration and extension of
+the calibration range are not required. Continue in manifest order with
+`CZCS-B02` (`CZPOP-0017` through `CZPOP-0032`), while applying an explicit
+complete-enclosing-activity boundary check to source-published events.
+
+**Deferred work:** Prior-knowledge labeling, bucket assignment, case selection,
+`CZP` assignment, BCIR trigger assessment, checklist analysis, and synthesis
+remain unperformed.
+
+**Status:** CZCS-B01 accepted after correction; CZCS-B02 authorized

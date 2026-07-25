@@ -1,3 +1,59 @@
+---
+metadata_schema: "1.0"
+
+project:
+  id: Orden
+  name: Behavior Change Review Framework
+
+document:
+  id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-OWNER-REVIEW-B01-001
+  title: BCApps Czech Coarse Screen Owner Review — CZCS-B01
+  type: Empirical Study
+  version: 0.1.0
+  status: Active
+
+classification:
+  domain: Empirical Research
+  layer: Evidence
+  maturity: Review
+
+owner: Štěpán Dvořák
+
+purpose: >
+  Records the owner-review checkpoint for calibration batch CZCS-B01,
+  including accepted records and required evidence-citation corrections.
+
+quality:
+  review: Approved
+  evidence: Verified
+  editorial: Reviewed
+
+audience:
+  - Researchers
+  - Reviewers
+  - AI Assistants
+
+depends_on:
+  - Empirical/BCApps_CZ_Coarse_Screen_Execution_Protocol.md
+  - Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl
+
+related_documents:
+  - Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md
+
+study:
+  method: Structured Owner Review of Calibration Evidence
+  subject: Coarse-screen calibration batch CZCS-B01 (CZPOP-0001 through CZPOP-0016)
+  data_access: Retained Repository Dataset and Fixed BCApps Source Revision
+  reproducibility: Owner Review Report and Automated Regression Checks
+
+tags:
+  - empirical
+  - coarse-screen
+  - owner-review
+  - calibration
+  - BCApps
+---
+
 # Owner Review Report
 
 > This report records owner-review results only. It does not modify or replace the source coarse-screen records.
