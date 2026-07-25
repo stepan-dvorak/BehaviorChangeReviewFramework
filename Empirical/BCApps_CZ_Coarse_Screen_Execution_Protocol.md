@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-EXECUTION-001
   title: BCApps Czech Coarse Screen Execution Protocol
   type: Empirical Study Protocol
-  version: 0.1.0
+  version: 0.1.1
   status: Active
 
 classification:
@@ -186,11 +186,19 @@ synthesis remain deferred.
 
 ## 9. Current State and Next Action
 
-The execution plan is prepared; no batch has been screened. The next action is
-to review `CZCS-B01` (`CZPOP-0001` through `CZPOP-0016`) and submit its complete
-16-record result for the initial owner checkpoint.
+`CZCS-B01` (`CZPOP-0001` through `CZPOP-0016`) has been screened and retained.
+All 16 records are `Ready for Prior-Knowledge Labeling`; this count reports only
+evidence readiness. The next action is the initial owner checkpoint defined in
+Section 6. Screening must stop before `CZPOP-0017` until the checkpoint is
+accepted.
 
 ## 10. Revision History
+
+### 0.1.1 — 2026-07-21
+
+- Recorded completion of the 16-record calibration batch and its evidence-
+  readiness disposition.
+- Opened the initial owner checkpoint and kept every later batch unscreened.
 
 ### 0.1.0 — 2026-07-21
 

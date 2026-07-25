@@ -764,10 +764,10 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.1.0
-    summary: Fixes lexical 16-record execution batches, per-record evidence review, and an owner checkpoint after the first batch.
+    version: 0.1.1
+    summary: Fixes lexical 16-record execution batches and records completion of CZCS-B01 pending its required owner checkpoint.
     use_for: [coarse-screen execution, batch boundaries, reviewer procedure, calibration checkpoint, completion gate]
-    caution: Execution controls only; no screening decision or downstream classification is recorded.
+    caution: CZCS-B01 records evidence-readiness decisions only; owner acceptance and every downstream classification remain pending.
     depends_on: [Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md, Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md]
 
   - path: Empirical/MS_CZF_IsHandled_Refactoring_Analysis.md
