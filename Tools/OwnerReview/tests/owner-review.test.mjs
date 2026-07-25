@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { acceptanceWarnings, buildSourceUrl, canonicalLf, createEmptyRecordReview, extractSourceCitations, generateMarkdownReport, normalizeSession, parseJsonl, sha256Hex, validateBatchManifest } from "../core.js";
+import { acceptanceWarnings, buildSourceUrl, canonicalLf, createEmptyRecordReview, extractSourceCitations, generateMarkdownReport, normalizeSession, parseJsonl, reportFilename, sha256Hex, validateBatchManifest, validateGeneratedReport } from "../core.js";
 import { CONFIG } from "../config.js";
 
 const line = (id) => JSON.stringify({ inventory_id: id, screening_observations: [] });
@@ -98,6 +98,7 @@ test("Markdown report contains only the active batch scope", () => {
   const report=generateMarkdownReport(session,["CZPOP-0001","CZPOP-0002"]);
   assert.match(report,/Active scope: Batch CZCS-B01/);assert.match(report,/Records in scope: 2/);assert.doesNotMatch(report,/CZPOP-0003/);
 });
+test("generated report is governed",()=>{const s=makeSession("fp");s.scopeLabel="Batch CZCS-B01";const r=generateMarkdownReport(s,["CZPOP-0001"]);assert.equal(validateGeneratedReport(r),true);assert.match(r,/evidence: Verified/);assert.equal(reportFilename(s,["CZPOP-0001"]),"BCApps_CZ_Coarse_Screen_Owner_Review_CZCS_B01.md");});
 
 function makeSession(fingerprint){return {dataset:{fileName:"input.jsonl",fingerprint,recordCount:1},bcAppsRef:CONFIG.defaultRef,scopeLabel:"Test data",reviews:{}};}
 function makeRecords(){return ["CZPOP-0001","CZPOP-0002","CZPOP-0003","CZPOP-0004"].map(inventory_id=>({inventory_id,screening_status:"Not Screened",screening_observations:[]}));}
