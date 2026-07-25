@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Orden OwnerReview</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div><h1>Orden OwnerReview</h1><p>Local, non-mutating review of JSONL worksheets</p></div>
+    <div id="saveState" class="saved">No dataset loaded</div>
+  </header>
+  <section class="toolbar" aria-label="Dataset controls">
+    <label class="file-button">Load JSONL<input id="jsonlFile" type="file" accept=".jsonl,application/jsonl,text/plain"></label>
+    <label class="file-button secondary">Load batch manifest<input id="manifestFile" type="file" accept=".json,application/json"></label>
+    <select id="batchSelect" disabled><option value="">Entire dataset</option></select>
+    <label>Range <input id="rangeInput" placeholder="CZPOP-0001:CZPOP-0016" disabled></label>
+    <button id="applyRange" disabled>Apply</button>
+    <label>BCApps ref <select id="refSelect"><option id="fixedRefOption"></option><option value="main">main (latest)</option></select></label>
+    <button id="exportMd" disabled>Export Markdown</button><button id="exportJson" disabled>Export session</button>
+    <label class="file-button secondary disabled" id="importLabel">Import session<input id="sessionFile" type="file" accept=".json,application/json" disabled></label>
+    <button id="clearSession" class="danger" disabled>Clear session</button>
+  </section>
+  <div id="message" role="alert" aria-live="polite"></div>
+  <main id="workspace" class="workspace hidden">
+    <aside class="sidebar">
+      <div class="filter-row"><label>Filter <select id="statusFilter"><option>All</option><option>Not Reviewed</option><option>Accepted</option><option>Correction Required</option></select></label></div>
+      <label class="search">Inventory ID<input id="idSearch" list="inventoryIds" autocomplete="off"><datalist id="inventoryIds"></datalist></label>
+      <div id="recordList" class="record-list" aria-label="Records"></div>
+    </aside>
+    <section class="content">
+      <div class="record-header">
+        <div><h2 id="recordId"></h2><span id="position"></span></div>
+        <div class="nav-buttons"><button id="previous">← Previous</button><button id="next">Next →</button></div>
+        <label>Overall result <select id="overallResult"></select></label>
+      </div>
+      <div id="acceptanceWarning" class="warning hidden"></div>
+      <div class="columns">
+        <section><h3>Source data <span class="immutable">read-only</span></h3><div id="sourceSections"></div><details><summary>Raw JSON</summary><pre id="rawJson"></pre></details></section>
+        <section><h3>Owner-review data</h3><p class="scope-note">These controls do not change the source record.</p><div id="reviewAreas"></div><label class="notes">Additional owner notes<textarea id="ownerNotes" rows="4"></textarea></label></section>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

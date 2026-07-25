@@ -917,7 +917,38 @@ documents:
     summary: Standard ADR structure for context, drivers, options, decision, rationale, and consequences.
     use_for: [architecture decisions, governance decisions]
 
+  - path: Tools/OwnerReview/README.md
+    document_id: TOOL-OWNER-REVIEW-001
+    title: Orden OwnerReview
+    profile: governed_document
+    category: tooling
+    authority: working
+    status: active
+    maturity: review
+    version: 1.0.0
+    summary: Instructions for running and safely using the local OwnerReview application.
+    use_for: [owner-review operation, local-tool setup, review-session handling]
+
+  - path: Tools/OwnerReview/examples/OwnerReview_Report_Test_Data.md
+    document_id: TOOL-OWNER-REVIEW-EXAMPLE-001
+    title: Owner Review Report Test-Data Example
+    profile: governed_document
+    category: tooling
+    authority: example
+    status: active
+    maturity: review
+    version: 1.0.0
+    summary: Synthetic example of the Markdown report format that makes no empirical review claim.
+    use_for: [report-format inspection, tool documentation, test-data example]
+
 non_markdown_artifacts:
+  - path: Tools/OwnerReview/
+    category: tooling
+    authority: working
+    status: active
+    summary: Local browser application for non-mutating, fingerprint-bound owner review of JSONL worksheets and export of review reports.
+    use_for: [owner review, worksheet inspection, review-session export]
+
   - path: Schemas/Repository_Document_Metadata.schema.json
     category: governance
     authority: working
