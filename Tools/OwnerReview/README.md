@@ -9,7 +9,7 @@ document:
   id: TOOL-OWNER-REVIEW-001
   title: Orden OwnerReview
   type: Tool Guide
-  version: 1.0.0
+  version: 1.0.1
   status: Active
 
 classification:
@@ -63,6 +63,13 @@ does not write to GitHub or modify the selected JSONL file.
 The default BCApps reference is the fixed pilot commit. Select `main (latest)`
 only when intentionally comparing the current source. The selected reference
 is retained in the session and report.
+
+The batch manifest records the original planning worksheet fingerprint.
+OwnerReview validates the current dataset against the manifest's ordered
+population and complete batch structure. A fingerprint difference caused by
+later screening-field updates is reported as information and does not prevent
+batch selection. Imported owner-review sessions remain bound to the exact input
+file fingerprint.
 
 Arrow Left and Arrow Right navigate records unless focus is inside an input,
 text area, or select control.
