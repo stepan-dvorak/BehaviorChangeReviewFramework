@@ -32,6 +32,10 @@ PROCEDURE_PATTERN = re.compile(
     r'("(?:[^"]|"")*"|[A-Za-z_][\w]*)\s*\(',
     re.IGNORECASE,
 )
+TRIGGER_PATTERN = re.compile(
+    r'^\s*trigger\s+("(?:[^"]|"")*"|[A-Za-z_][\w]*)\s*\(',
+    re.IGNORECASE,
+)
 EVENT_ATTRIBUTE_PATTERN = re.compile(
     r'^\s*\[(IntegrationEvent|BusinessEvent|InternalEvent)\b', re.IGNORECASE
 )
@@ -113,15 +117,44 @@ def al_procedure_boundary(lines: list[str], procedure_at: int) -> tuple[int | No
     return None, None
 
 
-def build_source_index(root: Path, codeunit_names: set[str]) -> tuple[dict, dict, dict]:
+def executable_activities(lines: list[str]) -> list[dict]:
+    """Return deterministic procedure and trigger boundaries for one AL object."""
+    activities = []
+    for index, line in enumerate(lines):
+        procedure = PROCEDURE_PATTERN.match(line)
+        trigger = TRIGGER_PATTERN.match(line)
+        if procedure:
+            activity_kind = "procedure"
+            activity_name = procedure.group(1)
+        elif trigger:
+            activity_kind = "trigger"
+            activity_name = trigger.group(1)
+        else:
+            continue
+        body_start, body_end = al_procedure_boundary(lines, index)
+        if body_start is None or body_end is None:
+            continue
+        activities.append({
+            "activity_kind": activity_kind,
+            "activity_name": activity_name,
+            "declaration_line": index + 1,
+            "body_start_line": body_start,
+            "body_end_line": body_end,
+        })
+    return activities
+
+
+def build_source_index(root: Path, codeunit_names: set[str]) -> tuple[dict, dict, dict, dict]:
     events: dict[tuple[str, str, str], list[dict]] = defaultdict(list)
     qualified_calls: dict[str, list[str]] = defaultdict(list)
     normalized_names = {normalize_name(name): name for name in codeunit_names}
     binding_index: dict[str, list[str]] = defaultdict(list)
+    activities_by_path: dict[str, list[dict]] = {}
     for boundary_id, source_root in BOUNDARY_ROOTS.items():
         for path in sorted((root / source_root).rglob("*.al")):
             lines = read_lines(path)
             source_path = relative_path(root, path)
+            activities_by_path[source_path] = executable_activities(lines)
             for line_number, line in enumerate(lines, 1):
                 for call in re.findall(r'\.\s*("(?:[^"]|"")*"|[A-Za-z_][\w]*)\s*\(', line):
                     qualified_calls[normalize_name(call)].append(
@@ -182,9 +215,12 @@ def build_source_index(root: Path, codeunit_names: set[str]) -> tuple[dict, dict
                     pending_event = None
                 elif line.strip() and not line.lstrip().startswith("["):
                     pending_event = None
-    return events, qualified_calls, {
-        key: sorted(set(value)) for key, value in binding_index.items()
-    }
+    return (
+        events,
+        qualified_calls,
+        {key: sorted(set(value)) for key, value in binding_index.items()},
+        activities_by_path,
+    )
 
 
 def procedure_context(lines: list[str], attribute_line: int, procedure_name: str,
@@ -247,6 +283,33 @@ def raise_sites(event: dict, qualified_calls: dict[str, list[str]]) -> list[str]
     return sorted(set(result))
 
 
+def raise_site_contexts(sites: list[str], activities_by_path: dict[str, list[dict]]) -> list[dict]:
+    """Map every raise site to its unique enclosing executable AL activity."""
+    contexts = []
+    for site in sites:
+        path, separator, line_text = site.rpartition(":")
+        if not separator or not line_text.isdigit():
+            continue
+        line_number = int(line_text)
+        enclosing = [
+            activity for activity in activities_by_path.get(path, [])
+            if activity["body_start_line"] <= line_number <= activity["body_end_line"]
+        ]
+        if len(enclosing) != 1:
+            continue
+        activity = enclosing[0]
+        contexts.append({
+            "path": site,
+            "line": line_number,
+            "activity_kind": activity["activity_kind"],
+            "activity_name": activity["activity_name"],
+            "declaration_line": activity["declaration_line"],
+            "body_start_line": activity["body_start_line"],
+            "body_end_line": activity["body_end_line"],
+        })
+    return sorted(contexts, key=lambda item: (item["path"], item["line"]))
+
+
 def runtime_class(row: dict[str, str]) -> str | None:
     object_type = row["publisher_object_type"].split("::")[-1].casefold()
     event = row["published_event_name"].casefold()
@@ -268,7 +331,9 @@ def runtime_class(row: dict[str, str]) -> str | None:
 
 def resolve_row(root: Path, row: dict[str, str], events: dict, peers: dict,
                 qualified_calls: dict[str, list[str]], binding_index: dict[str, list[str]],
-                boundary_apps: dict[str, dict[str, str]]) -> dict:
+                boundary_apps: dict[str, dict[str, str]],
+                activities_by_path: dict[str, list[dict]] | None = None) -> dict:
+    activities_by_path = activities_by_path or {}
     base = {
         "inventory_id": row["inventory_id"],
         "source_commit": row["source_commit"],
@@ -317,6 +382,7 @@ def resolve_row(root: Path, row: dict[str, str], events: dict, peers: dict,
     if len(candidates) == 1:
         event = candidates[0]
         sites = raise_sites(event, qualified_calls)
+        site_contexts = raise_site_contexts(sites, activities_by_path)
         in_subject = event["boundary_id"] == "CZDEP-0001"
         boundary_app = boundary_apps[event["boundary_id"]]
         status = "Publisher in Subject Application" if in_subject else "Resolved Source Publisher"
@@ -326,6 +392,10 @@ def resolve_row(root: Path, row: dict[str, str], events: dict, peers: dict,
             status = "Raise Site Unresolved"
             unresolved = "Source publisher resolved, but no raise site was found in its owning object."
             context_status = "Partially Resolved"
+        elif len(site_contexts) != len(sites):
+            status = "Raise Site Unresolved"
+            unresolved = "One or more source raise sites could not be mapped to a unique enclosing executable AL activity."
+            context_status = "Partially Resolved"
         return {**base, "target_event_class": event["event_class"],
                 "publisher_resolution_status": status,
                 "publisher_boundary_id": event["boundary_id"],
@@ -333,14 +403,16 @@ def resolve_row(root: Path, row: dict[str, str], events: dict, peers: dict,
                 "publisher_app_name": boundary_app["app_name"],
                 "publisher_path": event["path"],
                 "publisher_procedure": event["procedure"],
-                "raise_site_paths": sites, "platform_semantics_reference": None,
+                "raise_site_paths": sites, "raise_site_contexts": site_contexts,
+                "platform_semantics_reference": None,
                 "context_resolution_status": context_status,
                 "unresolved_reason": unresolved}
     if len(candidates) > 1:
         locations = [f"{item['path']}:{item['declaration_line']}" for item in candidates]
         return {**base, "target_event_class": "Unknown",
                 "publisher_resolution_status": "Ambiguous Target",
-                "raise_site_paths": [], "platform_semantics_reference": None,
+                "raise_site_paths": [], "raise_site_contexts": [],
+                "platform_semantics_reference": None,
                 "context_resolution_status": "Partially Resolved",
                 "unresolved_reason": "Multiple compatible publisher declarations: " + " | ".join(locations)}
     platform = runtime_class(row)
@@ -350,6 +422,7 @@ def resolve_row(root: Path, row: dict[str, str], events: dict, peers: dict,
                 "publisher_boundary_id": None, "publisher_app_id": None,
                 "publisher_app_name": None, "publisher_path": None,
                 "publisher_procedure": None, "raise_site_paths": [],
+                "raise_site_contexts": [],
                 "platform_semantics_reference": PLATFORM_REFERENCE,
                 "context_resolution_status": "Resolved", "unresolved_reason": None}
     return {**base, "target_event_class": "Unknown",
@@ -357,6 +430,7 @@ def resolve_row(root: Path, row: dict[str, str], events: dict, peers: dict,
             "publisher_boundary_id": None, "publisher_app_id": None,
             "publisher_app_name": None, "publisher_path": None,
             "publisher_procedure": None, "raise_site_paths": [],
+            "raise_site_contexts": [],
             "platform_semantics_reference": None,
             "context_resolution_status": "Unresolved",
             "unresolved_reason": "No compatible publisher declaration or recognized platform trigger was found in the fixed boundary."}
@@ -402,7 +476,7 @@ def main() -> int:
         row["subscriber_codeunit_name"] for row in rows
         if row["subscriber_instance"].casefold() == "manual"
     }
-    events, qualified_calls, binding_index = build_source_index(root, manual_names)
+    events, qualified_calls, binding_index, activities_by_path = build_source_index(root, manual_names)
     peers: dict[tuple[str, str, str, str], list[str]] = defaultdict(list)
     for row in rows:
         target = tuple(row[key] for key in (
@@ -417,6 +491,7 @@ def main() -> int:
         records.append(resolve_row(
             root, row, events, peers[target], qualified_calls, binding_index,
             boundary_apps,
+            activities_by_path,
         ))
     output = records if args.mode in {"dry-run", "full"} else validation_selection(records)
     args.output.parent.mkdir(parents=True, exist_ok=True)

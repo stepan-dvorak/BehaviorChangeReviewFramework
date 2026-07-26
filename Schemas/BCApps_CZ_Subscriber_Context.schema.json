@@ -41,6 +41,26 @@
     "publisher_path": {"type": ["string", "null"]},
     "publisher_procedure": {"type": ["string", "null"]},
     "raise_site_paths": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "raise_site_contexts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path", "line", "activity_kind", "activity_name",
+          "declaration_line", "body_start_line", "body_end_line"
+        ],
+        "properties": {
+          "path": {"type": "string", "minLength": 1},
+          "line": {"type": "integer", "minimum": 1},
+          "activity_kind": {"enum": ["procedure", "trigger"]},
+          "activity_name": {"type": "string", "minLength": 1},
+          "declaration_line": {"type": "integer", "minimum": 1},
+          "body_start_line": {"type": "integer", "minimum": 1},
+          "body_end_line": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
     "platform_semantics_reference": {"type": ["string", "null"]},
     "subscriber_instance": {"type": "string"},
     "binding_context_paths": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},

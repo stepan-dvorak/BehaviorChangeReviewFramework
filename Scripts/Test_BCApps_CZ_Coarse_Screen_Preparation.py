@@ -27,6 +27,7 @@ def context(**overrides) -> dict:
         "binding_context_paths": [], "context_resolution_status": "Resolved",
         "subscriber_path": "Subscriber.Codeunit.al", "subscriber_body_start_line": 10,
         "subscriber_body_end_line": 20,
+        "raise_site_contexts": [],
     }
     value.update(overrides)
     return value
@@ -55,6 +56,23 @@ class PreparationTests(unittest.TestCase):
             ["Integration Event", "Dependency Publisher", "Static Subscriber",
              "Mutable Parameter Write", "Same-Target CZL Peers", "No Linked Test Context"],
             record["stratum_indicators"],
+        )
+
+    def test_publisher_activity_is_mechanical_prefill(self) -> None:
+        record = SCREEN.prepare_record(context(raise_site_contexts=[{
+            "path": "Publisher.Codeunit.al:42",
+            "line": 42,
+            "activity_kind": "procedure",
+            "activity_name": "PublishFixture",
+            "declaration_line": 35,
+            "body_start_line": 39,
+            "body_end_line": 48,
+        }]))
+        self.assertEqual("Available", record["evidence_availability"]["established_flow"])
+        self.assertIn(
+            "Publisher activity: procedure PublishFixture at "
+            "Publisher.Codeunit.al:35 (body 39-48; raise site 42).",
+            record["screening_observations"],
         )
 
     def test_validation_selection_deduplicates_and_orders(self) -> None:
