@@ -65,6 +65,19 @@ def indicators(context: dict) -> list[str]:
     return [item for item in INDICATOR_ORDER if item in found]
 
 
+def publisher_activity_observations(context: dict) -> list[str]:
+    observations = []
+    for site in context.get("raise_site_contexts", []):
+        observations.append(
+            "Publisher activity: "
+            f"{site['activity_kind']} {site['activity_name']} at "
+            f"{site['path'].rsplit(':', 1)[0]}:{site['declaration_line']} "
+            f"(body {site['body_start_line']}-{site['body_end_line']}; "
+            f"raise site {site['line']})."
+        )
+    return observations
+
+
 def prepare_record(context: dict) -> dict:
     manual = context["subscriber_instance"] == "Manual"
     questions = [
@@ -79,6 +92,7 @@ def prepare_record(context: dict) -> dict:
         f"Publisher resolution status: {context['publisher_resolution_status']}.",
         f"Subscriber body: {context['subscriber_path']}:{context['subscriber_body_start_line']}-{context['subscriber_body_end_line']}.",
     ]
+    observations.extend(publisher_activity_observations(context))
     return {
         "inventory_id": context["inventory_id"],
         "context_dataset_sha256": EXPECTED_CONTEXT_SHA256,
@@ -89,7 +103,10 @@ def prepare_record(context: dict) -> dict:
             "subscriber_body": "Available",
             "publisher_or_platform": "Available",
             "raise_or_trigger": "Available",
-            "established_flow": "Targeted Search Required",
+            "established_flow": (
+                "Available" if context.get("raise_site_contexts")
+                else "Targeted Search Required"
+            ),
             "runtime_participation": (
                 "Binding Evidence Available" if manual and context["binding_context_paths"]
                 else "Targeted Search Required" if manual

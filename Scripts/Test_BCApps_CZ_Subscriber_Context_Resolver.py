@@ -90,6 +90,68 @@ class ResolverFailureStatusTests(unittest.TestCase):
         selected = RESOLVER.validation_selection(sorted(records, key=lambda x: x["inventory_id"]))
         self.assertEqual(["CZPOP-0001"], [item["inventory_id"] for item in selected])
 
+    def test_raise_site_maps_to_enclosing_procedure(self) -> None:
+        lines = (
+            "codeunit 2 FixturePublisher\n"
+            "    local procedure PublishFixture()\n"
+            "    begin\n"
+            "        OnFixture();\n"
+            "    end;\n"
+            "\n"
+            "    [IntegrationEvent(false, false)]\n"
+            "    local procedure OnFixture()\n"
+            "    begin\n"
+            "    end;\n"
+            "}\n"
+        ).splitlines()
+        activities = RESOLVER.executable_activities(lines)
+        contexts = RESOLVER.raise_site_contexts(
+            ["Publisher.Codeunit.al:4"],
+            {"Publisher.Codeunit.al": activities},
+        )
+        self.assertEqual([{
+            "path": "Publisher.Codeunit.al:4",
+            "line": 4,
+            "activity_kind": "procedure",
+            "activity_name": "PublishFixture",
+            "declaration_line": 2,
+            "body_start_line": 3,
+            "body_end_line": 5,
+        }], contexts)
+
+    def test_raise_site_maps_to_enclosing_trigger(self) -> None:
+        lines = (
+            "page 3 FixturePage\n"
+            "    actions\n"
+            "    {\n"
+            "        action(Print)\n"
+            "        {\n"
+            "            trigger OnAction()\n"
+            "            begin\n"
+            "                OnFixture();\n"
+            "            end;\n"
+            "        }\n"
+            "    }\n"
+            "}\n"
+        ).splitlines()
+        contexts = RESOLVER.raise_site_contexts(
+            ["Fixture.Page.al:8"],
+            {"Fixture.Page.al": RESOLVER.executable_activities(lines)},
+        )
+        self.assertEqual("trigger", contexts[0]["activity_kind"])
+        self.assertEqual("OnAction", contexts[0]["activity_name"])
+        self.assertEqual((6, 7, 9), (
+            contexts[0]["declaration_line"],
+            contexts[0]["body_start_line"],
+            contexts[0]["body_end_line"],
+        ))
+
+    def test_unmapped_raise_site_is_not_fully_resolved(self) -> None:
+        self.assertEqual([], RESOLVER.raise_site_contexts(
+            ["Publisher.Codeunit.al:40"],
+            {"Publisher.Codeunit.al": []},
+        ))
+
     def test_body_boundary_excludes_comment_before_next_subscriber(self) -> None:
         lines = (
             "codeunit 1 FixtureSubscriber\n"
