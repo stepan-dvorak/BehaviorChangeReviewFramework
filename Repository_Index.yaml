@@ -327,7 +327,7 @@ documents:
     authority: normative
     status: active
     maturity: review
-    version: 0.3.0
+    version: 0.3.1
     summary: End-to-end AI workflow from context resolution and knowledge modeling through reasoning, realization, validation, delivery, and governance evolution.
     use_for: [AI operating workflow, validation, complete-document delivery, governance-aware contribution]
     depends_on: [Repository_Standards.md, Reasoning_Standard.md, Governance_Principles.md]

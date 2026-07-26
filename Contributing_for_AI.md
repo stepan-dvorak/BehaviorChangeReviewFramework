@@ -9,7 +9,7 @@ document:
   id: CG-001
   title: AI Contribution Guidelines
   type: Contribution Guide
-  version: 0.3.0
+  version: 0.3.1
   status: Active
 
 classification:
@@ -433,6 +433,81 @@ Any unresolved inconsistency SHALL suspend workflow execution until clarified.
 
 ---
 
+## 4.7 Execution Environment Failure Scope
+
+A failure observed within one tool, container, process, virtual environment, connector, or network namespace SHALL initially be treated as a limitation of that execution path only.
+
+The AI SHALL NOT infer that an external resource, repository, service, host, file, or capability is globally unavailable solely because one execution environment cannot access it.
+
+Before declaring a required resource unavailable, the AI SHALL evaluate other available execution paths, including where applicable:
+
+- repository connectors;
+    
+- provider APIs;
+    
+- alternate network-enabled tools;
+    
+- previously retrieved authoritative content;
+    
+- repository blobs or file-fetch operations;
+    
+- host-side tools;
+    
+- local reconstruction from verified source objects;
+    
+- deterministic generation executed within the repository owner's checkout.
+    
+
+For example, a DNS or network failure reported by an isolated container establishes only that the container could not reach the resource. It does not establish that the resource is unavailable through the wider tool environment.
+
+### 4.7.1 Fallback Obligation
+
+When the preferred execution path fails, the AI SHALL:
+
+1. identify the scope of the observed failure;
+    
+2. inventory materially different available access paths;
+    
+3. select the path that can still produce verifiable evidence;
+    
+4. continue the task through that path when feasible.
+    
+
+The AI SHALL stop only when all materially relevant available paths have been exhausted or when proceeding would require unsupported assumptions.
+
+### 4.7.2 Reporting
+
+Environment limitations SHALL be reported precisely.
+
+Preferred form:
+
+> The current container cannot resolve github.com.
+
+Prohibited escalation without further evidence:
+
+> GitHub is unavailable.
+
+The AI SHALL distinguish:
+
+- resource unavailability;
+    
+- connector unavailability;
+    
+- container network isolation;
+    
+- missing credentials;
+    
+- unsupported tool operations;
+    
+- incomplete local checkout;
+    
+- failure of one specific command.
+    
+
+A local execution failure SHALL NOT be used to lower the validation standard.
+
+---
+
 ## Rationale
 
 Repository tasks often appear similar while requiring different governance,
@@ -727,6 +802,90 @@ the resulting artifact:
 Partial artifacts SHALL be produced only when explicitly requested.
 
 ---
+## 7.8 Repository Patch Realization
+
+When repository changes are delivered as a Git patch, the AI SHALL prefer the
+following realization workflow:
+
+1. obtain the current authoritative repository state;
+2. perform the requested edits against that state;
+3. run the applicable focused validations;
+4. let Git generate the patch from the actual working-tree or index difference;
+5. restore or create a clean copy of the intended target baseline;
+6. verify the exact generated patch against that baseline;
+7. deliver the verified patch together with the application wrapper and delivery
+   evidence.
+
+The preferred patch-generation command is:
+
+```text
+git diff --binary > <patch-file>
+```
+
+or, when the intended change is staged:
+
+```text
+git diff --cached --binary > <patch-file>
+```
+
+The patch SHALL be generated from an actual Git difference. It SHALL NOT be  
+constructed manually from remembered source fragments, reconstructed hunks, or  
+partial excerpts unless the repository owner explicitly requests diagnostic  
+patch repair.
+
+The preferred workflow SHALL always be the simplest workflow that provides the required evidence. Additional defensive mechanisms SHALL only be introduced when they solve a demonstrated problem that cannot be addressed within the simpler workflow.
+
+### 7.8.1 Preferred Simplicity
+
+The default workflow SHALL remain as simple as the task permits.
+
+Additional mechanisms such as transformation generators, three-way application,  
+file fingerprints, embedded source copies, or baseline reconstruction SHALL be  
+used only when the normal repository-diff workflow cannot be executed.
+
+Fallback mechanisms SHALL NOT replace the preferred workflow merely because they  
+appear more defensive.
+
+### 7.8.2 Failed-Patch Recovery
+
+When a generated patch fails structural application against its intended  
+baseline, the AI SHALL return to the authoritative repository state and  
+regenerate the patch from an actual Git diff.
+
+The AI SHALL NOT repeatedly modify patch hunks, remove context, relax whitespace  
+matching, or add application flags in an attempt to make an incorrectly  
+generated patch appear applicable.
+
+### 7.8.3 Text-File Fingerprints and Line Endings
+
+Working-copy byte hashes SHALL NOT be used as a default prerequisite for
+applying Git patches to repository text files.
+
+Text-file bytes may differ between execution environments because of Git line
+ending conversion, `.gitattributes`, editor behavior, byte-order marks, or final
+newline normalization.
+
+For ordinary repository patch delivery, baseline identity SHALL be established
+primarily through:
+
+- the target branch and commit;
+- a clean Git working tree;
+- the actual Git-generated diff;
+- successful `git apply --check`.
+
+When object-level identity is required, the AI SHOULD use Git object identity
+such as:
+
+```text
+git rev-parse HEAD:<path>
+```
+
+rather than hashing the checked-out working-tree bytes.
+
+Working-copy fingerprints MAY be used only when byte-for-byte identity is an  
+explicit requirement and line-ending behavior has been defined and validated.
+
+---
 
 ## Rationale
 
@@ -852,6 +1011,83 @@ reveals deficiencies.
 Validation SHALL prioritize repository quality over completion speed.
 
 ---
+## 8.7 Executable Artifact Delivery Gate
+
+This section applies to executable or mechanically applicable delivery artifacts, including:
+
+* Git patches;
+* shell, batch, or PowerShell application scripts;
+* migration scripts;
+* repository transformation scripts;
+* generated data-repair scripts;
+* commands represented as ready-to-run repository procedures.
+
+Such an artifact SHALL NOT be described as verified, applicable, ready, safe to apply, or successfully tested unless the exact delivered artifact has passed the applicable execution gate against the exact intended repository state.
+
+### 8.7.1 Required Evidence
+
+For a Git patch, the minimum application evidence is a successful execution of:
+
+```text
+git apply --check <delivered-patch>
+```
+
+against the intended clean repository baseline.
+
+When the delivery includes an application wrapper, the wrapper and the exact patch it references SHALL be tested together whenever the execution environment permits.
+
+Syntax validation, patch statistics, manual inspection, inferred applicability, matching line numbers, matching file hashes, or successful application of a different intermediate artifact SHALL NOT be represented as evidence that the delivered patch applies.
+
+### 8.7.2 Exact-Artifact Requirement
+
+Validation SHALL apply to the exact bytes delivered to the repository owner.
+
+An artifact SHALL be revalidated after any modification, including:
+
+* line-ending conversion;
+* whitespace normalization;
+* hunk reconstruction;
+* context-line changes;
+* filename changes;
+* wrapper-script changes;
+* regeneration or re-export.
+
+Validation of a source representation, intermediate patch, transformed patch, or logically equivalent artifact SHALL NOT be transferred to the delivered artifact.
+
+### 8.7.3 Baseline Requirement
+
+The validation baseline SHALL be identified explicitly.
+
+For repository changes, the baseline SHOULD be the current clean target branch after an explicit update from its configured remote.
+
+When the current baseline cannot be reproduced, the AI SHALL state that applicability has not been verified. It SHALL NOT replace missing execution evidence with reasoning or confidence language.
+
+### 8.7.4 Failure Policy
+
+A patch that fails structural application against the intended baseline SHALL be rejected as a delivery candidate.
+
+After the first structural application failure, the AI SHALL return to the authoritative source files and regenerate the patch from an actual repository diff.
+
+The AI SHALL NOT continue repairing or weakening the same patch through speculative hunk edits, zero-context conversion, whitespace relaxation, recounting, or three-way application unless the repository owner explicitly requests diagnostic recovery of that specific patch.
+
+### 8.7.5 Delivery Language
+
+The following statements require successful execution evidence:
+
+* verified;
+* applies cleanly;
+* tested against current main;
+* ready to apply;
+* safe to run;
+* validated end to end.
+
+When the required evidence is unavailable, the AI SHALL use explicit limitation language, such as:
+
+> The artifact has been generated but its application has not been executed against the target repository baseline.
+
+The AI SHALL NOT use reassuring or predictive language as a substitute for evidence.
+
+---
 
 ## Rationale
 
@@ -944,7 +1180,73 @@ Communication SHALL distinguish between:
 
 ---
 
-## 9.6 Delivery Outcome
+## 9.6 Repository Delivery Package 
+
+Whenever repository modifications are delivered for external application, the
+AI SHALL deliver a Repository Delivery Package.
+
+Unless explicitly agreed otherwise, the package SHALL contain:
+
+- a Git patch;
+- an application wrapper (for example BAT or PowerShell);
+- a review document describing the change;
+- a Delivery Evidence declaration.
+
+Each component serves an independent purpose.
+
+Omitting one component SHALL require explicit agreement from the repository
+owner.
+
+### 9.6.1 Review Document
+
+The review document SHALL summarize:
+
+- objective
+- motivation
+- implementation overview
+- affected files
+- validation performed
+- compatibility considerations
+- remaining limitations
+- recommended reviewer focus
+
+## 9.7 Delivery Evidence Declaration
+
+Every delivery containing an executable or mechanically applicable repository
+artifact SHALL include a concise Delivery Evidence declaration.
+
+The declaration SHALL identify:
+
+- the intended repository baseline;
+- the exact delivered artifact;
+- the application validation performed;
+- the focused tests performed;
+- the repository validations performed;
+- any validation that could not be performed.
+
+For a Git patch, the declaration SHOULD use the following form:
+
+```text
+Delivery evidence:
+- Baseline: <branch and commit>
+- Artifact: <exact delivered filename>
+- Patch application check: PASS | NOT RUN | FAIL
+- Focused tests: <commands or summarized result>
+- Repository validation: <commands or summarized result>
+- Limitations: None | <explicit limitation>
+```
+
+A PASS result SHALL be reported only when the stated command was executed
+successfully against the stated baseline and exact delivered artifact.
+
+The declaration SHALL distinguish executed evidence from inferred confidence.
+
+Statements such as "should apply", "appears correct", "syntactically valid", or
+"expected to pass" SHALL NOT be reported as validation evidence.
+
+---
+
+## 9.8 Delivery Outcome
 
 Successful delivery concludes the operational workflow.
 

@@ -34,3 +34,18 @@ Read:
   than a delta document.
 - Preserve canonical terminology.
 - Mark repository concepts as Candidate until validated.
+- Do not describe an executable delivery artifact as verified unless the exact delivered bytes have passed the applicable execution gate against the intended repository baseline.
+- Reject a Git patch after its first structural application failure and regenerate it from authoritative source files and an actual repository diff; do not repair failed hunks speculatively.
+- Treat a tool, container, process, or network failure as local to that execution path until materially different available access paths have been evaluated.
+- Generate repository patches from an actual Git working-tree or staged
+  difference; do not construct or repair patch hunks manually.
+- Verify the exact delivered patch with `git apply --check` against the intended
+  clean baseline before describing it as verified or ready.
+- Include a concise Delivery Evidence declaration with executable repository
+  artifacts.
+- Do not use checked-out text-file hashes as a default patch gate; prefer Git
+  baseline identity and Git application validation to avoid cross-platform line
+  ending failures.
+- Treat advanced generators, fingerprints, and three-way recovery as fallback
+  mechanisms, not the default patch-delivery workflow.
+
