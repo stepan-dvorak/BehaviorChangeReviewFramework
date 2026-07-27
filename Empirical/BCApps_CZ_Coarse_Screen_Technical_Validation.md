@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-VALIDATION-001
   title: BCApps Czech Coarse Screen Preparation Technical Validation
   type: Empirical Study Validation Record
-  version: 0.3.0
+  version: 0.4.0
   status: Active
 
 classification:
@@ -20,9 +20,9 @@ classification:
 owner: Štěpán Dvořák
 
 purpose: >
-  Records automated validation of deterministic coarse-screen worksheet
-  preparation while preserving human review and every screening decision as
-  pending operations.
+  Records automated validation of deterministic coarse-screen preparation,
+  structured publisher-activity prefill, and preservation of accepted screening
+  decisions during upstream context refresh.
 
 quality:
   review: Self Reviewed
@@ -63,16 +63,20 @@ tags:
 
 ## 1. Status and Scope
 
-The worksheet-preparation generator is implemented and its automated checks
-pass. Owner review accepted five records and conditionally accepted the set
-after finding an upstream body-boundary error in `CZPOP-0270`. The context
-resolver and derived records were corrected. Focused owner re-review then
-confirmed body range `22-33`, the regenerated worksheet observation, and
-workflow protection. Population-wide screening is authorized.
+The worksheet-preparation generator and focused regression checks pass. The
+initial technical validation and owner review authorized population-wide
+screening, and the separate B01 checkpoint was later accepted after citation
+correction.
 
-Every retained record remains `Not Screened`. The output contains no readiness
-decision, reviewer identity, review date, prior-knowledge label, selection
-status change, `CZP` ID, trigger result, checklist result, or impact finding.
+After the resolver added structured enclosing-activity context, the six-record
+technical-validation dataset was regenerated twice with byte-identical output.
+The complete worksheet was refreshed through the preservation procedure. All 16
+accepted B01 records retained their screening decisions and reviewer evidence;
+the 432 later records remain `Not Screened`.
+
+The preservation operation performs no prior-knowledge labeling, case
+selection, `CZP` assignment, trigger result, checklist result, quality judgment,
+or impact finding.
 
 ## 2. Implemented Preparation Behavior
 
@@ -81,21 +85,24 @@ status change, `CZP` ID, trigger result, checklist result, or impact finding.
 - rejects a context dataset whose SHA-256 differs from the fixed input;
 - requires 448 unique context identities and rejects a non-resolved context
   input;
-- creates one worksheet record per context record without modifying context;
+- creates one worksheet template per context record without modifying context;
 - pre-fills subscriber, publisher or platform, raise or trigger, composition,
   test, and runtime evidence fields from named context fields;
-- keeps `established_flow` as `Targeted Search Required` because its readiness
-  requires bounded human review;
+- pre-fills `established_flow = Available` when structured source
+  `raise_site_contexts` are present and otherwise retains `Targeted Search
+  Required`;
+- records a deterministic publisher-activity observation for each structured
+  raise-site context;
 - adds a specific binding-search question for manual subscribers without linked
   binding evidence;
 - derives controlled stratum indicators in fixed order;
 - fixes every workflow and analysis field to its pre-screen value; and
 - supports deterministic validation and full-template modes.
 
-`full-template` creates 448 `Not Screened` worksheet records. The complete
-initial worksheet is retained as
-`Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl`. It does not constitute executed
-screening.
+`full-template` creates 448 `Not Screened` worksheet templates. Updating the
+active retained worksheet after screening has begun requires the separate
+preservation procedure; the template must not overwrite accepted screening
+fields.
 
 ## 3. Mechanical Prefill Mapping
 
@@ -134,27 +141,36 @@ All six records remain `Not Screened`, have null reviewer and date, and retain
 
 ## 5. Automated Validation
 
-- five focused regression tests pass, including retained full-template
-  reproduction and protected-state assertions;
+- six focused preparation tests pass, including retained mechanical-structure
+  and protected-state assertions;
+- five batch-execution tests pass, including B01 preservation and exact
+  established-activity boundaries;
 - two validation generations are byte-identical;
-- all six records validate against
-  `Schemas/BCApps_CZ_Coarse_Screen.schema.json`;
-- every validation ID resolves to the fixed context dataset;
+- all six validation records validate against the current coarse-screen schema;
+- every validation ID resolves to the current context dataset;
 - indicator order and mechanical derivation are deterministic;
 - manual binding-present and binding-not-linked paths remain distinct;
-- all records remain `Not Screened`; and
+- all six validation records remain `Not Screened`; and
 - no context or later-workflow field is mutated.
 
-Checksums:
+Current checksums:
 
 - worksheet generator:
-  `3633ec834ecc589b232c59198e7bbd4755ef0f6fa3ad82d68bdb08e865e4029a`;
-- regression tests:
-  `030519d5f590656c8ad48c136a132d47c21c6154f080aa44d745053041fc355b`;
+  `902eeb069670300a9e73f49ad2cb4a0a149af3ad3641454663cc80aeec25b244`;
+- preparation regression tests:
+  `a2f3836aed28f6024221409afc778642f41c05fd1e7e8ae3ecd7898c01e9a910`;
+- batch-execution regression tests:
+  `c4b553e4c6453d27852bc1e4bccce534535449271609ebc241f6c4f7c0f0e6bb`;
+- coarse-screen schema:
+  `296fb8ef928c12c18489887e17b159bce73792c4ee5c933bfa9ea899d5a3657b`;
 - retained technical-validation JSON Lines:
-  `87bb7580adcf144f8daa13a77baf00c65bac9ff4603476a307afba684e5627c3`.
-- retained 448-record initial worksheet:
-  `0a60f6a24466195fd2cd94d98fd3d4f1518ac24f2bc84f00c7435059d0219729`.
+  `b73d0a860e71db9aa366c3d16fb81c74a467163135b9702bc5d5658916413148`;
+  and
+- current preserved 448-record worksheet:
+  `ff368978fa8ae921fed1419bf069f5b954d9846bed8f84c635231a780bca6a0b`.
+
+The pristine initial worksheet remains preserved in Git history and remains the
+historical source of the fixed batch membership manifest.
 
 ## 6. Required Owner Review
 
@@ -188,16 +204,30 @@ questions or assign readiness during validation.
 
 ## 8. Acceptance Status and Next Step
 
-Automated technical validation and owner review are complete. The repository
-owner confirmed that regenerated `CZPOP-0270` cites body range `22-33`, that its
-worksheet observation is correct, and that protected workflow fields remain
-unchanged. The full-screening gate is open.
+Automated preparation, preservation validation, and the accepted B01 checkpoint
+are complete. The preservation report established that all 16 B01 records
+changed only in `context_dataset_sha256`; 432 unscreened records were regenerated
+from the repaired context; and no protected-field error occurred.
 
-The retained 448-record worksheet is the authorized initial screening dataset.
-Screening may proceed in lexical order under the pre-registered protocol.
-Prior-knowledge labeling and case selection remain later operations.
+The current worksheet contains 448 ordered, schema-valid records: 16
+`Ready for Prior-Knowledge Labeling` and 432 `Not Screened`. This technical
+acceptance does not classify behavior, quality, impact, or selection.
+
+The next permitted screening action is `CZCS-B02` (`CZPOP-0017` through
+`CZPOP-0032`). Prior-knowledge labeling and every downstream analytical
+operation remain separate.
 
 ## 9. Revision History
+
+### 0.4.0 — 2026-07-27
+
+- Regenerated the six-record validation dataset from the repaired context
+  baseline.
+- Recorded structured publisher-activity prefill and current checksums.
+- Added regression evidence for preservation of the accepted B01 checkpoint.
+- Accepted the 448-record preserved worksheet with 16 ready and 432 unscreened
+  records.
+
 
 ### 0.3.0 — 2026-07-21
 

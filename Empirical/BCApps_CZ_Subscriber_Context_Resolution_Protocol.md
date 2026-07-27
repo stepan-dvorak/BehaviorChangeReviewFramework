@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-CONTEXT-PROTOCOL-001
   title: BCApps Czech Subscriber Context Resolution Protocol
   type: Empirical Study Protocol
-  version: 0.3.0
+  version: 0.4.0
   status: Active
 
 classification:
@@ -68,21 +68,23 @@ tags:
 
 ## 1. Status and Purpose
 
-This protocol freezes the inputs and outputs for the next stage of the Czech
-localization pilot. The resolver and automated technical validation are now
-implemented, owner review is accepted, and full 448-record context generation
-is complete. This document contains no coarse-screen result, prior-knowledge label, case
-selection, trigger classification, impact assessment, defect claim, or
-framework conclusion.
+The bounded resolver, owner-reviewed validation, and full 448-record generation
+were completed before coarse screening began. A later tooling review established
+that the retained source-publisher evidence identified the event declaration and
+raise-site line but did not retain the executable procedure or trigger enclosing
+that raise site.
 
-The unit invariant is:
+The resolver contract has therefore been extended with structured
+`raise_site_contexts`. The corrected resolver maps every source raise site to one
+unique enclosing executable activity and returns an explicit unresolved status
+when that mapping cannot be established. The complete context dataset and the
+technical-validation subset were regenerated twice from the unchanged fixed
+BCApps commit and accepted as the current mechanical context baseline.
 
-> Every context record belongs to exactly one retained `CZPOP-NNNN` event
-> subscriber declared in the Core Localization Pack for Czech application.
-
-Publisher declarations, raise sites, binding calls, control parameters, and
-other subscribers are context attached to that unit. They are not independent
-candidate cases.
+This correction does not perform or revise a coarse-screening decision. The
+accepted `CZCS-B01` decisions were preserved separately, and prior-knowledge
+labeling, case selection, trigger classification, impact assessment, defect
+claims, and framework conclusions remain outside this protocol.
 
 ## 2. Research Question
 
@@ -165,27 +167,32 @@ source is searched.
 |---|---|
 | `Scripts/Discover_BCApps_CZ_Dependency_Boundary.py` | Validates the commit, manifests, versions, and fixed relationships and generates the boundary CSV |
 | `Empirical/Data/BCApps_CZ_Core_Localization_Dependency_Boundary.csv` | Five-row ordered physical source boundary |
-| `Schemas/BCApps_CZ_Subscriber_Context.schema.json` | Machine-readable contract for one future subscriber-context record |
-| `Scripts/Resolve_BCApps_CZ_Subscriber_Context.py` | Implements bounded dry-run and technical-validation resolution |
-| `Scripts/Test_BCApps_CZ_Subscriber_Context_Resolver.py` | Exercises explicit failure statuses and deterministic validation selection |
+| `Schemas/BCApps_CZ_Subscriber_Context.schema.json` | Machine-readable contract for one subscriber-context record, including structured enclosing-activity context |
+| `Scripts/Resolve_BCApps_CZ_Subscriber_Context.py` | Implements bounded dry-run, validation, and full context resolution |
+| `Scripts/Test_BCApps_CZ_Subscriber_Context_Resolver.py` | Exercises explicit failure statuses, enclosing-activity mapping, and deterministic validation selection |
 | `Empirical/Data/BCApps_CZ_Subscriber_Context_Technical_Validation.jsonl` | Three retained records selected by the protocol rule |
 | `Empirical/Data/BCApps_CZ_Subscriber_Context.jsonl` | Complete one-record-per-subscriber static context dataset |
-| `Empirical/BCApps_CZ_Subscriber_Context_Manifest.md` | Generation, integrity, summary, and limitation record |
+| `Empirical/BCApps_CZ_Subscriber_Context_Manifest.md` | Generation, integrity, summary, preservation, and limitation record |
 
 Reproduction command:
 
 ```text
-python Scripts\Discover_BCApps_CZ_Dependency_Boundary.py --bcapps-root C:\Research\BCApps --output Empirical\Data\BCApps_CZ_Core_Localization_Dependency_Boundary.csv
+python Scripts\Resolve_BCApps_CZ_Subscriber_Context.py --bcapps-root C:\Research\BCApps --population Empirical\Data\BCApps_CZ_Core_Localization_Event_Population.csv --boundary Empirical\Data\BCApps_CZ_Core_Localization_Dependency_Boundary.csv --output Empirical\Data\BCApps_CZ_Subscriber_Context.jsonl --mode full
 ```
 
-Generation checksums:
+Current retained checksums:
 
-- boundary generator:
-  `e3217709c8c232b733ace2d8d2ae9757969e03e1140dde6cd6b62ef7dcd67333`;
-- dependency-boundary CSV:
-  `b45db9af153dc327d418119a0b9f8fb89b0cdc75876a88bf12742c91d1a615f7`;
+- resolver:
+  `dcd2748df3536b2d741a06fcdd971c008427685bc314d38578991ee291839630`;
+- resolver regression tests:
+  `13a695dfd8ca11091483d8caf74d799db5bb558480b458be10ed70035926195e`;
 - subscriber-context schema:
-  `bac8eb28ad3ef4f07ec3cf04dd63ec0682457ed0069a20b791007c2da9be8a25`.
+  `92f643dfe3e0695a91de7c79e51144b5d5e13bf2a4c3f1796f494649d43570e9`;
+- retained technical-validation dataset:
+  `898dd35f6c20069e398c6965cfaf6b571e8e7b650966abef44c405e0d94e8539`;
+  and
+- retained full context dataset:
+  `3267f7ffb1e3adbfff789169d328d44ab4a116eaa1d322121bd897086e6edfc9`.
 
 ## 6. Subscriber-Context Record Contract
 
@@ -199,10 +206,15 @@ The record groups fields into six responsibilities:
 |---|---|
 | Subscriber identity | Preserve the `CZPOP` foreign key, fixed commit, path, codeunit, procedure, and body boundary |
 | Target identity | Preserve object type, object, event, element, and event class from the retained subscriber |
-| Publisher context | Record resolution status, owning boundary application, declaration, raise sites, or platform semantics |
+| Publisher context | Record resolution status, owning boundary application, declaration, raise sites, and one structured enclosing executable activity for every source raise site, or platform semantics when no AL publisher exists |
 | Runtime context | Record subscriber instance and binding paths applicable to this subscriber |
 | Mechanical subscriber context | Record direct calls, exact control reads and writes, transaction markers, and error markers inside the subscriber body |
 | Supporting context | Record composition subscriber IDs, callers, tests, unresolved reason, and any auditable manual correction |
+
+Each `raise_site_contexts` item retains the source path and raise line together
+with `activity_kind`, `activity_name`, declaration line, body start line, and
+body end line. For a fully resolved source publisher, the structured contexts
+must correspond one-to-one with `raise_site_paths`.
 
 The schema fixes `prior_known` to `Unknown`, `coarse_screen_status` to `Not
 Screened`, and `selection_status` to `Unselected`. A context resolver must not
@@ -240,16 +252,20 @@ classification.
    traversal order, not as authority precedence.
 3. Require compatible object type, object identity, event name, and element
    where applicable.
-4. For a source-published event, retain the publisher declaration and every
-   discovered raise site in the owning application.
-5. For a database, page, or other runtime event, record `Resolved Platform or
+4. For a source-published event, retain the publisher declaration, every
+   discovered raise site, and the unique executable procedure or trigger
+   enclosing each raise site.
+5. If a source raise site cannot be mapped to exactly one enclosing executable
+   activity, return `Raise Site Unresolved` and retain the available evidence
+   rather than treating the source publisher as fully resolved.
+6. For a database, page, or other runtime event, record `Resolved Platform or
    Trigger Event` and cite the applicable platform semantics instead of
    inventing an AL publisher path.
-6. If multiple compatible targets remain, return `Ambiguous Target` and retain
+7. If multiple compatible targets remain, return `Ambiguous Target` and retain
    every candidate location.
-7. If the declaration resolves but no raise site is found, return `Raise Site
+8. If the declaration resolves but no raise site is found, return `Raise Site
    Unresolved` rather than assuming the event is unused.
-8. A CZL-published event is recorded as `Publisher in Subject Application`; it
+9. A CZL-published event is recorded as `Publisher in Subject Application`; it
    remains context for the CZL subscriber and is not a new candidate case.
 
 ### 7.4 Subscriber-local mechanical context
@@ -290,13 +306,11 @@ identify the original value, corrected value, source evidence, and reviewer.
 
 ## 8. Technical Validation Before Full Execution
 
-The resolver must be tested before it writes the 448-row context dataset. The
-technical validation set is not a pilot sample and receives no `CZP` IDs.
-
-After an initial dry run, choose the first row in lexical `inventory_id` order
-for every target class actually present, plus the first row producing each
-non-success resolution status. This deterministic rule prevents selecting
-convenient examples. Preserve all attempted validation rows, including failures.
+The technical-validation set is not a pilot sample and receives no `CZP` IDs.
+It contains the first row in lexical order for every target class returned by
+the complete dry run and the first row for each non-success resolution status.
+The current fixed population yields `CZPOP-0001`, `CZPOP-0009`, and
+`CZPOP-0386`.
 
 Validation must demonstrate:
 
@@ -306,16 +320,20 @@ Validation must demonstrate:
 - exact-case path resolution;
 - schema validity for every context record;
 - source locations for every extracted body marker;
+- exact one-to-one correspondence between source raise sites and structured
+  enclosing-activity contexts;
 - correct separation of source-published and platform-trigger events;
-- explicit ambiguity and missing-source behavior; and
+- explicit ambiguity, missing-source, and unresolved-activity behavior; and
 - unchanged `Unknown`, `Not Screened`, and `Unselected` workflow values.
 
-At least one human review must compare each technical validation record with
-the fixed source before full execution. Validation success establishes parser
-fitness for this bounded task, not semantic correctness of later analysis.
+The regenerated validation dataset contains three records and both executions
+were byte-identical. The complete regeneration contains 448 resolved records:
+339 `Resolved Source Publisher`, four `Publisher in Subject Application`, and
+105 `Resolved Platform or Trigger Event`. The eight owner-corrected B01 source
+boundaries match the generated enclosing-activity context.
 
-The repository owner completed this review for all three retained records,
-accepted them without correction, and authorized population-wide generation.
+Validation success establishes parser fitness for this bounded task, not
+semantic correctness of later screening or case analysis.
 
 ## 9. Acceptance Criteria for Resolver Execution
 
@@ -356,16 +374,17 @@ workflow value.
 ## 11. Candidate Implications and Deferred Work
 
 No candidate framework implication is introduced. This protocol is study
-infrastructure created to prevent publisher or marker evidence from replacing
-the subscriber-centered unit of analysis.
+infrastructure created to prevent event declarations, raise-site lines, or
+subscriber-local markers from replacing the subscriber-centered unit of
+analysis.
 
-Resolver implementation, technical validation, owner review, and generation of
-one context record for each retained subscriber are complete. Deferred work is
-now limited to defining the separate coarse-screen operation before executing
-it.
+The resolver repair, deterministic regeneration, schema validation, B01
+golden-oracle comparison, and preservation of the active worksheet are complete.
+The current context baseline may support continued screening in manifest order.
 
-Prior-knowledge labeling, case selection, trigger classification, checklist
-analysis, and synthesis remain explicitly deferred.
+The next permitted screening action remains `CZCS-B02` (`CZPOP-0017` through
+`CZPOP-0032`). Prior-knowledge labeling, case selection, trigger
+classification, checklist analysis, and synthesis remain explicitly deferred.
 
 ## 12. References
 
@@ -386,6 +405,18 @@ analysis, and synthesis remain explicitly deferred.
   <https://github.com/microsoft/BCApps/blob/397d01199c321e774edaf23a7290fee40f75c6a6/src/System%20Application/App/app.json>.
 
 ## 13. Revision History
+
+### 0.4.0 — 2026-07-27
+
+- Added structured enclosing executable activity context for every source raise
+  site.
+- Regenerated and accepted the three-record validation dataset and complete
+  448-record context dataset at the unchanged fixed BCApps commit.
+- Recorded current checksums and the one-to-one source raise-site mapping
+  requirement.
+- Preserved accepted B01 screening decisions and every downstream protected
+  field.
+
 
 ### 0.3.0 — 2026-07-19
 

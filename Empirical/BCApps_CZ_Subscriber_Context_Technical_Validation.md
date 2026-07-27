@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-CONTEXT-VALIDATION-001
   title: BCApps Czech Subscriber Context Resolver Technical Validation
   type: Empirical Study Validation Record
-  version: 0.3.0
+  version: 0.4.0
   status: Active
 
 classification:
@@ -21,8 +21,8 @@ owner: Štěpán Dvořák
 
 purpose: >
   Records implementation-level evidence for the bounded CZL subscriber-context
-  resolver while preserving owner source review, full context generation,
-  coarse screening, and case selection as separate pending steps.
+  resolver, including enclosing-activity repair and deterministic regeneration,
+  while preserving screening decisions and later analysis as separate steps.
 
 quality:
   review: Reviewed
@@ -63,14 +63,19 @@ tags:
 
 ## 1. Status and Scope
 
-The bounded static resolver is implemented and its automated technical checks
-pass. The repository owner reviewed and accepted each retained validation
-record without correction and authorized full 448-record context generation.
-The authorized generation is recorded separately in
-`Empirical/BCApps_CZ_Subscriber_Context_Manifest.md`.
+The bounded static resolver and its focused regression checks pass. The original
+technical validation and owner review established the retained subscriber unit,
+publisher or platform classification, and protected workflow state.
 
-This validation performs no coarse screening, prior-knowledge labeling, case
-selection, trigger classification, impact analysis, defect assessment, or
+After `CZCS-B01`, the resolver was repaired to distinguish the source event
+declaration from the executable procedure or trigger enclosing each raise site.
+The three-record technical-validation dataset and complete 448-record context
+dataset were regenerated twice from the unchanged fixed BCApps commit. The
+outputs were byte-identical, schema-valid, and consistent with the accepted B01
+source boundaries.
+
+This validation performs no coarse-screening decision, prior-knowledge label,
+case selection, trigger classification, impact analysis, defect assessment, or
 framework synthesis.
 
 ## 2. Implemented Resolution Boundary
@@ -85,13 +90,17 @@ framework synthesis.
   extensions against their base objects;
 - distinguishes source-published events from recognized database and page
   trigger events;
-- retains publisher application identity, declaration, raise sites, peer
-  `CZPOP` subscribers, procedure boundaries, direct calls, mutable-parameter
+- indexes executable AL procedures and triggers across the retained boundary;
+- maps every source raise site to one unique enclosing executable activity and
+  retains its kind, name, declaration, body bounds, and raise line;
+- returns `Raise Site Unresolved` when the enclosing activity cannot be mapped
+  uniquely;
+- retains publisher application identity, declaration, peer `CZPOP`
+  subscribers, subscriber body boundaries, direct calls, mutable-parameter
   reads and writes, transaction markers, error markers, and bounded manual
   binding locations;
 - emits explicit ambiguous, missing-source, parse-failure, and unresolved
-  raise-site statuses rather than silently repairing or expanding the boundary;
-  and
+  statuses rather than silently repairing or expanding the boundary; and
 - fixes workflow values to `Unknown`, `Not Screened`, and `Unselected`.
 
 Caller and test paths remain empty unless the current implementation can link
@@ -148,11 +157,13 @@ status. Focused synthetic regression fixtures therefore verify that:
 - two compatible declarations produce `Ambiguous Target` and `Partially
   Resolved`;
 - failure records retain an explanation;
-- mutable-parameter writes retain their source line; and
+- mutable-parameter writes retain their source line;
 - validation selection remains deterministic and does not alter screening
-  state; and
-- balanced `begin`, `case`, and `end` blocks stop a procedure body before
-  comments or declarations belonging to the next object member.
+  state;
+- balanced `begin`, `case`, and `end` blocks stop an executable body before
+  comments or declarations belonging to the next object member; and
+- procedure, trigger, and unresolved raise-site mappings retain or reject
+  structured enclosing-activity context as required.
 
 Synthetic fixtures validate control behavior only. They are not empirical
 BCApps cases and are not included in the population or validation dataset.
@@ -164,18 +175,23 @@ python Scripts\Test_BCApps_CZ_Subscriber_Context_Resolver.py
 python Scripts\Resolve_BCApps_CZ_Subscriber_Context.py --bcapps-root C:\Research\BCApps --population Empirical\Data\BCApps_CZ_Core_Localization_Event_Population.csv --boundary Empirical\Data\BCApps_CZ_Core_Localization_Dependency_Boundary.csv --output Empirical\Data\BCApps_CZ_Subscriber_Context_Technical_Validation.jsonl --mode validation
 ```
 
-Checksums:
+Current checksums:
 
 - resolver:
-  `9e148c3c3a5716350bbea13375f7a411de988364474df91d9dd1461dd05e2103`;
+  `dcd2748df3536b2d741a06fcdd971c008427685bc314d38578991ee291839630`;
 - regression tests:
-  `9eb17f936e3d36ea2603fac5be507dfc990e4b5120f1fe38751e551a2271410c`;
-- retained validation JSON Lines:
-  `4ee46fd6010f808f89b256bc6af49a423353f92d0c3cb4c2e24b42bb65bb7dbc`.
+  `13a695dfd8ca11091483d8caf74d799db5bb558480b458be10ed70035926195e`;
+- subscriber-context schema:
+  `92f643dfe3e0695a91de7c79e51144b5d5e13bf2a4c3f1796f494649d43570e9`;
+- retained technical-validation JSON Lines:
+  `898dd35f6c20069e398c6965cfaf6b571e8e7b650966abef44c405e0d94e8539`;
+  and
+- retained complete context JSON Lines:
+  `3267f7ffb1e3adbfff789169d328d44ab4a116eaa1d322121bd897086e6edfc9`.
 
-Two independent resolver runs produced byte-identical retained validation
-output. All three records validate against
-`Schemas/BCApps_CZ_Subscriber_Context.schema.json`.
+Two independent resolver runs produced byte-identical validation output. The
+complete full-mode runs were also byte-identical. All retained records validate
+against `Schemas/BCApps_CZ_Subscriber_Context.schema.json`.
 
 ## 7. Threats and Known Limitations
 
@@ -198,23 +214,34 @@ output. All three records validate against
 
 ## 8. Acceptance Status and Next Step
 
-Automated implementation validation and owner source review are complete. The
-owner authorized generation and retention of exactly one context record for
-each of the 448 `CZPOP` rows. That operation completed without changing any
-screening or selection field. Coarse screening and case selection remain later,
-separate operations.
+The repaired resolver produced 448 schema-valid, resolved context records in
+exact retained population order. Every source-published record has a structured
+enclosing-activity context corresponding to its retained raise-site paths.
+Platform-trigger records retain no invented AL publisher activity.
 
-The later owner review of coarse-screen worksheet preparation found that
-`CZPOP-0270` ended at line 35 rather than the procedure's line 33. The review
-was conditionally accepted and population-wide coarse screening was not
-authorized. General correction and regeneration changed 10 context records:
-`CZPOP-0033`, `CZPOP-0036`, `CZPOP-0114`, `CZPOP-0198`, `CZPOP-0246`,
-`CZPOP-0247`, `CZPOP-0270`, `CZPOP-0308`, `CZPOP-0321`, `CZPOP-0406`,
-and no others. Every change affects only the retained body end line; all
-mechanical marker arrays remain byte-equivalent. A focused owner re-review of
-the regenerated `CZPOP-0270` worksheet remains required.
+The B01 golden-oracle comparison confirmed the eight owner-corrected enclosing
+activity ranges. Preservation regenerated the unscreened worksheet records from
+the repaired context while changing each accepted B01 record only in
+`context_dataset_sha256`. All prior-knowledge, selection, trigger, and checklist
+fields remain protected.
+
+This technical result accepts the regenerated context dataset as the current
+mechanical screening input. It does not re-open the accepted B01 checkpoint or
+perform screening for `CZPOP-0017` onward. The next permitted screening action
+is `CZCS-B02`.
 
 ## 9. Revision History
+
+### 0.4.0 — 2026-07-27
+
+- Recorded the post-merge enclosing-activity resolver repair.
+- Regenerated the technical-validation and complete context datasets twice with
+  byte-identical results.
+- Recorded the current resolver, test, schema, validation, and full-dataset
+  checksums.
+- Accepted the regenerated context as the preservation input without changing
+  B01 screening decisions or downstream protected fields.
+
 
 ### 0.3.0 — 2026-07-21
 

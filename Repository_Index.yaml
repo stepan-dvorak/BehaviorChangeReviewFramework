@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.16
+  version: 1.0.17
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -43,7 +43,7 @@ artifact:
     - human contributors
 
 generation:
-  generated_on: 2026-07-18
+  generated_on: 2026-07-27
   method: Manual Review
   source_repository: https://github.com/stepan-dvorak/BehaviorChangeReviewFramework
   source_branch: main
@@ -412,8 +412,8 @@ documents:
     authority: working
     status: active
     maturity: draft
-    version: 0.15.0
-    summary: Research backbone recording hypothesis evolution, rejected directions, open questions, and decisions.
+    version: 0.16.0
+    summary: Research backbone recording hypothesis evolution, empirical decisions, resolver repair, and screening-preservation provenance.
     use_for: [research history, open questions, rejected ideas, current hypothesis state]
     depends_on: [00_Project_Charter.md]
     keywords: [research log, hypothesis lifecycle, execution flow, review trigger, negative results]
@@ -694,10 +694,10 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.3.0
-    summary: Freezes the context contract and records completed validation, owner acceptance, and reproducible population-wide static context generation.
+    version: 0.4.0
+    summary: Freezes context resolution and now requires one structured enclosing executable activity for every retained source raise site.
     use_for: [dependency boundary, subscriber-context resolution, publisher lookup, runtime-context evidence, resolver implementation]
-    caution: Static context resolution is complete, but no screening or selection has occurred and the boundary is not a complete packaged Application closure.
+    caution: Static enclosing-activity resolution is mechanical evidence and does not establish runtime behavior, impact, quality, or selection.
     depends_on: [02_Research_Methodology.md, Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md, Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md, References/Microsoft_Event_Types.md]
 
   - path: Empirical/BCApps_CZ_Subscriber_Context_Technical_Validation.md
@@ -708,10 +708,10 @@ documents:
     authority: evidentiary
     status: active
     maturity: draft
-    version: 0.3.0
-    summary: Records resolver validation, the later body-boundary defect, its general correction, and the complete 10-record regeneration impact.
+    version: 0.4.0
+    summary: Records resolver validation, enclosing-activity repair, byte-identical regeneration, and acceptance of the current 448-record context baseline.
     use_for: [resolver validation, parser limitations, validation provenance, owner source review]
-    caution: Validation establishes bounded parser fitness only; it is not screening, impact, quality, or defect evidence.
+    caution: Validation establishes bounded parser fitness and preservation integrity only; it is not a screening or behavioral finding.
     depends_on: [Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md, Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md]
 
   - path: Empirical/BCApps_CZ_Subscriber_Context_Manifest.md
@@ -722,10 +722,10 @@ documents:
     authority: evidentiary
     status: active
     maturity: draft
-    version: 0.3.0
-    summary: Records corrected reproducible generation and limitations for all 448 static context records after balanced procedure-boundary regeneration.
+    version: 0.4.0
+    summary: Records the current reproducible 448-record context baseline with structured enclosing activities and worksheet-preservation provenance.
     use_for: [context dataset provenance, integrity verification, mechanical context summary, coarse-screen input planning]
-    caution: Resolution success and mechanical counts do not establish behavior change, impact, quality, defect status, or screening eligibility.
+    caution: Resolution and structured activity context remain static evidence; they do not establish behavior change, impact, quality, or selection.
     depends_on: [Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md, Empirical/BCApps_CZ_Subscriber_Context_Technical_Validation.md, Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md]
 
   - path: Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md
@@ -736,10 +736,10 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.4.1
-    summary: Pre-registers one-to-one evidence-readiness screening against the corrected context dataset and records the open execution gate.
+    version: 0.5.0
+    summary: Governs one-to-one evidence-readiness screening against the repaired context baseline while preserving the accepted B01 checkpoint.
     use_for: [coarse-screen design, evidence readiness, targeted context search, screening implementation, selection-bias control]
-    caution: Protocol only; no screening, prior-knowledge labeling, bucket assignment, case selection, trigger classification, or impact analysis has occurred.
+    caution: B01 is accepted and 432 records remain unscreened; prior-knowledge labeling and every downstream analytical operation remain pending.
     depends_on: [02_Research_Methodology.md, Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md, Empirical/BCApps_CZ_Subscriber_Context_Manifest.md, Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md]
 
   - path: Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md
@@ -750,10 +750,10 @@ documents:
     authority: evidentiary
     status: active
     maturity: draft
-    version: 0.3.0
-    summary: Records completed automated and owner validation, including focused acceptance of corrected CZPOP-0270 and authorization of population-wide screening.
+    version: 0.4.0
+    summary: Records structured prefill validation and controlled preservation of B01 while mechanically refreshing the 432 unscreened records.
     use_for: [coarse-screen implementation validation, worksheet provenance, workflow-state protection, owner source review]
-    caution: Automated preparation is not coarse screening; readiness decisions and all downstream operations remain pending.
+    caution: Preparation and preservation validation do not perform new screening decisions or downstream analysis.
     depends_on: [Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md, Empirical/BCApps_CZ_Subscriber_Context_Manifest.md]
 
   - path: Empirical/BCApps_CZ_Coarse_Screen_Execution_Protocol.md
@@ -764,10 +764,10 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.1.2
-    summary: Fixes lexical 16-record execution batches and records corrected owner acceptance of the CZCS-B01 calibration checkpoint.
+    version: 0.1.3
+    summary: Fixes lexical 16-record execution batches, records accepted B01, and distinguishes historical and current worksheet fingerprints after preservation.
     use_for: [coarse-screen execution, batch boundaries, reviewer procedure, calibration checkpoint, completion gate]
-    caution: CZCS-B01 records evidence-readiness decisions only; prior-knowledge labeling and every downstream classification remain pending.
+    caution: CZCS-B01 records evidence readiness only; B02 is next and every downstream classification remains pending.
     depends_on: [Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md, Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md]
 
   - path: Empirical/BCApps_CZ_Coarse_Screen_Owner_Review_CZCS_B01.md
@@ -995,7 +995,7 @@ non_markdown_artifacts:
     category: tooling
     authority: evidentiary
     status: active
-    summary: Resolves validation, dry-run, or full bounded static publisher, platform, subscriber-body, composition, and binding context for retained CZL subscribers.
+    summary: Resolves bounded publisher, platform, subscriber, composition, binding, and structured enclosing-activity context for retained CZL subscribers.
     use_for: [subscriber-context resolution, technical validation, context dataset generation]
 
   - path: Scripts/Test_BCApps_CZ_Subscriber_Context_Resolver.py
@@ -1009,7 +1009,7 @@ non_markdown_artifacts:
     category: tooling
     authority: evidentiary
     status: active
-    summary: Deterministically prepares protected Not Screened coarse-screen worksheets from the fixed subscriber-context dataset.
+    summary: Deterministically prepares protected Not Screened templates with structured publisher-activity evidence from the fixed context dataset.
     use_for: [coarse-screen worksheet preparation, technical validation, workflow-state protection]
 
   - path: Scripts/Test_BCApps_CZ_Coarse_Screen_Preparation.py
@@ -1023,14 +1023,14 @@ non_markdown_artifacts:
     category: tooling
     authority: working
     status: active
-    summary: JSON Schema contract for future one-record-per-subscriber context-resolution records.
+    summary: JSON Schema contract for retained subscriber-context records, including structured enclosing executable activity for source raise sites.
     use_for: [context-record validation, resolver implementation, workflow-state protection]
 
   - path: Schemas/BCApps_CZ_Coarse_Screen.schema.json
     category: tooling
     authority: working
     status: active
-    summary: JSON Schema contract for future one-record-per-subscriber coarse evidence-availability screening records.
+    summary: JSON Schema contract for retained coarse evidence-availability records bound to the current context baseline.
     use_for: [coarse-screen validation, readiness-status enforcement, workflow-state protection]
 
   - path: Empirical/Data/BCApps_CZ_Core_Localization_Event_Population.csv
@@ -1051,30 +1051,30 @@ non_markdown_artifacts:
     category: empirical_study
     authority: evidentiary
     status: active
-    summary: Three schema-valid context records selected deterministically, automatically validated, and accepted by the repository owner.
+    summary: Three deterministic schema-valid context records regenerated with structured enclosing-activity evidence at the fixed BCApps commit.
     use_for: [technical validation, source comparison, resolver provenance]
 
   - path: Empirical/Data/BCApps_CZ_Subscriber_Context.jsonl
     category: empirical_study
     authority: evidentiary
     status: active
-    summary: Complete schema-valid 448-record static subscriber-context dataset in exact retained population order.
+    summary: Complete ordered 448-record static context dataset with structured enclosing activities for every source-published raise site.
     use_for: [subscriber context, coarse-screen input, publisher and platform lookup, mechanical evidence availability]
 
   - path: Empirical/Data/BCApps_CZ_Coarse_Screen_Technical_Validation.jsonl
     category: empirical_study
     authority: evidentiary
     status: active
-    summary: Six deterministic schema-valid worksheet records retained as Not Screened for owner source review.
+    summary: Six deterministic schema-valid Not Screened records regenerated from the repaired context baseline.
     use_for: [coarse-screen technical validation, owner source review, worksheet provenance]
 
   - path: Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl
     category: empirical_study
     authority: working
     status: active
-    summary: Complete ordered 448-record coarse-screen worksheet retained in the initial Not Screened state after owner authorization.
+    summary: Current ordered 448-record worksheet with accepted B01 and 432 preserved Not Screened records bound to the repaired context baseline.
     use_for: [population-wide coarse screening, screening checkpoints, evidence-readiness review]
-    caution: Initial worksheet only; it contains no completed screening decision, prior-knowledge label, selection, trigger result, or checklist result.
+    caution: Contains evidence-readiness decisions only for B01; no prior-knowledge label, case selection, trigger result, checklist result, or impact finding.
 
   - path: Empirical/Data/BCApps_CZ_Coarse_Screen_Batches.json
     category: empirical_study
