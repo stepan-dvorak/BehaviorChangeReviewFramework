@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-PROTOCOL-001
   title: BCApps Czech Coarse Evidence-Availability Screening Protocol
   type: Empirical Study Protocol
-  version: 0.4.1
+  version: 0.5.0
   status: Active
 
 classification:
@@ -67,11 +67,17 @@ tags:
 
 ## 1. Status and Boundary
 
-This protocol is fixed before screening begins. It defines a preparatory
-evidence-availability operation over all 448 retained `CZPOP` units. It does not
-perform the screen and contains no prior-knowledge label, `CZP` case ID,
-selection bucket, trigger classification, checklist result, quality judgment,
-defect claim, or prevalence conclusion.
+This protocol was fixed before screening began and remains the decision-rule
+authority for the complete 448-record evidence-availability operation.
+`CZCS-B01` has been screened, corrected, and owner-accepted. Records
+`CZPOP-0017` through `CZPOP-0448` remain `Not Screened`.
+
+The upstream resolver was later repaired to retain structured executable
+activity context for source raise sites. The active worksheet was refreshed
+through an explicit preservation operation: B01 screening decisions were
+preserved, unscreened records were mechanically regenerated, and no
+prior-knowledge, selection, trigger, checklist, quality, defect, or prevalence
+decision was introduced.
 
 The screen answers whether enough bounded source context is available to carry
 a subscriber into later reviewer labeling and selection. It does not answer
@@ -90,22 +96,22 @@ of no behavior, no impact, or poor implementation.
 ## 3. Unit and Fixed Inputs
 
 The unit remains one retained `CZPOP-NNNN` subscriber. Publisher declarations,
-raise sites, callers, tests, bindings, mechanical markers, and other subscribers
-remain context attached to that unit.
+raise sites, structured enclosing activities, callers, tests, bindings,
+mechanical markers, and other subscribers remain context attached to that unit.
 
-Fixed inputs are:
+Current fixed inputs are:
 
 - BCApps commit `397d01199c321e774edaf23a7290fee40f75c6a6`;
 - `Empirical/Data/BCApps_CZ_Core_Localization_Event_Population.csv`;
 - `Empirical/Data/BCApps_CZ_Subscriber_Context.jsonl` with SHA-256
-  `381d476096615b757fecd92e52e3325b65b20384adfa8e9ae1bac792a99c8dfb`;
+  `3267f7ffb1e3adbfff789169d328d44ab4a116eaa1d322121bd897086e6edfc9`;
 - the five-application source boundary; and
 - `Schemas/BCApps_CZ_Coarse_Screen.schema.json`.
 
-The context dataset is immutable input. Screening corrections must be recorded
-in the screen record. A discovered context-extraction defect requires correction
-and revalidation of the upstream resolver and dataset rather than silent repair
-inside screening output.
+The context dataset is immutable during ordinary screening. A discovered
+upstream extraction defect requires a separate resolver correction,
+deterministic regeneration, validation, and explicit worksheet-preservation
+operation. It must not be silently repaired inside a screening record.
 
 ## 4. Separation from Later Operations
 
@@ -132,15 +138,15 @@ The coarse screen must not perform or anticipate steps 3–6. In particular:
 
 ## 5. Screening Record Contract
 
-The JSON Schema is the field authority. Screening creates exactly one separate
-record for every context record and leaves the context dataset unchanged.
+The JSON Schema is the field authority. Screening retains exactly one separate
+record for every context record and does not mutate the context dataset.
 
-Schema SHA-256:
-`9698581c03ae663e5288a03719f6df759ebe35f378d4e3ee5e95f88c9fc31047`.
+Current schema SHA-256:
+`296fb8ef928c12c18489887e17b159bce73792c4ee5c933bfa9ea899d5a3657b`.
 
 Every record contains:
 
-- the `CZPOP` foreign key and fixed context-dataset checksum;
+- the `CZPOP` foreign key and current context-dataset checksum;
 - one screening status;
 - eight evidence-availability fields;
 - zero or more descriptive stratum indicators;
@@ -181,15 +187,21 @@ ambiguous.
 
 ### 6.3 Established flow
 
-`established_flow` is `Available` only when the reviewer can identify the
+`established_flow` is `Available` only when the retained evidence identifies the
 bounded activity in which the event is raised or the platform trigger occurs.
-This requires a concise source-backed description and paths sufficient for
-later case analysis. It does not require a judgment that the subscriber changes
-that flow materially.
+For source-published events, the preparer may mechanically prefill `Available`
+when `raise_site_contexts` maps every raise site to one unique enclosing
+procedure or trigger. That prefill is evidence routing, not a completed human
+screening decision.
 
-Use `Targeted Search Required` when the existing context record locates the
-event but not enough surrounding caller or control-flow context. Use `Outside
-Boundary` when essential source is unavailable under the fixed protocol.
+Before assigning a non-`Not Screened` status, the reviewer must confirm the
+enclosing activity and retain a concise source-backed description sufficient
+for later case interpretation. Platform events still require the reviewer to
+bind the documented trigger phase to the retained target.
+
+Use `Targeted Search Required` when the context record locates the event but
+does not provide enough surrounding control-flow context. Use `Outside Boundary`
+when essential source is unavailable under the fixed protocol.
 
 ### 6.4 Runtime participation
 
@@ -360,21 +372,22 @@ unavailable counts without treating them as behavior or defect prevalence.
 
 ## 14. Authorized Execution State and Deferred Work
 
-The worksheet-preparation implementation, automated technical validation, and
-owner review are complete. Owner review accepted corrected `CZPOP-0270` with
-body range `22-33` and authorized population-wide coarse screening. The
-complete retained worksheet contains 448 records in lexical order, all in the
-initial `Not Screened` state.
+Worksheet preparation, automated validation, and the initial owner checkpoint
+are complete. `CZCS-B01` contains 16 accepted
+`Ready for Prior-Knowledge Labeling` records. The current preserved worksheet
+SHA-256 is
+`ff368978fa8ae921fed1419bf069f5b954d9846bed8f84c635231a780bca6a0b`;
+the remaining 432 records are `Not Screened`.
 
-Human evidence-availability screening is now the active next operation. After
-screening is complete, prior-knowledge labels must be supplied in a separate
-owner-controlled step before bucket assignment.
+The preservation refresh added current context checksums and structured
+publisher-activity evidence without changing any accepted B01 screening field
+other than `context_dataset_sha256`. Protected downstream fields remain
+unchanged for all 448 records.
 
-Execution sessions, fixed batch membership, and the initial owner checkpoint
-are governed by `Empirical/BCApps_CZ_Coarse_Screen_Execution_Protocol.md`.
-
-Case selection, trigger classification, checklist analysis, and framework
-synthesis remain explicitly deferred.
+Human evidence-availability screening continues in manifest order. The next
+permitted batch is `CZCS-B02`. Prior-knowledge labeling, bucket assignment, case
+selection, trigger classification, checklist analysis, and framework synthesis
+remain explicitly deferred.
 
 ## 15. References
 
@@ -390,6 +403,17 @@ synthesis remain explicitly deferred.
   Validation." `Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md`.
 
 ## 16. Revision History
+
+### 0.5.0 — 2026-07-27
+
+- Updated the fixed context and schema checksums after the enclosing-activity
+  resolver repair.
+- Clarified that structured enclosing-activity context may mechanically prefill
+  established-flow availability but does not replace reviewer confirmation.
+- Recorded preservation of all accepted B01 decisions and regeneration of the
+  432 unscreened records.
+- Kept the screening decision rules and deferred-work boundary unchanged.
+
 
 ### 0.4.1 — 2026-07-21
 

@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-CONTEXT-MANIFEST-001
   title: BCApps Czech Subscriber Context Dataset Manifest
   type: Empirical Study Manifest
-  version: 0.3.0
+  version: 0.4.0
   status: Active
 
 classification:
@@ -20,9 +20,9 @@ classification:
 owner: Štěpán Dvořák
 
 purpose: >
-  Records the reproducible generation, integrity checks, mechanical summary,
-  and limitations of the complete 448-record CZL subscriber-context dataset
-  before coarse screening or case selection.
+  Records reproducible generation, integrity checks, mechanical summary,
+  preservation, and limitations of the current 448-record CZL subscriber-context
+  baseline supporting the active coarse-screen workflow.
 
 quality:
   review: Self Reviewed
@@ -65,14 +65,20 @@ tags:
 
 ## 1. Status and Scope
 
-The protocol-required owner review accepted `CZPOP-0001`, `CZPOP-0009`, and
-`CZPOP-0386` without corrections and explicitly authorized full generation.
-The resolver subsequently generated one retained context record for every one
-of the 448 fixed population rows.
+The protocol-required owner review originally accepted `CZPOP-0001`,
+`CZPOP-0009`, and `CZPOP-0386` and authorized full generation. The resolver
+subsequently generated one retained context record for every fixed population
+row.
 
-This dataset is preparatory static-source evidence. It contains no coarse
-screen, prior-knowledge label, selected case, Behavioral Change Impact Review
-trigger result, checklist analysis, defect claim, or prevalence conclusion.
+A later tooling repair added structured executable activity context for source
+raise sites. The complete dataset was regenerated twice from the unchanged
+BCApps commit. Both outputs were byte-identical and all 448 records remain
+resolved and schema-valid.
+
+This dataset is preparatory static-source evidence. `CZCS-B01` has been screened
+and accepted in the separate coarse-screen worksheet, but this context dataset
+contains no prior-knowledge label, selected case, BCIR trigger result, checklist
+analysis, defect claim, or prevalence conclusion.
 
 ## 2. Fixed Inputs and Output
 
@@ -93,14 +99,22 @@ order and contains one JSON object per line.
 python Scripts\Resolve_BCApps_CZ_Subscriber_Context.py --bcapps-root C:\Research\BCApps --population Empirical\Data\BCApps_CZ_Core_Localization_Event_Population.csv --boundary Empirical\Data\BCApps_CZ_Core_Localization_Dependency_Boundary.csv --output Empirical\Data\BCApps_CZ_Subscriber_Context.jsonl --mode full
 ```
 
-Retained checksums:
+Current retained checksums:
 
 - resolver:
-  `9e148c3c3a5716350bbea13375f7a411de988364474df91d9dd1461dd05e2103`;
-- full context dataset:
-  `381d476096615b757fecd92e52e3325b65b20384adfa8e9ae1bac792a99c8dfb`.
+  `dcd2748df3536b2d741a06fcdd971c008427685bc314d38578991ee291839630`;
+- resolver regression tests:
+  `13a695dfd8ca11091483d8caf74d799db5bb558480b458be10ed70035926195e`;
+- schema:
+  `92f643dfe3e0695a91de7c79e51144b5d5e13bf2a4c3f1796f494649d43570e9`;
+- technical-validation dataset:
+  `898dd35f6c20069e398c6965cfaf6b571e8e7b650966abef44c405e0d94e8539`;
+  and
+- complete context dataset:
+  `3267f7ffb1e3adbfff789169d328d44ab4a116eaa1d322121bd897086e6edfc9`.
 
-Two independent executions produced byte-identical output.
+Two independent validation executions and two independent complete executions
+produced byte-identical output.
 
 ## 4. Integrity Results
 
@@ -113,14 +127,18 @@ Two independent executions produced byte-identical output.
 | Population and context order | Exact match |
 | JSON Schema-valid records | 448 |
 | `context_resolution_status = Resolved` | 448 |
+| Source-published records with complete enclosing-activity context | 343 |
+| Platform-trigger records without invented AL activity | 105 |
 | `prior_known = Unknown` | 448 |
 | `coarse_screen_status = Not Screened` | 448 |
 | `selection_status = Unselected` | 448 |
 | Invalid composition references | 0 |
 
 Successful `context_resolution_status` means that the required subscriber
-identity and publisher or platform context resolved under the protocol. It does
-not mean that every possible caller, test, binding, or runtime path is known.
+identity and publisher or platform context resolved under the protocol. For a
+source publisher, every retained raise-site path also maps to one structured
+enclosing procedure or trigger. Resolution does not mean that every caller,
+test, binding, runtime path, or semantic effect is known.
 
 ## 5. Mechanical Dataset Description
 
@@ -166,13 +184,19 @@ lexical link. It is not evidence that runtime binding never occurs.
 ## 6. Repository Observation and Interpretation
 
 **Repository observation:** The bounded resolver produced schema-valid static
-publisher or platform context for all retained subscribers and preserved the
-population unit and all protected workflow fields.
+publisher or platform context for all retained subscribers. For 343
+source-published records, the dataset now distinguishes the event declaration
+from the executable procedure or trigger containing each raise site.
 
-**Interpretation:** The dataset is fit to serve as the mechanical input to a
-separately defined coarse evidence-availability screen. Its successful
-generation does not validate the later screen, the candidate review trigger,
-or the Behavioral Change Impact Checklist.
+**Interpretation:** The repaired dataset is fit to serve as the current
+mechanical input to the separately governed coarse evidence-availability
+screen. Structured enclosing-activity context can reduce repeated source
+navigation, but it does not itself complete human screening or establish
+behavioral significance.
+
+**Preservation observation:** Refreshing the active worksheet changed each
+accepted B01 record only in its context checksum. The 432 unscreened records were
+regenerated mechanically; all downstream protected values remained unchanged.
 
 **Unresolved question:** Caller and test context remain empty unless a direct
 mechanical link was established by the current implementation. Later screening
@@ -194,16 +218,26 @@ must treat empty fields as unavailable static evidence, not as proof of absence.
 
 ## 8. Next Research Step
 
-Population-wide context regeneration is complete after correction of the
-procedure-body boundary rule. The separate coarse evidence-availability
-protocol and record contract are fixed, but screening has not begun. The
-corrected validation record requires focused owner confirmation before the
-screening gate can close.
+Context regeneration, validation, and worksheet preservation are complete. The
+accepted `CZCS-B01` checkpoint remains unchanged, and records
+`CZPOP-0017` through `CZPOP-0448` remain `Not Screened`.
 
+The next permitted screening action is `CZCS-B02` (`CZPOP-0017` through
+`CZPOP-0032`) under the fixed evidence-availability and execution rules.
 Prior-knowledge labeling, case selection, trigger classification, checklist
 analysis, and synthesis remain unperformed.
 
 ## 9. Revision History
+
+### 0.4.0 — 2026-07-27
+
+- Regenerated all 448 records with structured enclosing executable activity
+  context for source raise sites.
+- Recorded byte-identical validation and complete-generation runs and current
+  checksums.
+- Accepted the regenerated dataset as the active coarse-screen context baseline.
+- Preserved the accepted B01 checkpoint and all downstream protected fields.
+
 
 ### 0.3.0 — 2026-07-21
 

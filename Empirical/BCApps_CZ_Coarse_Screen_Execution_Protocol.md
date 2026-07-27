@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-EXECUTION-001
   title: BCApps Czech Coarse Screen Execution Protocol
   type: Empirical Study Protocol
-  version: 0.1.2
+  version: 0.1.3
   status: Active
 
 classification:
@@ -77,16 +77,22 @@ or defect status.
 ## 2. Fixed Execution Inputs
 
 - fixed BCApps commit: `397d01199c321e774edaf23a7290fee40f75c6a6`;
-- corrected context dataset SHA-256:
-  `381d476096615b757fecd92e52e3325b65b20384adfa8e9ae1bac792a99c8dfb`;
-- initial worksheet canonical LF SHA-256:
+- current corrected context dataset SHA-256:
+  `3267f7ffb1e3adbfff789169d328d44ab4a116eaa1d322121bd897086e6edfc9`;
+- pristine initial worksheet canonical LF SHA-256:
   `0a60f6a24466195fd2cd94d98fd3d4f1518ac24f2bc84f00c7435059d0219729`;
+- accepted B01 worksheet before context preservation:
+  `f53e70313c334e28b05ece9f9893c139ad8c01968a52f04c49dc52a19b3e5915`;
+- current preserved worksheet canonical LF SHA-256:
+  `ff368978fa8ae921fed1419bf069f5b954d9846bed8f84c635231a780bca6a0b`;
 - 448 ordered records in `Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl`;
 - batch manifest `Empirical/Data/BCApps_CZ_Coarse_Screen_Batches.json`; and
 - schema `Schemas/BCApps_CZ_Coarse_Screen.schema.json`.
 
-The initial worksheet is preserved in Git history. Screening edits update the
-retained file; a new parallel results file must not be introduced.
+The pristine initial worksheet is preserved in Git history. The batch manifest
+continues to fingerprint that historical planning baseline and defines only
+membership and order. Screening edits and explicit preservation refreshes update
+the single retained worksheet; a parallel results file must not be introduced.
 
 ## 3. Batch Plan
 
@@ -186,19 +192,32 @@ synthesis remain deferred.
 
 ## 9. Current State and Next Action
 
-`CZCS-B01` (`CZPOP-0001` through `CZPOP-0016`) has been screened, owner-reviewed,
-and corrected. All 16 records remain `Ready for Prior-Knowledge Labeling`; this
-count reports only evidence readiness. The owner corrections changed exact
-enclosing-activity citations for eight source-published records and did not
-change any evidence-availability value, screening status, stratum indicator, or
-protected downstream field.
+`CZCS-B01` (`CZPOP-0001` through `CZPOP-0016`) has been screened,
+owner-reviewed, corrected, and accepted. All 16 records remain
+`Ready for Prior-Knowledge Labeling`; this count reports only evidence
+readiness.
 
-The initial owner checkpoint is accepted after correction. No protocol revision,
-recalibration, or calibration-range extension is required. The next permitted
-screening action is `CZCS-B02` (`CZPOP-0017` through `CZPOP-0032`) under the
-unchanged rules in Sections 4–7.
+The enclosing-activity resolver repair changed the upstream context baseline.
+The worksheet was therefore refreshed through a controlled preservation
+operation. Every accepted B01 record changed only in
+`context_dataset_sha256`; 432 later records were mechanically regenerated and
+remain `Not Screened`; all downstream protected fields remain unchanged.
+
+No protocol decision rule, batch boundary, recalibration requirement, or B01
+disposition changed. The next permitted screening action is `CZCS-B02`
+(`CZPOP-0017` through `CZPOP-0032`) under the unchanged rules in Sections 4–7.
 
 ## 10. Revision History
+
+### 0.1.3 — 2026-07-27
+
+- Updated the active context and worksheet checksums after resolver repair and
+  controlled preservation.
+- Distinguished the historical pristine worksheet fingerprint from the current
+  retained screening worksheet.
+- Recorded preservation of every accepted B01 decision and protected field.
+- Kept `CZCS-B02` as the next permitted screening action.
+
 
 ### 0.1.2 — 2026-07-25
 

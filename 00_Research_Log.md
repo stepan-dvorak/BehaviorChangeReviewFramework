@@ -9,7 +9,7 @@ document:
   id: RD-LOG-001
   title: Research Log
   type: Research Log
-  version: 0.15.0
+  version: 0.16.0
   status: Active
 
 classification:
@@ -729,3 +729,42 @@ complete-enclosing-activity boundary check to source-published events.
 remain unperformed.
 
 **Status:** CZCS-B01 accepted after correction; CZCS-B02 authorized
+
+## 2026-07-27 — BCApps Czech Resolver Repair and Screening Preservation
+
+**Tooling observation:** The subscriber-context resolver retained the source
+event declaration and raise-site line but did not retain the executable
+procedure or trigger enclosing the raise. Downstream evidence preparation
+therefore could not distinguish publisher declaration context from bounded
+publisher activity without repeated human navigation.
+
+**Corrective action:** Extended the context schema and resolver with structured
+`raise_site_contexts`, mapped each source raise site to one unique executable
+activity, added procedure, trigger, and unresolved-mapping tests, and regenerated
+the validation and complete context datasets twice from BCApps commit
+`397d01199c321e774edaf23a7290fee40f75c6a6`.
+
+**Regeneration evidence:** Both complete runs were byte-identical. The retained
+context contains 448 resolved records and has SHA-256
+`3267f7ffb1e3adbfff789169d328d44ab4a116eaa1d322121bd897086e6edfc9`.
+The three-record context validation and six-record coarse-screen validation also
+produced byte-identical outputs.
+
+**Preservation decision:** Refreshed the active coarse-screen worksheet rather
+than replacing it with a new template. All 16 accepted B01 records changed only
+in `context_dataset_sha256`. The 432 unscreened records were mechanically
+regenerated; 333 received updated evidence-availability and publisher-activity
+observations. No prior-knowledge, selection, trigger, checklist, reviewer, or
+accepted B01 decision changed.
+
+**Validation:** Resolver, preparation, and batch-execution regression suites
+passed. The current worksheet contains 16 `Ready for Prior-Knowledge Labeling`
+records and 432 `Not Screened` records and has SHA-256
+`ff368978fa8ae921fed1419bf069f5b954d9846bed8f84c635231a780bca6a0b`.
+
+**Decision:** Accept the regenerated context and preserved worksheet as the
+current repository baseline. Keep the tooling and data-refresh correction
+separate from new coarse-screen execution. Continue next with `CZCS-B02` only
+after this preservation change is merged.
+
+**Status:** Context repair and screening preservation accepted; B02 remains next
