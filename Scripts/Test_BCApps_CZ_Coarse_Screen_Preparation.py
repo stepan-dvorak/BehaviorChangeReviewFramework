@@ -71,9 +71,70 @@ class PreparationTests(unittest.TestCase):
         self.assertEqual("Available", record["evidence_availability"]["established_flow"])
         self.assertIn(
             "Publisher activity: procedure PublishFixture at "
-            "Publisher.Codeunit.al:35 (body 39-48; raise site 42).",
+            "Publisher.Codeunit.al:35-48 (body 39-48; raise site 42).",
             record["screening_observations"],
         )
+        self.assertEqual([], record["targeted_search_questions"])
+
+    def test_platform_activity_is_mechanical_prefill(self) -> None:
+        reference = (
+            "https://learn.microsoft.com/en-us/dynamics365/"
+            "business-central/dev-itpro/developer/devenv-event-types"
+        )
+        record = SCREEN.prepare_record(context(
+            target_event_class="Database Trigger Event",
+            publisher_resolution_status="Resolved Platform or Trigger Event",
+            target_event="OnAfterValidateEvent",
+            target_object='Database::"Customer Posting Group"',
+            target_element="Receivables Account",
+            platform_semantics_reference=reference,
+        ))
+        self.assertEqual("Available", record["evidence_availability"]["established_flow"])
+        self.assertIn(
+            "Platform activity: Database Trigger Event OnAfterValidateEvent "
+            "for Customer Posting Group.Receivables Account.",
+            record["screening_observations"],
+        )
+        self.assertIn(
+            f"Platform semantics evidence: {reference}.",
+            record["screening_observations"],
+        )
+        self.assertEqual([], record["targeted_search_questions"])
+
+    def test_manual_source_activity_retains_only_binding_question(self) -> None:
+        record = SCREEN.prepare_record(context(
+            subscriber_instance="Manual",
+            binding_context_paths=[],
+            raise_site_contexts=[{
+                "path": "Publisher.Codeunit.al:42",
+                "line": 42,
+                "activity_kind": "procedure",
+                "activity_name": "PublishFixture",
+                "declaration_line": 35,
+                "body_start_line": 39,
+                "body_end_line": 48,
+            }],
+        ))
+        self.assertEqual("Available", record["evidence_availability"]["established_flow"])
+        self.assertNotIn(
+            "Identify and cite the bounded established activity surrounding the resolved raise site or platform trigger.",
+            record["targeted_search_questions"],
+        )
+        self.assertEqual(
+            ["Locate bounded binding or activation evidence for this manual subscriber, or record that the fixed boundary is exhausted."],
+            record["targeted_search_questions"],
+        )
+
+    def test_unresolved_activity_retains_targeted_question(self) -> None:
+        record = SCREEN.prepare_record(context(
+            publisher_resolution_status="Raise Site Unresolved",
+            raise_site_contexts=[],
+        ))
+        self.assertEqual(
+            "Targeted Search Required",
+            record["evidence_availability"]["established_flow"],
+        )
+        self.assertEqual(1, len(record["targeted_search_questions"]))
 
     def test_validation_selection_deduplicates_and_orders(self) -> None:
         contexts = [

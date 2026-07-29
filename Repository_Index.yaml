@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.17
+  version: 1.0.18
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -43,7 +43,7 @@ artifact:
     - human contributors
 
 generation:
-  generated_on: 2026-07-27
+  generated_on: 2026-07-29
   method: Manual Review
   source_repository: https://github.com/stepan-dvorak/BehaviorChangeReviewFramework
   source_branch: main
@@ -412,8 +412,8 @@ documents:
     authority: working
     status: active
     maturity: draft
-    version: 0.16.0
-    summary: Research backbone recording hypothesis evolution, empirical decisions, resolver repair, and screening-preservation provenance.
+    version: 0.17.0
+    summary: Research backbone recording hypothesis evolution, empirical decisions, context preservation, and pre-B02 evidence-usability correction.
     use_for: [research history, open questions, rejected ideas, current hypothesis state]
     depends_on: [00_Project_Charter.md]
     keywords: [research log, hypothesis lifecycle, execution flow, review trigger, negative results]
@@ -736,10 +736,10 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.5.0
-    summary: Governs one-to-one evidence-readiness screening against the repaired context baseline while preserving the accepted B01 checkpoint.
+    version: 0.5.1
+    summary: Governs evidence-readiness screening with reviewable source ranges, explicit platform activity, and targeted questions only for incomplete context.
     use_for: [coarse-screen design, evidence readiness, targeted context search, screening implementation, selection-bias control]
-    caution: B01 is accepted and 432 records remain unscreened; prior-knowledge labeling and every downstream analytical operation remain pending.
+    caution: B01 remains accepted and 432 records remain unscreened; mechanical prefill is not owner acceptance.
     depends_on: [02_Research_Methodology.md, Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md, Empirical/BCApps_CZ_Subscriber_Context_Manifest.md, Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md]
 
   - path: Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md
@@ -750,10 +750,10 @@ documents:
     authority: evidentiary
     status: active
     maturity: draft
-    version: 0.4.0
-    summary: Records structured prefill validation and controlled preservation of B01 while mechanically refreshing the 432 unscreened records.
+    version: 0.4.1
+    summary: Records validation of source ranges, platform activity evidence, resolved-question removal, and byte-preserved B01 regeneration.
     use_for: [coarse-screen implementation validation, worksheet provenance, workflow-state protection, owner source review]
-    caution: Preparation and preservation validation do not perform new screening decisions or downstream analysis.
+    caution: Validation improves usability but does not execute new screening decisions.
     depends_on: [Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md, Empirical/BCApps_CZ_Subscriber_Context_Manifest.md]
 
   - path: Empirical/BCApps_CZ_Coarse_Screen_Execution_Protocol.md
@@ -764,10 +764,10 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.1.3
-    summary: Fixes lexical 16-record execution batches, records accepted B01, and distinguishes historical and current worksheet fingerprints after preservation.
+    version: 0.1.4
+    summary: Fixes lexical batches, preserves accepted B01, and records the pre-B02 usability refresh of 432 unscreened records.
     use_for: [coarse-screen execution, batch boundaries, reviewer procedure, calibration checkpoint, completion gate]
-    caution: CZCS-B01 records evidence readiness only; B02 is next and every downstream classification remains pending.
+    caution: B02 remains next and downstream analysis remains pending.
     depends_on: [Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md, Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md]
 
   - path: Empirical/BCApps_CZ_Coarse_Screen_Owner_Review_CZCS_B01.md
@@ -1009,14 +1009,14 @@ non_markdown_artifacts:
     category: tooling
     authority: evidentiary
     status: active
-    summary: Deterministically prepares protected Not Screened templates with structured publisher-activity evidence from the fixed context dataset.
+    summary: Deterministically prepares protected Not Screened templates with linkable source ranges, explicit platform activity evidence, and bounded targeted questions.
     use_for: [coarse-screen worksheet preparation, technical validation, workflow-state protection]
 
   - path: Scripts/Test_BCApps_CZ_Coarse_Screen_Preparation.py
     category: tooling
     authority: evidentiary
     status: active
-    summary: Focused regression tests for coarse-screen worksheet preparation and deterministic validation selection.
+    summary: Regression tests for protected preparation, source ranges, platform prefill, genuine targeted searches, and retained worksheet structure.
     use_for: [worksheet regression testing, mechanical-stratum validation, workflow-state protection]
 
   - path: Schemas/BCApps_CZ_Subscriber_Context.schema.json
@@ -1065,16 +1065,16 @@ non_markdown_artifacts:
     category: empirical_study
     authority: evidentiary
     status: active
-    summary: Six deterministic schema-valid Not Screened records regenerated from the repaired context baseline.
+    summary: Six deterministic schema-valid Not Screened records exercising corrected source-range and platform-activity preparation.
     use_for: [coarse-screen technical validation, owner source review, worksheet provenance]
 
   - path: Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl
     category: empirical_study
     authority: working
     status: active
-    summary: Current ordered 448-record worksheet with accepted B01 and 432 preserved Not Screened records bound to the repaired context baseline.
+    summary: Current ordered 448-record worksheet with byte-preserved accepted B01 and 432 usability-corrected Not Screened records.
     use_for: [population-wide coarse screening, screening checkpoints, evidence-readiness review]
-    caution: Contains evidence-readiness decisions only for B01; no prior-knowledge label, case selection, trigger result, checklist result, or impact finding.
+    caution: Contains evidence-readiness decisions only for B01; B02 and downstream analysis remain pending.
 
   - path: Empirical/Data/BCApps_CZ_Coarse_Screen_Batches.json
     category: empirical_study
