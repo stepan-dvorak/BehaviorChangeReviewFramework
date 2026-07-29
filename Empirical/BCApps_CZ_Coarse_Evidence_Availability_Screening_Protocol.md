@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-PROTOCOL-001
   title: BCApps Czech Coarse Evidence-Availability Screening Protocol
   type: Empirical Study Protocol
-  version: 0.5.0
+  version: 0.5.1
   status: Active
 
 classification:
@@ -189,19 +189,22 @@ ambiguous.
 
 `established_flow` is `Available` only when the retained evidence identifies the
 bounded activity in which the event is raised or the platform trigger occurs.
-For source-published events, the preparer may mechanically prefill `Available`
-when `raise_site_contexts` maps every raise site to one unique enclosing
-procedure or trigger. That prefill is evidence routing, not a completed human
-screening decision.
 
-Before assigning a non-`Not Screened` status, the reviewer must confirm the
-enclosing activity and retain a concise source-backed description sufficient
-for later case interpretation. Platform events still require the reviewer to
-bind the documented trigger phase to the retained target.
+For a source-published event, the preparer may mechanically prefill `Available`
+when every raise site maps to one unique enclosing procedure or trigger. The
+observation must cite the complete declaration-through-body range.
 
-Use `Targeted Search Required` when the context record locates the event but
-does not provide enough surrounding control-flow context. Use `Outside Boundary`
-when essential source is unavailable under the fixed protocol.
+For a recognized platform event, the preparer may mechanically prefill
+`Available` when the event class, trigger phase, target object, optional target
+element, and platform-semantics reference are resolved. The observation must
+state those values without inventing an AL publisher.
+
+Both prefills are evidence routing, not completed human screening decisions. A
+targeted established-flow question is retained only when neither complete source
+activity nor complete platform activity is available.
+
+Use `Targeted Search Required` when retained context is incomplete. Use `Outside
+Boundary` when essential source is unavailable under the fixed protocol.
 
 ### 6.4 Runtime participation
 
@@ -376,7 +379,7 @@ Worksheet preparation, automated validation, and the initial owner checkpoint
 are complete. `CZCS-B01` contains 16 accepted
 `Ready for Prior-Knowledge Labeling` records. The current preserved worksheet
 SHA-256 is
-`ff368978fa8ae921fed1419bf069f5b954d9846bed8f84c635231a780bca6a0b`;
+`0e138671c16d2b976e30f4160a7e584d45ec7339d548c3a2941c916a7a9bd68d`;
 the remaining 432 records are `Not Screened`.
 
 The preservation refresh added current context checksums and structured
@@ -403,6 +406,15 @@ remain explicitly deferred.
   Validation." `Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md`.
 
 ## 16. Revision History
+
+### 0.5.1 — 2026-07-29
+
+- Required directly reviewable source-activity range citations.
+- Added complete recognized platform activity to mechanical established-flow
+  prefill.
+- Restricted targeted questions to genuinely incomplete retained context.
+- Preserved B01 and all protected fields.
+
 
 ### 0.5.0 — 2026-07-27
 

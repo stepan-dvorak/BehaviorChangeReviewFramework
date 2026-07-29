@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-EXECUTION-001
   title: BCApps Czech Coarse Screen Execution Protocol
   type: Empirical Study Protocol
-  version: 0.1.3
+  version: 0.1.4
   status: Active
 
 classification:
@@ -84,7 +84,7 @@ or defect status.
 - accepted B01 worksheet before context preservation:
   `f53e70313c334e28b05ece9f9893c139ad8c01968a52f04c49dc52a19b3e5915`;
 - current preserved worksheet canonical LF SHA-256:
-  `ff368978fa8ae921fed1419bf069f5b954d9846bed8f84c635231a780bca6a0b`;
+  `0e138671c16d2b976e30f4160a7e584d45ec7339d548c3a2941c916a7a9bd68d`;
 - 448 ordered records in `Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl`;
 - batch manifest `Empirical/Data/BCApps_CZ_Coarse_Screen_Batches.json`; and
 - schema `Schemas/BCApps_CZ_Coarse_Screen.schema.json`.
@@ -192,22 +192,29 @@ synthesis remain deferred.
 
 ## 9. Current State and Next Action
 
-`CZCS-B01` (`CZPOP-0001` through `CZPOP-0016`) has been screened,
-owner-reviewed, corrected, and accepted. All 16 records remain
-`Ready for Prior-Knowledge Labeling`; this count reports only evidence
-readiness.
+`CZCS-B01` remains screened, owner-reviewed, corrected, and accepted. All 16
+records remain `Ready for Prior-Knowledge Labeling` and are byte-identical to the
+previously accepted retained records.
 
-The enclosing-activity resolver repair changed the upstream context baseline.
-The worksheet was therefore refreshed through a controlled preservation
-operation. Every accepted B01 record changed only in
-`context_dataset_sha256`; 432 later records were mechanically regenerated and
-remain `Not Screened`; all downstream protected fields remain unchanged.
+Before B02, the 432 unscreened records were mechanically refreshed to restore
+reviewable source ranges, add explicit platform activity evidence, and remove
+targeted questions whose evidence was already complete. They remain `Not
+Screened`, with all protected fields unchanged.
 
-No protocol decision rule, batch boundary, recalibration requirement, or B01
-disposition changed. The next permitted screening action is `CZCS-B02`
-(`CZPOP-0017` through `CZPOP-0032`) under the unchanged rules in Sections 4–7.
+The current worksheet SHA-256 is `0e138671c16d2b976e30f4160a7e584d45ec7339d548c3a2941c916a7a9bd68d`. No decision rule,
+batch boundary, B01 disposition, or recalibration requirement changed. The next
+permitted action remains `CZCS-B02`.
 
 ## 10. Revision History
+
+### 0.1.4 — 2026-07-29
+
+- Recorded the pre-B02 evidence-usability correction.
+- Preserved accepted B01 byte-for-byte.
+- Updated the worksheet checksum after deterministic regeneration of 432
+  unscreened records.
+- Kept B02 membership and execution rules unchanged.
+
 
 ### 0.1.3 — 2026-07-27
 

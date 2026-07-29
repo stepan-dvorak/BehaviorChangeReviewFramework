@@ -65,24 +65,69 @@ def indicators(context: dict) -> list[str]:
     return [item for item in INDICATOR_ORDER if item in found]
 
 
+PLATFORM_EVENT_CLASSES = {
+    "Database Trigger Event",
+    "Page Trigger Event",
+    "Platform Event",
+}
+
+
+def al_display_name(value: str | None) -> str:
+    text = str(value or "")
+    if "::" in text:
+        text = text.split("::", 1)[1]
+    return text.strip('"')
+
+
 def publisher_activity_observations(context: dict) -> list[str]:
     observations = []
     for site in context.get("raise_site_contexts", []):
+        source_path = site["path"].rsplit(":", 1)[0]
         observations.append(
             "Publisher activity: "
             f"{site['activity_kind']} {site['activity_name']} at "
-            f"{site['path'].rsplit(':', 1)[0]}:{site['declaration_line']} "
+            f"{source_path}:{site['declaration_line']}-{site['body_end_line']} "
             f"(body {site['body_start_line']}-{site['body_end_line']}; "
             f"raise site {site['line']})."
         )
     return observations
 
 
+def platform_activity_available(context: dict) -> bool:
+    return (
+        context.get("publisher_resolution_status") == "Resolved Platform or Trigger Event"
+        and context.get("target_event_class") in PLATFORM_EVENT_CLASSES
+        and bool(context.get("target_event"))
+        and bool(context.get("target_object"))
+        and bool(context.get("platform_semantics_reference"))
+    )
+
+
+def platform_activity_observations(context: dict) -> list[str]:
+    if not platform_activity_available(context):
+        return []
+    target = al_display_name(context.get("target_object"))
+    element = str(context.get("target_element") or "").strip()
+    target_label = f"{target}.{element}" if element else target
+    return [
+        "Platform activity: "
+        f"{context['target_event_class']} {context['target_event']} for {target_label}.",
+        f"Platform semantics evidence: {context['platform_semantics_reference']}.",
+    ]
+
+
+def established_flow_available(context: dict) -> bool:
+    return bool(context.get("raise_site_contexts")) or platform_activity_available(context)
+
+
 def prepare_record(context: dict) -> dict:
     manual = context["subscriber_instance"] == "Manual"
-    questions = [
-        "Identify and cite the bounded established activity surrounding the resolved raise site or platform trigger."
-    ]
+    established_available = established_flow_available(context)
+    questions = []
+    if not established_available:
+        questions.append(
+            "Identify and cite the bounded established activity surrounding the resolved raise site or platform trigger."
+        )
     if manual and not context["binding_context_paths"]:
         questions.append(
             "Locate bounded binding or activation evidence for this manual subscriber, or record that the fixed boundary is exhausted."
@@ -93,6 +138,7 @@ def prepare_record(context: dict) -> dict:
         f"Subscriber body: {context['subscriber_path']}:{context['subscriber_body_start_line']}-{context['subscriber_body_end_line']}.",
     ]
     observations.extend(publisher_activity_observations(context))
+    observations.extend(platform_activity_observations(context))
     return {
         "inventory_id": context["inventory_id"],
         "context_dataset_sha256": EXPECTED_CONTEXT_SHA256,
@@ -104,7 +150,7 @@ def prepare_record(context: dict) -> dict:
             "publisher_or_platform": "Available",
             "raise_or_trigger": "Available",
             "established_flow": (
-                "Available" if context.get("raise_site_contexts")
+                "Available" if established_available
                 else "Targeted Search Required"
             ),
             "runtime_participation": (

@@ -9,7 +9,7 @@ document:
   id: RD-LOG-001
   title: Research Log
   type: Research Log
-  version: 0.16.0
+  version: 0.17.0
   status: Active
 
 classification:
@@ -768,3 +768,33 @@ separate from new coarse-screen execution. Continue next with `CZCS-B02` only
 after this preservation change is merged.
 
 **Status:** Context repair and screening preservation accepted; B02 remains next
+
+## 2026-07-29 — BCApps Czech Coarse-Screen Evidence Usability Correction
+
+**Owner-review observation:** Before `CZCS-B02`, source activity links covered
+only one declaration line, platform-trigger records lacked a direct bounded-
+activity explanation, and resolved records retained a generic targeted-search
+question.
+
+**Root cause:** The coarse-screen preparer formatted source activity as a
+single-line citation, emitted no platform-activity observation, and initialized
+the established-flow question unconditionally.
+
+**Correction:** Source activity now cites the complete declaration-through-body
+range. Complete recognized platform events now retain target, trigger phase, and
+platform-semantics observations. The established-flow question remains only when
+neither complete source nor complete platform activity is available.
+
+**Preservation:** The subscriber-context dataset was not changed. All 16 accepted
+B01 records remain byte-identical. All 432 later records were regenerated and
+remain `Not Screened`; 333 have source activity prefill,
+99 have platform activity prefill, and 0 retain a
+genuine established-flow targeted search.
+
+**Validation:** The retained worksheet is schema-valid and has SHA-256
+`0e138671c16d2b976e30f4160a7e584d45ec7339d548c3a2941c916a7a9bd68d`. The technical-validation dataset has SHA-256
+`33392268b0e0ab6f0c1c9c036390fdd8f9794c23ede8bfe40380ff565f92898c`.
+
+**Decision:** Merge this preparer and data-preservation correction before B02.
+
+**Status:** Evidence-usability correction complete; B02 remains next

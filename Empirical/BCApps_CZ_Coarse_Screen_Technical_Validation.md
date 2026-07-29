@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-VALIDATION-001
   title: BCApps Czech Coarse Screen Preparation Technical Validation
   type: Empirical Study Validation Record
-  version: 0.4.0
+  version: 0.4.1
   status: Active
 
 classification:
@@ -156,18 +156,18 @@ All six records remain `Not Screened`, have null reviewer and date, and retain
 Current checksums:
 
 - worksheet generator:
-  `902eeb069670300a9e73f49ad2cb4a0a149af3ad3641454663cc80aeec25b244`;
+  `03d7c371bc80cc8917d7fe44e848ff539c0f0f58239b225899fa36e93c8b6f4e`;
 - preparation regression tests:
-  `a2f3836aed28f6024221409afc778642f41c05fd1e7e8ae3ecd7898c01e9a910`;
+  `8e53345d76ea5b9cbb7459b2f7416ed3d22acb396a6b7525ef2f9275f24ad689`;
 - batch-execution regression tests:
   `c4b553e4c6453d27852bc1e4bccce534535449271609ebc241f6c4f7c0f0e6bb`;
 - coarse-screen schema:
   `296fb8ef928c12c18489887e17b159bce73792c4ee5c933bfa9ea899d5a3657b`;
 - retained technical-validation JSON Lines:
-  `b73d0a860e71db9aa366c3d16fb81c74a467163135b9702bc5d5658916413148`;
+  `33392268b0e0ab6f0c1c9c036390fdd8f9794c23ede8bfe40380ff565f92898c`;
   and
 - current preserved 448-record worksheet:
-  `ff368978fa8ae921fed1419bf069f5b954d9846bed8f84c635231a780bca6a0b`.
+  `0e138671c16d2b976e30f4160a7e584d45ec7339d548c3a2941c916a7a9bd68d`.
 
 The pristine initial worksheet remains preserved in Git history and remains the
 historical source of the fixed batch membership manifest.
@@ -204,20 +204,31 @@ questions or assign readiness during validation.
 
 ## 8. Acceptance Status and Next Step
 
-Automated preparation, preservation validation, and the accepted B01 checkpoint
-are complete. The preservation report established that all 16 B01 records
-changed only in `context_dataset_sha256`; 432 unscreened records were regenerated
-from the repaired context; and no protected-field error occurred.
+The evidence-usability correction is complete. Source-publisher observations now
+expose directly linkable declaration-through-body ranges. Resolved platform
+triggers now retain bounded activity and platform-semantics observations. A
+generic established-flow targeted question is no longer retained after the
+required evidence is complete.
 
-The current worksheet contains 448 ordered, schema-valid records: 16
-`Ready for Prior-Knowledge Labeling` and 432 `Not Screened`. This technical
-acceptance does not classify behavior, quality, impact, or selection.
+The subscriber-context dataset was not changed. All 16 accepted B01 records are
+byte-identical. All 432 later records were regenerated from the unchanged
+context baseline and remain `Not Screened`; protected fields remain unchanged.
 
-The next permitted screening action is `CZCS-B02` (`CZPOP-0017` through
-`CZPOP-0032`). Prior-knowledge labeling and every downstream analytical
-operation remain separate.
+The current worksheet SHA-256 is `0e138671c16d2b976e30f4160a7e584d45ec7339d548c3a2941c916a7a9bd68d`. The retained technical-
+validation SHA-256 is `33392268b0e0ab6f0c1c9c036390fdd8f9794c23ede8bfe40380ff565f92898c`.
+
+The next permitted screening action remains `CZCS-B02`.
 
 ## 9. Revision History
+
+### 0.4.1 — 2026-07-29
+
+- Added regression coverage for linkable source ranges.
+- Added deterministic platform activity and semantics observations.
+- Removed resolved established-flow questions while retaining genuine searches.
+- Regenerated six validation records and 432 unscreened records with byte-
+  identical B01 preservation.
+
 
 ### 0.4.0 — 2026-07-27
 
