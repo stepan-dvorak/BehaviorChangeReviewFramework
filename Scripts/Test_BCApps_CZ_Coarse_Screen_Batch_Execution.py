@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression tests for the retained CZL coarse-screen calibration batch."""
+"""Regression tests for the retained CZL population-wide coarse screen."""
 
 from __future__ import annotations
 
@@ -36,6 +36,10 @@ ALLOWED_SCREENING_FIELDS = {
     "screening_status", "evidence_availability", "targeted_search_questions",
     "screening_observations", "unavailability_reason", "screened_by", "screened_on",
 }
+SPECIAL_MANUAL_BINDING_IDS = {
+    "CZPOP-0125", "CZPOP-0200", "CZPOP-0201", "CZPOP-0202",
+    "CZPOP-0203", "CZPOP-0245",
+}
 
 
 def read_jsonl(path: Path) -> list[dict]:
@@ -67,29 +71,25 @@ class BatchExecutionTests(unittest.TestCase):
         ]
         self.assertEqual([], errors)
 
-    def test_population_order_and_screening_checkpoint_are_preserved(self) -> None:
+    def test_population_order_and_screening_completion_are_preserved(self) -> None:
         self.assertEqual(448, len(self.records))
         self.assertEqual(
             [f"CZPOP-{number:04d}" for number in range(1, 449)],
             [record["inventory_id"] for record in self.records],
         )
         for index, record in enumerate(self.records):
-            if index < 16:
-                self.assertEqual(
-                    "Ready for Prior-Knowledge Labeling",
-                    record["screening_status"],
-                )
-                self.assertEqual(
-                    "Available",
-                    record["evidence_availability"]["established_flow"],
-                )
-                self.assertEqual([], record["targeted_search_questions"])
-                self.assertEqual("OpenAI Codex", record["screened_by"])
-                self.assertEqual("2026-07-21", record["screened_on"])
-            else:
-                self.assertEqual(self.prepared[index], record)
+            self.assertEqual("Ready for Prior-Knowledge Labeling", record["screening_status"])
+            self.assertEqual("Available", record["evidence_availability"]["established_flow"])
+            self.assertEqual([], record["targeted_search_questions"])
+            self.assertIsNone(record["unavailability_reason"])
+            self.assertEqual("OpenAI Codex", record["screened_by"])
+            self.assertEqual("2026-07-21" if index < 16 else "2026-07-29", record["screened_on"])
+            self.assertEqual("Unknown", record["prior_known"])
+            self.assertEqual("Unselected", record["selection_status"])
+            self.assertEqual("Not Evaluated", record["trigger_status"])
+            self.assertEqual("Not Evaluated", record["checklist_status"])
 
-    def test_b01_differs_from_current_mechanical_template_only_in_screening_fields(self) -> None:
+    def test_retained_records_differ_from_mechanical_template_only_in_screening_fields(self) -> None:
         for index, (prepared, retained) in enumerate(
             zip(self.prepared, self.records, strict=True),
             1,
@@ -99,15 +99,39 @@ class BatchExecutionTests(unittest.TestCase):
                 for key in set(prepared) | set(retained)
                 if prepared.get(key) != retained.get(key)
             }
-            if index <= 16:
-                self.assertLessEqual(changed, ALLOWED_SCREENING_FIELDS)
-            else:
-                self.assertEqual(set(), changed)
-
+            self.assertLessEqual(changed, ALLOWED_SCREENING_FIELDS)
+            if index > 16:
+                self.assertTrue(
+                    {"screening_status", "screening_observations", "screened_by", "screened_on"}
+                    <= changed
+                )
             self.assertEqual("Unknown", retained["prior_known"])
             self.assertEqual("Unselected", retained["selection_status"])
             self.assertEqual("Not Evaluated", retained["trigger_status"])
             self.assertEqual("Not Evaluated", retained["checklist_status"])
+
+    def test_manual_runtime_participation_is_resolved(self) -> None:
+        records = {record["inventory_id"]: record for record in self.records}
+        manual_ids = {
+            context["inventory_id"]
+            for context in self.contexts
+            if context["subscriber_instance"] == "Manual"
+        }
+        self.assertTrue(SPECIAL_MANUAL_BINDING_IDS <= manual_ids)
+        for inventory_id in manual_ids:
+            record = records[inventory_id]
+            self.assertEqual(
+                "Binding Evidence Available",
+                record["evidence_availability"]["runtime_participation"],
+            )
+            self.assertEqual([], record["targeted_search_questions"])
+            self.assertTrue(
+                any(
+                    observation.startswith("Runtime-participation conclusion:")
+                    for observation in record["screening_observations"]
+                ),
+                inventory_id,
+            )
 
     def test_owner_corrections_use_exact_established_activity_boundaries(self) -> None:
         records = {record["inventory_id"]: record for record in self.records}

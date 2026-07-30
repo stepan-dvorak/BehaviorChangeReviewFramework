@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.18
+  version: 1.0.19
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -412,8 +412,8 @@ documents:
     authority: working
     status: active
     maturity: draft
-    version: 0.17.0
-    summary: Research backbone recording hypothesis evolution, empirical decisions, context preservation, and pre-B02 evidence-usability correction.
+    version: 0.18.0
+    summary: Research backbone recording hypothesis evolution, empirical decisions, context preservation, and population-wide coarse-screen completion.
     use_for: [research history, open questions, rejected ideas, current hypothesis state]
     depends_on: [00_Project_Charter.md]
     keywords: [research log, hypothesis lifecycle, execution flow, review trigger, negative results]
@@ -736,10 +736,10 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.5.1
-    summary: Governs evidence-readiness screening with reviewable source ranges, explicit platform activity, and targeted questions only for incomplete context.
+    version: 0.5.2
+    summary: Governs the completed evidence-readiness screen with reviewable source ranges, explicit platform activity, and bounded manual-runtime searches.
     use_for: [coarse-screen design, evidence readiness, targeted context search, screening implementation, selection-bias control]
-    caution: B01 remains accepted and 432 records remain unscreened; mechanical prefill is not owner acceptance.
+    caution: Population readiness is AI-assisted evidence review, not owner acceptance or downstream behavioral analysis.
     depends_on: [02_Research_Methodology.md, Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md, Empirical/BCApps_CZ_Subscriber_Context_Manifest.md, Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md]
 
   - path: Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md
@@ -750,10 +750,10 @@ documents:
     authority: evidentiary
     status: active
     maturity: draft
-    version: 0.4.1
-    summary: Records validation of source ranges, platform activity evidence, resolved-question removal, and byte-preserved B01 regeneration.
+    version: 0.4.2
+    summary: Records preparation validation and workflow-state regression coverage for the completed population-wide coarse screen.
     use_for: [coarse-screen implementation validation, worksheet provenance, workflow-state protection, owner source review]
-    caution: Validation improves usability but does not execute new screening decisions.
+    caution: Preparation validation remains distinct from owner acceptance and downstream analysis.
     depends_on: [Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md, Empirical/BCApps_CZ_Subscriber_Context_Manifest.md]
 
   - path: Empirical/BCApps_CZ_Coarse_Screen_Execution_Protocol.md
@@ -764,11 +764,25 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.1.4
-    summary: Fixes lexical batches, preserves accepted B01, and records the pre-B02 usability refresh of 432 unscreened records.
-    use_for: [coarse-screen execution, batch boundaries, reviewer procedure, calibration checkpoint, completion gate]
-    caution: B02 remains next and downstream analysis remains pending.
+    version: 0.2.0
+    summary: Records calibration, owner-authorized population-wide execution, fixed audit partitions, and the completed 448-record evidence-readiness gate.
+    use_for: [coarse-screen execution, batch boundaries, population session, reviewer procedure, calibration checkpoint, completion gate]
+    caution: Owner review and all downstream analysis remain separate from the completed AI-assisted screen.
     depends_on: [Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md, Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md]
+
+  - path: Empirical/BCApps_CZ_Coarse_Screen_Population_Checkpoint.md
+    document_id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-POPULATION-001
+    title: BCApps Czech Population-Wide Coarse Screen Checkpoint
+    profile: empirical_study
+    category: empirical_study
+    authority: evidentiary
+    status: active
+    maturity: review
+    version: 0.1.0
+    summary: Records population-wide completion, disposition counts, bounded manual-runtime resolutions, preservation guarantees, and validation results.
+    use_for: [population coarse-screen completion, disposition counts, manual binding evidence, preservation evidence, owner review preparation]
+    caution: AI-assisted evidence readiness is not owner acceptance, prior knowledge, selection, trigger classification, checklist assessment, or BCIR analysis.
+    depends_on: [Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md, Empirical/BCApps_CZ_Coarse_Screen_Execution_Protocol.md, Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl]
 
   - path: Empirical/BCApps_CZ_Coarse_Screen_Owner_Review_CZCS_B01.md
     document_id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-OWNER-REVIEW-B01-001
@@ -1072,9 +1086,9 @@ non_markdown_artifacts:
     category: empirical_study
     authority: working
     status: active
-    summary: Current ordered 448-record worksheet with byte-preserved accepted B01 and 432 usability-corrected Not Screened records.
-    use_for: [population-wide coarse screening, screening checkpoints, evidence-readiness review]
-    caution: Contains evidence-readiness decisions only for B01; B02 and downstream analysis remain pending.
+    summary: Completed ordered 448-record evidence-readiness worksheet with byte-preserved accepted B01 and population-wide AI screening decisions.
+    use_for: [population-wide coarse screening, screening checkpoints, evidence-readiness review, owner review preparation]
+    caution: Contains evidence-readiness decisions only; owner acceptance and downstream analysis remain pending.
 
   - path: Empirical/Data/BCApps_CZ_Coarse_Screen_Batches.json
     category: empirical_study

@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-EXECUTION-001
   title: BCApps Czech Coarse Screen Execution Protocol
   type: Empirical Study Protocol
-  version: 0.1.4
+  version: 0.2.0
   status: Active
 
 classification:
@@ -83,8 +83,10 @@ or defect status.
   `0a60f6a24466195fd2cd94d98fd3d4f1518ac24f2bc84f00c7435059d0219729`;
 - accepted B01 worksheet before context preservation:
   `f53e70313c334e28b05ece9f9893c139ad8c01968a52f04c49dc52a19b3e5915`;
-- current preserved worksheet canonical LF SHA-256:
+- pre-execution preserved worksheet canonical LF SHA-256:
   `0e138671c16d2b976e30f4160a7e584d45ec7339d548c3a2941c916a7a9bd68d`;
+- completed population-wide worksheet canonical LF SHA-256:
+  `f5fd8b7332fdee1baaf1b294f8ba9f1144ee01e6502d7ea484b4c82d139da8c9`;
 - 448 ordered records in `Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl`;
 - batch manifest `Empirical/Data/BCApps_CZ_Coarse_Screen_Batches.json`; and
 - schema `Schemas/BCApps_CZ_Coarse_Screen.schema.json`.
@@ -105,6 +107,14 @@ the pristine worksheet and contains no screening result.
 calibration batch. Calibration concerns consistent application and recording
 of the fixed rules; it must not tune the rules to obtain a preferred readiness
 rate or case population.
+
+### 3.1 Owner-Authorized Population-Wide Execution
+
+After B01 owner acceptance and the pre-B02 evidence-usability correction, the
+repository owner authorized `CZCS-B02` through `CZCS-B28` to be screened in one
+population-wide change set on 2026-07-29. Batch boundaries remain fixed planning
+and audit partitions. They are used for traceability and count reconciliation,
+not as separate delivery gates and not to tune decisions by observed results.
 
 ## 4. Record Review Procedure
 
@@ -136,9 +146,12 @@ Every reviewed record ends as one of:
 - `Targeted Context Required`; or
 - `Unavailable for Selection`.
 
-`Not Screened` remains mandatory outside completed batches. A batch may contain
-temporary `Targeted Context Required` records. Such records are not skipped:
-their exact question and bounded search disposition remain visible.
+During batch-isolated execution, `Not Screened` remains mandatory outside
+completed batches. Under the owner-authorized population-wide execution, all
+records in `CZCS-B02` through `CZCS-B28` are active in the same change set and
+must reach a terminal status together. Temporary `Targeted Context Required`
+records are not skipped; their exact question and bounded-search disposition
+remain visible until resolved or retained.
 
 No summary count may be interpreted as behavioral, defect, or quality
 prevalence.
@@ -161,23 +174,24 @@ applied to the first batch and re-reviewed. Changes to the governing screening
 rules require an explicit protocol revision and reassessment of all already
 screened records; they must not be introduced as silent calibration notes.
 
-## 7. Subsequent Sessions
+## 7. Population-Wide Execution Session
 
-After owner acceptance of `CZCS-B01`, process later batches in manifest order.
-One commit should contain one completed batch unless a targeted-search
-resolution is intentionally recorded as a separate follow-up. At each commit:
+The authorized population-wide session reviews `CZPOP-0017` through
+`CZPOP-0448` while preserving accepted B01 byte-for-byte. The implementation
+must:
 
-- all earlier accepted records remain unchanged except for documented
-  corrections;
-- the active batch contains no `Not Screened` records;
-- later batches remain `Not Screened`;
-- the complete worksheet is schema-valid; and
-- the research log records the batch ID, range, disposition counts, reviewer,
-  date, unresolved targeted searches, and validation result.
+- retain the fixed manifest order and batch membership as audit partitions;
+- apply the record procedure in Section 4 to every active record;
+- resolve only bounded targeted searches allowed by the parent protocol;
+- leave no active record as `Not Screened`;
+- preserve all four protected downstream fields and all stratum indicators;
+- validate the complete 448-record worksheet and repository; and
+- record final disposition counts, reviewer, date, resolved searches, checksum,
+  and validation results in one completion checkpoint.
 
 Unexpected ambiguity, extraction defects, or evidence outside the fixed
-boundary are results, not reasons to omit a record. An upstream extraction
-defect stops the active batch until corrected and revalidated.
+boundary remain results, not reasons to omit a record. A systematic upstream
+defect stops the population session until corrected and revalidated.
 
 ## 8. Completion Gate
 
@@ -192,20 +206,34 @@ synthesis remain deferred.
 
 ## 9. Current State and Next Action
 
-`CZCS-B01` remains screened, owner-reviewed, corrected, and accepted. All 16
-records remain `Ready for Prior-Knowledge Labeling` and are byte-identical to the
-previously accepted retained records.
+Population-wide evidence-availability screening is complete. All 448 records are
+`Ready for Prior-Knowledge Labeling`: 16 accepted B01 records dated 2026-07-21
+and 432 population-session records dated 2026-07-29. The completed worksheet
+canonical LF SHA-256 is `f5fd8b7332fdee1baaf1b294f8ba9f1144ee01e6502d7ea484b4c82d139da8c9`.
 
-Before B02, the 432 unscreened records were mechanically refreshed to restore
-reviewable source ranges, add explicit platform activity evidence, and remove
-targeted questions whose evidence was already complete. They remain `Not
-Screened`, with all protected fields unchanged.
+Accepted B01 is byte-identical. Six manual-subscriber runtime questions
+(`CZPOP-0125`, `CZPOP-0200` through `CZPOP-0203`, and `CZPOP-0245`) were resolved
+from bounded binding or activation evidence at the fixed BCApps revision. No
+record remains `Not Screened`, `Targeted Context Required`, or `Unavailable for
+Selection`. Protected downstream fields and stratum indicators remain unchanged.
 
-The current worksheet SHA-256 is `0e138671c16d2b976e30f4160a7e584d45ec7339d548c3a2941c916a7a9bd68d`. No decision rule,
-batch boundary, B01 disposition, or recalibration requirement changed. The next
-permitted action remains `CZCS-B02`.
+The next operation is a separate owner-review checkpoint for the population-wide
+AI-assisted decisions. Prior-knowledge labeling and every downstream analytical
+operation remain deferred until separately authorized.
 
 ## 10. Revision History
+
+### 0.2.0 — 2026-07-29
+
+- Recorded owner authorization for one population-wide B02-through-B28 execution
+  change set.
+- Retained fixed batches as planning and audit partitions rather than delivery
+  gates.
+- Completed all 448 evidence-readiness dispositions while preserving B01 and all
+  protected downstream fields.
+- Kept owner review, prior knowledge, selection, trigger, checklist, and
+  synthesis work separate.
+
 
 ### 0.1.4 — 2026-07-29
 

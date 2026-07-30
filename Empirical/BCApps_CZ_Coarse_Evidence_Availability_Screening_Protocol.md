@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-PROTOCOL-001
   title: BCApps Czech Coarse Evidence-Availability Screening Protocol
   type: Empirical Study Protocol
-  version: 0.5.1
+  version: 0.5.2
   status: Active
 
 classification:
@@ -375,22 +375,21 @@ unavailable counts without treating them as behavior or defect prevalence.
 
 ## 14. Authorized Execution State and Deferred Work
 
-Worksheet preparation, automated validation, and the initial owner checkpoint
-are complete. `CZCS-B01` contains 16 accepted
-`Ready for Prior-Knowledge Labeling` records. The current preserved worksheet
-SHA-256 is
-`0e138671c16d2b976e30f4160a7e584d45ec7339d548c3a2941c916a7a9bd68d`;
-the remaining 432 records are `Not Screened`.
+Worksheet preparation, automated validation, the initial owner checkpoint, and
+the owner-authorized population-wide execution are complete. All 448 records
+are `Ready for Prior-Knowledge Labeling`. The completed worksheet canonical LF
+SHA-256 is `f5fd8b7332fdee1baaf1b294f8ba9f1144ee01e6502d7ea484b4c82d139da8c9`.
 
-The preservation refresh added current context checksums and structured
-publisher-activity evidence without changing any accepted B01 screening field
-other than `context_dataset_sha256`. Protected downstream fields remain
-unchanged for all 448 records.
+The 16 accepted B01 records remain byte-identical. Records `CZPOP-0017` through
+`CZPOP-0448` were reviewed against the fixed context dataset and source boundary.
+Six manual-subscriber runtime questions were resolved with bounded binding or
+activation evidence. No record required unavailable or unresolved disposition.
+Protected downstream fields remain unchanged for all 448 records.
 
-Human evidence-availability screening continues in manifest order. The next
-permitted batch is `CZCS-B02`. Prior-knowledge labeling, bucket assignment, case
-selection, trigger classification, checklist analysis, and framework synthesis
-remain explicitly deferred.
+The fixed batches remain planning and audit partitions; their boundaries did not
+influence the screening decisions. Prior-knowledge labeling, bucket assignment,
+case selection, trigger classification, checklist analysis, and framework
+synthesis remain explicitly deferred.
 
 ## 15. References
 
@@ -406,6 +405,17 @@ remain explicitly deferred.
   Validation." `Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md`.
 
 ## 16. Revision History
+
+### 0.5.2 — 2026-07-29
+
+- Recorded completion of the owner-authorized population-wide evidence-readiness
+  screen.
+- Preserved accepted B01 byte-for-byte and all protected downstream fields.
+- Resolved six bounded manual-subscriber runtime questions from the fixed source
+  revision.
+- Kept prior knowledge, selection, trigger, checklist, and synthesis work
+  deferred.
+
 
 ### 0.5.1 — 2026-07-29
 
