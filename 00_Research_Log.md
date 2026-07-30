@@ -9,7 +9,7 @@ document:
   id: RD-LOG-001
   title: Research Log
   type: Research Log
-  version: 0.17.0
+  version: 0.18.0
   status: Active
 
 classification:
@@ -798,3 +798,35 @@ genuine established-flow targeted search.
 **Decision:** Merge this preparer and data-preservation correction before B02.
 
 **Status:** Evidence-usability correction complete; B02 remains next
+
+## 2026-07-29 — BCApps Czech Population-Wide Coarse Screen Completion
+
+**Owner decision:** Replace the remaining batch-by-batch delivery cycle with one
+population-wide execution for `CZCS-B02` through `CZCS-B28`. Fixed batches remain
+planning and audit partitions rather than separate delivery gates.
+
+**Execution:** Reviewed `CZPOP-0017` through `CZPOP-0448` against the fixed
+subscriber-context dataset and BCApps source revision. The 16 accepted B01
+records remain byte-identical.
+
+**Bounded targeted searches:** Resolved the six manual-subscriber runtime
+questions for `CZPOP-0125`, `CZPOP-0200` through `CZPOP-0203`, and `CZPOP-0245`
+from explicit binding or activation evidence within the fixed source boundary.
+No unresolved targeted question remains.
+
+**Disposition:** 448 records are `Ready for Prior-Knowledge Labeling`;
+0 are `Targeted Context Required`; 0 are
+`Unavailable for Selection`; and 0 remain `Not Screened`.
+These counts report evidence readiness only.
+
+**Preservation:** All protected prior-knowledge, selection, trigger, and checklist
+fields remain unchanged. Stratum indicators remain unchanged. No prior knowledge,
+selection, trigger assessment, checklist assessment, materiality, quality,
+defect, or BCIR conclusion was introduced.
+
+**Validation:** The completed worksheet canonical LF SHA-256 is `f5fd8b7332fdee1baaf1b294f8ba9f1144ee01e6502d7ea484b4c82d139da8c9`.
+The full unit-test suite, worksheet schema and population checks, baseline and
+strict metadata validation, `git diff --check`, and patch application check pass.
+
+**Status:** AI-assisted population-wide coarse screen complete; owner review and
+all downstream operations remain separate.

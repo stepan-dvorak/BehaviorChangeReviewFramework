@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-VALIDATION-001
   title: BCApps Czech Coarse Screen Preparation Technical Validation
   type: Empirical Study Validation Record
-  version: 0.4.1
+  version: 0.4.2
   status: Active
 
 classification:
@@ -143,8 +143,9 @@ All six records remain `Not Screened`, have null reviewer and date, and retain
 
 - six focused preparation tests pass, including retained mechanical-structure
   and protected-state assertions;
-- five batch-execution tests pass, including B01 preservation and exact
-  established-activity boundaries;
+- six batch-execution tests pass, including B01 preservation, population
+  completion, manual-runtime resolution, and exact established-activity
+  boundaries;
 - two validation generations are byte-identical;
 - all six validation records validate against the current coarse-screen schema;
 - every validation ID resolves to the current context dataset;
@@ -160,14 +161,14 @@ Current checksums:
 - preparation regression tests:
   `8e53345d76ea5b9cbb7459b2f7416ed3d22acb396a6b7525ef2f9275f24ad689`;
 - batch-execution regression tests:
-  `c4b553e4c6453d27852bc1e4bccce534535449271609ebc241f6c4f7c0f0e6bb`;
+  `894d4ede2f96a3af8b47067947ff89146987a6d883edde05b67a3d9f9b2518b0`;
 - coarse-screen schema:
   `296fb8ef928c12c18489887e17b159bce73792c4ee5c933bfa9ea899d5a3657b`;
 - retained technical-validation JSON Lines:
   `33392268b0e0ab6f0c1c9c036390fdd8f9794c23ede8bfe40380ff565f92898c`;
   and
-- current preserved 448-record worksheet:
-  `0e138671c16d2b976e30f4160a7e584d45ec7339d548c3a2941c916a7a9bd68d`.
+- completed 448-record worksheet:
+  `f5fd8b7332fdee1baaf1b294f8ba9f1144ee01e6502d7ea484b4c82d139da8c9`.
 
 The pristine initial worksheet remains preserved in Git history and remains the
 historical source of the fixed batch membership manifest.
@@ -204,22 +205,31 @@ questions or assign readiness during validation.
 
 ## 8. Acceptance Status and Next Step
 
-The evidence-usability correction is complete. Source-publisher observations now
-expose directly linkable declaration-through-body ranges. Resolved platform
-triggers now retain bounded activity and platform-semantics observations. A
-generic established-flow targeted question is no longer retained after the
-required evidence is complete.
+The evidence-usability correction and preparation validation remain accepted.
+The subscriber-context dataset and retained six-record technical-validation
+dataset were not changed by population execution.
 
-The subscriber-context dataset was not changed. All 16 accepted B01 records are
-byte-identical. All 432 later records were regenerated from the unchanged
-context baseline and remain `Not Screened`; protected fields remain unchanged.
+Population-wide screening subsequently completed against that fixed baseline.
+All 16 accepted B01 records remain byte-identical, all 432 later records have a
+terminal evidence-readiness disposition, and protected fields remain unchanged.
+The completed worksheet canonical LF SHA-256 is `f5fd8b7332fdee1baaf1b294f8ba9f1144ee01e6502d7ea484b4c82d139da8c9`. The retained
+technical-validation SHA-256 remains
+`33392268b0e0ab6f0c1c9c036390fdd8f9794c23ede8bfe40380ff565f92898c`.
 
-The current worksheet SHA-256 is `0e138671c16d2b976e30f4160a7e584d45ec7339d548c3a2941c916a7a9bd68d`. The retained technical-
-validation SHA-256 is `33392268b0e0ab6f0c1c9c036390fdd8f9794c23ede8bfe40380ff565f92898c`.
-
-The next permitted screening action remains `CZCS-B02`.
+Population completion is recorded in
+`Empirical/BCApps_CZ_Coarse_Screen_Population_Checkpoint.md`; preparation
+validation does not perform owner acceptance or downstream analysis.
 
 ## 9. Revision History
+
+### 0.4.2 — 2026-07-29
+
+- Updated workflow-state regression coverage for the completed population-wide
+  screen.
+- Retained preparation fixtures and the technical-validation dataset unchanged.
+- Recorded the completed worksheet checksum while preserving the distinction
+  between preparation validation and screening decisions.
+
 
 ### 0.4.1 — 2026-07-29
 

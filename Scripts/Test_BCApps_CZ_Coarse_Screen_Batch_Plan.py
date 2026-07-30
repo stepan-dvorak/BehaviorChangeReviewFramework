@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression tests for the CZL coarse-screen batch plan."""
+"""Regression tests for the CZL coarse-screen batch plan and completed population."""
 
 from __future__ import annotations
 
@@ -34,7 +34,7 @@ class BatchPlanTests(unittest.TestCase):
         self.assertEqual(expected, actual)
         self.assertEqual(len(actual), len(set(actual)))
 
-    def test_batches_are_fixed_and_unexecuted(self) -> None:
+    def test_batches_remain_fixed_planning_and_audit_partitions(self) -> None:
         self.assertEqual(28, self.manifest["batch_count"])
         self.assertTrue(all(batch["record_count"] == 16 for batch in self.manifest["batches"]))
         self.assertTrue(all(batch["execution_status"] == "Planned" for batch in self.manifest["batches"]))
@@ -43,18 +43,14 @@ class BatchPlanTests(unittest.TestCase):
         checkpoints = [batch["batch_id"] for batch in self.manifest["batches"] if batch["checkpoint_after_batch"]]
         self.assertEqual(["CZCS-B01"], checkpoints)
 
-    def test_only_calibration_batch_is_screened(self) -> None:
+    def test_population_screening_is_complete(self) -> None:
+        self.assertEqual(448, len(self.records))
         for index, record in enumerate(self.records):
-            if index < 16:
-                self.assertEqual("Ready for Prior-Knowledge Labeling", record["screening_status"])
-                self.assertEqual("Available", record["evidence_availability"]["established_flow"])
-                self.assertEqual([], record["targeted_search_questions"])
-                self.assertEqual("OpenAI Codex", record["screened_by"])
-                self.assertEqual("2026-07-21", record["screened_on"])
-            else:
-                self.assertEqual("Not Screened", record["screening_status"])
-                self.assertIsNone(record["screened_by"])
-                self.assertIsNone(record["screened_on"])
+            self.assertEqual("Ready for Prior-Knowledge Labeling", record["screening_status"])
+            self.assertEqual("Available", record["evidence_availability"]["established_flow"])
+            self.assertEqual([], record["targeted_search_questions"])
+            self.assertEqual("OpenAI Codex", record["screened_by"])
+            self.assertEqual("2026-07-21" if index < 16 else "2026-07-29", record["screened_on"])
             self.assertEqual("Unknown", record["prior_known"])
             self.assertEqual("Unselected", record["selection_status"])
             self.assertEqual("Not Evaluated", record["trigger_status"])
