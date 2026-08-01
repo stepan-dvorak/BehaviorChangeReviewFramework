@@ -9,7 +9,7 @@ document:
   id: RD-LOG-001
   title: Research Log
   type: Research Log
-  version: 0.18.0
+  version: 0.19.0
   status: Active
 
 classification:
@@ -830,3 +830,51 @@ strict metadata validation, `git diff --check`, and patch application check pass
 
 **Status:** AI-assisted population-wide coarse screen complete; owner review and
 all downstream operations remain separate.
+
+## 2026-07-31 — Lightweight Research Mode Adopted for Case Classification
+
+**Owner observation:** The population-wide coarse screen left all 448 records
+`Ready for Prior-Knowledge Labeling`, with no `CZP` case yet selected or
+classified. Repeating the complete contribution workflow, metadata maintenance,
+and delivery ceremony for every individual labeling or classification entry
+would fragment one coherent analytical phase without improving the already
+validated coarse-screen baseline.
+
+**Governance clarification:** The Executable Artifact Delivery Gate in Section
+8.7 of `Contributing_for_AI.md` already applies only to executable or
+mechanically applicable delivery artifacts. It is not waived by this decision.
+Any delivered Git patch, wrapper, script, or comparable artifact remains subject
+to that gate.
+
+**Decision:** Adopt
+`Decisions/ADR-002_Lightweight_Research_Mode_for_Empirical_Case_Classification.md`.
+The mode reduces workflow cadence only for prior-knowledge recording, `CZP` case
+selection, BCIR trigger classification, event-evidence assessment, checklist
+analysis, and per-case notes in the BCApps Czech Core Localization Event Pilot.
+
+**Artifact boundary:** Preserve
+`Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl` as the immutable population-wide
+evidence-readiness baseline. Record prior knowledge, the frozen selection
+register, and per-case classification in
+`Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md`. A new parallel dataset or
+schema is outside the lightweight mode.
+
+**Preserved sequence and safeguards:** Record `prior_known` before bucket
+assignment, `CZP` selection, or outcome evaluation; preserve the pre-registered
+selection limits and tie-breakers; cite bounded source evidence; distinguish
+observation from interpretation; retain uncertainty; and require owner
+acceptance of the frozen selection register and the completed classification
+set.
+
+**Scope and duration:** Full workflow remains mandatory for tooling, schemas,
+protocols, governance, repository-index checkpoints, executable delivery
+artifacts, and later synthesis. The mode expires after the classification
+checkpoint is accepted and before case findings are synthesized into this log,
+the Whitepaper, or another framework-level deliverable. This adoption entry does
+not itself trigger expiration.
+
+**Status:** Adopted; candidate prior-knowledge recording and frozen `CZP`
+selection remain next
+
+See
+`Decisions/ADR-002_Lightweight_Research_Mode_for_Empirical_Case_Classification.md`.

@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.19
+  version: 1.0.20
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -43,7 +43,7 @@ artifact:
     - human contributors
 
 generation:
-  generated_on: 2026-07-29
+  generated_on: 2026-07-31
   method: Manual Review
   source_repository: https://github.com/stepan-dvorak/BehaviorChangeReviewFramework
   source_branch: main
@@ -172,6 +172,15 @@ query_routes:
       - Empirical/MS_CZF_IsHandled_Refactoring_Analysis.md
       - Empirical/MS_CZL_IsHandled_Refactoring_Analysis_Report.md
     caution: These preliminary studies are limited to IsHandled markers and do not represent complete framework-based assessments.
+  - intent: classify_bcapps_cz_pilot_cases
+    retrieve:
+      - Decisions/ADR-002_Lightweight_Research_Mode_for_Empirical_Case_Classification.md
+      - Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md
+      - Empirical/BCApps_CZ_Coarse_Screen_Population_Checkpoint.md
+      - Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl
+      - 02_Research_Methodology.md
+      - Reasoning_Standard.md
+    rule: Preserve the coarse-screen worksheet unchanged; record prior knowledge in the pilot register before bucket assignment, CZP selection, or outcome evaluation.
   - intent: synthesize_or_edit_whitepaper
     retrieve:
       - Whitepaper/Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md
@@ -320,6 +329,19 @@ documents:
     depends_on: [Governance_Principles.md]
     keywords: [ADR, artifact profile, metadata, US English, repository architecture, filename convention]
 
+  - path: Decisions/ADR-002_Lightweight_Research_Mode_for_Empirical_Case_Classification.md
+    document_id: ADR-002
+    title: Lightweight Research Mode for Empirical Case Classification
+    category: decisions
+    authority: normative
+    status: active
+    maturity: stable
+    version: 1.0.0
+    summary: Accepted decision defining a bounded proportional workflow for prior-knowledge recording, frozen case selection, and case classification while preserving the immutable coarse-screen baseline, pre-registered ordering controls, full executable-artifact gates, and later synthesis rigor.
+    use_for: [pilot classification workflow, prior-knowledge ordering, artifact boundary, checkpoint validation, expiration criteria]
+    depends_on: [Governance_Principles.md, Contributing_for_AI.md]
+    keywords: [ADR, lightweight research mode, case classification, prior knowledge, selection register, immutable baseline, BCApps]
+
   - path: Contributing_for_AI.md
     document_id: CG-001
     title: AI Contribution Guidelines
@@ -412,8 +434,8 @@ documents:
     authority: working
     status: active
     maturity: draft
-    version: 0.18.0
-    summary: Research backbone recording hypothesis evolution, empirical decisions, context preservation, and population-wide coarse-screen completion.
+    version: 0.19.0
+    summary: Research backbone recording hypothesis evolution, empirical decisions, context preservation, population-wide coarse-screen completion, and the bounded lightweight workflow adopted for pilot case selection and classification.
     use_for: [research history, open questions, rejected ideas, current hypothesis state]
     depends_on: [00_Project_Charter.md]
     keywords: [research log, hypothesis lifecycle, execution flow, review trigger, negative results]
