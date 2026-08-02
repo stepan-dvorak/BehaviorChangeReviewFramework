@@ -9,7 +9,7 @@ document:
   id: RD-LOG-001
   title: Research Log
   type: Research Log
-  version: 0.19.0
+  version: 0.20.0
   status: Active
 
 classification:
@@ -878,3 +878,37 @@ selection remain next
 
 See
 `Decisions/ADR-002_Lightweight_Research_Mode_for_Empirical_Case_Classification.md`.
+
+## 2026-08-01 — BCApps Czech Population Coarse-Screen Owner Review Accepted
+
+**Repository observation:** The repository owner reviewed a deterministic
+36-record sample from the completed population-wide coarse screen. The sample
+represented every fixed audit partition from `CZCS-B02` through `CZCS-B28` and
+included all six manual-subscriber runtime-participation resolutions.
+
+**Review result:** All 36 sampled records were accepted. No record-level
+correction, systematic screening defect, screening-rule change, or worksheet
+change was required.
+
+**Interpretation:** The sampled checkpoint accepts the AI-assisted coarse-screen
+process and its evidence-readiness result. It does not represent individual
+owner review of every unsampled record and does not convert evidence readiness
+into a behavioral, materiality, quality, defect, or BCIR conclusion.
+
+**Method boundary:** Owner observations concerning manual-subscription
+lifecycle, bounded suppression, separated event-publisher layers, and
+unconditional handling remain leads for later analysis. They must not be used
+retroactively to alter the deterministic sample or future prior-knowledge
+records.
+
+**Next operation:** Under ADR-002, record prior knowledge in the pilot selection
+register before bucket assignment, `CZP` selection, or outcome evaluation.
+Freeze and obtain owner acceptance of the complete selection register before
+full case classification. Trigger classification, checklist analysis, and
+synthesis remain deferred.
+
+**Status:** Coarse evidence-availability screening complete and owner-accepted;
+prior-knowledge recording and frozen selection remain next
+
+See
+`Empirical/BCApps_CZ_Coarse_Screen_Owner_Review_Population.md`.

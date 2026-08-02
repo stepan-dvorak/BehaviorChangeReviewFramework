@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-EXECUTION-001
   title: BCApps Czech Coarse Screen Execution Protocol
   type: Empirical Study Protocol
-  version: 0.2.0
+  version: 0.3.0
   status: Active
 
 classification:
@@ -41,7 +41,11 @@ depends_on:
   - Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl
 
 related_documents:
+  - Decisions/ADR-002_Lightweight_Research_Mode_for_Empirical_Case_Classification.md
   - Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md
+  - Empirical/BCApps_CZ_Coarse_Screen_Population_Checkpoint.md
+  - Empirical/BCApps_CZ_Coarse_Screen_Owner_Review_CZCS_B01.md
+  - Empirical/BCApps_CZ_Coarse_Screen_Owner_Review_Population.md
   - Empirical/Data/BCApps_CZ_Coarse_Screen_Batches.json
   - 00_Research_Log.md
 
@@ -195,33 +199,61 @@ defect stops the population session until corrected and revalidated.
 
 ## 8. Completion Gate
 
-Population screening is complete only when all 28 batches are accepted, all
-448 records have a non-`Not Screened` status, the file is schema-valid, and the
-final counts reconcile to 448. The completion summary reports only evidence
-readiness and retained limitations.
+Population screening execution is complete when all 28 audit partitions have
+terminal dispositions, all 448 records have a non-`Not Screened` status, the file
+is schema-valid, and the final counts reconcile to 448. The completion summary
+reports only evidence readiness and retained limitations.
 
-Prior-knowledge labeling begins afterward as a separate owner-controlled
-operation. Selection, trigger classification, checklist analysis, and
-synthesis remain deferred.
+The evidence-readiness phase becomes owner-accepted only after a separate
+owner-review checkpoint evaluates the calibrated process and completed
+population result. Sampled owner acceptance must state its coverage and must not
+be represented as individual review of every unsampled record.
+
+After owner acceptance, prior knowledge is recorded under
+`Decisions/ADR-002_Lightweight_Research_Mode_for_Empirical_Case_Classification.md`
+in the pilot selection register before bucket assignment, `CZP` selection, or
+outcome evaluation. Trigger classification, checklist analysis, and synthesis
+remain deferred.
 
 ## 9. Current State and Next Action
 
-Population-wide evidence-availability screening is complete. All 448 records are
-`Ready for Prior-Knowledge Labeling`: 16 accepted B01 records dated 2026-07-21
-and 432 population-session records dated 2026-07-29. The completed worksheet
-canonical LF SHA-256 is `f5fd8b7332fdee1baaf1b294f8ba9f1144ee01e6502d7ea484b4c82d139da8c9`.
+Population-wide evidence-availability screening is complete and owner-accepted.
+All 448 records remain `Ready for Prior-Knowledge Labeling`: 16 accepted B01
+records dated 2026-07-21 and 432 population-session records dated 2026-07-29.
+The completed worksheet canonical LF SHA-256 remains
+`f5fd8b7332fdee1baaf1b294f8ba9f1144ee01e6502d7ea484b4c82d139da8c9`.
 
-Accepted B01 is byte-identical. Six manual-subscriber runtime questions
-(`CZPOP-0125`, `CZPOP-0200` through `CZPOP-0203`, and `CZPOP-0245`) were resolved
-from bounded binding or activation evidence at the fixed BCApps revision. No
-record remains `Not Screened`, `Targeted Context Required`, or `Unavailable for
-Selection`. Protected downstream fields and stratum indicators remain unchanged.
+On 2026-08-01, the repository owner accepted a deterministic 36-record sample
+covering every audit partition from `CZCS-B02` through `CZCS-B28` and all six
+manual-subscriber runtime-participation resolutions. All 36 reviewed records
+were accepted. No record-level correction, systematic screening defect, or
+worksheet change was required.
 
-The next operation is a separate owner-review checkpoint for the population-wide
-AI-assisted decisions. Prior-knowledge labeling and every downstream analytical
-operation remain deferred until separately authorized.
+The sampled checkpoint accepts the AI-assisted screening process and its
+evidence-readiness result; it is not individual owner review of every unsampled
+record.
+
+The next operation is owner-controlled prior-knowledge recording in
+`Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md` under
+`Decisions/ADR-002_Lightweight_Research_Mode_for_Empirical_Case_Classification.md`.
+Each applicable `prior_known` value must be recorded before bucket assignment,
+`CZP` selection, or outcome evaluation. Trigger classification, checklist
+analysis, and synthesis remain deferred until the selection register is frozen
+and owner-accepted.
 
 ## 10. Revision History
+
+### 0.3.0 — 2026-08-01
+
+- Recorded acceptance of the deterministic 36-record population owner-review
+  sample.
+- Confirmed coverage of all 27 B02-through-B28 audit partitions and all six
+  manual runtime resolutions.
+- Recorded zero corrections, zero systematic screening defects, and no
+  worksheet change.
+- Closed the coarse evidence-availability phase as owner-accepted.
+- Routed the next operation to prior-knowledge recording under ADR-002.
+
 
 ### 0.2.0 — 2026-07-29
 

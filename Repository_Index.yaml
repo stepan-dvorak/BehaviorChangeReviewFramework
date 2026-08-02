@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.20
+  version: 1.0.21
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -43,7 +43,7 @@ artifact:
     - human contributors
 
 generation:
-  generated_on: 2026-07-31
+  generated_on: 2026-08-02
   method: Manual Review
   source_repository: https://github.com/stepan-dvorak/BehaviorChangeReviewFramework
   source_branch: main
@@ -177,6 +177,7 @@ query_routes:
       - Decisions/ADR-002_Lightweight_Research_Mode_for_Empirical_Case_Classification.md
       - Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md
       - Empirical/BCApps_CZ_Coarse_Screen_Population_Checkpoint.md
+      - Empirical/BCApps_CZ_Coarse_Screen_Owner_Review_Population.md
       - Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl
       - 02_Research_Methodology.md
       - Reasoning_Standard.md
@@ -434,8 +435,8 @@ documents:
     authority: working
     status: active
     maturity: draft
-    version: 0.19.0
-    summary: Research backbone recording hypothesis evolution, empirical decisions, context preservation, population-wide coarse-screen completion, and the bounded lightweight workflow adopted for pilot case selection and classification.
+    version: 0.20.0
+    summary: Research backbone recording hypothesis evolution, empirical decisions, context preservation, population-wide coarse-screen completion, sampled owner acceptance, and the bounded lightweight workflow for pilot classification.
     use_for: [research history, open questions, rejected ideas, current hypothesis state]
     depends_on: [00_Project_Charter.md]
     keywords: [research log, hypothesis lifecycle, execution flow, review trigger, negative results]
@@ -786,10 +787,10 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.2.0
-    summary: Records calibration, owner-authorized population-wide execution, fixed audit partitions, and the completed 448-record evidence-readiness gate.
-    use_for: [coarse-screen execution, batch boundaries, population session, reviewer procedure, calibration checkpoint, completion gate]
-    caution: Owner review and all downstream analysis remain separate from the completed AI-assisted screen.
+    version: 0.3.0
+    summary: Records calibration, owner-authorized population-wide execution, fixed audit partitions, the completed 448-record evidence-readiness gate, and accepted sampled owner review.
+    use_for: [coarse-screen execution, batch boundaries, population session, reviewer procedure, calibration checkpoint, completion gate, owner acceptance]
+    caution: Sampled owner acceptance validates the screening process and result but is not individual review of every unsampled record; downstream analysis remains separate.
     depends_on: [Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md, Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md]
 
   - path: Empirical/BCApps_CZ_Coarse_Screen_Population_Checkpoint.md
@@ -800,11 +801,25 @@ documents:
     authority: evidentiary
     status: active
     maturity: review
-    version: 0.1.0
-    summary: Records population-wide completion, disposition counts, bounded manual-runtime resolutions, preservation guarantees, and validation results.
-    use_for: [population coarse-screen completion, disposition counts, manual binding evidence, preservation evidence, owner review preparation]
-    caution: AI-assisted evidence readiness is not owner acceptance, prior knowledge, selection, trigger classification, checklist assessment, or BCIR analysis.
+    version: 0.2.0
+    summary: Records population-wide completion, disposition counts, bounded manual-runtime resolutions, preservation guarantees, validation results, and accepted sampled owner review.
+    use_for: [population coarse-screen completion, disposition counts, manual binding evidence, preservation evidence, owner acceptance]
+    caution: The 36-record sampled owner review accepts the process and evidence-readiness result but does not individually review every unsampled record or perform downstream analysis.
     depends_on: [Empirical/BCApps_CZ_Coarse_Evidence_Availability_Screening_Protocol.md, Empirical/BCApps_CZ_Coarse_Screen_Execution_Protocol.md, Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl]
+
+  - path: Empirical/BCApps_CZ_Coarse_Screen_Owner_Review_Population.md
+    document_id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-OWNER-REVIEW-POPULATION-001
+    title: BCApps Czech Coarse Screen Owner Review — Population Sample
+    profile: empirical_study
+    category: empirical_study
+    authority: evidentiary
+    status: active
+    maturity: review
+    version: 0.1.0
+    summary: Records the accepted deterministic 36-record owner-review sample covering all 27 B02-through-B28 audit partitions and all six manual runtime resolutions.
+    use_for: [population owner review, sampled acceptance, audit-partition coverage, manual runtime verification, coarse-screen phase closure]
+    caution: The sampled checkpoint accepts the screening process and evidence-readiness result; it is not individual review of every unsampled record and performs no downstream classification.
+    depends_on: [Empirical/BCApps_CZ_Coarse_Screen_Execution_Protocol.md, Empirical/BCApps_CZ_Coarse_Screen_Population_Checkpoint.md, Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl]
 
   - path: Empirical/BCApps_CZ_Coarse_Screen_Owner_Review_CZCS_B01.md
     document_id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-OWNER-REVIEW-B01-001
@@ -1110,7 +1125,7 @@ non_markdown_artifacts:
     status: active
     summary: Completed ordered 448-record evidence-readiness worksheet with byte-preserved accepted B01 and population-wide AI screening decisions.
     use_for: [population-wide coarse screening, screening checkpoints, evidence-readiness review, owner review preparation]
-    caution: Contains evidence-readiness decisions only; owner acceptance and downstream analysis remain pending.
+    caution: Contains evidence-readiness decisions only; sampled owner acceptance is recorded separately and downstream analysis remains pending.
 
   - path: Empirical/Data/BCApps_CZ_Coarse_Screen_Batches.json
     category: empirical_study
