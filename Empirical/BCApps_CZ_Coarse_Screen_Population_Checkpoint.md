@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-COARSE-SCREEN-POPULATION-001
   title: BCApps Czech Population-Wide Coarse Screen Checkpoint
   type: Empirical Study
-  version: 0.1.0
+  version: 0.2.0
   status: Active
 
 classification:
@@ -25,7 +25,7 @@ purpose: >
   BCApps Czech coarse evidence-availability screen.
 
 quality:
-  review: Self Reviewed
+  review: Approved
   evidence: Verified
   editorial: Reviewed
 
@@ -40,7 +40,10 @@ depends_on:
   - Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl
 
 related_documents:
+  - Decisions/ADR-002_Lightweight_Research_Mode_for_Empirical_Case_Classification.md
+  - Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md
   - Empirical/BCApps_CZ_Coarse_Screen_Owner_Review_CZCS_B01.md
+  - Empirical/BCApps_CZ_Coarse_Screen_Owner_Review_Population.md
   - Empirical/BCApps_CZ_Coarse_Screen_Technical_Validation.md
 
 study:
@@ -137,8 +140,9 @@ evidence package generated with this change set.
 
 ## 7. Threats and Limitations
 
-- The population session is AI-assisted and is not equivalent to owner acceptance
-  of records `CZPOP-0017` through `CZPOP-0448`.
+- The population session is AI-assisted. The accepted 36-record deterministic
+  sample validates the screening process and evidence-readiness result, but it
+  is not individual owner review of every unsampled record.
 - Evidence readiness does not establish runtime reachability, behavioral impact,
   quality, materiality, or defect prevalence.
 - `No Linked Evidence` and `No CZL Peer Recorded` remain bounded dataset values,
@@ -146,8 +150,49 @@ evidence package generated with this change set.
 - The conclusions apply to the fixed BCApps revision and retained source
   boundary.
 
-## 8. Next Operation
+## 8. Owner-Review Acceptance
 
-A separate owner-review checkpoint may inspect the population-wide AI decisions.
-Prior-knowledge labeling and every downstream analytical operation remain
-separate and require explicit authorization.
+On 2026-08-01, the repository owner completed a deterministic sampled acceptance
+audit of the population-wide AI-assisted coarse screen.
+
+The sample contained 36 records and represented every fixed audit partition
+from `CZCS-B02` through `CZCS-B28`. It included all six manual-subscriber
+runtime-participation resolutions: `CZPOP-0125`, `CZPOP-0200` through
+`CZPOP-0203`, and `CZPOP-0245`.
+
+All 36 reviewed records were accepted. The review identified:
+
+- zero record-level corrections;
+- zero systematic screening defects;
+- zero screening-rule changes; and
+- no required change to the retained worksheet.
+
+The owner accepted the population-wide screening process and its
+evidence-readiness result. This decision is not individual owner review of every
+unsampled record.
+
+See
+`Empirical/BCApps_CZ_Coarse_Screen_Owner_Review_Population.md`.
+
+## 9. Next Operation
+
+The coarse evidence-availability phase is complete and owner-accepted. The next
+operation is owner-controlled prior-knowledge recording in
+`Empirical/BCApps_CZ_Core_Localization_Event_Pilot.md` under
+`Decisions/ADR-002_Lightweight_Research_Mode_for_Empirical_Case_Classification.md`.
+
+Each applicable `prior_known` value must be recorded before bucket assignment,
+`CZP` selection, or outcome evaluation. Trigger classification, checklist
+analysis, materiality, quality assessment, defect classification, and synthesis
+remain deferred until the selection register is frozen and owner-accepted.
+
+## 10. Revision History
+
+### 0.2.0 — 2026-08-01
+
+- Recorded acceptance of the deterministic 36-record owner-review sample.
+- Confirmed all 27 B02-through-B28 audit partitions and all six manual runtime
+  resolutions were represented.
+- Recorded zero corrections, zero systematic defects, and no worksheet change.
+- Closed the coarse evidence-availability phase as owner-accepted.
+- Routed the next operation to prior-knowledge recording under ADR-002.
