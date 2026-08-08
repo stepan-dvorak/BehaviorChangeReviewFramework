@@ -9,7 +9,7 @@ document:
   id: RS-001
   title: Repository Standards
   type: Governance Standard
-  version: 3.0.0
+  version: 3.1.0
   status: Active
 
 classification:
@@ -21,8 +21,8 @@ owner: Štěpán Dvořák
 
 purpose: >
   Defines the repository architecture, artifact profiles, metadata contract,
-  lifecycle, language, naming, relationship, versioning, and contribution
-  standards used throughout the Orden project.
+  lifecycle, language, text normalization, naming, relationship, versioning,
+  and contribution standards used throughout the Orden project.
 
 quality:
   review: Approved
@@ -67,7 +67,7 @@ It is the authoritative source for:
 - document and artifact profiles;
 - mandatory and optional metadata;
 - lifecycle, maturity, and quality semantics;
-- repository language and filename conventions;
+- repository language, text normalization, line endings, and filename conventions;
 - document identity, relationships, and versioning;
 - treatment of entrypoints, machine-readable artifacts, and archives.
 
@@ -512,6 +512,40 @@ Original-language evidence SHALL:
 Document-level `language` metadata is not used for ordinary repository
 documents because US English is the repository-wide default.
 
+### 8.1 Text Encoding and Line Endings
+
+`.gitattributes` is the authoritative repository policy for Git text
+normalization and line endings. Contributor operating-system defaults, editor
+defaults, and global Git configuration SHALL NOT override repository policy.
+
+The canonical Git-index representation SHALL satisfy these rules:
+
+- tracked text content SHALL be LF-normalized in the Git index;
+- ordinary text SHALL use `eol=lf`;
+- file types that require a different working-tree representation SHALL be
+  declared explicitly in `.gitattributes`;
+- `.bat` and `.cmd` files SHALL use `eol=crlf` as explicit working-tree
+  exceptions while remaining LF-normalized in the Git index; and
+- known binary formats SHALL be marked binary and excluded from text
+  normalization.
+
+`.editorconfig` MAY mirror the repository policy for editor behavior, but it
+does not override `.gitattributes` or Git object semantics.
+
+Windows clones SHOULD use repository-local `core.autocrlf=false`,
+`core.eol=lf`, and `core.safecrlf=true`.
+`Scripts/Configure_Git_Line_Endings.bat` configures and validates these
+settings. They are defense in depth; `.gitattributes` remains authoritative.
+
+Repository delivery tooling SHALL NOT perform independent line-ending
+conversion. Git patch generation and validation SHALL operate on canonical Git
+state. Repository-wide normalization SHALL use Git's normalization mechanism,
+such as `git add --renormalize`, and SHALL be isolated from substantive
+research changes.
+
+The canonical line-ending invariant SHALL be validated by
+`Scripts/Validate_Line_Endings.py`.
+
 ---
 
 ## 9. Filename and Path Rules
@@ -681,6 +715,14 @@ Preference alone is not sufficient reason to reopen an accepted decision.
 ---
 
 ## 17. Revision History
+
+### 3.1.0 — 2026-08-08
+
+- Established `.gitattributes` as the authoritative line-ending policy.
+- Required LF-normalized text in the Git index with explicit CRLF working-tree
+  exceptions for Windows command scripts.
+- Prohibited independent EOL conversion in repository delivery tooling.
+- Added an executable repository line-ending invariant.
 
 ### 3.0.0 — 2026-07-17
 

@@ -9,7 +9,7 @@ document:
   id: CG-001
   title: AI Contribution Guidelines
   type: Contribution Guide
-  version: 0.3.1
+  version: 0.4.0
   status: Active
 
 classification:
@@ -858,6 +858,11 @@ generated patch appear applicable.
 
 ### 7.8.3 Text-File Fingerprints and Line Endings
 
+Repository line endings are governed by `.gitattributes`. The AI SHALL treat
+the Git index as the canonical cross-platform text representation and SHALL NOT
+perform independent LF/CRLF conversion in patch generators, wrappers, or file
+updaters.
+
 Working-copy byte hashes SHALL NOT be used as a default prerequisite for
 applying Git patches to repository text files.
 
@@ -869,9 +874,10 @@ For ordinary repository patch delivery, baseline identity SHALL be established
 primarily through:
 
 - the target branch and commit;
-- a clean Git working tree;
+- a clean Git working tree and index;
 - the actual Git-generated diff;
-- successful `git apply --check`.
+- successful `git apply --cached --check` against the canonical index; and
+- successful repository line-ending validation.
 
 When object-level identity is required, the AI SHOULD use Git object identity
 such as:
@@ -1026,15 +1032,22 @@ Such an artifact SHALL NOT be described as verified, applicable, ready, safe to 
 
 ### 8.7.1 Required Evidence
 
-For a Git patch, the minimum application evidence is a successful execution of:
+For a Git patch, the minimum canonical application evidence is a successful
+execution of:
 
 ```text
-git apply --check <delivered-patch>
+git apply --cached --check <delivered-patch>
 ```
 
-against the intended clean repository baseline.
+against the intended clean repository baseline. When a wrapper applies the
+patch to the working tree, that wrapper SHALL also be executed as a separate
+delivery-path test.
 
 When the delivery includes an application wrapper, the wrapper and the exact patch it references SHALL be tested together whenever the execution environment permits.
+
+Repository deliveries that modify tracked text SHALL also pass
+`python Scripts/Validate_Line_Endings.py --root .` after the proposed index
+state has been constructed.
 
 Syntax validation, patch statistics, manual inspection, inferred applicability, matching line numbers, matching file hashes, or successful application of a different intermediate artifact SHALL NOT be represented as evidence that the delivered patch applies.
 

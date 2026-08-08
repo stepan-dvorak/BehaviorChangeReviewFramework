@@ -1,0 +1,25 @@
+# Orden canonical text policy.
+# Git stores tracked text with LF line endings. Working-tree exceptions are
+# explicit and repository-owned rather than dependent on contributor settings.
+* text=auto eol=lf
+
+# Windows command scripts require CRLF when materialized in the working tree.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Explicit binary formats. Do not apply text normalization to these files.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.docx binary
+*.xlsx binary
+*.pptx binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary

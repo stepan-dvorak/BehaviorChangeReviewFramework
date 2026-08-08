@@ -1,0 +1,43 @@
+name: Repository validation
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install validation dependencies
+        run: python -m pip install -r requirements-validation.txt
+
+      - name: Validate line endings
+        run: python Scripts/Validate_Line_Endings.py --root .
+
+      - name: Validate repository metadata
+        run: python Scripts/Validate_Repository_Metadata.py --root .
+
+      - name: Validate repository metadata strictly
+        run: python Scripts/Validate_Repository_Metadata.py --root . --strict
+
+      - name: Run repository Python tests
+        run: python -m unittest discover -s Scripts -p "Test_*.py"
+
+      - name: Reject whitespace errors in pull-request diff
+        if: github.event_name == 'pull_request'
+        run: git diff --check "${{ github.event.pull_request.base.sha }}...HEAD"
