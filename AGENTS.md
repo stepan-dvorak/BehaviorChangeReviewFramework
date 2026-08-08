@@ -46,6 +46,12 @@ Read:
 - Do not use checked-out text-file hashes as a default patch gate; prefer Git
   baseline identity and Git application validation to avoid cross-platform line
   ending failures.
+- Treat `.gitattributes` as the authoritative repository line-ending policy;
+  do not perform independent EOL conversion in delivery tooling.
+- Validate canonical Git-index line endings with
+  `python Scripts/Validate_Line_Endings.py --root .`.
+- Verify Git patch applicability against the canonical index with
+  `git apply --cached --check <patch>` before relying on worktree application.
 - Treat advanced generators, fingerprints, and three-way recovery as fallback
   mechanisms, not the default patch-delivery workflow.
 

@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.22
+  version: 1.0.23
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -208,10 +208,13 @@ query_routes:
   - intent: validate_repository_metadata
     retrieve:
       - Repository_Standards.md
+      - .gitattributes
+      - .editorconfig
       - Schemas/Repository_Document_Metadata.schema.json
+      - Scripts/Validate_Line_Endings.py
       - Scripts/Validate_Repository_Metadata.py
       - requirements-validation.txt
-    rule: Baseline mode permits only the explicit migration backlog; strict mode permits no active legacy Markdown artifacts.
+    rule: Validate canonical Git-index line endings before baseline or strict metadata conformance; baseline mode permits only the explicit migration backlog and strict mode permits no active legacy Markdown artifacts.
 
 canonical_concepts:
   terminology_priority:
@@ -280,8 +283,8 @@ documents:
     authority: normative
     status: active
     audience: [AI assistants]
-    summary: Concise operational entrypoint defining mandatory pre-reading, archive handling, index maintenance, and non-negotiable AI contribution rules.
-    use_for: [AI startup, edit prerequisites, non-negotiable contribution rules]
+    summary: Concise operational entrypoint defining mandatory pre-reading, archive handling, index maintenance, canonical line-ending handling, and non-negotiable AI contribution rules.
+    use_for: [AI startup, edit prerequisites, line-ending policy, non-negotiable contribution rules]
     depends_on:
       - Repository_Standards.md
       - Governance_Principles.md
@@ -312,10 +315,10 @@ documents:
     authority: normative
     status: active
     maturity: stable
-    version: 3.0.0
-    summary: Constitutional repository standard for architecture, artifact profiles, metadata, language, naming, relationships, versioning, lifecycle, and index maintenance.
-    use_for: [repository architecture, artifact profiles, front matter, document IDs, metadata, language, naming, versioning, lifecycle, repository conventions]
-    keywords: [YAML front matter, metadata, artifact profile, US English, filenames, SemVer, maturity, quality, document identity]
+    version: 3.1.0
+    summary: Constitutional repository standard for architecture, artifact profiles, metadata, language, naming, canonical line endings, relationships, versioning, lifecycle, and index maintenance.
+    use_for: [repository architecture, artifact profiles, front matter, document IDs, metadata, language, line endings, naming, versioning, lifecycle, repository conventions]
+    keywords: [YAML front matter, metadata, artifact profile, US English, line endings, gitattributes, filenames, SemVer, maturity, quality, document identity]
 
   - path: Decisions/ADR-001_Repository_Artifact_Profiles_and_Metadata.md
     document_id: ADR-001
@@ -350,11 +353,11 @@ documents:
     authority: normative
     status: active
     maturity: review
-    version: 0.3.1
-    summary: End-to-end AI workflow from context resolution and knowledge modeling through reasoning, realization, validation, delivery, and governance evolution.
-    use_for: [AI operating workflow, validation, complete-document delivery, governance-aware contribution]
+    version: 0.4.0
+    summary: End-to-end AI workflow from context resolution and knowledge modeling through reasoning, realization, canonical Git-index patch validation, delivery, and governance evolution.
+    use_for: [AI operating workflow, validation, line-ending handling, Git patch validation, complete-document delivery, governance-aware contribution]
     depends_on: [Repository_Standards.md, Reasoning_Standard.md, Governance_Principles.md]
-    keywords: [AI workflow, knowledge model, validation, artifact realization, delivery]
+    keywords: [AI workflow, knowledge model, validation, gitattributes, Git index, artifact realization, delivery]
 
   - path: Reasoning_Standard.md
     document_id: GOV-RSN-001
@@ -1007,6 +1010,48 @@ documents:
     use_for: [report-format inspection, tool documentation, test-data example]
 
 non_markdown_artifacts:
+  - path: .gitattributes
+    category: governance
+    authority: normative
+    status: active
+    summary: Executable Git attribute policy that LF-normalizes tracked text in the index and declares explicit working-tree EOL and binary exceptions.
+    use_for: [line-ending normalization, Git text policy, binary classification, patch portability]
+
+  - path: .editorconfig
+    category: governance
+    authority: working
+    status: active
+    summary: Editor-facing mirror of the canonical repository text and line-ending conventions.
+    use_for: [editor configuration, UTF-8 text, line-ending defaults, trailing-whitespace prevention]
+
+  - path: .github/workflows/repository-validation.yml
+    category: tooling
+    authority: working
+    status: active
+    summary: Pull-request and main-branch CI gate for line endings, metadata, repository unit tests, and diff whitespace.
+    use_for: [continuous validation, pull-request gate, line-ending regression prevention]
+
+  - path: Scripts/Validate_Line_Endings.py
+    category: tooling
+    authority: working
+    status: active
+    summary: Validates that tracked text is LF-normalized in the canonical Git index under the repository attribute policy.
+    use_for: [line-ending validation, Git index validation, cross-platform patch safety]
+
+  - path: Scripts/Test_Line_Endings.py
+    category: tooling
+    authority: working
+    status: active
+    summary: Regression tests for Git EOL-output parsing and the canonical index line-ending invariant.
+    use_for: [line-ending validator regression testing, repository validation]
+
+  - path: Scripts/Configure_Git_Line_Endings.bat
+    category: tooling
+    authority: working
+    status: active
+    summary: Idempotently configures repository-local Windows Git line-ending settings and runs the canonical line-ending validator.
+    use_for: [Windows repository setup, local Git configuration, line-ending validation]
+
   - path: Tools/OwnerReview/
     category: tooling
     authority: working
