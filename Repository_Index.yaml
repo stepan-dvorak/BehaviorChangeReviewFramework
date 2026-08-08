@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.21
+  version: 1.0.22
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -43,7 +43,7 @@ artifact:
     - human contributors
 
 generation:
-  generated_on: 2026-08-02
+  generated_on: 2026-08-08
   method: Manual Review
   source_repository: https://github.com/stepan-dvorak/BehaviorChangeReviewFramework
   source_branch: main
@@ -689,10 +689,10 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.11.0
-    summary: Pre-registers a bounded 16-case subscriber-centered pilot; corrected static context and worksheet preparation are validated and population-wide coarse screening is authorized.
-    use_for: [Czech localization pilot, pre-registration, event subscriber case selection, behavioral change trigger testing, impact checklist testing]
-    caution: Pre-registration only; the selection register is empty and no case findings or prevalence claims are available.
+    version: 0.12.0
+    summary: Records the pre-registered 16-case subscriber-centered pilot, owner-accepted prior-knowledge labels, and the frozen two-per-bucket selection register.
+    use_for: [Czech localization pilot, pre-registration, frozen case selection, prior knowledge, behavioral change trigger testing, impact checklist testing]
+    caution: Selection is frozen and owner-accepted; trigger classification, checklist analysis, case findings, and prevalence claims remain unavailable.
     depends_on: [02_Research_Methodology.md, Empirical/BCApps_Event_Pattern_Analysis.md, References/Microsoft_Event_Types.md]
 
   - path: Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md
