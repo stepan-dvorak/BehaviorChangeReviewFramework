@@ -9,7 +9,7 @@ document:
   id: ES-BCAPPS-CZ-CLP-EVENT-PILOT-001
   title: BCApps Czech Core Localization Event Pilot
   type: Empirical Study
-  version: 0.11.0
+  version: 0.12.0
   status: Active
 
 classification:
@@ -21,9 +21,9 @@ owner: Štěpán Dvořák
 
 purpose: >
   Pre-registers a bounded pilot of event participation in Microsoft's Core
-  Localization Pack for Czech application to test the candidate Behavioral
-  Change Impact Review trigger, checklist, and event-evidence dimensions before
-  any case findings are recorded.
+  Localization Pack for Czech application, records its frozen case-selection
+  boundary, and tests the candidate Behavioral Change Impact Review trigger,
+  checklist, and event-evidence dimensions before any case findings are recorded.
 
 quality:
   review: Self Reviewed
@@ -76,9 +76,10 @@ tags:
 
 ## 1. Study Status
 
-This document pre-registers the pilot before case selection and classification.
-It contains no evaluated cases, behavioral findings, defect claims, prevalence
-claims, or framework conclusions.
+This document records the pre-registered pilot and its frozen 16-case selection
+register. The repository owner accepted the complete register on 2026-08-08.
+Case classification has not started. The document contains no evaluated cases,
+behavioral findings, defect claims, prevalence claims, or framework conclusions.
 
 The pilot tests candidate concepts. Behavioral Change Impact Review remains a
 working label, and the trigger, checklist, event dimensions, and materiality
@@ -172,8 +173,8 @@ compilation, and does not establish runtime participation or subscriber effect.
 The manifest records the commands, versions, checksums, validation, and
 limitations. A later application-wide marker inventory was withdrawn because
 it mixed CZL publishers and ordinary implementation markers with the CZL
-subscriber population. Dependency-aware, per-subscriber context resolution is
-therefore still pending [C4].
+subscriber population. Dependency-aware, per-subscriber context resolution was
+subsequently completed under the retained context protocol [C4][C6].
 
 ## 5. Scope
 
@@ -232,6 +233,22 @@ The repository owner has prior development experience with the application and
 expects the population to include both diverse patterns and possible
 shortcomings. This knowledge is valuable for functional interpretation but
 creates confirmation and selection risks.
+
+`Prior Known` records case-specific familiarity with the concrete subscriber
+occurrence before its first targeted inspection within the Orden pilot. The
+reference boundary is activity-based rather than date-based. General Business
+Central expertise, familiarity with the functional area, or knowledge acquired
+during population preparation, coarse screening, owner review, or case
+selection does not by itself constitute prior knowledge.
+
+Use the values as follows:
+
+- `Yes`: the reviewer knew the concrete subscriber occurrence or its specific
+  behavior independently of the Orden pilot;
+- `No`: the reviewer may have known the area or pattern but did not know this
+  concrete occurrence before its targeted inspection in the pilot; and
+- `Uncertain`: the reviewer cannot reliably reconstruct whether the familiarity
+  predates the pilot or was acquired during the pilot.
 
 Apply these controls:
 
@@ -335,28 +352,49 @@ Do not replace a selected case because its result is favorable, unfavorable,
 not triggered, or uncertain. Replacement is permitted only for a documented
 inclusion failure, duplicate unit, or unavailable essential context.
 
-## 10. Empty Selection Register
+## 10. Frozen Selection Register
 
-Complete this table and freeze it before applying the full checklist.
+The repository owner supplied all sixteen `Prior Known` values before formal
+primary-bucket assignment and accepted the complete register on 2026-08-08.
+Case IDs follow the pre-registered bucket order and, within each bucket, lexical
+subscriber source path and procedure name.
 
-| Case ID | Primary bucket | Source path | Subscriber symbol | Prior known | Inclusion evidence | Status |
-|---|---|---|---|---|---|---|
-| CZP-001 |  |  |  |  |  | Unselected |
-| CZP-002 |  |  |  |  |  | Unselected |
-| CZP-003 |  |  |  |  |  | Unselected |
-| CZP-004 |  |  |  |  |  | Unselected |
-| CZP-005 |  |  |  |  |  | Unselected |
-| CZP-006 |  |  |  |  |  | Unselected |
-| CZP-007 |  |  |  |  |  | Unselected |
-| CZP-008 |  |  |  |  |  | Unselected |
-| CZP-009 |  |  |  |  |  | Unselected |
-| CZP-010 |  |  |  |  |  | Unselected |
-| CZP-011 |  |  |  |  |  | Unselected |
-| CZP-012 |  |  |  |  |  | Unselected |
-| CZP-013 |  |  |  |  |  | Unselected |
-| CZP-014 |  |  |  |  |  | Unselected |
-| CZP-015 |  |  |  |  |  | Unselected |
-| CZP-016 |  |  |  |  |  | Unselected |
+| Case ID | Population ID | Primary bucket | Source path | Subscriber symbol | Prior known | Inclusion evidence | Status |
+|---|---|---|---|---|---|---|---|
+| CZP-001 | CZPOP-0002 | Suppression or substitution | `src/Apps/CZ/CoreLocalizationPack/app/Src/Codeunits/AccScheduleManagementCZL.Codeunit.al` | `Acc. Schedule Management CZL.PrintAccScheduleByType` | No | Runs a CZL report path and writes `IsHandled` in `Financial Report Mgt..OnBeforePrint`. | Frozen — Owner Accepted |
+| CZP-002 | CZPOP-0308 | Suppression or substitution | `src/Apps/CZ/CoreLocalizationPack/app/Src/Codeunits/ReconciliationHandlerCZL.Codeunit.al` | `Reconciliation Handler CZL.OnBeforeSaveNetChange` | No | Writes `IsHandled := true` before BaseApp `SaveNetChange`; companion CZL logic populates net-change records. | Frozen — Owner Accepted |
+| CZP-003 | CZPOP-0097 | Validation or invariant influence | `src/Apps/CZ/CoreLocalizationPack/app/Src/Codeunits/DimensionMgtHandlerCZL.Codeunit.al` | `Dimension Mgt. Handler CZL.UserChecksAllowedOnCheckDimValuePostingOnBeforeExit` | No | Runs user-specific dimension-value checks and writes `IsChecked` and `IsHandled`. | Frozen — Owner Accepted |
+| CZP-004 | CZPOP-0129 | Validation or invariant influence | `src/Apps/CZ/CoreLocalizationPack/app/Src/Codeunits/GenJnlCheckLineHandlerCZL.Codeunit.al` | `Gen.Jnl.Check Line Handler CZL.IsCheckDimensionsEnabledOnCheckDimensionsOnAfterAssignDimTableIDs` | No | Writes `CheckDone` from the CZL dimension-check enablement state. | Frozen — Owner Accepted |
+| CZP-005 | CZPOP-0146 | Posting or transaction behavior | `src/Apps/CZ/CoreLocalizationPack/app/Src/Codeunits/GenJnlPostLineHandlerCZL.Codeunit.al` | `Gen.Jnl. Post Line Handler CZL.CorrectPmtDiscLCYOnCalcPmtDiscIfAdjVATOnAfterCalcPmtDiscVATBases` | No | Recalculates payment-discount VAT-base data inside general-journal posting. | Frozen — Owner Accepted |
+| CZP-006 | CZPOP-0209 | Posting or transaction behavior | `src/Apps/CZ/CoreLocalizationPack/app/Src/Codeunits/InventoryPostingHandlerCZL.Codeunit.al` | `Inventory Posting Handler CZL.RoundingDateOnPostItemJnlLineOnAfterSetPostingDate` | No | Rewrites item-journal posting date inside inventory-adjustment posting. | Frozen — Owner Accepted |
+| CZP-007 | CZPOP-0125 | Manual runtime participation | `src/Apps/CZ/CoreLocalizationPack/app/Src/Codeunits/GLEntryasCorrectionCZL.Codeunit.al` | `G/L Entry as Correction CZL.SetCorrectionOnBeforeInsertGlEntry` | No | Manual subscriber mutates `GenJnlLine` before G/L entry insertion. | Frozen — Owner Accepted |
+| CZP-008 | CZPOP-0245 | Manual runtime participation | `src/Apps/CZ/CoreLocalizationPack/app/Src/Codeunits/ItemTrackingDocHandlerCZL.Codeunit.al` | `Item Tracking Doc. Handler CZL.FillExpirationDateOnAfterFillTrackingSpecBufferFromItemLedgEntry` | Uncertain | Manual subscriber updates tracking-specification expiration data. | Frozen — Owner Accepted |
+| CZP-009 | CZPOP-0001 | Mutable influence without demonstrated full replacement | `src/Apps/CZ/CoreLocalizationPack/app/Src/Codeunits/AccScheduleManagementCZL.Codeunit.al` | `Acc. Schedule Management CZL.CalcCZLOnAfterCalcCellValue` | No | Mutates the calculated account-schedule result after standard calculation. | Frozen — Owner Accepted |
+| CZP-010 | CZPOP-0081 | Mutable influence without demonstrated full replacement | `src/Apps/CZ/CoreLocalizationPack/app/Src/Codeunits/CorrectionsPostingMgtCZL.Codeunit.al` | `Corrections Posting Mgt. CZL.PurchLineSetNegativeOnAfterInitOutstandingQty` | Uncertain | Mutates `Purchase Line."Negative CZL"` after outstanding quantities are initialized. | Frozen — Owner Accepted |
+| CZP-011 | CZPOP-0017 | Workflow, reporting, integration, or delegated behavior | `src/Apps/CZ/CoreLocalizationPack/app/Src/Codeunits/CNBCurrExchRateMgtCZL.Codeunit.al` | `CNB Curr. Exch. Rate Mgt. CZL.SetupCurrencyExchangeRateServiceOnBeforeSetupCurrencyExchRateService` | Uncertain | Configures the CNB exchange-rate service and contains an explicit `Commit`. | Frozen — Owner Accepted |
+| CZP-012 | CZPOP-0257 | Workflow, reporting, integration, or delegated behavior | `src/Apps/CZ/CoreLocalizationPack/app/Src/Codeunits/NavigateHandlerCZL.Codeunit.al` | `Navigate Handler CZL.OnAfterNavigateFindRecords` | Uncertain | Adds CZL EET records to Navigate results. | Frozen — Owner Accepted |
+| CZP-013 | CZPOP-0048 | Negative controls | `src/Apps/CZ/CoreLocalizationPack/app/Src/Codeunits/ContactHandlerCZL.Codeunit.al` | `Contact Handler CZL.SaveRegistrationNoOnBeforeCustCopyFieldsFromCont` | No | Delegates localized registration-number propagation during contact-to-customer copy. | Frozen — Owner Accepted |
+| CZP-014 | CZPOP-0401 | Negative controls | `src/Apps/CZ/CoreLocalizationPack/app/Src/Codeunits/VATDateHandlerCZL.Codeunit.al` | `VAT Date Handler CZL.UpdateVatDateOnAfterCopyGenJnlLineFromGLEntry` | Yes | Copies VAT reporting date from a general-journal line to a G/L entry. | Frozen — Owner Accepted |
+| CZP-015 | CZPOP-0033 | Borderline or uncertain cases | `src/Apps/CZ/CoreLocalizationPack/app/Src/Codeunits/CompanyBankAccHandlerCZL.Codeunit.al` | `Company Bank Acc. Handler CZL.FinanceChargeMemoUpdateBankAccountCodeCZLOnAfterValidateCompanyBankAccountCode` | Uncertain | Platform validation event updates the localized bank-account field; no AL publisher raise site exists. | Frozen — Owner Accepted |
+| CZP-016 | CZPOP-0353 | Borderline or uncertain cases | `src/Apps/CZ/CoreLocalizationPack/app/Src/Codeunits/ServiceHeaderHandlerCZL.Codeunit.al` | `Service Header Handler CZL.UpdateVATCurrencyfactorCZLOnBeforeCurrencyFactorValidate` | No | Platform pre-validation event updates VAT currency factor; no AL publisher raise site exists. | Frozen — Owner Accepted |
+
+Selection-control reconciliation:
+
+- 16 unique population records fill all eight buckets with two cases each;
+- 15 subscriber codeunits and 15 subscriber source files are represented;
+- only `Acc. Schedule Management CZL` appears twice, and no codeunit exceeds the
+  two-case limit;
+- `Prior Known` counts are one `Yes`, five `Uncertain`, and ten `No`; even a
+  conservative `Yes` plus `Uncertain` count is six and remains below eight;
+- `CZPOP-0033`, `CZPOP-0048`, `CZPOP-0353`, and `CZPOP-0401` were retained for
+  negative-control or evidence-boundary coverage without a prior defect
+  expectation; and
+- no trigger, checklist, materiality, quality, defect, or framework conclusion
+  was assigned during selection.
+
+The register is frozen. A case may be replaced only for a documented inclusion
+failure, duplicate unit, or unavailable essential context. The completed coarse-
+screen worksheet remains unchanged.
 
 ## 11. Empty Case Record Template
 
@@ -504,7 +542,9 @@ BCApps, Microsoft, or ecosystem prevalence.
 
 ## 14. Findings
 
-No case findings are available. Selection and study execution are pending.
+No case findings are available. The selection register is frozen and owner-
+accepted; case evidence recording, trigger classification, and checklist
+analysis remain pending.
 
 ## 15. Candidate Framework Implications
 
@@ -523,9 +563,9 @@ None. The pilot is designed to test candidate concepts, not to accept them.
 - [x] Implement and automatically validate coarse-screen worksheet preparation.
 - [x] Complete focused owner re-review of corrected `CZPOP-0270`.
 - [x] Retain the complete 448-record initial coarse-screen worksheet.
-- [ ] Complete coarse evidence-availability screening.
-- [ ] Mark prior-known status before bucket assignment.
-- [ ] Fill and freeze the 16-case selection register.
+- [x] Complete coarse evidence-availability screening.
+- [x] Mark prior-known status before bucket assignment.
+- [x] Fill and freeze the 16-case selection register.
 - [ ] Copy the empty case record for every selected case.
 - [ ] Inspect publisher, raise site, subscriber, binding, caller, and test
       context for each case.
@@ -533,7 +573,8 @@ None. The pilot is designed to test candidate concepts, not to accept them.
 - [ ] Apply the checklist without forcing unsupported rows.
 - [ ] Preserve counterevidence, uncertain cases, and failed classifications.
 - [ ] Compare cases only after all records are complete.
-- [ ] Update findings, limitations, research log, and index only after study
+- [x] Synchronize repository-index metadata for the selection-freeze checkpoint.
+- [ ] Update findings, limitations, and the research log only after study
       execution.
 
 ## 17. References
@@ -554,6 +595,17 @@ None. The pilot is designed to test candidate concepts, not to accept them.
   `Empirical/BCApps_CZ_Subscriber_Context_Resolution_Protocol.md`.
 
 ## 18. Revision History
+
+### 0.12.0 — 2026-08-08
+
+- Operationalized `Prior Known` as case-specific familiarity predating the
+  concrete subscriber's first targeted inspection within the Orden pilot.
+- Recorded the owner-provided prior-knowledge values for all sixteen selected
+  population records.
+- Filled, reconciled, owner-accepted, and froze the complete 16-case selection
+  register with two cases in each pre-registered bucket.
+- Preserved the immutable coarse-screen worksheet and kept trigger,
+  checklist, materiality, quality, defect, and framework conclusions pending.
 
 ### 0.11.0 — 2026-07-21
 
