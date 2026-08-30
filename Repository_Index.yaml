@@ -30,7 +30,7 @@ artifact:
   id: ORDEN-REPOSITORY-INDEX-001
   title: Orden Repository Retrieval Index
   type: Machine Index
-  version: 1.0.23
+  version: 1.0.24
   status: Active
   owner: Štěpán Dvořák
   maintenance: Generated
@@ -43,7 +43,7 @@ artifact:
     - human contributors
 
 generation:
-  generated_on: 2026-08-08
+  generated_on: 2026-08-30
   method: Manual Review
   source_repository: https://github.com/stepan-dvorak/BehaviorChangeReviewFramework
   source_branch: main
@@ -181,7 +181,7 @@ query_routes:
       - Empirical/Data/BCApps_CZ_Coarse_Screen.jsonl
       - 02_Research_Methodology.md
       - Reasoning_Standard.md
-    rule: Preserve the coarse-screen worksheet unchanged; record prior knowledge in the pilot register before bucket assignment, CZP selection, or outcome evaluation.
+    rule: Preserve the coarse-screen worksheet unchanged; treat the pilot's owner-reviewed case evidence as the authoritative evidence baseline; do not alter the frozen selection or introduce trigger/checklist conclusions while using the evidence checkpoint.
   - intent: synthesize_or_edit_whitepaper
     retrieve:
       - Whitepaper/Behavior_Change_Review_Framework_for_Business_Central_Research_Draft.md
@@ -692,10 +692,10 @@ documents:
     authority: planned
     status: active
     maturity: draft
-    version: 0.12.0
-    summary: Records the pre-registered 16-case subscriber-centered pilot, owner-accepted prior-knowledge labels, and the frozen two-per-bucket selection register.
-    use_for: [Czech localization pilot, pre-registration, frozen case selection, prior knowledge, behavioral change trigger testing, impact checklist testing]
-    caution: Selection is frozen and owner-accepted; trigger classification, checklist analysis, case findings, and prevalence claims remain unavailable.
+    version: 0.13.0
+    summary: Records the pre-registered 16-case subscriber-centered pilot, frozen owner-accepted selection, and owner-reviewed evidence-only case records for all sixteen cases.
+    use_for: [Czech localization pilot, pre-registration, frozen case selection, prior knowledge, owner-reviewed case evidence, evidence checkpoint, behavioral change trigger testing, impact checklist testing]
+    caution: Evidence acquisition and sufficiency review are complete for all sixteen cases; trigger classification, event-dimension interpretation, checklist analysis, case findings, and prevalence claims remain unavailable.
     depends_on: [02_Research_Methodology.md, Empirical/BCApps_Event_Pattern_Analysis.md, References/Microsoft_Event_Types.md]
 
   - path: Empirical/BCApps_CZ_Core_Localization_Event_Population_Manifest.md
